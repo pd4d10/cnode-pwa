@@ -5,6 +5,7 @@ import {
 } from '../actions/list'
 
 export default function list(state = {
+  isFetching: false,
   topics: [],
 }, action) {
   switch (action.type) {
