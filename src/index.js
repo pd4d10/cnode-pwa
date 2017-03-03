@@ -3,8 +3,12 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import Immutable from 'seamless-immutable'
+import { Router, Route, browserHistory } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import List from './containers/list'
+import Detail from './containers/detail'
+import NotFound from './containers/not-found'
 import reducers from './reducers'
 import './index.css'
 
@@ -23,9 +27,16 @@ const store = createStore(
   composeEnhancers(applyMiddleware(...middlewares)),
 )
 
+const history = syncHistoryWithStore(browserHistory, store)
+
 ReactDOM.render(
   <Provider store={store}>
-    <List />
+    <Router history={history}>
+      <Route path="/" component={List}>
+        <Route path="/topic/:id" component={Detail} />
+        <Route path="*" component={NotFound} />
+      </Route>
+    </Router>
   </Provider>,
   document.getElementById('root'),
 )
