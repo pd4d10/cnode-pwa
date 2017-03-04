@@ -19,6 +19,9 @@ import './index.css'
 injectTapEventPlugin()
 
 const presistedState = Immutable({
+  drawer: {
+    isVisible: false,
+  },
   list: {
     isFetching: false,
     topics: [],
