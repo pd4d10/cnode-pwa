@@ -15,6 +15,7 @@ export default function list(state = {
     case FETCH_TOPICS_SUCCESS:
       return state.set('topics', action.topics)
         .set('activeTab', action.tab)
+        .set('isFetching', false)
     case FETCH_TOPICS_FAIL:
       return state.set('isFetching', false)
     default:

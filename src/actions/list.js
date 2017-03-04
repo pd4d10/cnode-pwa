@@ -1,4 +1,4 @@
-import { push } from 'react-router-redux'
+// import { push } from 'react-router-redux'
 
 export const FETCH_TOPICS_START = 'FETCH_TOPICS_START'
 export const FETCH_TOPICS_SUCCESS = 'FETCH_TOPICS_SUCCESS'
@@ -15,7 +15,8 @@ const fetchFail = err => ({
 })
 
 export const fetchTopics = tab => async (dispatch) => {
-  const query = tab ? `?tab=${tab}` : ''
+  const requestTab = tab || 'all'
+  const query = `?tab=${requestTab}`
   dispatch(fetchStart())
 
   try {
@@ -24,11 +25,10 @@ export const fetchTopics = tab => async (dispatch) => {
     dispatch(({
       type: FETCH_TOPICS_SUCCESS,
       topics: data,
-      tab,
+      tab: requestTab,
     }))
 
-    //
-    dispatch(push(`/${query}`))
+    // dispatch(push(`/${query}`))
   } catch (err) {
     dispatch(fetchFail(err))
   }

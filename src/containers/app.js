@@ -31,7 +31,7 @@ const App = props => (
   <MuiThemeProvider muiTheme={muiTheme}>
     <div>
       <AppBar
-        title="Title"
+        title={props.title}
         iconClassNameRight="muidocs-icon-navigation-expand-more"
         onLeftIconButtonTouchTap={() => props.dispatch(showDrawer())}
       />
@@ -41,7 +41,7 @@ const App = props => (
         open={props.isVisible}
         onRequestChange={() => props.dispatch(hideDrawer())}
       >
-        <List>
+        <List style={{ marginTop: '40px' }}>
           {props.tabs.map(tab => (
             <ListItem
               primaryText={tab.label}
@@ -57,6 +57,7 @@ const App = props => (
 )
 
 App.propTypes = {
+  title: PropTypes.string.isRequired,
   tabs: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
@@ -76,6 +77,9 @@ App.defaultProps = {
   ],
 }
 
-const mapStateToProps = state => state.drawer
+const mapStateToProps = state => ({
+  isVisible: state.drawer.isVisible,
+  title: state.list.activeTab,
+})
 
 export default connect(mapStateToProps)(App)
