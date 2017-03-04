@@ -10,6 +10,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import App from './containers/app'
 import List from './containers/list'
 import Detail from './containers/detail'
+import User from './containers/user'
 import NotFound from './containers/not-found'
 import reducers from './reducers'
 import './index.css'
@@ -30,6 +31,10 @@ const presistedState = Immutable({
   detail: {
     isFetching: false,
     topic: null,
+  },
+  user: {
+    isFetching: false,
+    data: null,
   },
 })
 
@@ -52,6 +57,7 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <IndexRoute component={List} />
         <Route path="/topic/:id" component={Detail} />
+        <Route path="/user/:name" component={User} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>
