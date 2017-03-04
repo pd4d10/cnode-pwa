@@ -6,12 +6,17 @@ import Immutable from 'seamless-immutable'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import thunk from 'redux-thunk'
+import injectTapEventPlugin from 'react-tap-event-plugin'
 import App from './containers/app'
 import List from './containers/list'
 import Detail from './containers/detail'
 import NotFound from './containers/not-found'
 import reducers from './reducers'
 import './index.css'
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin()
 
 const presistedState = Immutable({
   list: {
