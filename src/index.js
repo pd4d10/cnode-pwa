@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import Immutable from 'seamless-immutable'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
+import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import App from './containers/app'
@@ -33,12 +33,15 @@ const presistedState = Immutable({
   },
 })
 
-const middlewares = [thunk]
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose // eslint-disable-line
+
 const store = createStore(
   reducers,
   presistedState,
-  composeEnhancers(applyMiddleware(...middlewares)),
+  composeEnhancers(applyMiddleware(
+    routerMiddleware(browserHistory),
+    thunk,
+  )),
 )
 
 const history = syncHistoryWithStore(browserHistory, store)
