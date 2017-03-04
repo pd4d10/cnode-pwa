@@ -25,6 +25,7 @@ const presistedState = Immutable({
   list: {
     isFetching: false,
     topics: [],
+    activeTab: 'all',
   },
   detail: {
     isFetching: false,
