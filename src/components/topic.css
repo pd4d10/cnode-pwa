@@ -1,11 +1,12 @@
 .container {
   display: flex;
-  padding: 6px;
+  padding: 12px;
   border-bottom: 1px solid #ccc;
 }
 
 .avatar {
   width: 48px;
+  display: block;
   margin-right: 6px;
   border-radius: 4px;
 }
@@ -34,14 +35,32 @@
 
   & .left {
     display: flex;
+    align-items: center;
+  }
+
+  & .tag {
+    background-color: #80bd01;
+    color: #fff;
+    font-size: 12px;
+    line-height: 20px;
+    border-radius: 2px;
+    padding: 0 4px;
+    margin-right: 8px;
   }
 
   & .count {
     font-size: 12px;
+    color: #b4b4b4;
+
+    & strong {
+      font-weight: normal;
+      color: #9e78c0;
+    }
   }
 
   & time {
     font-size: 12px;
+    color: #778087;
   }
 }
 

@@ -18,7 +18,9 @@ const Topic = props => (
       <div className={style.extra}>
         <div className={style.left}>
           <div className={style.tag}>{getTagFromTopic(props)}</div>
-          <div className={style.count}>{props.reply_count} / {props.visit_count}</div>
+          <div className={style.count}>
+            <strong>{props.reply_count}</strong> / {props.visit_count}
+          </div>
         </div>
         <TimeAgo
           datetime={props.last_reply_at}
