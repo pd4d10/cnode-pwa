@@ -5063,6 +5063,16 @@ through@^2.3.6:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
 
+timeago-react@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/timeago-react/-/timeago-react-1.0.8.tgz#613cc56912af9d7cd166c1305afb235576c9c715"
+  dependencies:
+    timeago.js "^2.0.5"
+
+timeago.js@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/timeago.js/-/timeago.js-2.0.5.tgz#730c74fbdb0b0917a553675a4460e3a7f80db86c"
+
 timers-browserify@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/timers-browserify/-/timers-browserify-2.0.2.tgz#ab4883cf597dcd50af211349a00fbca56ac86b86"

@@ -19,9 +19,13 @@ class List extends Component {
     const { topics, isFetching } = this.props
     return (
       <div>
-        {isFetching ? <CircularProgress /> : topics.map(topic => (
-          <Topic {...topic} key={topic.id} />
-        ))}
+        {isFetching ? <CircularProgress /> : (
+          <ul>
+            {topics.map(topic => (
+              <Topic {...topic} key={topic.id} />
+            ))}
+          </ul>
+        )}
       </div>
     )
   }

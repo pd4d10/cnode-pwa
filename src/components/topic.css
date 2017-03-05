@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  padding: 6px;
+  border-bottom: 1px solid #ccc;
+}
+
+.avatar {
+  width: 48px;
+  padding-right: 6px;
+}
+
+.content {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: normal;
+  color: #333;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.extra {
+  display: flex;
+}

@@ -28,7 +28,7 @@ export const fetchTopics = tab => async (dispatch) => {
       tab: requestTab,
     }))
 
-    // dispatch(push(`/${query}`))
+    // dispatch(push('/'))
   } catch (err) {
     dispatch(fetchFail(err))
   }
