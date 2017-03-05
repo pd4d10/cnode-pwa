@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 // import { Paper, ListItem } from 'material-ui'
 import TimeAgo from 'timeago-react' // var TimeAgo = require('timeago-react');
 import style from './topic.css'
+import { getTagFromTopic } from '../utils'
 
 const Topic = props => (
   <li className={style.container}>
@@ -13,9 +14,12 @@ const Topic = props => (
       />
     </Link>
     <Link to={`/topic/${props.id}`} className={style.content}>
-      <h3 className={style.title}>{props.title}</h3>
+      <h3>{props.title}</h3>
       <div className={style.extra}>
-        <div className={style.count}>{props.reply_count}/{props.visit_count}</div>
+        <div className={style.left}>
+          <div className={style.tag}>{getTagFromTopic(props)}</div>
+          <div className={style.count}>{props.reply_count} / {props.visit_count}</div>
+        </div>
         <TimeAgo
           datetime={props.last_reply_at}
           locale="zh_CN"

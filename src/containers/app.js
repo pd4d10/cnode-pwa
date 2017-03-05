@@ -13,6 +13,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import { green800 } from 'material-ui/styles/colors'
 import { showDrawer, hideDrawer } from '../actions/drawer'
 import { fetchTopics } from '../actions/list'
+import { tabs } from '../utils'
 
 // This replaces the textColor value on the palette
 // and then update the keys for each component that depends on it.
@@ -42,11 +43,11 @@ const App = props => (
         onRequestChange={() => props.dispatch(hideDrawer())}
       >
         <List style={{ marginTop: '40px' }}>
-          {props.tabs.map(tab => (
+          {tabs.map(tab => (
             <ListItem
-              primaryText={tab.label}
-              key={tab.value}
-              onClick={() => props.dispatch(fetchTopics(tab.value))}
+              primaryText={tab.value}
+              key={tab.key}
+              onClick={() => props.dispatch(fetchTopics(tab.key))}
             />
           ))}
         </List>
@@ -58,23 +59,9 @@ const App = props => (
 
 App.propTypes = {
   title: PropTypes.string.isRequired,
-  tabs: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-  })).isRequired,
   children: PropTypes.element.isRequired,
   isVisible: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
-}
-
-App.defaultProps = {
-  tabs: [
-    { label: '全部', value: 'all' },
-    { label: '精华', value: 'good' },
-    { label: '分享', value: 'share' },
-    { label: '问答', value: 'ask' },
-    { label: '招聘', value: 'job' },
-  ],
 }
 
 const mapStateToProps = state => ({
