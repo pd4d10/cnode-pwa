@@ -1,0 +1,12 @@
+.container {
+  padding: 12px;
+  h2 {
+    font-size: 18px;
+  }
+}
+
+:global(.markdown-text) {
+  & img {
+    max-width: 100%;
+  }
+}

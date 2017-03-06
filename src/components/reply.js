@@ -1,9 +1,14 @@
 import React, { PropTypes } from 'react'
+import { Link } from 'react-router'
+import style from './reply.css'
 
 const Reply = props => (
-  <div>
-    <img src={props.author.avatar_url} alt={props.author.loginname} />
-    <div dangerouslySetInnerHTML={{ __html: props.content }} />
+  <div className={style.container}>
+    <Link to={`/user/${props.author.loginname}`} className={style.avatar}>
+      <img src={props.author.avatar_url} alt={props.author.loginname} />
+    </Link>
+    <div>{props.author.loginname}</div>
+    <div className={style.content} dangerouslySetInnerHTML={{ __html: props.content }} />
   </div>
 )
 

@@ -1,0 +1,15 @@
+.container {
+  /*padding: 12px;*/
+}
+
+.avatar {
+  & img {
+    width: 48px;
+  }
+}
+
+.content {
+  img {
+    max-width: 100%;
+  }
+}
