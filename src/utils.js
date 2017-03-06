@@ -6,6 +6,8 @@ const tabsMap = {
   job: '招聘',
 }
 
+export const API_PREFIX = 'https://cnodejs.org/api/v1'
+
 export const tabs = Object.keys(tabsMap).map(key => ({
   key,
   value: tabsMap[key],

@@ -1,4 +1,5 @@
 // import { push } from 'react-router-redux'
+import { API_PREFIX } from '../utils'
 
 export const FETCH_TOPICS_START = 'FETCH_TOPICS_START'
 export const FETCH_TOPICS_SUCCESS = 'FETCH_TOPICS_SUCCESS'
@@ -20,7 +21,7 @@ export const fetchTopics = tab => async (dispatch) => {
   dispatch(fetchStart())
 
   try {
-    const res = await fetch(`https://cnodejs.org/api/v1/topics${query}`)
+    const res = await fetch(`${API_PREFIX}/topics${query}`)
     const { data } = await res.json()
     dispatch(({
       type: FETCH_TOPICS_SUCCESS,
@@ -44,7 +45,7 @@ export const changeTab = value => async (dispatch, getState) => {
 
   dispatch(fetchStart())
   try {
-    const res = await fetch(`https://cnodejs.org/api/v1/topics?tab=${value}`)
+    const res = await fetch(`${API_PREFIX}/topics?tab=${value}`)
     const { data } = await res.json()
     dispatch({
       type: FETCH_TOPICS_SUCCESS,
