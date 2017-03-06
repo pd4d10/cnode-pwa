@@ -4,7 +4,7 @@ import {
   // LOGIN_FAIL,
 } from '../actions/login'
 
-export default function login(state, action) {
+export default function login(state = {}, action) {
   switch (action.type) {
     case LOGIN_START:
       return state.set('isFetching', true)
