@@ -1,4 +1,4 @@
-const tabsMap = {
+export const tabsMap = {
   all: '全部',
   good: '精华',
   share: '分享',

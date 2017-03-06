@@ -10,21 +10,21 @@ import {
 } from 'material-ui'
 // import RaisedButton from 'material-ui/RaisedButton'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import { green800 } from 'material-ui/styles/colors'
+// import { green800 } from 'material-ui/styles/colors'
 import { showDrawer, hideDrawer } from '../actions/drawer'
 import { fetchTopics } from '../actions/list'
-import { tabs } from '../utils'
+import { tabs, tabsMap } from '../utils'
 
 // This replaces the textColor value on the palette
 // and then update the keys for each component that depends on it.
 // More on Colors: http://www.material-ui.com/#/customization/colors
 const muiTheme = getMuiTheme({
   palette: {
-    textColor: green800,
+    // textColor: green800,
   },
   appBar: {
-    color: '#444',
-    height: 50,
+    // color: '#444',
+    // height: 50,
   },
 })
 
@@ -66,7 +66,7 @@ App.propTypes = {
 
 const mapStateToProps = state => ({
   isVisible: state.drawer.isVisible,
-  title: state.list.activeTab,
+  title: tabsMap[state.list.activeTab],
 })
 
 export default connect(mapStateToProps)(App)
