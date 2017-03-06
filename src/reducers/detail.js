@@ -13,6 +13,7 @@ export default function list(state = {
       return state.set('isFetching', true)
     case FETCH_TOPIC_SUCCESS:
       return state.set('topic', action.topic)
+        .set('isFetching', false)
     case FETCH_TOPIC_FAIL:
       return state.set('isFetching', false)
     default:
