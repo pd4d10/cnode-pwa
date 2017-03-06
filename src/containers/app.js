@@ -14,6 +14,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import { showDrawer, hideDrawer } from '../actions/drawer'
 import { fetchTopics } from '../actions/list'
 import { tabs, tabsMap } from '../utils'
+import style from './app.css'
 
 // This replaces the textColor value on the palette
 // and then update the keys for each component that depends on it.
@@ -30,7 +31,7 @@ const muiTheme = getMuiTheme({
 
 const App = props => (
   <MuiThemeProvider muiTheme={muiTheme}>
-    <div>
+    <div className={style.container}>
       <AppBar
         title={props.title}
         iconClassNameRight="muidocs-icon-navigation-expand-more"

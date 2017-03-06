@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 // import { pick } from 'lodash'
 import { fetchTopic } from '../actions/detail'
 import Reply from '../components/reply'
+import Loading from '../components/loading'
 import style from './detail.css'
 
 const mapStateToProps = state => state.detail
@@ -13,8 +14,8 @@ class Detail extends Component {
   }
 
   render() {
-    const { topic } = this.props
-    return topic && (
+    const { topic, isFetching } = this.props
+    return (isFetching || !topic) ? <Loading /> : (
       <div className={style.container}>
         <h2>{topic.title}</h2>
         <div dangerouslySetInnerHTML={{ __html: topic.content }} />
@@ -27,6 +28,7 @@ class Detail extends Component {
 }
 
 Detail.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
   params: PropTypes.shape({
     id: PropTypes.string.isRequired,
   }).isRequired,

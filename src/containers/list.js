@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { CircularProgress } from 'material-ui'
-// import { compose, pick } from 'lodash/fp'
 import { fetchTopics } from '../actions/list'
 import Topic from '../components/topic'
+import Loading from '../components/loading'
+import style from './list.css'
 
 const mapStateToProps = state => ({
   isFetching: state.list.isFetching,
@@ -18,8 +18,8 @@ class List extends Component {
   render() {
     const { topics, isFetching } = this.props
     return (
-      <div>
-        {isFetching ? <CircularProgress /> : (
+      <div className={style.container}>
+        {isFetching ? <Loading /> : (
           <ul>
             {topics.map(topic => (
               <Topic {...topic} key={topic.id} />
