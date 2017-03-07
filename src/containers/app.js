@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { connect } from 'react-redux'
 // import { push } from 'react-router-redux'
+// import { Link } from 'react-router'
 import {
   AppBar,
   Drawer,
@@ -47,8 +48,8 @@ const App = props => (
           {tabs.map(tab => (
             <ListItem
               primaryText={tab.value}
-              key={tab.key}
               onClick={() => props.dispatch(fetchTopics(tab.key))}
+              key={tab.key}
             />
           ))}
         </List>
@@ -67,7 +68,7 @@ App.propTypes = {
 
 const mapStateToProps = state => ({
   isVisible: state.drawer.isVisible,
-  title: tabsMap[state.list.activeTab],
+  title: tabsMap[state.routing.locationBeforeTransitions.query.tab],
 })
 
 export default connect(mapStateToProps)(App)

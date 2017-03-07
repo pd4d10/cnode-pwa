@@ -1,58 +1,33 @@
-// import { push } from 'react-router-redux'
+import { push } from 'react-router-redux'
 import { API_PREFIX } from '../utils'
 
 export const FETCH_TOPICS_START = 'FETCH_TOPICS_START'
 export const FETCH_TOPICS_SUCCESS = 'FETCH_TOPICS_SUCCESS'
 export const FETCH_TOPICS_FAIL = 'FETCH_TOPICS_FAIL'
-export const CHANGE_TAB = 'CHANGE_TAB'
 
-const fetchStart = () => ({
-  type: FETCH_TOPICS_START,
-})
-
-const fetchFail = err => ({
-  type: FETCH_TOPICS_FAIL,
-  err,
-})
-
-export const fetchTopics = tab => async (dispatch) => {
-  const requestTab = tab || 'all'
-  const query = `?tab=${requestTab}`
-  dispatch(fetchStart())
+export const fetchTopics = (tab = 'all') => async (dispatch, getState) => {
+  dispatch({
+    type: FETCH_TOPICS_START,
+  })
 
   try {
+    const query = `?tab=${tab}`
     const res = await fetch(`${API_PREFIX}/topics${query}`)
     const { data } = await res.json()
     dispatch(({
       type: FETCH_TOPICS_SUCCESS,
       topics: data,
-      tab: requestTab,
+      tab,
     }))
 
-    // dispatch(push('/'))
+    // If tab switched, push a new URL
+    if (getState().routing.locationBeforeTransitions.query.tab !== tab) {
+      dispatch(push(`/${query}`))
+    }
   } catch (err) {
-    dispatch(fetchFail(err))
-  }
-}
-
-export const changeTab = value => async (dispatch, getState) => {
-  const state = getState()
-
-  // If clicked tab is already active, do nothing
-  if (state.list.activeTab === value) {
-    return
-  }
-
-  dispatch(fetchStart())
-  try {
-    const res = await fetch(`${API_PREFIX}/topics?tab=${value}`)
-    const { data } = await res.json()
     dispatch({
-      type: FETCH_TOPICS_SUCCESS,
-      topics: data,
-      tab: value,
+      type: FETCH_TOPICS_FAIL,
+      err,
     })
-  } catch (err) {
-    dispatch(fetchFail(err))
   }
 }

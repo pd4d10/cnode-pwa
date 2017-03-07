@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 
 class List extends Component {
   componentDidMount() {
-    this.props.dispatch(fetchTopics())
+    this.props.dispatch(fetchTopics(this.props.location.query.tab))
   }
 
   render() {
@@ -34,6 +34,11 @@ class List extends Component {
 List.propTypes = {
   topics: PropTypes.arrayOf(PropTypes.object).isRequired,
   isFetching: PropTypes.bool.isRequired,
+  location: PropTypes.shape({
+    query: PropTypes.shape({
+      tab: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
   dispatch: PropTypes.func.isRequired,
 }
 
