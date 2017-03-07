@@ -6,6 +6,8 @@
 }
 
 :global(.markdown-text) {
+  overflow: auto;
+
   & img {
     max-width: 100%;
   }
