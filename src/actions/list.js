@@ -11,19 +11,18 @@ export const fetchTopics = (tab = 'all') => async (dispatch, getState) => {
   })
 
   try {
-    const query = `?tab=${tab}`
-    const res = await fetch(`${API_PREFIX}/topics${query}`)
+    // If tab switched, push a new URL
+    if (getState().routing.locationBeforeTransitions.query.tab !== tab) {
+      dispatch(push(`/?tab=${tab}`))
+    }
+
+    const res = await fetch(`${API_PREFIX}/topics?tab=${tab}`)
     const { data } = await res.json()
     dispatch(({
       type: FETCH_TOPICS_SUCCESS,
       topics: data,
       tab,
     }))
-
-    // If tab switched, push a new URL
-    if (getState().routing.locationBeforeTransitions.query.tab !== tab) {
-      dispatch(push(`/${query}`))
-    }
   } catch (err) {
     dispatch({
       type: FETCH_TOPICS_FAIL,
