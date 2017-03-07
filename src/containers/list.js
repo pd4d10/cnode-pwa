@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { AppBar, Drawer, List, ListItem, FloatingActionButton } from 'material-ui'
+import { AppBar, Drawer, Divider, List, ListItem, FloatingActionButton } from 'material-ui'
 import ContentCreate from 'material-ui/svg-icons/content/create'
 import { fetchTopics } from '../actions/list'
 import { showDrawer, hideDrawer } from '../actions/drawer'
@@ -37,12 +37,17 @@ class ListComponent extends Component {
                 key={tab.key}
               />
             ))}
+            <Divider />
+            <ListItem primaryText="消息" />
+            <ListItem primaryText="关于" />
           </List>
         </Drawer>
         {props.isFetching ? <Loading /> : (
           <ul>
             {props.topics.map(topic => (
-              <Topic {...topic} key={topic.id} />
+              <li key={topic.id}>
+                <Topic {...topic} />
+              </li>
             ))}
           </ul>
         )}
