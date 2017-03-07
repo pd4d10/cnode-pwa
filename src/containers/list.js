@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { AppBar, Drawer, List, ListItem } from 'material-ui'
+import { AppBar, Drawer, List, ListItem, FloatingActionButton } from 'material-ui'
+import ContentCreate from 'material-ui/svg-icons/content/create'
 import { fetchTopics } from '../actions/list'
 import { showDrawer, hideDrawer } from '../actions/drawer'
 import Topic from '../components/topic'
@@ -45,6 +46,9 @@ class ListComponent extends Component {
             ))}
           </ul>
         )}
+        <FloatingActionButton className={style.post}>
+          <ContentCreate />
+        </FloatingActionButton>
       </div>
     )
   }
