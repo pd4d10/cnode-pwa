@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { AppBar, IconButton } from 'material-ui'
-import { push, goBack } from 'react-router-redux'
+import { goBack } from 'react-router-redux'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
-import { fetchTopic } from '../actions/detail'
-import Reply from '../components/reply'
-import Loading from '../components/loading'
+import { fetchTopic } from '../../actions/detail'
+import Reply from '../../components/reply'
+import Loading from '../../components/loading'
 import style from './detail.css'
 
 const mapStateToProps = state => state.detail

@@ -2,12 +2,12 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { AppBar, Drawer, Divider, List, ListItem, FloatingActionButton } from 'material-ui'
 import ContentCreate from 'material-ui/svg-icons/content/create'
-import { fetchTopics } from '../actions/list'
-import { showDrawer, hideDrawer } from '../actions/drawer'
-import Topic from '../components/topic'
-import Loading from '../components/loading'
+import { fetchTopics } from '../../actions/list'
+import { showDrawer, hideDrawer } from '../../actions/drawer'
+import Topic from '../../components/topic'
+import Loading from '../../components/loading'
 import style from './list.css'
-import { tabs, tabsMap } from '../utils'
+import { tabs, tabsMap } from '../../utils'
 
 class ListComponent extends Component {
   componentDidMount() {

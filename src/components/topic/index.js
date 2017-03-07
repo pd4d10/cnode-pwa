@@ -4,7 +4,7 @@ import { ListItem } from 'material-ui'
 import { green500 } from 'material-ui/styles/colors'
 import TimeAgo from 'timeago-react' // var TimeAgo = require('timeago-react');
 import style from './topic.css'
-import { getTagFromTopic } from '../utils'
+import { getTagFromTopic } from '../../utils'
 
 const Topic = props => (
   <Link to={`/topic/${props.id}`}>

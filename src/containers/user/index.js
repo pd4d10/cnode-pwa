@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { CircularProgress } from 'material-ui'
 // import { compose, pick } from 'lodash/fp'
-import { fetchUser } from '../actions/user'
+import { fetchUser } from '../../actions/user'
 // import Topic from '../components/topic'
 
 const mapStateToProps = state => state.user
