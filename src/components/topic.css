@@ -17,6 +17,7 @@
   flex-grow: 1;
   flex-direction: column;
   justify-content: space-between;
+  height: 48px;
 
   & h3 {
     font-size: 16px;
