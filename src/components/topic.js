@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import { ListItem } from 'material-ui'
+import { green500 } from 'material-ui/styles/colors'
 import TimeAgo from 'timeago-react' // var TimeAgo = require('timeago-react');
 import style from './topic.css'
 import { getTagFromTopic } from '../utils'
@@ -18,7 +19,7 @@ const Topic = props => (
         <h3>{props.title}</h3>
         <div className={style.extra}>
           <div className={style.left}>
-            <div className={style.tag}>{getTagFromTopic(props)}</div>
+            <div className={style.tag} style={{ backgroundColor: green500 }}>{getTagFromTopic(props)}</div>
             <div className={style.count}>
               <strong>{props.reply_count}</strong> / {props.visit_count}
             </div>

@@ -51,7 +51,7 @@ class ListComponent extends Component {
             ))}
           </ul>
         )}
-        <FloatingActionButton className={style.post}>
+        <FloatingActionButton className={style.post} style={{ zIndex: 2 }}>
           <ContentCreate />
         </FloatingActionButton>
       </div>

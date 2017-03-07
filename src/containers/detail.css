@@ -12,3 +12,7 @@
     max-width: 100%;
   }
 }
+
+:global(.prettyprint) {
+  overflow: auto;
+}

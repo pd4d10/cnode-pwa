@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 // import { Link } from 'react-router'
 // import RaisedButton from 'material-ui/RaisedButton'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
-// import { green800 } from 'material-ui/styles/colors'
+import { grey800, green500 } from 'material-ui/styles/colors'
 import style from './app.css'
 
 // This replaces the textColor value on the palette
@@ -16,8 +16,10 @@ const muiTheme = getMuiTheme({
     // textColor: green800,
   },
   appBar: {
-    // color: '#444',
-    // height: 50,
+    color: grey800,
+  },
+  floatingActionButton: {
+    color: green500,
   },
 })
 
