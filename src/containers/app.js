@@ -3,18 +3,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { connect } from 'react-redux'
 // import { push } from 'react-router-redux'
 // import { Link } from 'react-router'
-import {
-  AppBar,
-  Drawer,
-  List,
-  ListItem,
-} from 'material-ui'
 // import RaisedButton from 'material-ui/RaisedButton'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 // import { green800 } from 'material-ui/styles/colors'
-import { showDrawer, hideDrawer } from '../actions/drawer'
-import { fetchTopics } from '../actions/list'
-import { tabs, tabsMap } from '../utils'
 import style from './app.css'
 
 // This replaces the textColor value on the palette
@@ -33,42 +24,19 @@ const muiTheme = getMuiTheme({
 const App = props => (
   <MuiThemeProvider muiTheme={muiTheme}>
     <div className={style.container}>
-      <AppBar
-        title={props.title}
-        iconClassNameRight="muidocs-icon-navigation-expand-more"
-        onLeftIconButtonTouchTap={() => props.dispatch(showDrawer())}
-      />
-      <Drawer
-        docked={false}
-        width={200}
-        open={props.isVisible}
-        onRequestChange={() => props.dispatch(hideDrawer())}
-      >
-        <List style={{ marginTop: '40px' }}>
-          {tabs.map(tab => (
-            <ListItem
-              primaryText={tab.value}
-              onClick={() => props.dispatch(fetchTopics(tab.key))}
-              key={tab.key}
-            />
-          ))}
-        </List>
-      </Drawer>
       {props.children}
     </div>
   </MuiThemeProvider>
 )
 
 App.propTypes = {
-  title: PropTypes.string.isRequired,
+  // title: PropTypes.string.isRequired,
   children: PropTypes.element.isRequired,
-  isVisible: PropTypes.bool.isRequired,
-  dispatch: PropTypes.func.isRequired,
+  // isVisible: PropTypes.bool.isRequired,
+  // dispatch: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = state => ({
-  isVisible: state.drawer.isVisible,
-  title: tabsMap[state.routing.locationBeforeTransitions.query.tab],
-})
+// const mapStateToProps = state => ({
+// })
 
-export default connect(mapStateToProps)(App)
+export default connect()(App)

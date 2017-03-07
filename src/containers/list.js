@@ -1,27 +1,46 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { AppBar, Drawer, List, ListItem } from 'material-ui'
 import { fetchTopics } from '../actions/list'
+import { showDrawer, hideDrawer } from '../actions/drawer'
 import Topic from '../components/topic'
 import Loading from '../components/loading'
 import style from './list.css'
+import { tabs, tabsMap } from '../utils'
 
-const mapStateToProps = state => ({
-  isFetching: state.list.isFetching,
-  topics: state.list.topics,
-})
-
-class List extends Component {
+class ListComponent extends Component {
   componentDidMount() {
     this.props.dispatch(fetchTopics(this.props.location.query.tab))
   }
 
   render() {
-    const { topics, isFetching } = this.props
+    const { props } = this
     return (
       <div className={style.container}>
-        {isFetching ? <Loading /> : (
+        <AppBar
+          title={props.title}
+          iconClassNameRight="muidocs-icon-navigation-expand-more"
+          onLeftIconButtonTouchTap={() => props.dispatch(showDrawer())}
+        />
+        <Drawer
+          docked={false}
+          width={200}
+          open={props.isVisible}
+          onRequestChange={() => props.dispatch(hideDrawer())}
+        >
+          <List style={{ marginTop: '40px' }}>
+            {tabs.map(tab => (
+              <ListItem
+                primaryText={tab.value}
+                onClick={() => props.dispatch(fetchTopics(tab.key))}
+                key={tab.key}
+              />
+          ))}
+          </List>
+        </Drawer>
+        {props.isFetching ? <Loading /> : (
           <ul>
-            {topics.map(topic => (
+            {props.topics.map(topic => (
               <Topic {...topic} key={topic.id} />
             ))}
           </ul>
@@ -31,9 +50,9 @@ class List extends Component {
   }
 }
 
-List.propTypes = {
-  topics: PropTypes.arrayOf(PropTypes.object).isRequired,
-  isFetching: PropTypes.bool.isRequired,
+ListComponent.propTypes = {
+  // topics: PropTypes.arrayOf(PropTypes.object).isRequired,
+  // isFetching: PropTypes.bool.isRequired,
   location: PropTypes.shape({
     query: PropTypes.shape({
       tab: PropTypes.string,
@@ -42,4 +61,13 @@ List.propTypes = {
   dispatch: PropTypes.func.isRequired,
 }
 
-export default connect(mapStateToProps)(List)
+
+const mapStateToProps = state => ({
+  isVisible: state.drawer.isVisible,
+  title: tabsMap[state.routing.locationBeforeTransitions.query.tab],
+  isFetching: state.list.isFetching,
+  topics: state.list.topics,
+})
+
+
+export default connect(mapStateToProps)(ListComponent)
