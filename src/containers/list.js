@@ -35,7 +35,7 @@ class ListComponent extends Component {
                 onClick={() => props.dispatch(fetchTopics(tab.key))}
                 key={tab.key}
               />
-          ))}
+            ))}
           </List>
         </Drawer>
         {props.isFetching ? <Loading /> : (
