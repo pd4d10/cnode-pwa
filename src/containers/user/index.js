@@ -4,18 +4,16 @@ import { CircularProgress } from 'material-ui'
 import Container from '../../components/container'
 import { fetchUser } from '../../actions/user'
 
-const mapStateToProps = state => state.user
-
 class User extends Component {
   componentDidMount() {
     this.props.dispatch(fetchUser(this.props.params.name))
   }
 
   render() {
-    const { data, isFetching } = this.props
+    const { data, isLoading } = this.props
     return (
       <Container title="用户">
-        {isFetching ? <CircularProgress /> : (data && (
+        {isLoading ? <CircularProgress /> : (data && (
           <div>
             <img src={data.avatar_url} alt={data.loginname} />
           </div>
@@ -33,8 +31,10 @@ User.propTypes = {
     avatar_url: PropTypes.string.isRequired,
     loginname: PropTypes.string.isRequired,
   }),
-  isFetching: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
 }
+
+const mapStateToProps = state => state.user
 
 export default connect(mapStateToProps)(User)

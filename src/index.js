@@ -24,15 +24,15 @@ const presistedState = Immutable({
     isVisible: false,
   },
   list: {
-    isFetching: false,
+    isLoading: false,
     topics: [],
   },
   detail: {
-    isFetching: false,
+    isLoading: false,
     topic: null,
   },
   user: {
-    isFetching: false,
+    isLoading: false,
     data: null,
   },
   login: {

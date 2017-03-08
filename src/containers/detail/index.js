@@ -17,7 +17,7 @@ class Detail extends Component {
     const { props } = this
     return (
       <Container title="话题">
-        {(props.isFetching || !props.topic) ? <Loading /> : (
+        {(props.isLoading || !props.topic) ? <Loading /> : (
           <div>
             <h2>{props.topic.title}</h2>
             <div dangerouslySetInnerHTML={{ __html: props.topic.content }} />
@@ -32,7 +32,7 @@ class Detail extends Component {
 }
 
 Detail.propTypes = {
-  isFetching: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   params: PropTypes.shape({
     id: PropTypes.string.isRequired,
   }).isRequired,

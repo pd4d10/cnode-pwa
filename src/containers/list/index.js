@@ -81,7 +81,7 @@ class ListComponent extends Component {
             <ListItem primaryText="关于" />
           </List>
         </Drawer>
-        {props.isFetching ? <Loading /> : (
+        {props.isLoading ? <Loading /> : (
           <ul style={{ paddingTop: '64px' }}>
             {props.topics.map(topic => (
               <li key={topic.id}>
@@ -100,7 +100,7 @@ class ListComponent extends Component {
 
 ListComponent.propTypes = {
   // topics: PropTypes.arrayOf(PropTypes.object).isRequired,
-  // isFetching: PropTypes.bool.isRequired,
+  // isLoading: PropTypes.bool.isRequired,
   location: PropTypes.shape({
     query: PropTypes.shape({
       tab: PropTypes.string,
@@ -147,7 +147,7 @@ const mapStateToProps = (state) => {
   return {
     isVisible: state.drawer.isVisible,
     title: tabsMap[state.routing.locationBeforeTransitions.query.tab],
-    isFetching: state.list.isFetching,
+    isLoading: state.list.isLoading,
     topics: state.list.topics,
     activeItem,
   }
