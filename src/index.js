@@ -37,7 +37,7 @@ const presistedState = Immutable({
   },
   login: {
     input: '',
-    isLoginVisible: false,
+    isVisible: false,
   },
 })
 
