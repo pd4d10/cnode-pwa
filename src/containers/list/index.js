@@ -50,7 +50,7 @@ class ListComponent extends Component {
   render() {
     const { props } = this
     return (
-      <div className={style.container}>
+      <div className={style.container} style={props.location.pathname !== '/' ? { display: 'none' } : {}}>
         <AppBar
           title={props.title}
           iconClassNameRight="muidocs-icon-navigation-expand-more"

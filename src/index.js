@@ -8,7 +8,6 @@ import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import App from './containers/app'
-import List from './containers/list'
 import Detail from './containers/detail'
 import User from './containers/user'
 import NotFound from './containers/not-found'
@@ -58,7 +57,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={App}>
-        <IndexRoute component={List} />
+        <IndexRoute component={() => <div />} />
         <Route path="/topic/:id" component={Detail} />
         <Route path="/user/:name" component={User} />
         <Route path="*" component={NotFound} />

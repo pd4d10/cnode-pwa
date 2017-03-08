@@ -7,6 +7,7 @@ import { TextField, RaisedButton } from 'material-ui'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { grey800, green500 } from 'material-ui/styles/colors'
+import List from '../list'
 import style from './app.css'
 import { login, hideLogin, inputToken } from '../../actions/login'
 
@@ -44,9 +45,11 @@ const App = props => (
         transitionLeaveTimeout={300}
       >
         {/* http://www.jianshu.com/p/4dda6e4a22d2*/}
-        {React.cloneElement(props.children, {
+        {/* {React.cloneElement(props.children, {
           key: props.location.pathname,
-        })}
+        })}*/}
+        <List location={props.location} />
+        {props.children}
       </ReactCSSTransitionGroup>
     </div>
   </MuiThemeProvider>
