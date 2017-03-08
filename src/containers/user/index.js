@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { CircularProgress } from 'material-ui'
 // import { compose, pick } from 'lodash/fp'
+import AppBar from '../../components/app-bar'
 import { fetchUser } from '../../actions/user'
 // import Topic from '../components/topic'
 
@@ -16,6 +17,7 @@ class User extends Component {
     const { data, isFetching } = this.props
     return (
       <div>
+        <AppBar title="用户" />
         {isFetching ? <CircularProgress /> : (data && (
           <div>
             <img src={data.avatar_url} alt={data.loginname} />

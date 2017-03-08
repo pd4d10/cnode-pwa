@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { AppBar, IconButton } from 'material-ui'
-import { goBack } from 'react-router-redux'
-import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
+import AppBar from '../../components/app-bar'
 import { fetchTopic } from '../../actions/detail'
 import Reply from '../../components/reply'
 import Loading from '../../components/loading'
@@ -19,14 +17,7 @@ class Detail extends Component {
     const { props } = this
     return (
       <div>
-        <AppBar
-          style={{
-            position: 'fixed',
-          }}
-          title="话题"
-          iconElementLeft={<IconButton><ArrowBack /></IconButton>}
-          onLeftIconButtonTouchTap={() => props.dispatch(goBack())}
-        />
+        <AppBar title="话题" />
         {(props.isFetching || !props.topic) ? <Loading /> : (
           <div className={style.container} style={{ paddingTop: '64px' }}>
             <h2>{props.topic.title}</h2>
