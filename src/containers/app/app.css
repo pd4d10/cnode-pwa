@@ -13,3 +13,19 @@
   right: 0;
   z-index: 9999;
 }
+
+:global(.example-enter) {
+  opacity: 0.01;
+  & :global(.example-enter-active) {
+    opacity: 1;
+    transition: opacity 1000ms ease-in;
+  }
+}
+
+:global(.example-leave) {
+  opacity: 1;
+  & :global(.example-leave-active) {
+    opacity: 0.01;
+    transition: opacity 1000ms ease-in;
+  }
+}

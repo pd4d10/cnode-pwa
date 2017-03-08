@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 // import { Link } from 'react-router'
 import { TextField, RaisedButton } from 'material-ui'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { grey800, green500 } from 'material-ui/styles/colors'
 import style from './app.css'
 import { login, hideLogin, inputToken } from '../../actions/login'
@@ -36,7 +37,17 @@ const App = props => (
         <RaisedButton label="登录" primary onClick={() => props.dispatch(login())} />
         <RaisedButton label="取消" secondary onClick={() => props.dispatch(hideLogin())} />
       </form>
-      {props.children}
+
+      <ReactCSSTransitionGroup
+        transitionName="example"
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={300}
+      >
+        {/* http://www.jianshu.com/p/4dda6e4a22d2*/}
+        {React.cloneElement(props.children, {
+          key: props.location.pathname,
+        })}
+      </ReactCSSTransitionGroup>
     </div>
   </MuiThemeProvider>
 )

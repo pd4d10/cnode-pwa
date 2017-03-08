@@ -30,9 +30,9 @@ class Detail extends Component {
             <div dangerouslySetInnerHTML={{ __html: props.topic.content }} />
             {props.topic.replies.map(reply => (
               <Reply {...reply} key={reply.id} />
-            ))}
+              ))}
           </div>
-        )}
+          )}
       </div>
     )
   }
