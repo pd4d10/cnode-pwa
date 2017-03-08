@@ -11,7 +11,6 @@ import App from './containers/app'
 import List from './containers/list'
 import Detail from './containers/detail'
 import User from './containers/user'
-import Login from './containers/login'
 import NotFound from './containers/not-found'
 import reducers from './reducers'
 import './index.css'
@@ -62,7 +61,6 @@ ReactDOM.render(
         <IndexRoute component={List} />
         <Route path="/topic/:id" component={Detail} />
         <Route path="/user/:name" component={User} />
-        <Route path="/login" component={Login} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>
