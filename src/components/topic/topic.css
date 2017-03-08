@@ -6,7 +6,7 @@
 
 .avatar {
   width: 48px;
-  display: block;
+  height: 48px;
   margin-right: 6px;
   border-radius: 4px;
 }

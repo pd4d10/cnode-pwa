@@ -1,20 +1,24 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
+import { connect } from 'react-redux'
 import { ListItem } from 'material-ui'
 import { green500 } from 'material-ui/styles/colors'
 import TimeAgo from 'timeago-react' // var TimeAgo = require('timeago-react');
+import { push } from 'react-router-redux'
 import style from './topic.css'
 import { getTagFromTopic } from '../../utils'
 
 const Topic = props => (
   <Link to={`/topic/${props.id}`}>
     <ListItem innerDivStyle={{ display: 'flex', borderBottom: '1px solid #ccc' }}>
-      <Link to={`/user/${props.author.loginname}`}>
-        <img
-          className={style.avatar}
-          src={props.author.avatar_url} alt={props.author.loginname}
-        />
-      </Link>
+      <img
+        className={style.avatar}
+        src={props.author.avatar_url} alt={props.author.loginname}
+        onClick={(e) => {
+          e.preventDefault()
+          props.dispatch(push(`/user/${props.author.loginname}`))
+        }}
+      />
       <div className={style.content}>
         <h3>{props.title}</h3>
         <div className={style.extra}>
@@ -44,6 +48,7 @@ Topic.propTypes = {
   visit_count: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   last_reply_at: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
 }
 
-export default Topic
+export default connect()(Topic)
