@@ -3,10 +3,11 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { connect } from 'react-redux'
 // import { push } from 'react-router-redux'
 // import { Link } from 'react-router'
-// import RaisedButton from 'material-ui/RaisedButton'
+import { TextField, RaisedButton } from 'material-ui'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import { grey800, green500 } from 'material-ui/styles/colors'
 import style from './app.css'
+import { login, hideLogin, inputToken } from '../../actions/login'
 
 // This replaces the textColor value on the palette
 // and then update the keys for each component that depends on it.
@@ -26,19 +27,30 @@ const muiTheme = getMuiTheme({
 const App = props => (
   <MuiThemeProvider muiTheme={muiTheme}>
     <div className={style.container}>
+      <form style={props.isLoginVisible ? {} : { display: 'none' }} className={style.login}>
+        <TextField
+          value={props.input}
+          floatingLabelText="Token"
+          onChange={e => props.dispatch(inputToken(e.target.value))}
+        />
+        <RaisedButton label="登录" primary onClick={() => props.dispatch(login())} />
+        <RaisedButton label="取消" secondary onClick={() => props.dispatch(hideLogin())} />
+      </form>
       {props.children}
     </div>
   </MuiThemeProvider>
 )
 
 App.propTypes = {
-  // title: PropTypes.string.isRequired,
+  input: PropTypes.string.isRequired,
   children: PropTypes.element.isRequired,
-  // isVisible: PropTypes.bool.isRequired,
-  // dispatch: PropTypes.func.isRequired,
+  isLoginVisible: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func.isRequired,
 }
 
-// const mapStateToProps = state => ({
-// })
+const mapStateToProps = state => ({
+  input: state.login.input,
+  isLoginVisible: state.login.isVisible,
+})
 
-export default connect()(App)
+export default connect(mapStateToProps)(App)

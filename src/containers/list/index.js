@@ -11,6 +11,7 @@ import IconJob from 'material-ui/svg-icons/action/group-work'
 
 import { fetchTopics } from '../../actions/list'
 import { showDrawer, hideDrawer } from '../../actions/drawer'
+import { showLogin } from '../../actions/login'
 import Topic from '../../components/topic'
 import Loading from '../../components/loading'
 import style from './list.css'
@@ -72,7 +73,7 @@ class ListComponent extends Component {
               />
             ))}
             <Divider />
-            <ListItem primaryText="消息" />
+            <ListItem primaryText="消息" onClick={() => props.dispatch(showLogin())} />
             <ListItem primaryText="关于" />
           </List>
         </Drawer>
