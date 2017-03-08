@@ -29,7 +29,7 @@ const Item = props => (
   <ListItem
     leftIcon={<props.icon />}
     primaryText={tabsMap[props.tab]}
-    onClick={() => props.dispatch(load(props.tab))}
+    onClick={() => props.dispatch(listActions.load(props.tab))}
     innerDivStyle={props.activeItem[props.tab] ? {
       color: green500,
       backgroundColor: grey300,

@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { ListItem } from 'material-ui'
 import { green500 } from 'material-ui/styles/colors'
-import TimeAgo from 'timeago-react' // var TimeAgo = require('timeago-react');
+import TimeAgo from 'timeago-react'
 import { push } from 'react-router-redux'
 import style from './topic.css'
 import { getTagFromTopic } from '../../utils'
