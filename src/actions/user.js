@@ -10,7 +10,7 @@ export const fetchUser = name => async (dispatch) => {
   })
 
   try {
-    const res = await fetch(`${API_PREFIX}/v1/user/${name}`)
+    const res = await fetch(`${API_PREFIX}/user/${name}`)
     const { data } = await res.json()
     dispatch({
       type: FETCH_USER_SUCCESS,
