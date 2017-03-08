@@ -1,17 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import AppBar from '../../components/app-bar'
+import Container from '../../components/container'
 
 const Message = props => (
-  <div>
-    <AppBar title="消息" />
+  <Container title="消息">
     {props.hasnot_read_messages.map(message => (
       <div key={message.id}>{message.topic.title}</div>
     ))}
     {props.has_read_messages.map(message => (
       <div key={message.id}>{message.topic.title}</div>
     ))}
-  </div>
+  </Container>
 )
 
 const mapStateToProps = state => state.message

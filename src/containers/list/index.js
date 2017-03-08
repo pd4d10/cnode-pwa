@@ -8,10 +8,9 @@ import IconGood from 'material-ui/svg-icons/action/thumb-up'
 import IconShare from 'material-ui/svg-icons/action/timeline'
 import IconAsk from 'material-ui/svg-icons/action/question-answer'
 import IconJob from 'material-ui/svg-icons/action/group-work'
-
+import Container from '../../components/container'
 import { fetchTopics } from '../../actions/list'
 import { showDrawer, hideDrawer } from '../../actions/drawer'
-import { showLogin } from '../../actions/login'
 import * as messageAction from '../../actions/message'
 import Topic from '../../components/topic'
 import Loading from '../../components/loading'
@@ -86,7 +85,7 @@ class ListComponent extends Component {
               <li key={topic.id}>
                 <Topic {...topic} />
               </li>
-            ))}
+              ))}
           </ul>
         )}
         <FloatingActionButton className={style.post} style={{ zIndex: 2 }}>

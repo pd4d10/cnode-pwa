@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import AppBar from '../../components/app-bar'
+import Container from '../../components/container'
 import { fetchTopic } from '../../actions/detail'
 import Reply from '../../components/reply'
 import Loading from '../../components/loading'
@@ -16,18 +16,17 @@ class Detail extends Component {
   render() {
     const { props } = this
     return (
-      <div>
-        <AppBar title="话题" />
+      <Container title="话题">
         {(props.isFetching || !props.topic) ? <Loading /> : (
-          <div className={style.container} style={{ paddingTop: '64px' }}>
+          <div>
             <h2>{props.topic.title}</h2>
             <div dangerouslySetInnerHTML={{ __html: props.topic.content }} />
             {props.topic.replies.map(reply => (
               <Reply {...reply} key={reply.id} />
-              ))}
+            ))}
           </div>
-          )}
-      </div>
+        )}
+      </Container>
     )
   }
 }
