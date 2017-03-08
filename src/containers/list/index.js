@@ -52,6 +52,9 @@ class ListComponent extends Component {
     return (
       <div className={style.container} style={props.location.pathname !== '/' ? { display: 'none' } : {}}>
         <AppBar
+          style={{
+            position: 'fixed',
+          }}
           title={props.title}
           iconClassNameRight="muidocs-icon-navigation-expand-more"
           onLeftIconButtonTouchTap={() => props.dispatch(showDrawer())}
@@ -78,7 +81,7 @@ class ListComponent extends Component {
           </List>
         </Drawer>
         {props.isFetching ? <Loading /> : (
-          <ul>
+          <ul style={{ paddingTop: '64px' }}>
             {props.topics.map(topic => (
               <li key={topic.id}>
                 <Topic {...topic} />

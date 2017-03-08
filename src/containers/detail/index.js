@@ -20,12 +20,15 @@ class Detail extends Component {
     return (
       <div>
         <AppBar
+          style={{
+            position: 'fixed',
+          }}
           title="话题"
           iconElementLeft={<IconButton><ArrowBack /></IconButton>}
           onLeftIconButtonTouchTap={() => props.dispatch(goBack())}
         />
         {(props.isFetching || !props.topic) ? <Loading /> : (
-          <div className={style.container}>
+          <div className={style.container} style={{ paddingTop: '64px' }}>
             <h2>{props.topic.title}</h2>
             <div dangerouslySetInnerHTML={{ __html: props.topic.content }} />
             {props.topic.replies.map(reply => (

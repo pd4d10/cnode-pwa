@@ -5,22 +5,22 @@
 }
 
 .avatar {
-  width: 48px;
+  flex-basis: 48px;
   height: 48px;
-  margin-right: 6px;
+  margin-right: 10px;
   border-radius: 4px;
 }
 
 .content {
   display: flex;
   min-width: 0; /* https://stackoverflow.com/questions/34934586/white-space-nowrap-and-flexbox-did-not-work-in-chrome */
-  flex-grow: 1;
   flex-direction: column;
   justify-content: space-between;
   height: 48px;
 
   & h3 {
     font-size: 16px;
+    line-height: 20px;
     font-weight: normal;
     color: #333;
     white-space: nowrap;
