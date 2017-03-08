@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { AppBar, Drawer, Divider, List, ListItem, FloatingActionButton } from 'material-ui'
+import { AppBar, Drawer, Divider, List, ListItem, FloatingActionButton, IconButton } from 'material-ui'
 import ContentCreate from 'material-ui/svg-icons/content/create'
 import { green500, grey300 } from 'material-ui/styles/colors'
 import IconAll from 'material-ui/svg-icons/content/inbox'
@@ -8,10 +8,10 @@ import IconGood from 'material-ui/svg-icons/action/thumb-up'
 import IconShare from 'material-ui/svg-icons/action/timeline'
 import IconAsk from 'material-ui/svg-icons/action/question-answer'
 import IconJob from 'material-ui/svg-icons/action/group-work'
-import Container from '../../components/container'
-import { fetchTopics } from '../../actions/list'
-import { showDrawer, hideDrawer } from '../../actions/drawer'
-import * as messageAction from '../../actions/message'
+import Refresh from 'material-ui/svg-icons/navigation/refresh'
+import * as listActions from '../../actions/list'
+import * as drawerActions from '../../actions/drawer'
+import * as messageActions from '../../actions/message'
 import Topic from '../../components/topic'
 import Loading from '../../components/loading'
 import style from './list.css'
@@ -29,7 +29,7 @@ const Item = props => (
   <ListItem
     leftIcon={<props.icon />}
     primaryText={tabsMap[props.tab]}
-    onClick={() => props.dispatch(fetchTopics(props.tab))}
+    onClick={() => props.dispatch(load(props.tab))}
     innerDivStyle={props.activeItem[props.tab] ? {
       color: green500,
       backgroundColor: grey300,
@@ -44,7 +44,7 @@ Item.propTypes = {
 
 class ListComponent extends Component {
   componentDidMount() {
-    this.props.dispatch(fetchTopics(this.props.location.query.tab))
+    this.props.dispatch(listActions.load(this.props.location.query.tab))
   }
 
   render() {
@@ -56,13 +56,15 @@ class ListComponent extends Component {
             position: 'fixed',
           }}
           title={props.title}
-          onLeftIconButtonTouchTap={() => props.dispatch(showDrawer())}
+          onLeftIconButtonTouchTap={() => props.dispatch(drawerActions.show())}
+          iconElementRight={<IconButton><Refresh /></IconButton>}
+          onRightIconButtonTouchTap={() => props.dispatch(listActions.load())}
         />
         <Drawer
           docked={false}
           width={200}
           open={props.isVisible}
-          onRequestChange={() => props.dispatch(hideDrawer())}
+          onRequestChange={() => props.dispatch(drawerActions.hide())}
         >
           <List style={{ marginTop: '40px' }}>
             {tabs.map(tab => (
@@ -75,7 +77,7 @@ class ListComponent extends Component {
               />
             ))}
             <Divider />
-            <ListItem primaryText="消息" onClick={() => props.dispatch(messageAction.load())} />
+            <ListItem primaryText="消息" onClick={() => props.dispatch(messageActions.load())} />
             <ListItem primaryText="关于" />
           </List>
         </Drawer>

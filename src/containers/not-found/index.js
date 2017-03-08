@@ -1,11 +1,10 @@
 import React from 'react'
-import AppBar from '../../components/app-bar'
+import Container from '../../components/container'
 
 const NotFound = () => (
-  <div>
-    <AppBar title="无法找到此主题" />
+  <Container title="无法找到此主题">
     <div>404</div>
-  </div>
+  </Container>
 )
 
 export default NotFound
