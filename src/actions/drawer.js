@@ -1,10 +1,10 @@
-export const SHOW_DRAWER = 'SHOW_DRAWER'
-export const HIDE_DRAWER = 'HIDE_DRAWER'
+export const SHOW = 'DRAWER/SHOW'
+export const HIDE = 'DRAWER/HIDE'
 
-export const showDrawer = () => ({
-  type: SHOW_DRAWER,
+export const show = () => ({
+  type: SHOW,
 })
 
-export const hideDrawer = () => ({
-  type: HIDE_DRAWER,
+export const hide = () => ({
+  type: HIDE,
 })

@@ -1,20 +1,20 @@
 import { API_PREFIX } from '../utils'
 
-export const FETCH_TOPIC_START = 'FETCH_TOPIC_START'
-export const FETCH_TOPIC_SUCCESS = 'FETCH_TOPIC_SUCCESS'
-export const FETCH_TOPIC_FAIL = 'FETCH_TOPIC_FAIL'
+export const LOAD_START = 'DETAIL/LOAD_START'
+export const LOAD_SUCCESS = 'DETAIL/LOAD_SUCCESS'
+export const LOAD_FAIL = 'DETAIL/LOAD_FAIL'
 
 const fetchStart = () => ({
-  type: FETCH_TOPIC_START,
+  type: LOAD_START,
 })
 
 const fetchSuccess = topic => ({
-  type: FETCH_TOPIC_SUCCESS,
+  type: LOAD_SUCCESS,
   topic,
 })
 
 const fetchFail = err => ({
-  type: FETCH_TOPIC_FAIL,
+  type: LOAD_FAIL,
   err,
 })
 

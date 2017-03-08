@@ -1,9 +1,9 @@
+import { push } from 'react-router-redux'
 import { showLogin } from './login'
 import { API_PREFIX } from '../utils'
-import { push } from 'react-router-redux'
 
-export const LOAD_START = 'FETCH_MESSAGE_START'
-export const LOAD_SUCCESS = 'FETCH_MESSAGE_SUCCESS'
+export const LOAD_START = 'MESSAGE/LOAD_START'
+export const LOAD_SUCCESS = 'MESSAGE/LOAD_SUCCESS'
 
 export const load = () => async (dispatch, getState) => {
   const { token } = getState().login

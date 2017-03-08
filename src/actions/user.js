@@ -1,19 +1,19 @@
 import { API_PREFIX } from '../utils'
 
-export const FETCH_USER_START = 'FETCH_USER_START'
-export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS'
-export const FETCH_USER_FAIL = 'FETCH_USER_FAIL'
+export const LOAD_START = 'USER/LOAD_START'
+export const LOAD_SUCCESS = 'USER/LOAD_SUCCESS'
+export const LOAD_FAIL = 'USER/LOAD_FAIL'
 
 export const fetchUser = name => async (dispatch) => {
   dispatch({
-    type: FETCH_USER_START,
+    type: LOAD_START,
   })
 
   try {
     const res = await fetch(`${API_PREFIX}/user/${name}`)
     const { data } = await res.json()
     dispatch({
-      type: FETCH_USER_SUCCESS,
+      type: LOAD_SUCCESS,
       data,
     })
   } catch (err) {

@@ -1,21 +1,17 @@
-import {
-  FETCH_USER_START,
-  FETCH_USER_SUCCESS,
-  FETCH_USER_FAIL,
-} from '../actions/user'
+import * as userTypes from '../actions/user'
 
 export default function user(state = {
   isFetching: false,
   data: null,
 }, action) {
   switch (action.type) {
-    case FETCH_USER_START:
+    case userTypes.LOAD_START:
       return state.set('isFetching', true)
-    case FETCH_USER_SUCCESS:
+    case userTypes.LOAD_SUCCESS:
       return state
         .set('isFetching', false)
         .set('data', action.data)
-    case FETCH_USER_FAIL:
+    case userTypes.LOAD_FAIL:
       return state.set('isFetching', false)
     default:
       return state

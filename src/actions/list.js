@@ -1,13 +1,13 @@
 import { push } from 'react-router-redux'
 import { API_PREFIX } from '../utils'
 
-export const FETCH_TOPICS_START = 'FETCH_TOPICS_START'
-export const FETCH_TOPICS_SUCCESS = 'FETCH_TOPICS_SUCCESS'
-export const FETCH_TOPICS_FAIL = 'FETCH_TOPICS_FAIL'
+export const LOAD_START = 'LIST/LOAD_START'
+export const LOAD_SUCCESS = 'LIST/LOAD_SUCCESS'
+export const LOAD_FAIL = 'LIST/LOAD_FAIL'
 
-export const fetchTopics = (tab = 'all') => async (dispatch, getState) => {
+export const load = (tab = 'all') => async (dispatch, getState) => {
   dispatch({
-    type: FETCH_TOPICS_START,
+    type: LOAD_START,
   })
 
   try {
@@ -19,13 +19,13 @@ export const fetchTopics = (tab = 'all') => async (dispatch, getState) => {
     const res = await fetch(`${API_PREFIX}/topics?tab=${tab}`)
     const { data } = await res.json()
     dispatch(({
-      type: FETCH_TOPICS_SUCCESS,
+      type: LOAD_SUCCESS,
       topics: data,
       tab,
     }))
   } catch (err) {
     dispatch({
-      type: FETCH_TOPICS_FAIL,
+      type: LOAD_FAIL,
       err,
     })
   }
