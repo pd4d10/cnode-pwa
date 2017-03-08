@@ -11,6 +11,7 @@ import App from './containers/app'
 import Detail from './containers/detail'
 import User from './containers/user'
 import NotFound from './containers/not-found'
+import Message from './containers/message'
 import reducers from './reducers'
 import './index.css'
 
@@ -37,6 +38,12 @@ const presistedState = Immutable({
   login: {
     input: '',
     isVisible: false,
+    token: require('./token').token,
+  },
+  message: {
+    isLoading: false,
+    hasnot_read_messages: [],
+    has_read_messages: [],
   },
 })
 
@@ -60,6 +67,7 @@ ReactDOM.render(
         <IndexRoute component={() => <div />} />
         <Route path="/topic/:id" component={Detail} />
         <Route path="/user/:name" component={User} />
+        <Route path="/messages" component={Message} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>
