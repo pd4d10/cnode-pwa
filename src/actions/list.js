@@ -1,5 +1,5 @@
 import { push } from 'react-router-redux'
-import { API_PREFIX } from '../utils'
+import { fetchAPI } from '../utils'
 
 export const LOAD_START = 'LIST/LOAD_START'
 export const LOAD_SUCCESS = 'LIST/LOAD_SUCCESS'
@@ -16,8 +16,7 @@ export const load = (tab = 'all') => async (dispatch, getState) => {
       dispatch(push(`/?tab=${tab}`))
     }
 
-    const res = await fetch(`${API_PREFIX}/topics?tab=${tab}`)
-    const { data } = await res.json()
+    const { data } = await fetchAPI(`/topics?tab=${tab}`)
     dispatch(({
       type: LOAD_SUCCESS,
       topics: data,

@@ -6,7 +6,16 @@ export const tabsMap = {
   job: '招聘',
 }
 
-export const API_PREFIX = 'https://cnodejs.org/api/v1'
+export async function fetchAPI(url, options) {
+  const res = await fetch(`https://cnodejs.org/api/v1${url}`, options)
+  const json = await res.json()
+
+  if (!json.success) {
+    throw new Error(json.error_msg)
+  }
+
+  return json
+}
 
 export const tabs = Object.keys(tabsMap).map(key => ({
   key,

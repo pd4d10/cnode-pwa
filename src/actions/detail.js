@@ -1,4 +1,4 @@
-import { API_PREFIX } from '../utils'
+import { fetchAPI } from '../utils'
 
 export const LOAD_START = 'DETAIL/LOAD_START'
 export const LOAD_SUCCESS = 'DETAIL/LOAD_SUCCESS'
@@ -22,8 +22,7 @@ export const fetchTopic = id => async (dispatch) => {
   dispatch(fetchStart())
   // const id = getState().routing.id
   try {
-    const res = await fetch(`${API_PREFIX}/topic/${id}`)
-    const { data } = await res.json()
+    const { data } = await fetchAPI(`/topic/${id}`)
     dispatch(fetchSuccess(data))
   } catch (err) {
     dispatch(fetchFail(err))

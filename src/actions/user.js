@@ -1,4 +1,4 @@
-import { API_PREFIX } from '../utils'
+import { fetchAPI } from '../utils'
 
 export const LOAD_START = 'USER/LOAD_START'
 export const LOAD_SUCCESS = 'USER/LOAD_SUCCESS'
@@ -10,8 +10,7 @@ export const fetchUser = name => async (dispatch) => {
   })
 
   try {
-    const res = await fetch(`${API_PREFIX}/user/${name}`)
-    const { data } = await res.json()
+    const { data } = await fetchAPI(`/user/${name}`)
     dispatch({
       type: LOAD_SUCCESS,
       data,
