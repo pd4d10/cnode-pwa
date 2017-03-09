@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { AppBar, Drawer, Divider, List, ListItem, FloatingActionButton, IconButton } from 'material-ui'
+import { AppBar, Drawer, Divider, List, ListItem, FloatingActionButton, IconButton, Avatar } from 'material-ui'
 import ContentCreate from 'material-ui/svg-icons/content/create'
 import { green500, grey300 } from 'material-ui/styles/colors'
 import IconAll from 'material-ui/svg-icons/content/inbox'
@@ -8,10 +8,12 @@ import IconGood from 'material-ui/svg-icons/action/thumb-up'
 import IconShare from 'material-ui/svg-icons/action/timeline'
 import IconAsk from 'material-ui/svg-icons/action/question-answer'
 import IconJob from 'material-ui/svg-icons/action/group-work'
+import DefaultAvatar from 'material-ui/svg-icons/social/person'
 import Refresh from 'material-ui/svg-icons/navigation/refresh'
 import * as listActions from '../../actions/list'
 import * as drawerActions from '../../actions/drawer'
 import * as messageActions from '../../actions/message'
+import * as authActions from '../../actions/auth'
 import Topic from '../../components/topic'
 import Loading from '../../components/loading'
 import LoadingMore from '../../components/loading-more'
@@ -55,6 +57,7 @@ class ListComponent extends Component {
 
   componentDidMount() {
     this.props.dispatch(listActions.load(this.props.location.query.tab))
+    this.props.dispatch(authActions.load())
     window.addEventListener('scroll', this.loadMore)
   }
 
@@ -77,11 +80,18 @@ class ListComponent extends Component {
         />
         <Drawer
           docked={false}
-          width={200}
           open={props.isVisible}
           onRequestChange={() => props.dispatch(drawerActions.hide())}
         >
           <List style={{ marginTop: '40px' }}>
+            <ListItem
+              leftAvatar={<Avatar
+                src={props.avatar ? props.avatar : null}
+                icon={props.avatar ? null : <DefaultAvatar />}
+              />}
+              primaryText={props.name ? props.name : '点击登录'}
+            />
+            <Divider />
             {tabs.map(tab => (
               <Item
                 key={tab.key}
@@ -167,6 +177,8 @@ const mapStateToProps = (state) => {
     isVisible: state.drawer.isVisible,
     title: tabsMap[state.routing.locationBeforeTransitions.query.tab],
     activeItem,
+    avatar: state.auth.avatar,
+    name: state.auth.name,
   }
 }
 

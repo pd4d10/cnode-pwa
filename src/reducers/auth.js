@@ -1,4 +1,4 @@
-import * as types from '../actions/login'
+import * as types from '../actions/auth'
 
 export default function login(state = {
   input: '',

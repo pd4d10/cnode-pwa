@@ -1,12 +1,12 @@
 import { push } from 'react-router-redux'
-import { showLogin } from './login'
+import { showLogin } from './auth'
 import { fetchAPI } from '../utils'
 
 export const LOAD_START = 'MESSAGE/LOAD_START'
 export const LOAD_SUCCESS = 'MESSAGE/LOAD_SUCCESS'
 
 export const load = () => async (dispatch, getState) => {
-  const { token } = getState().login
+  const { token } = getState().auth
 
   // If there is no token, show login popup
   if (!token) {

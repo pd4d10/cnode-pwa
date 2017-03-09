@@ -4,7 +4,7 @@ import list from './list'
 import detail from './detail'
 import drawer from './drawer'
 import user from './user'
-import login from './login'
+import auth from './auth'
 import message from './message'
 
 export default combineReducers({
@@ -13,6 +13,6 @@ export default combineReducers({
   detail,
   drawer,
   user,
-  login,
+  auth,
   message,
 })

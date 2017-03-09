@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import { AppBar, IconButton } from 'material-ui'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
 import { goBack } from 'react-router-redux'
+import style from './container.css'
 
 const Container = props => (
-  <div>
+  <div className={style.container}>
     <AppBar
       style={{
         position: 'fixed',
