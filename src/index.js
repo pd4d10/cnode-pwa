@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
-import Immutable from 'seamless-immutable'
 import { Router, Route, IndexRoute, hashHistory } from 'react-router'
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
@@ -19,39 +18,10 @@ import './index.css'
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin()
 
-const presistedState = Immutable({
-  drawer: {
-    isVisible: false,
-  },
-  list: {
-    isLoading: false,
-    topics: [],
-  },
-  detail: {
-    isLoading: false,
-    topic: null,
-  },
-  user: {
-    isLoading: false,
-    data: null,
-  },
-  login: {
-    input: '',
-    isVisible: false,
-    token: require('./token').token,
-  },
-  message: {
-    isLoading: false,
-    hasnot_read_messages: [],
-    has_read_messages: [],
-  },
-})
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose // eslint-disable-line
 
 const store = createStore(
   reducers,
-  presistedState,
   composeEnhancers(applyMiddleware(
     routerMiddleware(hashHistory),
     thunk,

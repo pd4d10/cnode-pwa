@@ -1,21 +1,41 @@
 import * as types from '../actions/login'
 
-export default function login(state = {}, action) {
+export default function login(state = {
+  input: '',
+  isLoading: false,
+  isVisible: false,
+  token: require('../token').token,
+}, action) {
   switch (action.type) {
     case types.LOGIN_START:
-      return state.set('isLoading', true)
+      return {
+        ...state,
+        isLoading: true,
+      }
     case types.LOGIN_SUCCESS:
-      return state.set('isLoading', false)
-        .set('isVisible', false)
-        .set('token', action.token)
-        .set('name', action.name)
-        .set('avatar', action.avatar)
+      return {
+        ...state,
+        isLoading: false,
+        isVisible: false,
+        token: action.token,
+        name: action.name,
+        avatar: action.avatar,
+      }
     case types.SHOW_LOGIN:
-      return state.set('isVisible', true)
+      return {
+        ...state,
+        isVisible: true,
+      }
     case types.HIDE_LOGIN:
-      return state.set('isVisible', false)
+      return {
+        ...state,
+        isVisible: false,
+      }
     case types.INPUT_TOKEN:
-      return state.set('input', action.value)
+      return {
+        ...state,
+        input: action.value,
+      }
     default:
       return state
   }
