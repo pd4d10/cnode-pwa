@@ -14,6 +14,7 @@ import * as drawerActions from '../../actions/drawer'
 import * as messageActions from '../../actions/message'
 import Topic from '../../components/topic'
 import Loading from '../../components/loading'
+import LoadingMore from '../../components/loading-more'
 import style from './list.css'
 import { tabs, tabsMap } from '../../utils'
 
@@ -43,8 +44,22 @@ Item.propTypes = {
 }
 
 class ListComponent extends Component {
+  constructor(props) {
+    super(props)
+    this.loadMore = () => {
+      if (document.documentElement.scrollHeight - document.body.scrollTop - document.documentElement.clientHeight < 100 && !this.props.isLoadingMore) {
+        this.props.dispatch(listActions.loadMore())
+      }
+    }
+  }
+
   componentDidMount() {
     this.props.dispatch(listActions.load(this.props.location.query.tab))
+    window.addEventListener('scroll', this.loadMore)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.loadMore)
   }
 
   render() {
@@ -89,6 +104,9 @@ class ListComponent extends Component {
               </li>
               ))}
           </ul>
+        )}
+        {props.isLoadingMore ? <LoadingMore /> : (
+          <div>加载更多</div>
         )}
         <FloatingActionButton className={style.post} style={{ zIndex: 2 }}>
           <ContentCreate />
@@ -145,10 +163,9 @@ const mapStateToProps = (state) => {
   activeItem[key] = true
 
   return {
+    ...state.list,
     isVisible: state.drawer.isVisible,
     title: tabsMap[state.routing.locationBeforeTransitions.query.tab],
-    isLoading: state.list.isLoading,
-    topics: state.list.topics,
     activeItem,
   }
 }

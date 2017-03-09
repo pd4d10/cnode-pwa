@@ -16,6 +16,7 @@ export default function list(state = {
       return {
         ...state,
         isLoading: false,
+        page: 1, // Reset page
         topics: action.data,
       }
     case types.LOAD_FAIL:
@@ -32,6 +33,7 @@ export default function list(state = {
       return {
         ...state,
         isLoadingMore: false,
+        page: state.page + 1,
         topics: [...state.topics, ...action.data],
       }
     default:
