@@ -17,15 +17,17 @@ class Detail extends Component {
     const { props } = this
     return (
       <Container title="话题">
-        {(props.isLoading || !props.topic) ? <Loading /> : (
-          <div>
-            <h2>{props.topic.title}</h2>
-            <div dangerouslySetInnerHTML={{ __html: props.topic.content }} />
-            {props.topic.replies.map(reply => (
-              <Reply {...reply} key={reply.id} />
-            ))}
-          </div>
-        )}
+        <div className={style.container}>
+          {(props.isLoading || !props.topic) ? <Loading /> : (
+            <div>
+              <h2>{props.topic.title}</h2>
+              <div dangerouslySetInnerHTML={{ __html: props.topic.content }} />
+              {props.topic.replies.map(reply => (
+                <Reply {...reply} key={reply.id} />
+              ))}
+            </div>
+          )}
+        </div>
       </Container>
     )
   }

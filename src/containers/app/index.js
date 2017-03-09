@@ -9,7 +9,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { grey800, green500 } from 'material-ui/styles/colors'
 import List from '../list'
 import style from './app.css'
-import { login, hideLogin, inputToken } from '../../actions/login'
+import { login, hideLogin, inputToken } from '../../actions/auth'
 
 // This replaces the textColor value on the palette
 // and then update the keys for each component that depends on it.
@@ -39,17 +39,17 @@ const App = props => (
         <RaisedButton label="取消" secondary onClick={() => props.dispatch(hideLogin())} />
       </form>
 
+      <List location={props.location} />
+
+      {/* https://github.com/ReactTraining/react-router/blob/master/examples/animations/app.js*/}
       <ReactCSSTransitionGroup
-        transitionName="example"
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={300}
+        transitionName="test"
+        transitionEnterTimeout={1000}
+        transitionLeaveTimeout={1000}
       >
-        {/* http://www.jianshu.com/p/4dda6e4a22d2*/}
-        {/* {React.cloneElement(props.children, {
+        {React.cloneElement(props.children, {
           key: props.location.pathname,
-        })}*/}
-        <List location={props.location} />
-        {props.children}
+        })}
       </ReactCSSTransitionGroup>
     </div>
   </MuiThemeProvider>
@@ -63,8 +63,8 @@ App.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  input: state.login.input,
-  isLoginVisible: state.login.isVisible,
+  input: state.auth.input,
+  isLoginVisible: state.auth.isVisible,
 })
 
 export default connect(mapStateToProps)(App)

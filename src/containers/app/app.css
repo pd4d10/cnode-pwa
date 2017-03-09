@@ -15,17 +15,20 @@
 }
 
 :global(.example-enter) {
-  opacity: 0.01;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate(250px, 0);
   & :global(.example-enter-active) {
-    opacity: 1;
-    transition: opacity 1000ms ease-in;
+    transform: translate(0, 0);
+    transition: transform 1000ms ease-in;
   }
 }
 
 :global(.example-leave) {
-  opacity: 1;
+  transform: translate(0, 0);
   & :global(.example-leave-active) {
-    opacity: 0.01;
-    transition: opacity 1000ms ease-in;
+    transform: translate(250px, 0);
+    transition: transform 1000ms ease-in;
   }
 }
