@@ -7,6 +7,7 @@ import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import App from './containers/app'
+import List from './containers/list'
 import Detail from './containers/detail'
 import User from './containers/user'
 import NotFound from './containers/not-found'
@@ -31,11 +32,16 @@ const store = createStore(
 
 const history = syncHistoryWithStore(hashHistory, store)
 
+if (process.env.NODE_ENV !== 'production') {
+  window.Perf = require('react-addons-perf')
+  // require('why-did-you-update').whyDidYouUpdate(React)
+}
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={App}>
-        <IndexRoute component={() => <div />} />
+        <IndexRoute component={List} />
         <Route path="/topic/:id" component={Detail} />
         <Route path="/user/:name" component={User} />
         <Route path="/messages" component={Message} />

@@ -36,6 +36,7 @@
     "postcss-cssnext": "^2.9.0",
     "postcss-loader": "1.2.2",
     "promise": "7.1.1",
+    "react-addons-perf": "^15.4.2",
     "react-dev-utils": "^0.5.1",
     "recursive-readdir": "2.1.1",
     "strip-ansi": "3.0.1",
@@ -44,7 +45,8 @@
     "webpack": "1.14.0",
     "webpack-dev-server": "1.16.2",
     "webpack-manifest-plugin": "1.1.0",
-    "whatwg-fetch": "2.0.2"
+    "whatwg-fetch": "2.0.2",
+    "why-did-you-update": "^0.0.8"
   },
   "dependencies": {
     "lodash": "^4.17.4",
