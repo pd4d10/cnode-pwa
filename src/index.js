@@ -2,7 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
-import { Router, Route, IndexRoute, hashHistory } from 'react-router'
+import { Router, Route, IndexRoute, hashHistory, applyRouterMiddleware } from 'react-router'
+import { useScroll } from 'react-router-scroll'
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import injectTapEventPlugin from 'react-tap-event-plugin'
@@ -39,7 +40,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
+    <Router history={history} render={applyRouterMiddleware(useScroll())}>
       <Route path="/" component={App}>
         <IndexRoute component={List} />
         <Route path="/topic/:id" component={Detail} />

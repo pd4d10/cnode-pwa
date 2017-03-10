@@ -77,7 +77,7 @@ class ListComponent extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(listActions.load(this.props.location.query.tab))
+    // this.props.dispatch(listActions.load(this.props.location.query.tab))
     this.props.dispatch(authActions.load())
     window.addEventListener('scroll', this.loadMore)
   }
@@ -89,7 +89,7 @@ class ListComponent extends Component {
   render() {
     const { props } = this
     return (
-      <div className={style.container} style={props.location.pathname !== '/' ? { display: 'none' } : {}}>
+      <div className={style.container}>
         <AppBar
           style={{
             position: 'fixed',
