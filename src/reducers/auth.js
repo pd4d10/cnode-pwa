@@ -4,7 +4,6 @@ export default function login(state = {
   input: '',
   isLoading: false,
   isVisible: false,
-  token: require('../token').token,
 }, action) {
   switch (action.type) {
     case types.LOGIN_START:

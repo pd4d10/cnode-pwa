@@ -1,24 +1,40 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import { AppBar, Drawer, Divider, List, ListItem, FloatingActionButton, IconButton, Avatar } from 'material-ui'
 import ContentCreate from 'material-ui/svg-icons/content/create'
 import { green500, grey300 } from 'material-ui/styles/colors'
+import { throttle } from 'lodash'
+
 import IconAll from 'material-ui/svg-icons/content/inbox'
 import IconGood from 'material-ui/svg-icons/action/thumb-up'
 import IconShare from 'material-ui/svg-icons/action/timeline'
 import IconAsk from 'material-ui/svg-icons/action/question-answer'
 import IconJob from 'material-ui/svg-icons/action/group-work'
+import IconMessage from 'material-ui/svg-icons/communication/message'
+import IconAbout from 'material-ui/svg-icons/action/info'
 import DefaultAvatar from 'material-ui/svg-icons/social/person'
+
 import Refresh from 'material-ui/svg-icons/navigation/refresh'
 import * as listActions from '../../actions/list'
 import * as drawerActions from '../../actions/drawer'
-import * as messageActions from '../../actions/message'
 import * as authActions from '../../actions/auth'
 import Topic from '../../components/topic'
 import Loading from '../../components/loading'
 import LoadingMore from '../../components/loading-more'
+import * as utils from '../../utils'
 import style from './list.css'
-import { tabs, tabsMap } from '../../utils'
+
+const tabsMap = {
+  ...utils.tabsMap,
+  message: '消息',
+  about: '关于',
+}
+
+const tabs = Object.keys(tabsMap).map(key => ({
+  key,
+  value: tabsMap[key],
+}))
 
 const iconsMap = {
   all: IconAll,
@@ -26,19 +42,24 @@ const iconsMap = {
   share: IconShare,
   ask: IconAsk,
   job: IconJob,
+  message: IconMessage,
+  about: IconAbout,
 }
 
-const Item = props => (
-  <ListItem
-    leftIcon={<props.icon />}
-    primaryText={tabsMap[props.tab]}
-    onClick={() => props.dispatch(listActions.load(props.tab))}
-    innerDivStyle={props.activeItem[props.tab] ? {
-      color: green500,
-      backgroundColor: grey300,
-    } : {}}
-  />
-)
+const Item = (props) => {
+  const Icon = iconsMap[props.tab]
+  return (
+    <ListItem
+      leftIcon={<Icon />}
+      primaryText={tabsMap[props.tab]}
+      onClick={() => props.dispatch(listActions.load(props.tab))}
+      innerDivStyle={props.activeItem[props.tab] ? {
+        color: green500,
+        backgroundColor: grey300,
+      } : {}}
+    />
+  )
+}
 
 Item.propTypes = {
   tab: PropTypes.string.isRequired,
@@ -48,11 +69,11 @@ Item.propTypes = {
 class ListComponent extends Component {
   constructor(props) {
     super(props)
-    this.loadMore = () => {
+    this.loadMore = throttle(() => {
       if (document.documentElement.scrollHeight - document.body.scrollTop - document.documentElement.clientHeight < 100 && !this.props.isLoadingMore) {
         this.props.dispatch(listActions.loadMore())
       }
-    }
+    }, 300)
   }
 
   componentDidMount() {
@@ -92,18 +113,24 @@ class ListComponent extends Component {
               primaryText={props.name ? props.name : '点击登录'}
             />
             <Divider />
-            {tabs.map(tab => (
+            {tabs.slice(0, 5).map(tab => (
               <Item
                 key={tab.key}
                 tab={tab.key}
-                icon={iconsMap[tab.key]}
                 activeItem={props.activeItem}
                 dispatch={props.dispatch}
               />
             ))}
             <Divider />
-            <ListItem primaryText="消息" onClick={() => props.dispatch(messageActions.load())} />
-            <ListItem primaryText="关于" />
+            <Link to="/about">
+              <ListItem
+                tab="about"
+                primaryText="关于"
+                leftIcon={<IconAbout />}
+                activeItem={props.activeItem}
+                onClick={() => props.dispatch(drawerActions.hide())}
+              />
+            </Link>
           </List>
         </Drawer>
         {props.isLoading ? <Loading /> : (

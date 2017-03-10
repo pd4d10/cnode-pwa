@@ -13,7 +13,8 @@ const Topic = props => (
     <ListItem innerDivStyle={{ display: 'flex', borderBottom: '1px solid #ccc' }}>
       <img
         className={style.avatar}
-        src={props.author.avatar_url} alt={props.author.loginname}
+        src={props.author.avatar_url}
+        alt={props.author.loginname}
         onClick={(e) => {
           e.preventDefault()
           props.dispatch(push(`/user/${props.author.loginname}`))

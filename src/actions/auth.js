@@ -57,24 +57,6 @@ export const load = () => async (dispatch, getState) => {
   }
 }
 
-// // Check if current token is correct
-// export const auth = () => async (dispatch, getState) => {
-//   const { token } = getState().auth
-
-//   // If there is no token, show login popup
-//   if (!token) {
-//     dispatch(showLogin())
-//     return
-//   }
-
-//   try {
-//     const json = await fetchAuth(token)
-//     dispatch(loginSuccess(token, json))
-//   } catch (err) {
-//     dispatch(showLogin())
-//   }
-// }
-
 export const login = () => async (dispatch, getState) => {
   dispatch(loginStart())
   const token = getState().auth.input

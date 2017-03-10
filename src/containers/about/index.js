@@ -1,5 +1,5 @@
-import React from 'react'
-import { List, ListItem, Divider } from 'material-ui'
+import React, { PropTypes } from 'react'
+import { ListItem, Divider } from 'material-ui'
 import Container from '../../components/container'
 import Logo from './logo'
 import style from './about.css'
@@ -15,10 +15,15 @@ const Linker = props => (
   </a>
 )
 
+Linker.propTypes = {
+  url: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+}
+
 const About = () => (
   <Container title="关于">
-    <div className={style.logo}><Logo /></div>
-    <List>
+    <div>
+      <div className={style.logo}><Logo /></div>
       <Divider />
       <Linker title="源代码" url="https://github.com/pd4d10/cnode-pwa" />
       <Divider />
@@ -26,7 +31,7 @@ const About = () => (
       <Divider />
       <ListItem primaryText="License" secondaryText="MIT" />
       <Divider />
-    </List>
+    </div>
   </Container>
 )
 
