@@ -31,6 +31,7 @@ const Topic = props => (
           <TimeAgo
             datetime={props.last_reply_at}
             locale="zh_CN"
+            live={false}
           />
         </div>
       </div>
