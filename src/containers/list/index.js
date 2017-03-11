@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { AppBar, Drawer, Divider, List, ListItem, FloatingActionButton, IconButton, Avatar } from 'material-ui'
 import ContentCreate from 'material-ui/svg-icons/content/create'
-import { green500, grey300 } from 'material-ui/styles/colors'
+// import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import { grey300 } from 'material-ui/styles/colors'
+import { colors } from '../../utils'
 import { throttle } from 'lodash'
 
 import IconAll from 'material-ui/svg-icons/content/inbox'
@@ -54,7 +56,7 @@ const Item = (props) => {
       primaryText={tabsMap[props.tab]}
       onClick={() => props.dispatch(listActions.load(props.tab))}
       innerDivStyle={props.activeItem[props.tab] ? {
-        color: green500,
+        color: colors.primary,
         backgroundColor: grey300,
       } : {}}
     />
@@ -73,7 +75,7 @@ class ListComponent extends Component {
       if (document.documentElement.scrollHeight - document.body.scrollTop - document.documentElement.clientHeight < 100 && !this.props.isLoadingMore) {
         this.props.dispatch(listActions.loadMore())
       }
-    }, 300)
+    }, 200)
   }
 
   componentDidMount() {
@@ -133,8 +135,8 @@ class ListComponent extends Component {
             </Link>
           </List>
         </Drawer>
-        {props.isLoading ? <Loading /> : (
-          <ul style={{ paddingTop: '64px' }}>
+        {props.isLoading ? <Loading key="loading" /> : (
+          <ul style={{ paddingTop: '64px' }} key={props.location.query.tab}>
             {props.topics.map(topic => (
               <li key={topic.id}>
                 <Topic {...topic} />
@@ -143,7 +145,7 @@ class ListComponent extends Component {
           </ul>
         )}
         {props.isLoadingMore ? <LoadingMore /> : (
-          <div>加载更多</div>
+          <div />
         )}
         <FloatingActionButton className={style.post} style={{ zIndex: 2 }}>
           <ContentCreate />

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 // import { Link } from 'react-router'
 import { TextField, RaisedButton } from 'material-ui'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import { grey800, green500 } from 'material-ui/styles/colors'
+import { colors } from '../../utils'
 import style from './app.css'
 import { login, hideLogin, inputToken } from '../../actions/auth'
 
@@ -17,10 +17,10 @@ const muiTheme = getMuiTheme({
     // textColor: green800,
   },
   appBar: {
-    color: grey800,
+    color: colors.primary,
   },
   floatingActionButton: {
-    color: green500,
+    color: colors.primary,
   },
 })
 

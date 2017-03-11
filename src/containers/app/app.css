@@ -19,27 +19,17 @@
 }
 
 :global(.back-enter) {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  transform: translate(250px, 0);
+  opacity: 0.01;
   &:global(.back-enter-active) {
-    transform: translate(0, 0);
-    transition: all 300ms;
+    opacity: 1;
+    transition: all 200ms;
   }
 }
 
 :global(.back-leave) {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  transform: translate(0, 0);
+  opacity: 1;
   &:global(.back-leave-active) {
-    transform: translate(250px, 0);
-    transition: all 300ms;
+    opacity: 0.01;
+    transition: all 200ms;
   }
 }

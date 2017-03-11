@@ -1,20 +1,23 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
-import { ListItem } from 'material-ui'
-import { green500 } from 'material-ui/styles/colors'
+import { ListItem, Divider } from 'material-ui'
+import { colors } from '../../utils'
 import TimeAgo from 'timeago-react'
 import { push } from 'react-router-redux'
 import style from './topic.css'
 import { getTagFromTopic } from '../../utils'
 
 const Topic = props => (
-  <Link to={`/topic/${props.id}`}>
-    <ListItem innerDivStyle={{ display: 'flex', borderBottom: '1px solid #ccc' }}>
+  <Link to={`/topic/${props.id}`} className={style.container}>
+    <ListItem
+      innerDivStyle={{ display: 'flex' }}
+    >
       <img
         className={style.avatar}
         src={props.author.avatar_url}
         alt={props.author.loginname}
+        style={{ borderBottom: `1px solid ${colors.avatarBorder}` }}
         onClick={(e) => {
           e.preventDefault()
           props.dispatch(push(`/user/${props.author.loginname}`))
@@ -24,7 +27,7 @@ const Topic = props => (
         <h3>{props.title}</h3>
         <div className={style.extra}>
           <div className={style.left}>
-            <div className={style.tag} style={{ backgroundColor: green500 }}>{getTagFromTopic(props)}</div>
+            <div className={style.tag} style={{ backgroundColor: colors.tag }}>{getTagFromTopic(props)}</div>
             <div className={style.count}>
               <strong>{props.reply_count}</strong> / {props.visit_count}
             </div>
@@ -37,6 +40,7 @@ const Topic = props => (
         </div>
       </div>
     </ListItem>
+    <Divider />
   </Link>
 )
 
