@@ -19,7 +19,7 @@ class Detail extends Component {
       <Container title="话题">
         <div className={style.container}>
           {(props.isLoading || !props.topic) ? <Loading /> : (
-            <div>
+            <div className="markdown-body">
               <h2>{props.topic.title}</h2>
               <div dangerouslySetInnerHTML={{ __html: props.topic.content }} />
               {props.topic.replies.map(reply => (

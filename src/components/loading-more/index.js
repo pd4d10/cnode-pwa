@@ -1,11 +1,11 @@
 import React from 'react'
 import { CircularProgress } from 'material-ui'
-import { green500 } from 'material-ui/styles/colors'
+import { colors } from '../../utils'
 import style from './loading-more.css'
 
 const LoadingMore = () => (
   <div className={style.container}>
-    <CircularProgress color={green500} />
+    <CircularProgress color={colors.primary} />
   </div>
 )
 

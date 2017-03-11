@@ -1,12 +1,12 @@
 import React from 'react'
 // import { fill } from 'lodash'
 import { CircularProgress } from 'material-ui'
-import { green500 } from 'material-ui/styles/colors'
+import { colors } from '../../utils'
 import style from './loading.css'
 
 const Loading = () => (
   <div className={style.container}>
-    <CircularProgress color={green500} />
+    <CircularProgress color={colors.primary} />
   </div>
 )
 

@@ -9,6 +9,8 @@ import { colors } from '../../utils'
 import style from './app.css'
 import { login, hideLogin, inputToken } from '../../actions/auth'
 
+import Drawer from '../drawer'
+
 // This replaces the textColor value on the palette
 // and then update the keys for each component that depends on it.
 // More on Colors: http://www.material-ui.com/#/customization/colors
@@ -26,7 +28,7 @@ const muiTheme = getMuiTheme({
 
 const App = props => (
   <MuiThemeProvider muiTheme={muiTheme}>
-    <div className={style.container}>
+    <main className={style.container}>
       <form style={props.isLoginVisible ? {} : { display: 'none' }} className={style.login}>
         <TextField
           value={props.input}
@@ -36,6 +38,8 @@ const App = props => (
         <RaisedButton label="登录" primary onClick={() => props.dispatch(login())} />
         <RaisedButton label="取消" secondary onClick={() => props.dispatch(hideLogin())} />
       </form>
+
+      <Drawer />
 
       {/* https://github.com/ReactTraining/react-router/blob/master/examples/animations/app.js*/}
       {/* <ReactCSSTransitionGroup
@@ -48,7 +52,7 @@ const App = props => (
         })}
       </ReactCSSTransitionGroup>*/}
       {props.children}
-    </div>
+    </main>
   </MuiThemeProvider>
 )
 

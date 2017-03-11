@@ -2,7 +2,15 @@ import {
   indigo700 as primary,
   indigo500 as tag,
   indigo100 as avatarBorder,
+  grey300 as avatarBackground,
 } from 'material-ui/styles/colors'
+
+export const colors = {
+  primary,
+  tag,
+  avatarBorder,
+  avatarBackground,
+}
 
 export const tabsMap = {
   all: '全部',
@@ -38,10 +46,4 @@ export function getTagFromTopic({ top, good, tab }) {
   }
 
   return tabsMap[tab] || '未知'
-}
-
-export const colors = {
-  primary,
-  tag,
-  avatarBorder,
 }

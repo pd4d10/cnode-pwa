@@ -1,0 +1,144 @@
+import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router'
+import * as MUI from 'material-ui'
+import DefaultAvatar from 'material-ui/svg-icons/social/person'
+
+import IconAll from 'material-ui/svg-icons/content/inbox'
+import IconGood from 'material-ui/svg-icons/action/thumb-up'
+import IconShare from 'material-ui/svg-icons/action/timeline'
+import IconAsk from 'material-ui/svg-icons/action/question-answer'
+import IconJob from 'material-ui/svg-icons/action/group-work'
+import IconMessage from 'material-ui/svg-icons/communication/message'
+import IconAbout from 'material-ui/svg-icons/action/info'
+
+import * as utils from '../../utils'
+import * as drawerActions from '../../actions/drawer'
+import * as listActions from '../../actions/list'
+
+const iconsMap = {
+  all: IconAll,
+  good: IconGood,
+  share: IconShare,
+  ask: IconAsk,
+  job: IconJob,
+  message: IconMessage,
+  about: IconAbout,
+}
+
+const Item = (props) => {
+  const Icon = iconsMap[props.tab]
+  return (
+    <MUI.ListItem
+      leftIcon={<Icon />}
+      primaryText={utils.tabsMap[props.tab]}
+      onClick={() => props.dispatch(listActions.load(props.tab))}
+      innerDivStyle={props.activeItem[props.tab] ? {
+        color: utils.colors.primary,
+        backgroundColor: utils.colors.avatarBackground,
+      } : {}}
+    />
+  )
+}
+
+Item.propTypes = {
+  tab: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
+}
+
+
+function getActiveItem({
+  pathname,
+  query,
+}) {
+  switch (pathname) {
+    case '/':
+      return query.tab
+    case '/about':
+      return 'about'
+    case '/message':
+      return 'message'
+    default: {
+      if (/^\/topics/.test(pathname)) {
+        return 'topics'
+      }
+      return undefined
+    }
+  }
+}
+
+
+const MyDrawer = props => (
+  <MUI.Drawer
+    docked={false}
+    open={props.isVisible}
+    onRequestChange={() => props.dispatch(drawerActions.hide())}
+  >
+    <MUI.List style={{ marginTop: '40px' }}>
+      <MUI.ListItem
+        leftAvatar={<MUI.Avatar
+          src={props.avatar ? props.avatar : null}
+          icon={props.avatar ? null : <DefaultAvatar />}
+        />}
+        primaryText={props.name}
+      />
+      <MUI.Divider />
+      {utils.tabs.map(tab => (
+        <Item
+          key={tab.key}
+          tab={tab.key}
+          activeItem={props.activeItem}
+          dispatch={props.dispatch}
+        />
+      ))}
+      <MUI.Divider />
+      <Link to="/about">
+        <MUI.ListItem
+          tab="about"
+          primaryText="关于"
+          leftIcon={<IconAbout />}
+          activeItem={props.activeItem}
+          onClick={() => props.dispatch(drawerActions.hide())}
+        />
+      </Link>
+    </MUI.List>
+  </MUI.Drawer>
+)
+
+MyDrawer.defaultProps = {
+  name: '点击登录',
+}
+
+MyDrawer.propTypes = {
+  name: PropTypes.string,
+  avatar: PropTypes.string,
+  isVisible: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func.isRequired,
+}
+
+const mapStateToProps = (state) => {
+  const activeItem = {
+    all: false,
+    good: false,
+    share: false,
+    ask: false,
+    job: false,
+    topic: false,
+    message: false,
+    about: false,
+  }
+
+  const key = getActiveItem(state.routing.locationBeforeTransitions)
+  activeItem[key] = true
+
+  return {
+    ...state.list,
+    isVisible: state.drawer.isVisible,
+    title: utils.tabsMap[state.routing.locationBeforeTransitions.query.tab],
+    activeItem,
+    avatar: state.auth.avatar,
+    name: state.auth.name,
+  }
+}
+
+export default connect(mapStateToProps)(MyDrawer)
