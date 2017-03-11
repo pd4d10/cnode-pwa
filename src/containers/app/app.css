@@ -2,18 +2,6 @@
   /*display: flex;*/
 }
 
-.login {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: #fff;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  right: 0;
-  z-index: 9999;
-}
-
 :global(.main-enter) {
 
 }
