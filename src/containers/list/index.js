@@ -8,7 +8,8 @@ import { throttle } from 'lodash'
 import Refresh from 'material-ui/svg-icons/navigation/refresh'
 import * as listActions from '../../actions/list'
 import * as drawerActions from '../../actions/drawer'
-import * as authActions from '../../actions/auth'
+// import * as authActions from '../../actions/auth'
+import * as toastActions from '../../actions/toast'
 import Topic from '../../components/topic'
 import Loading from '../../components/loading'
 import LoadingMore from '../../components/loading-more'
@@ -29,7 +30,7 @@ class ListComponent extends Component {
     if (this.props.topics.length === 0) {
       this.props.dispatch(listActions.load(this.props.location.query.tab))
     }
-    this.props.dispatch(authActions.load())
+    // this.props.dispatch(authActions.load())
     window.addEventListener('scroll', this.loadMore)
   }
 
@@ -59,10 +60,12 @@ class ListComponent extends Component {
               ))}
           </ul>
         )}
-        {props.isLoadingMore ? <LoadingMore /> : (
-          <div />
-        )}
-        <FloatingActionButton className={style.post} style={{ zIndex: 2 }}>
+        <LoadingMore isVisible={props.isLoadingMore} />
+        <FloatingActionButton
+          className={style.post}
+          style={{ zIndex: 2 }}
+          onClick={() => props.dispatch(toastActions.show('发贴'))}
+        >
           <ContentCreate />
         </FloatingActionButton>
       </div>

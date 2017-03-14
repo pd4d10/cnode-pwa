@@ -2,6 +2,7 @@ import * as drawerTypes from '../actions/drawer'
 import * as listTypes from '../actions/list'
 import * as messageTypes from '../actions/message'
 import * as authTypes from '../actions/auth'
+import * as toastTypes from '../actions/toast'
 
 export default function list(state = {
   isVisible: false,
@@ -16,6 +17,7 @@ export default function list(state = {
     case listTypes.LOAD_START:
     case messageTypes.LOAD_START:
     case authTypes.LOAD_START:
+    case toastTypes.SHOW_TOAST:
       return {
         ...state,
         isVisible: false,

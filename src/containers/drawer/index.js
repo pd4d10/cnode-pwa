@@ -15,8 +15,9 @@ import IconAbout from 'material-ui/svg-icons/action/info'
 import * as utils from '../../utils'
 import * as drawerActions from '../../actions/drawer'
 import * as listActions from '../../actions/list'
-import * as messageActions from '../../actions/message'
-import * as authActions from '../../actions/auth'
+// import * as messageActions from '../../actions/message'
+// import * as authActions from '../../actions/auth'
+import * as toastActions from '../../actions/toast'
 
 const iconsMap = {
   all: IconAll,
@@ -81,7 +82,7 @@ const MyDrawer = props => (
           icon={props.avatar ? null : <DefaultAvatar />}
         />}
         primaryText={props.name}
-        onClick={() => props.dispatch(authActions.login())}
+        onClick={() => props.dispatch(toastActions.show('登录'))}
       />
       <MUI.Divider />
       {utils.tabs.map(tab => (
@@ -93,11 +94,11 @@ const MyDrawer = props => (
         />
       ))}
       <MUI.Divider />
-      <MUI.ListItem
+      {/* <MUI.ListItem
         primaryText="消息"
         leftIcon={<IconMessage />}
         onClick={() => props.dispatch(messageActions.load())}
-      />
+      /> */}
       <MUI.Divider />
       <Link to="/about">
         <MUI.ListItem
