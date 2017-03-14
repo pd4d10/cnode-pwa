@@ -132,6 +132,7 @@ module.exports = {
       // in development "style" loader enables hot editing of CSS.
       {
         test: /\.css$/,
+        exclude: /node_modules/,
         loader: 'style!css?module&localIdentName=[local]_[hash:base64:5]&camelCase&importLoaders=1!postcss'
       },
       // JSON is not enabled by default in Webpack but both Node and Browserify
@@ -156,7 +157,8 @@ module.exports = {
   // We use PostCSS for autoprefixing only.
   postcss: function() {
     return [
-      require('postcss-cssnext')
+      require('postcss-cssnext'),
+      require('postcss-import')
     ];
   },
   plugins: [

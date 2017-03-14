@@ -5,6 +5,7 @@ import { fetchTopic } from '../../actions/detail'
 import Reply from '../../components/reply'
 import Loading from '../../components/loading'
 import style from './detail.css'
+import markdownStyle from './github-markdown.css'
 
 const mapStateToProps = state => state.detail
 
@@ -19,7 +20,7 @@ class Detail extends Component {
       <Container title="话题">
         <div className={style.container}>
           {(props.isLoading || !props.topic) ? <Loading /> : (
-            <div className="markdown-body">
+            <div className={markdownStyle.markdownBody}>
               <h2>{props.topic.title}</h2>
               <div dangerouslySetInnerHTML={{ __html: props.topic.content }} />
               {props.topic.replies.map(reply => (
