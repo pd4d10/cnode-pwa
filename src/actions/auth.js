@@ -20,15 +20,16 @@ export const hideLogin = () => ({
   type: HIDE_LOGIN,
 })
 
-const loginStart = () => ({
-  type: LOGIN_START,
-})
-
 const loginSuccess = (token, json) => ({
   type: LOGIN_SUCCESS,
   token,
   name: json.loginname,
   avatar: json.avatar_url,
+})
+
+const loginFail = message => ({
+  type: LOGIN_FAIL,
+  message,
 })
 
 async function fetchAuth(token) {
@@ -58,13 +59,29 @@ export const load = () => async (dispatch, getState) => {
 }
 
 export const login = () => async (dispatch, getState) => {
-  dispatch(loginStart())
-  const token = getState().auth.input
+  const state = getState()
+  const token = state.auth.input.trim()
+
+  // If there is no token, exit
+  if (!token) {
+    dispatch(loginFail('请填写 Access Token'))
+    return
+  }
+
+  dispatch({
+    type: LOGIN_START,
+  })
 
   try {
     const json = await fetchAuth(token)
-    dispatch(loginSuccess(token, json))
+    dispatch({
+      type: LOGIN_SUCCESS,
+      token,
+      name: json.loginname,
+      avatar: json.avatar_url,
+      message: '登录成功',
+    })
   } catch (err) {
-    //
+    dispatch(loginFail(err.message))
   }
 }

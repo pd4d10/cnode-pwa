@@ -26,7 +26,9 @@ class ListComponent extends Component {
   }
 
   componentDidMount() {
-    // this.props.dispatch(listActions.load(this.props.location.query.tab))
+    if (this.props.topics.length === 0) {
+      this.props.dispatch(listActions.load(this.props.location.query.tab))
+    }
     this.props.dispatch(authActions.load())
     window.addEventListener('scroll', this.loadMore)
   }
@@ -69,8 +71,8 @@ class ListComponent extends Component {
 }
 
 ListComponent.propTypes = {
-  // topics: PropTypes.arrayOf(PropTypes.object).isRequired,
-  // isLoading: PropTypes.bool.isRequired,
+  topics: PropTypes.arrayOf(PropTypes.object).isRequired,
+  isLoading: PropTypes.bool.isRequired,
   location: PropTypes.shape({
     query: PropTypes.shape({
       tab: PropTypes.string,

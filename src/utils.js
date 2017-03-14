@@ -1,7 +1,7 @@
 import {
-  indigo700 as primary,
-  indigo500 as tag,
-  indigo100 as avatarBorder,
+  teal700 as primary,
+  teal500 as tag,
+  teal300 as avatarBorder,
   grey300 as avatarBackground,
 } from 'material-ui/styles/colors'
 

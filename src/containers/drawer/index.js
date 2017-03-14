@@ -16,6 +16,7 @@ import * as utils from '../../utils'
 import * as drawerActions from '../../actions/drawer'
 import * as listActions from '../../actions/list'
 import * as messageActions from '../../actions/message'
+import * as authActions from '../../actions/auth'
 
 const iconsMap = {
   all: IconAll,
@@ -80,6 +81,7 @@ const MyDrawer = props => (
           icon={props.avatar ? null : <DefaultAvatar />}
         />}
         primaryText={props.name}
+        onClick={() => props.dispatch(authActions.login())}
       />
       <MUI.Divider />
       {utils.tabs.map(tab => (
@@ -89,7 +91,7 @@ const MyDrawer = props => (
           activeItem={props.activeItem}
           dispatch={props.dispatch}
         />
-            ))}
+      ))}
       <MUI.Divider />
       <MUI.ListItem
         primaryText="消息"

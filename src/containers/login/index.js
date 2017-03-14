@@ -1,47 +1,27 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import * as MUI from 'material-ui'
-import NavigationClose from 'material-ui/svg-icons/navigation/close'
+import { Dialog, TextField, RaisedButton } from 'material-ui'
 
 import * as authActions from '../../actions/auth'
 import { colors } from '../../utils'
 import style from './login.css'
 
 const Login = props => (
-  <div
-    style={{
-      visibility: props.isVisible ? 'visible' : 'hidden',
-      transform: props.isVisible ? 'translate(0,0)' : `translate(0, ${document.documentElement.clientHeight}px)`,
-    }}
-    className={style.container}
+  <Dialog
+    // title="登录"
+    // actions={actions}
+    modal={false}
+    open={props.isVisible}
+    onRequestClose={() => props.dispatch(authActions.hideLogin())}
   >
-    <MUI.AppBar
-      title="登录"
-      iconElementLeft={
-        <MUI.IconButton
-          iconStyle={{
-            color: colors.primary,
-          }}
-        >
-          <NavigationClose color={colors.primary} />
-        </MUI.IconButton>
-      }
-      onLeftIconButtonTouchTap={() => props.dispatch(authActions.hideLogin())}
-      style={{
-        backgroundColor: '#fff',
-      }}
-      titleStyle={{
-        color: colors.primary,
-      }}
+    请在 PC 端登录后，点击右上角的<strong>设置</strong>进入设置页面获取 Access Token
+    <TextField
+      value={props.input}
+      floatingLabelText="Access Token"
+      onChange={e => props.dispatch(authActions.inputToken(e.target.value))}
     />
-    <div>
-      <MUI.TextField
-        value={props.input}
-        floatingLabelText="Token"
-        onChange={e => props.dispatch(authActions.inputToken(e.target.value))}
-      />
-    </div>
-  </div>
+    <RaisedButton onClick={() => props.dispatch(authActions.login())}>登录</RaisedButton>
+  </Dialog>
 )
 
 Login.propTypes = {

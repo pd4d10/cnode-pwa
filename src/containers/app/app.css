@@ -7,17 +7,17 @@
 }
 
 :global(.back-enter) {
-  opacity: 0.01;
+  opacity: 0;
   &:global(.back-enter-active) {
     opacity: 1;
-    transition: all 200ms;
+    transition: all 1000ms;
   }
 }
 
 :global(.back-leave) {
   opacity: 1;
   &:global(.back-leave-active) {
-    opacity: 0.01;
-    transition: all 200ms;
+    opacity: 0;
+    transition: all 1000ms;
   }
 }

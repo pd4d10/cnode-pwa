@@ -6,6 +6,7 @@ import drawer from './drawer'
 import user from './user'
 import auth from './auth'
 import message from './message'
+import toast from './toast'
 
 export default combineReducers({
   routing,
@@ -15,4 +16,5 @@ export default combineReducers({
   user,
   auth,
   message,
+  toast,
 })
