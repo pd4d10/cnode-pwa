@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
+import TimeAgo from 'timeago-react'
 
 import Container from '../../components/container'
 import { fetchTopic } from '../../actions/detail'
@@ -23,6 +25,28 @@ class Detail extends Component {
           {(props.isLoading || !props.topic) ? <Loading /> : (
             <div>
               <h2 className={style.title}>{props.topic.title}</h2>
+              <div className={style.info}>
+                <Link to={`/user/${props.topic.author.loginname}`} className={style.avatar}>
+                  <img src={props.topic.author.avatar_url} alt={props.topic.author.loginnam} />
+                </Link>
+                <div className={style.extra}>
+                  <div>{props.topic.author.loginname}</div>
+                  <div className={style.time}>
+                    <span>
+                      创建于
+                      <TimeAgo
+                        datetime={props.topic.create_at}
+                        locale="zh_CN"
+                        live={false}
+                      />
+                    </span>
+                    <span style={{ marginLeft: '6px' }}>
+                      {props.topic.visit_count}
+                      次浏览
+                    </span>
+                  </div>
+                </div>
+              </div>
               <div className={markdownStyle.markdownBody} dangerouslySetInnerHTML={{ __html: props.topic.content }} />
               <div>
                 <div className={style.replyHeader}>共 {props.topic.reply_count} 条回复</div>

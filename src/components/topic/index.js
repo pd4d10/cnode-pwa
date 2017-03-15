@@ -17,7 +17,6 @@ const Topic = props => (
         className={style.avatar}
         src={props.author.avatar_url}
         alt={props.author.loginname}
-        style={{ borderBottom: `1px solid ${colors.avatarBorder}` }}
         onClick={(e) => {
           e.preventDefault()
           props.dispatch(push(`/user/${props.author.loginname}`))

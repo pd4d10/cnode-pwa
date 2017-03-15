@@ -5,8 +5,37 @@
   }
 }
 
+.avatar {
+  & img {
+    width: 48px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+}
+
 .title {
+  font-size: 20px;
   margin-bottom: 12px;
+}
+
+.info {
+  display: flex;
+  margin: 12px 0;
+}
+
+.extra {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  line-height: 24px;
+}
+
+.time {
+  font-size: 12px;
+  color: #555;
+  & time {
+    color: rgb(0, 121, 107);
+  }
 }
 
 :global(.markdown-text) {

@@ -3,7 +3,7 @@ import { Dialog, RaisedButton } from 'material-ui'
 
 const Unfinished = props => (
   <Dialog
-    title="正在开发，敬请期待"
+    title={`🚀 ${props.feature}功能正在开发中`}
     modal={false}
     open={props.isVisible}
     onRequestClose={props.close}
@@ -20,7 +20,7 @@ const Unfinished = props => (
 
 Unfinished.propTypes = {
   isVisible: PropTypes.bool.isRequired,
-  // feature: PropTypes.string.isRequired,
+  feature: PropTypes.string.isRequired,
   close: PropTypes.func.isRequired,
 }
 
