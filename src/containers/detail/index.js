@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+
 import Container from '../../components/container'
 import { fetchTopic } from '../../actions/detail'
 import Reply from '../../components/reply'
@@ -20,12 +21,15 @@ class Detail extends Component {
       <Container title="话题">
         <div className={style.container}>
           {(props.isLoading || !props.topic) ? <Loading /> : (
-            <div className={markdownStyle.markdownBody}>
-              <h2>{props.topic.title}</h2>
-              <div dangerouslySetInnerHTML={{ __html: props.topic.content }} />
-              {props.topic.replies.map(reply => (
-                <Reply {...reply} key={reply.id} />
-              ))}
+            <div>
+              <h2 className={style.title}>{props.topic.title}</h2>
+              <div className={markdownStyle.markdownBody} dangerouslySetInnerHTML={{ __html: props.topic.content }} />
+              <div>
+                <div className={style.replyHeader}>共 {props.topic.reply_count} 条回复</div>
+                {props.topic.replies.map(reply => (
+                  <Reply {...reply} key={reply.id} />
+                ))}
+              </div>
             </div>
           )}
         </div>

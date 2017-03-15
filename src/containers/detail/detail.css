@@ -5,6 +5,10 @@
   }
 }
 
+.title {
+  margin-bottom: 12px;
+}
+
 :global(.markdown-text) {
   overflow: auto;
 
@@ -15,4 +19,9 @@
 
 :global(.prettyprint) {
   overflow: auto;
+}
+
+.reply-header {
+  background: #eee;
+  padding: 6px;
 }
