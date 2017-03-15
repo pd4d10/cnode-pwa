@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import TimeAgo from 'timeago-react'
+import Helmet from 'react-helmet'
 
 import Container from '../../components/container'
 import { fetchTopic } from '../../actions/detail'
@@ -24,6 +25,9 @@ class Detail extends Component {
         <div className={style.container}>
           {(props.isLoading || !props.topic) ? <Loading /> : (
             <div>
+              <Helmet
+                title={props.topic.title}
+              />
               <h2 className={style.title}>{props.topic.title}</h2>
               <div className={style.info}>
                 <Link to={`/user/${props.topic.author.loginname}`} className={style.avatar}>

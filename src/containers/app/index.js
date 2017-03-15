@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { connect } from 'react-redux'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import Helmet from 'react-helmet'
 
 import { colors } from '../../utils'
 import style from './app.css'
@@ -28,6 +29,7 @@ const muiTheme = getMuiTheme({
 const App = props => (
   <MuiThemeProvider muiTheme={muiTheme}>
     <main className={style.container}>
+      <Helmet titleTemplate="%s - CNode PWA" defaultTitle="CNode PWA" />
       <Login />
       <Drawer />
       <Toast

@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react'
 import { ListItem, Divider } from 'material-ui'
+import Helmet from 'react-helmet'
+
 import Container from '../../components/container'
 import Logo from './logo'
 import style from './about.css'
@@ -23,6 +25,7 @@ Linker.propTypes = {
 const About = () => (
   <Container title="关于">
     <div>
+      <Helmet title="关于" />
       <div className={style.logo}><Logo /></div>
       <Divider />
       <Linker title="源代码" url="https://github.com/pd4d10/cnode-pwa" />
