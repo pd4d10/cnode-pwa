@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { AppBar, IconButton } from 'material-ui'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
-import { goBack } from 'react-router-redux'
+import { push, goBack } from 'react-router-redux'
 import style from './container.css'
 
 const Container = props => (
@@ -13,7 +13,15 @@ const Container = props => (
       }}
       title={props.title}
       iconElementLeft={<IconButton><ArrowBack /></IconButton>}
-      onLeftIconButtonTouchTap={() => props.dispatch(goBack())}
+      onLeftIconButtonTouchTap={() => {
+        // If no history, go to list page
+        if (window.history.length === 1) {
+          props.dispatch(push('/'))
+          return
+        }
+
+        props.dispatch(goBack())
+      }}
     />
     <div style={{ paddingTop: '64px' }}>
       {props.children}

@@ -30,9 +30,9 @@ class Detail extends Component {
               />
               <h2 className={style.title}>{props.topic.title}</h2>
               <div className={style.info}>
-                <Link to={`/user/${props.topic.author.loginname}`} className={style.avatar}>
+                <div className={style.avatar}>
                   <img src={props.topic.author.avatar_url} alt={props.topic.author.loginnam} />
-                </Link>
+                </div>
                 <div className={style.extra}>
                   <div>{props.topic.author.loginname}</div>
                   <div className={style.time}>

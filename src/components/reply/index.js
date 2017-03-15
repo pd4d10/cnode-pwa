@@ -9,9 +9,9 @@ import markdownStyle from '../../containers/detail/github-markdown.css'
 const Reply = props => (
   <div className={style.container}>
     <div className={style.info}>
-      <Link to={`/user/${props.author.loginname}`} className={style.avatar}>
+      <div to={`/user/${props.author.loginname}`} className={style.avatar}>
         <img src={props.author.avatar_url} alt={props.author.loginname} />
-      </Link>
+      </div>
       <div className={style.extra}>
         <div>{props.author.loginname}</div>
         <div className={style.time}>
