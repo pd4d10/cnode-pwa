@@ -8,7 +8,7 @@ export const LOAD_MORE_START = 'LIST/LOAD_MORE_START'
 export const LOAD_MORE_SUCCESS = 'LIST/LOAD_MORE_SUCCESS'
 export const LOAD_MORE_FAIL = 'LIST/LOAD_MORE_FAIL'
 
-export const load = (tab = 'all') => async (dispatch, getState) => {
+export const load = tab => async (dispatch, getState) => {
   dispatch({
     type: LOAD_START,
   })
@@ -19,11 +19,10 @@ export const load = (tab = 'all') => async (dispatch, getState) => {
       dispatch(push(`/?tab=${tab}`))
     }
 
-    const { data } = await fetchAPI(`/topics?tab=${tab}&limit=20`)
+    const { data } = await fetchAPI(`/topics?${tab ? `tab=${tab}` : ''}&limit=20`)
     dispatch(({
       type: LOAD_SUCCESS,
       data,
-      tab,
     }))
   } catch (err) {
     dispatch({

@@ -5,7 +5,6 @@ import ContentCreate from 'material-ui/svg-icons/content/create'
 import { throttle } from 'lodash'
 
 import Refresh from 'material-ui/svg-icons/navigation/refresh'
-import Cached from 'material-ui/svg-icons/action/cached'
 import * as listActions from '../../actions/list'
 import * as drawerActions from '../../actions/drawer'
 // import * as authActions from '../../actions/auth'
@@ -97,9 +96,13 @@ ListComponent.propTypes = {
   dispatch: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = state => ({
-  ...state.list,
-  title: utils.tabsMap[state.routing.locationBeforeTransitions.query.tab],
-})
+const mapStateToProps = (state) => {
+  const { tab } = state.routing.locationBeforeTransitions.query
+  const title = (!tab || tab === 'all') ? 'CNode 社区' : utils.tabsMap[tab]
+  return {
+    ...state.list,
+    title,
+  }
+}
 
 export default connect(mapStateToProps)(ListComponent)
