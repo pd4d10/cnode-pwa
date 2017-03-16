@@ -4,7 +4,7 @@ import { colors } from '../../utils'
 import style from './loading-more.css'
 
 const LoadingMore = props => (
-  <div className={style.container} style={props.isVisible ? {} : { display: 'none' }}>
+  <div className={style.container} style={props.isVisible ? {} : { visibility: 'hidden' }}>
     <CircularProgress color={colors.primary} />
   </div>
 )

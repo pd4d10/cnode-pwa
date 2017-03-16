@@ -1,11 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { FloatingActionButton, IconButton, AppBar } from 'material-ui'
+import { FloatingActionButton, AppBar } from 'material-ui'
 import ContentCreate from 'material-ui/svg-icons/content/create'
 import { throttle } from 'lodash'
-import Helmet from 'react-helmet'
 
-import Refresh from 'material-ui/svg-icons/navigation/refresh'
 import * as listActions from '../../actions/list'
 import * as drawerActions from '../../actions/drawer'
 // import * as authActions from '../../actions/auth'
@@ -19,11 +17,18 @@ import style from './list.css'
 class ListComponent extends Component {
   constructor(props) {
     super(props)
+    const throttleTime = 200
+
+    // TODO better infinity scrolling
     this.loadMore = throttle(() => {
-      if (document.documentElement.scrollHeight - document.body.scrollTop - document.documentElement.clientHeight < 100 && !this.props.isLoadingMore) {
+      const height = 200
+      if (
+        document.documentElement.scrollHeight - document.body.scrollTop - document.documentElement.clientHeight < height // eslint-disable-line
+        && !this.props.isLoadingMore
+      ) {
         this.props.dispatch(listActions.loadMore())
       }
-    }, 200)
+    }, throttleTime)
   }
 
   componentDidMount() {
@@ -73,7 +78,7 @@ class ListComponent extends Component {
 
 ListComponent.propTypes = {
   topics: PropTypes.arrayOf(PropTypes.object).isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isLoadingMore: PropTypes.bool.isRequired,
   location: PropTypes.shape({
     query: PropTypes.shape({
       tab: PropTypes.string,
