@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { FloatingActionButton, AppBar } from 'material-ui'
+import { FloatingActionButton, AppBar, IconButton } from 'material-ui'
 import ContentCreate from 'material-ui/svg-icons/content/create'
 import { throttle } from 'lodash'
 
+import Refresh from 'material-ui/svg-icons/navigation/refresh'
+import Cached from 'material-ui/svg-icons/action/cached'
 import * as listActions from '../../actions/list'
 import * as drawerActions from '../../actions/drawer'
 // import * as authActions from '../../actions/auth'
@@ -53,6 +55,14 @@ class ListComponent extends Component {
           }}
           title={props.title}
           onLeftIconButtonTouchTap={() => props.dispatch(drawerActions.show())}
+          iconElementRight={<IconButton
+            style={props.isLoading ? {
+              animation: `${style.spin} 5s linear infinite`,
+            } : {}}
+          >
+            <Refresh />
+          </IconButton>}
+          onRightIconButtonTouchTap={() => props.dispatch(listActions.load())}
         />
         {props.isLoading ? <Loading key="loading" /> : (
           <ul style={{ paddingTop: '64px' }} key={props.location.query.tab}>

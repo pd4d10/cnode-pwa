@@ -1,9 +1,11 @@
-.container {
-  /*margin-bottom: 200px;*/
-}
-
 .post {
   position: fixed;
   right: 20px;
   bottom: 20px;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
 }

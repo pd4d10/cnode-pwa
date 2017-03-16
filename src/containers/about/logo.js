@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react'
 
 // Copy from https://cnodejs.org/public/images/cnodejs.svg

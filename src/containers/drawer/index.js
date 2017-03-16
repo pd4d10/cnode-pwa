@@ -33,10 +33,10 @@ const Item = (props) => {
   const Icon = iconsMap[props.tab]
   return (
     <MUI.ListItem
-      leftIcon={<Icon />}
+      leftIcon={<Icon style={props.activeItem[props.tab] ? { fill: utils.colors.primary } : {}} />}
       primaryText={utils.tabsMap[props.tab]}
       onClick={() => props.dispatch(listActions.load(props.tab))}
-      innerDivStyle={props.activeItem[props.tab] ? { // eslint-disable-line
+      innerDivStyle={props.activeItem[props.tab] ? {
         color: utils.colors.primary,
         backgroundColor: utils.colors.avatarBackground,
       } : {}}
@@ -46,6 +46,7 @@ const Item = (props) => {
 
 Item.propTypes = {
   tab: PropTypes.string.isRequired,
+  activeItem: PropTypes.object.isRequired, // eslint-disable-line
   dispatch: PropTypes.func.isRequired,
 }
 
