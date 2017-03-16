@@ -51,6 +51,7 @@
   },
   "dependencies": {
     "github-markdown-css": "^2.4.1",
+    "history": "3.3.0",
     "lodash": "^4.17.4",
     "material-ui": "^0.17.0",
     "react": "^15.4.2",

@@ -2,7 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
-import { Router, Route, IndexRoute, hashHistory, applyRouterMiddleware } from 'react-router'
+import { createHistory } from 'history'
+import { Router, Route, IndexRoute, applyRouterMiddleware, useRouterHistory } from 'react-router'
 import { useScroll } from 'react-router-scroll'
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
@@ -17,24 +18,31 @@ import About from './containers/about'
 import reducers from './reducers'
 import './index.css'
 
+const __PROD__ = process.env.NODE_ENV === 'production' // eslint-disable-line
+
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin()
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose // eslint-disable-line
 
+// https://github.com/ReactTraining/react-router/issues/353#issuecomment-181786502
+const browserHistory = useRouterHistory(createHistory)({
+  basename: __PROD__ ? '/cnode-pwa' : '',
+})
+
 const store = createStore(
   reducers,
   composeEnhancers(applyMiddleware(
-    routerMiddleware(hashHistory),
+    routerMiddleware(browserHistory),
     thunk,
   )),
 )
 
-const history = syncHistoryWithStore(hashHistory, store)
+const history = syncHistoryWithStore(browserHistory, store)
 
-if (process.env.NODE_ENV !== 'production') {
-  window.Perf = require('react-addons-perf')
+if (!__PROD__) {
+  window.Perf = require('react-addons-perf') // eslint-disable-line
   // require('why-did-you-update').whyDidYouUpdate(React)
 }
 
