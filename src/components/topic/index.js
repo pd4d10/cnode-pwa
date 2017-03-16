@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
-import { connect } from 'react-redux'
+import { pure } from 'recompose'
 import { ListItem, Divider } from 'material-ui'
 import TimeAgo from 'timeago-react'
 // import { push } from 'react-router-redux'
@@ -26,7 +26,9 @@ const Topic = props => (
         <h3>{props.title}</h3>
         <div className={style.extra}>
           <div className={style.left}>
-            <div className={style.tag} style={{ backgroundColor: colors.tag }}>{getTagFromTopic(props)}</div>
+            <div className={style.tag} style={{ backgroundColor: colors.tag }}>
+              {getTagFromTopic(props)}
+            </div>
             <div className={style.count}>
               <strong>{props.reply_count} </strong>回复 / <strong>{props.visit_count}</strong> 浏览
             </div>
@@ -56,4 +58,4 @@ Topic.propTypes = {
   // dispatch: PropTypes.func.isRequired,
 }
 
-export default connect()(Topic)
+export default pure(Topic)

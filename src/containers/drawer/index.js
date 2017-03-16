@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import { pure } from 'recompose'
 import * as MUI from 'material-ui'
 import DefaultAvatar from 'material-ui/svg-icons/social/person'
 
@@ -29,7 +30,7 @@ const iconsMap = {
   about: IconAbout,
 }
 
-const Item = (props) => {
+const Item = pure((props) => {
   const Icon = iconsMap[props.tab]
   return (
     <MUI.ListItem
@@ -42,7 +43,7 @@ const Item = (props) => {
       } : {}}
     />
   )
-}
+})
 
 Item.propTypes = {
   tab: PropTypes.string.isRequired,
