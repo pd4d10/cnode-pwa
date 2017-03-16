@@ -36,7 +36,7 @@ const Item = (props) => {
       leftIcon={<Icon />}
       primaryText={utils.tabsMap[props.tab]}
       onClick={() => props.dispatch(listActions.load(props.tab))}
-      innerDivStyle={props.activeItem[props.tab] ? {
+      innerDivStyle={props.activeItem[props.tab] ? { // eslint-disable-line
         color: utils.colors.primary,
         backgroundColor: utils.colors.avatarBackground,
       } : {}}
@@ -98,10 +98,8 @@ const MyDrawer = props => (
       <MUI.Divider />
       <Link to="/about">
         <MUI.ListItem
-          tab="about"
           primaryText="关于"
           leftIcon={<IconAbout />}
-          activeItem={props.activeItem}
           onClick={() => props.dispatch(drawerActions.hide())}
         />
       </Link>
