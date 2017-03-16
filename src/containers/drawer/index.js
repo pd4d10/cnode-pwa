@@ -75,7 +75,7 @@ const MyDrawer = props => (
   <MUI.Drawer
     docked={false}
     open={props.isVisible}
-    onRequestChange={() => props.dispatch(drawerActions.hide())}
+    onRequestChange={open => props.dispatch(open ? drawerActions.show() : drawerActions.hide())}
   >
     <MUI.List>
       <MUI.ListItem
