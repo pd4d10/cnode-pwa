@@ -75,8 +75,9 @@ const MyDrawer = props => (
     open={props.isVisible}
     onRequestChange={() => props.dispatch(drawerActions.hide())}
   >
-    <MUI.List style={{ marginTop: '40px' }}>
+    <MUI.List>
       <MUI.ListItem
+        style={{ marginTop: '40px' }}
         leftAvatar={<MUI.Avatar
           src={props.avatar ? props.avatar : null}
           icon={props.avatar ? null : <DefaultAvatar />}
@@ -94,11 +95,6 @@ const MyDrawer = props => (
         />
       ))}
       <MUI.Divider />
-      {/* <MUI.ListItem
-        primaryText="消息"
-        leftIcon={<IconMessage />}
-        onClick={() => props.dispatch(messageActions.load())}
-      /> */}
       <MUI.Divider />
       <Link to="/about">
         <MUI.ListItem

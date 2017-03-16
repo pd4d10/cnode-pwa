@@ -12,22 +12,23 @@ const Topic = props => (
     <ListItem
       innerDivStyle={{ display: 'flex' }}
     >
-      <img
-        className={style.avatar}
-        src={props.author.avatar_url}
-        alt={props.author.loginname}
-        // onClick={(e) => {
-        //   e.preventDefault()
-        //   props.dispatch(push(`/user/${props.author.loginname}`))
-        // }}
-      />
+      <div className={style.avatar}>
+        <img
+          src={props.author.avatar_url}
+          alt={props.author.loginname}
+          // onClick={(e) => {
+          //   e.preventDefault()
+          //   props.dispatch(push(`/user/${props.author.loginname}`))
+          // }}
+        />
+      </div>
       <div className={style.content}>
         <h3>{props.title}</h3>
         <div className={style.extra}>
           <div className={style.left}>
             <div className={style.tag} style={{ backgroundColor: colors.tag }}>{getTagFromTopic(props)}</div>
             <div className={style.count}>
-              <strong>{props.reply_count}</strong> / {props.visit_count}
+              <strong>{props.reply_count} </strong>回复 / <strong>{props.visit_count}</strong> 浏览
             </div>
           </div>
           <TimeAgo

@@ -48,8 +48,6 @@ class ListComponent extends Component {
           }}
           title={props.title}
           onLeftIconButtonTouchTap={() => props.dispatch(drawerActions.show())}
-          iconElementRight={<IconButton><Refresh /></IconButton>}
-          onRightIconButtonTouchTap={() => props.dispatch(listActions.load())}
         />
         {props.isLoading ? <Loading key="loading" /> : (
           <ul style={{ paddingTop: '64px' }} key={props.location.query.tab}>

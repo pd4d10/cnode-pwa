@@ -6,7 +6,11 @@
   flex-basis: 48px;
   height: 48px;
   margin-right: 10px;
-  border-radius: 50%;
+  & img {
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+  }
 }
 
 .content {
@@ -53,7 +57,7 @@
 
     & strong {
       font-weight: normal;
-      color: #9e78c0;
+      color: #009688;
     }
   }
 

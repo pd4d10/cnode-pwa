@@ -53,7 +53,9 @@ class Detail extends Component {
               </div>
               <div className={markdownStyle.markdownBody} dangerouslySetInnerHTML={{ __html: props.topic.content }} />
               <div>
-                <div className={style.replyHeader}>共 {props.topic.reply_count} 条回复</div>
+                <div className={style.replyHeader}>
+                  {props.topic.reply_count ? `共 ${props.topic.reply_count} 条回复` : '暂无回复'}
+                </div>
                 {props.topic.replies.map(reply => (
                   <Reply {...reply} key={reply.id} />
                 ))}

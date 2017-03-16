@@ -24,6 +24,9 @@ const muiTheme = getMuiTheme({
   floatingActionButton: {
     color: colors.primary,
   },
+  raisedButton: {
+    secondaryColor: colors.primary,
+  },
 })
 
 const App = props => (

@@ -3,11 +3,11 @@ import { Dialog, RaisedButton } from 'material-ui'
 
 const Unfinished = props => (
   <Dialog
-    title={`🚀 ${props.feature}功能正在开发中`}
     modal={false}
     open={props.isVisible}
     onRequestClose={props.close}
   >
+    <div style={{ marginBottom: '6px' }}>{props.feature}功能正在开发 🚀🚀🚀 </div>
     <RaisedButton
       href="https://github.com/pd4d10/cnode-pwa"
       target="_blank"
