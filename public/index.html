@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +13,17 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>CNode PWA</title>
+
+    <!-- TODO add manifest here -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="CNode PWA">
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/images/icon.png">
+    <meta name="msapplication-TileImage" content="%PUBLIC_URL%/images/icon.png">
+    <meta name="msapplication-TileColor" content="#00796B">
   </head>
   <body>
     <div id="root"></div>
@@ -27,5 +37,12 @@
       To begin the development, run `npm start`.
       To create a production bundle, use `npm run build`.
     -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/service-worker.js');
+        });
+      }
+    </script>
   </body>
 </html>

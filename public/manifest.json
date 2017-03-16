@@ -1,0 +1,15 @@
+{
+  "name": "CNode Progressive Web App",
+  "short_name": "CNode PWA",
+  "icons": [
+    {
+      "src": "images/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#00796B",
+  "theme_color": "#00796B"
+}
