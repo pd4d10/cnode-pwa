@@ -115,7 +115,7 @@ MyDrawer.defaultProps = {
 
 MyDrawer.propTypes = {
   name: PropTypes.string,
-  avatar: PropTypes.string,
+  avatar: PropTypes.string, // eslint-disable-line
   isVisible: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
 }

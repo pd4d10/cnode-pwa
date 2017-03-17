@@ -16,6 +16,7 @@ const Toast = props => (
 Toast.propTypes = {
   isVisible: PropTypes.bool.isRequired,
   message: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => state.toast

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { Link } from 'react-router'
+// import { Link } from 'react-router'
 import { Divider } from 'material-ui'
 import TimeAgo from 'timeago-react'
 

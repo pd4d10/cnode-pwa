@@ -71,7 +71,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "eslint src/**/*.js",
+    "test-jest": "node scripts/test.js --env=jsdom"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -112,7 +113,8 @@
         "error",
         "never"
       ],
-      "react/jsx-filename-extension": "off"
+      "react/jsx-filename-extension": "off",
+      "react/no-danger": "off"
     }
   }
 }

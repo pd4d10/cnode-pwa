@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
+// import { Link } from 'react-router'
 import TimeAgo from 'timeago-react'
 import Helmet from 'react-helmet'
 
@@ -51,7 +51,10 @@ class Detail extends Component {
                   </div>
                 </div>
               </div>
-              <div className={markdownStyle.markdownBody} dangerouslySetInnerHTML={{ __html: props.topic.content }} />
+              <div
+                className={markdownStyle.markdownBody}
+                dangerouslySetInnerHTML={{ __html: props.topic.content }}
+              />
               <div>
                 <div className={style.replyHeader}>
                   {props.topic.reply_count ? `共 ${props.topic.reply_count} 条回复` : '暂无回复'}
@@ -69,7 +72,7 @@ class Detail extends Component {
 }
 
 Detail.propTypes = {
-  isLoading: PropTypes.bool.isRequired,
+  // isLoading: PropTypes.bool.isRequired,
   params: PropTypes.shape({
     id: PropTypes.string.isRequired,
   }).isRequired,

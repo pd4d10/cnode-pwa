@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { Dialog, TextField, RaisedButton } from 'material-ui'
 
 import * as authActions from '../../actions/auth'
-import { colors } from '../../utils'
-import style from './login.css'
+// import { colors } from '../../utils'
+// import style from './login.css'
 
 const Login = props => (
   <Dialog

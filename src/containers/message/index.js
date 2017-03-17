@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Container from '../../components/container'
 
@@ -12,6 +12,15 @@ const Message = props => (
     ))}
   </Container>
 )
+
+Message.propTypes = {
+  has_read_messages: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+  })).isRequired,
+  hasnot_read_messages: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+  })).isRequired,
+}
 
 const mapStateToProps = state => state.message
 

@@ -49,6 +49,7 @@ App.propTypes = {
   feature: PropTypes.string.isRequired,
   children: PropTypes.element.isRequired,
   dispatch: PropTypes.func.isRequired,
+  isToastVisible: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = state => ({
