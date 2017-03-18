@@ -51,11 +51,22 @@ class ListComponent extends Component {
           style={{
             position: 'fixed',
           }}
+          iconStyleLeft={{
+            width: '44px',
+            height: '44px',
+            padding: '10px',
+            marginTop: '6px',
+          }}
+          titleStyle={{
+            fontSize: '22px',
+            height: '56px',
+            lineHeight: '56px',
+          }}
           title={props.title}
           onLeftIconButtonTouchTap={() => props.dispatch(drawerActions.show())}
         />
         {props.isLoading ? <Loading key="loading" /> : (
-          <ul style={{ paddingTop: '64px' }} key={props.location.query.tab}>
+          <ul style={{ paddingTop: '56px' }} key={props.location.query.tab}>
             {props.topics.map(topic => (
               <li key={topic.id}>
                 <Topic {...topic} />

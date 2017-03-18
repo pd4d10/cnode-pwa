@@ -11,6 +11,16 @@ const Container = props => (
       style={{
         position: 'fixed',
       }}
+      iconStyleLeft={{
+        width: '44px',
+        height: '44px',
+        marginTop: '4px',
+      }}
+      titleStyle={{
+        fontSize: '22px',
+        height: '56px',
+        lineHeight: '56px',
+      }}
       title={props.title}
       iconElementLeft={<IconButton><ArrowBack /></IconButton>}
       onLeftIconButtonTouchTap={() => {
@@ -23,7 +33,7 @@ const Container = props => (
         props.dispatch(goBack())
       }}
     />
-    <div style={{ paddingTop: '64px' }}>
+    <div style={{ paddingTop: '56px' }}>
       {props.children}
     </div>
   </div>
