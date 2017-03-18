@@ -3,12 +3,12 @@
   "short_name": "CNode PWA",
   "icons": [
     {
-      "src": "/images/icon.png",
+      "src": "images/icon.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
-  "start_url": "/?pwa=1",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#444",
   "theme_color": "#444"

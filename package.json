@@ -44,6 +44,7 @@
     "recursive-readdir": "2.1.1",
     "strip-ansi": "3.0.1",
     "style-loader": "0.13.1",
+    "sw-precache": "^5.1.0",
     "url-loader": "0.5.7",
     "webpack": "1.14.0",
     "webpack-dev-server": "1.16.2",
@@ -72,7 +73,7 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "build": "node scripts/build.js && sw-precache --config=config/sw-precache-config.js",
     "deploy": "gh-pages -d build",
     "test": "eslint src/**/*.js",
     "test-jest": "node scripts/test.js --env=jsdom"
