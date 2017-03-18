@@ -26,7 +26,8 @@ const Toast = props => (
       marginLeft: '-150px',
     }}
   >
-    <h4 style={{ marginBottom: '20px' }}>无法连接到 CNode 服务器，请检查网络</h4>
+    <div style={{ fontSize: '120px', textAlign: 'center', marginBottom: '20px' }}>:(</div>
+    <h4>无法获取数据，请检查网络</h4>
     <p>错误信息如下：</p>
     <code style={{ color: 'red' }}>{props.message}</code>
   </div>
