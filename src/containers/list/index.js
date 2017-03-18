@@ -63,7 +63,11 @@ class ListComponent extends Component {
             lineHeight: '56px',
           }}
           title={props.title}
-          onLeftIconButtonTouchTap={() => props.dispatch(drawerActions.show())}
+          onLeftIconButtonTouchTap={(e) => {
+            // https://github.com/callemall/material-ui/issues/5070#issuecomment-244127708
+            e.preventDefault()
+            props.dispatch(drawerActions.show())
+          }}
         />
         {props.isLoading ? <Loading key="loading" /> : (
           <ul style={{ paddingTop: '56px' }} key={props.location.query.tab}>

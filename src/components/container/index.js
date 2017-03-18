@@ -23,7 +23,9 @@ const Container = props => (
       }}
       title={props.title}
       iconElementLeft={<IconButton><ArrowBack /></IconButton>}
-      onLeftIconButtonTouchTap={() => {
+      onLeftIconButtonTouchTap={(e) => {
+        e.preventDefault()
+
         // If no history, go to list page
         if (window.history.length === 1) {
           props.dispatch(push('/'))
