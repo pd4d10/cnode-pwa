@@ -9,6 +9,7 @@ import style from './app.css'
 import Login from '../login'
 import Drawer from '../drawer'
 import Toast from '../../components/unfinished'
+import ErrorToast from '../../containers/toast'
 import * as toastActions from '../../actions/toast'
 
 // This replaces the textColor value on the palette
@@ -41,6 +42,7 @@ const App = props => (
         close={() => props.dispatch(toastActions.hide())}
       />
       {props.children}
+      <ErrorToast />
     </main>
   </MuiThemeProvider>
 )

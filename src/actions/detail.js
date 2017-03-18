@@ -15,7 +15,7 @@ const loadSuccess = topic => ({
 
 const loadFail = err => ({
   type: LOAD_FAIL,
-  err,
+  message: err.message,
 })
 
 export const fetchTopic = id => async (dispatch) => {

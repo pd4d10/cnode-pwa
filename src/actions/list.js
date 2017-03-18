@@ -39,7 +39,7 @@ export const load = tab => async (dispatch, getState) => {
   } catch (err) {
     dispatch({
       type: LOAD_FAIL,
-      err,
+      message: err.message,
     })
   }
 }

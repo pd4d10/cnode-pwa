@@ -19,6 +19,7 @@ export default function list(state = {
       return {
         ...state,
         isLoading: false,
+        topic: undefined,
       }
     default:
       return state

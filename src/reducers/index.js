@@ -7,6 +7,7 @@ import user from './user'
 import auth from './auth'
 import message from './message'
 import toast from './toast'
+import errorToast from './error-toast'
 
 export default combineReducers({
   routing,
@@ -17,4 +18,5 @@ export default combineReducers({
   auth,
   message,
   toast,
+  errorToast,
 })

@@ -23,6 +23,7 @@ export default function list(state = {
       return {
         ...state,
         isLoading: false,
+        topics: [],
       }
     case types.LOAD_MORE_START:
       return {
