@@ -10,7 +10,7 @@ import { getTagFromTopic, colors } from '../../utils'
 const Topic = props => (
   <Link to={`/topic/${props.id}`} className={style.container}>
     <ListItem
-      innerDivStyle={{ display: 'flex' }}
+      innerDivStyle={{ display: 'flex', padding: '12px' }}
     >
       <div className={style.avatar}>
         <img

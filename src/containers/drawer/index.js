@@ -75,11 +75,12 @@ const MyDrawer = props => (
   <MUI.Drawer
     docked={false}
     open={props.isVisible}
+    width={220}
     onRequestChange={open => props.dispatch(open ? drawerActions.show() : drawerActions.hide())}
   >
     <MUI.List>
       <MUI.ListItem
-        style={{ marginTop: '40px' }}
+        style={{ marginTop: '20px' }}
         leftAvatar={<MUI.Avatar
           src={props.avatar ? props.avatar : null}
           icon={props.avatar ? null : <DefaultAvatar />}
