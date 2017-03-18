@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
-import { Dialog, RaisedButton } from 'material-ui'
+import Dialog from 'material-ui/Dialog'
+import RaisedButton from 'material-ui/RaisedButton'
 
 const Unfinished = props => (
   <Dialog

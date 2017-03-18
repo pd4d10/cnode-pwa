@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { CircularProgress } from 'material-ui'
+import CircularProgress from 'material-ui/CircularProgress'
 import Container from '../../components/container'
 import { fetchUser } from '../../actions/user'
 

@@ -1,8 +1,12 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { pure } from 'recompose'
-import * as MUI from 'material-ui'
+import pure from 'recompose/pure'
+import Avatar from 'material-ui/Avatar'
+import Drawer from 'material-ui/Drawer'
+import List from 'material-ui/List/List'
+import ListItem from 'material-ui/List/ListItem'
+import Divider from 'material-ui/Divider'
 import DefaultAvatar from 'material-ui/svg-icons/social/person'
 
 import IconAll from 'material-ui/svg-icons/content/inbox'
@@ -33,7 +37,7 @@ const iconsMap = {
 const Item = pure((props) => {
   const Icon = iconsMap[props.tab]
   return (
-    <MUI.ListItem
+    <ListItem
       leftIcon={<Icon style={props.activeItem[props.tab] ? { fill: utils.colors.primary } : {}} />}
       primaryText={utils.tabsMap[props.tab]}
       onClick={() => props.dispatch(listActions.load(props.tab))}
@@ -72,23 +76,23 @@ function getActiveItem({
 }
 
 const MyDrawer = props => (
-  <MUI.Drawer
+  <Drawer
     docked={false}
     open={props.isVisible}
     width={220}
     onRequestChange={open => props.dispatch(open ? drawerActions.show() : drawerActions.hide())}
   >
-    <MUI.List>
-      <MUI.ListItem
+    <List>
+      <ListItem
         style={{ marginTop: '20px' }}
-        leftAvatar={<MUI.Avatar
+        leftAvatar={<Avatar
           src={props.avatar ? props.avatar : null}
           icon={props.avatar ? null : <DefaultAvatar />}
         />}
         primaryText={props.name}
         onClick={() => props.dispatch(toastActions.show('登录'))}
       />
-      <MUI.Divider />
+      <Divider />
       {utils.tabs.map(tab => (
         <Item
           key={tab.key}
@@ -97,17 +101,17 @@ const MyDrawer = props => (
           dispatch={props.dispatch}
         />
       ))}
-      <MUI.Divider />
-      <MUI.Divider />
+      <Divider />
+      <Divider />
       <Link to="/about">
-        <MUI.ListItem
+        <ListItem
           primaryText="关于"
           leftIcon={<IconAbout />}
           onClick={() => props.dispatch(drawerActions.hide())}
         />
       </Link>
-    </MUI.List>
-  </MUI.Drawer>
+    </List>
+  </Drawer>
 )
 
 MyDrawer.defaultProps = {

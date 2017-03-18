@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { AppBar, IconButton } from 'material-ui'
+import AppBar from 'material-ui/AppBar'
+import IconButton from 'material-ui/IconButton'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
 import { push, goBack } from 'react-router-redux'
 import style from './container.css'

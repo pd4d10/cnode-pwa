@@ -1,10 +1,3 @@
-import {
-  // green700 as primary,
-  // teal500 as tag,
-  // teal300 as avatarBorder,
-  // grey300 as avatarBackground,
-} from 'material-ui/styles/colors'
-
 export const colors = {
   background: '#444',
   primary: '#80bd01',

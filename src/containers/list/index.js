@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { FloatingActionButton, AppBar } from 'material-ui'
+import FloatingActionButton from 'material-ui/FloatingActionButton'
+import AppBar from 'material-ui/AppBar'
 import ContentCreate from 'material-ui/svg-icons/content/create'
-import { throttle } from 'lodash'
+import throttle from 'lodash/throttle'
 
 import * as listActions from '../../actions/list'
 import * as drawerActions from '../../actions/drawer'

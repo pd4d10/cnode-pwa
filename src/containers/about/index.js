@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
-import { ListItem, Divider } from 'material-ui'
+import ListItem from 'material-ui/List/ListItem'
+import Divider from 'material-ui/Divider'
 import Helmet from 'react-helmet'
 
 import Container from '../../components/container'

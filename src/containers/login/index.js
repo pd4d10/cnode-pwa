@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Dialog, TextField, RaisedButton } from 'material-ui'
+import Dialog from 'material-ui/Dialog'
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
 
 import * as authActions from '../../actions/auth'
 // import { colors } from '../../utils'
