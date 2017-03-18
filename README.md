@@ -28,15 +28,15 @@ https://pd4d10.github.io/cnode-pwa/
 
 ### Android
 
-<img src="assets/android-1.jpg" width="220" alt="主屏幕图标" />
-<img src="assets/android-2.jpg" width="220" alt="首屏图片" />
-<img src="assets/android-3.jpg" width="220" alt="页面" />
-<img src="assets/android-4.jpg" width="220" alt="离线访问" />
+<span><img src="assets/android-1.jpg" width="220" alt="主屏幕图标" /></span>
+<span><img src="assets/android-2.jpg" width="220" alt="首屏图片" /></span>
+<span><img src="assets/android-3.jpg" width="220" alt="页面" /></span>
+<span><img src="assets/android-4.jpg" width="220" alt="离线访问" /></span>
 
 ### iOS
 
-<img src="assets/ios-1.png" width="260" alt="iOS 主屏幕图标" />
-<img src="assets/ios-2.png" width="260" alt="iOS 上的页面" />
+<span><img src="assets/ios-1.png" width="260" alt="iOS 主屏幕图标" /></span>
+<span><img src="assets/ios-2.png" width="260" alt="iOS 上的页面" /></span>
 
 ## 致谢
 
