@@ -1,15 +1,16 @@
 import {
-  teal700 as primary,
-  teal500 as tag,
-  teal300 as avatarBorder,
-  grey300 as avatarBackground,
+  // green700 as primary,
+  // teal500 as tag,
+  // teal300 as avatarBorder,
+  // grey300 as avatarBackground,
 } from 'material-ui/styles/colors'
 
 export const colors = {
-  primary,
-  tag,
-  avatarBorder,
-  avatarBackground,
+  background: '#444',
+  primary: '#80bd01',
+  tag: '#80bd01',
+  avatarBorder: '#80bd01',
+  avatarBackground: '#f5f5f5',
 }
 
 export const tabsMap = {

@@ -30,7 +30,7 @@ const Topic = props => (
               {getTagFromTopic(props)}
             </div>
             <div className={style.count}>
-              <strong>{props.reply_count} </strong>回复 / <strong>{props.visit_count}</strong> 浏览
+              <strong style={{ color: '#9e78c0' }}>{props.reply_count} </strong>回复 / <strong>{props.visit_count}</strong> 浏览
             </div>
           </div>
           <TimeAgo

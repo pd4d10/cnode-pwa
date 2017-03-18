@@ -1,15 +1,15 @@
 {
-  "name": "CNode Progressive Web App",
+  "name": "CNode 中文社区",
   "short_name": "CNode PWA",
   "icons": [
     {
-      "src": "images/icon.png",
+      "src": "/images/icon.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
-  "start_url": "/",
+  "start_url": "/?pwa=1",
   "display": "standalone",
-  "background_color": "#00796B",
-  "theme_color": "#00796B"
+  "background_color": "#444",
+  "theme_color": "#444"
 }

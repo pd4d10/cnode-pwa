@@ -19,7 +19,7 @@ const muiTheme = getMuiTheme({
     // textColor: green800,
   },
   appBar: {
-    color: colors.primary,
+    color: colors.background,
   },
   floatingActionButton: {
     color: colors.primary,
