@@ -2,8 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
-import { createHistory } from 'history'
-import { Router, Route, IndexRoute, applyRouterMiddleware, useRouterHistory } from 'react-router'
+import { Router, Route, IndexRoute, applyRouterMiddleware, hashHistory } from 'react-router'
 import { useScroll } from 'react-router-scroll'
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
@@ -26,20 +25,20 @@ injectTapEventPlugin()
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose // eslint-disable-line
 
-// https://github.com/ReactTraining/react-router/issues/353#issuecomment-181786502
-const browserHistory = useRouterHistory(createHistory)({
-  basename: __PROD__ ? '/cnode-pwa' : '',
-})
+// // https://github.com/ReactTraining/react-router/issues/353#issuecomment-181786502
+// const browserHistory = useRouterHistory(createHistory)({
+//   basename: __PROD__ ? '/cnode-pwa' : '',
+// })
 
 const store = createStore(
   reducers,
   composeEnhancers(applyMiddleware(
-    routerMiddleware(browserHistory),
+    routerMiddleware(hashHistory),
     thunk,
   )),
 )
 
-const history = syncHistoryWithStore(browserHistory, store)
+const history = syncHistoryWithStore(hashHistory, store)
 
 if (!__PROD__) {
   window.Perf = require('react-addons-perf') // eslint-disable-line
