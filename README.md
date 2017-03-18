@@ -2,6 +2,8 @@
 
 # CNode PWA
 
+[![Build Status](https://travis-ci.org/pd4d10/cnode-pwa.svg?branch=master)](https://travis-ci.org/pd4d10/cnode-pwa)
+
 CNode PWA 是使用 React，React Router 和 Redux 构建的 Progressive Web App。
 
 https://pd4d10.github.io/cnode-pwa/
