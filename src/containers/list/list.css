@@ -9,3 +9,10 @@
     transform: rotate(360deg);
   }
 }
+
+.item {
+  border-top: 1px solid #f0f0f0;
+  &:first {
+    border-top: none;
+  }
+}

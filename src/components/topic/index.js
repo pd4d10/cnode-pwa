@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import pure from 'recompose/pure'
 import ListItem from 'material-ui/List/ListItem'
-import Divider from 'material-ui/Divider'
 import TimeAgo from 'timeago-react'
 // import { push } from 'react-router-redux'
 import style from './topic.css'
@@ -42,7 +41,6 @@ const Topic = props => (
         </div>
       </div>
     </ListItem>
-    <Divider />
   </Link>
 )
 

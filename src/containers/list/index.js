@@ -73,7 +73,7 @@ class ListComponent extends Component {
         {props.isLoading ? <Loading key="loading" /> : (
           <ul style={{ paddingTop: '56px' }} key={props.location.query.tab}>
             {props.topics.map(topic => (
-              <li key={topic.id}>
+              <li key={topic.id} className={style.item}>
                 <Topic {...topic} />
               </li>
               ))}
