@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
-import AppBar from 'material-ui/AppBar'
 import ContentCreate from 'material-ui/svg-icons/content/create'
 import throttle from 'lodash/throttle'
 
 import * as listActions from '../../actions/list'
-import * as drawerActions from '../../actions/drawer'
+// import * as drawerActions from '../../actions/drawer'
 // import * as authActions from '../../actions/auth'
 import * as toastActions from '../../actions/toast'
 import Topic from '../../components/topic'
@@ -48,30 +47,8 @@ class ListComponent extends Component {
     const { props } = this
     return (
       <div className={style.container}>
-        <AppBar
-          style={{
-            position: 'fixed',
-          }}
-          iconStyleLeft={{
-            width: '44px',
-            height: '44px',
-            padding: '10px',
-            marginTop: '6px',
-          }}
-          titleStyle={{
-            fontSize: '22px',
-            height: '56px',
-            lineHeight: '56px',
-          }}
-          title={props.title}
-          onLeftIconButtonTouchTap={(e) => {
-            // https://github.com/callemall/material-ui/issues/5070#issuecomment-244127708
-            e.preventDefault()
-            props.dispatch(drawerActions.show())
-          }}
-        />
         {props.isLoading ? <Loading key="loading" /> : (
-          <ul style={{ paddingTop: '56px' }} key={props.location.query.tab}>
+          <ul key={props.location.query.tab}>
             {props.topics.map(topic => (
               <li key={topic.id} className={style.item}>
                 <Topic {...topic} />

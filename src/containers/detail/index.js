@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import TimeAgo from 'timeago-react'
 import Helmet from 'react-helmet'
 
-import Container from '../../components/container'
 import { fetchTopic } from '../../actions/detail'
 import Reply from '../../components/reply'
 import Loading from '../../components/loading'
@@ -21,13 +20,13 @@ class Detail extends Component {
   render() {
     const { props } = this
     return (
-      <Container title="话题">
-        <div className={style.container}>
-          {(props.isLoading || !props.topic) ? <Loading /> : (
-            <div>
-              <Helmet
-                title={props.topic.title}
-              />
+      <div>
+        {(props.isLoading || !props.topic) ? <Loading /> : (
+          <div>
+            <Helmet
+              title={props.topic.title}
+            />
+            <div className={style.container}>
               <h2 className={style.title}>{props.topic.title}</h2>
               <div className={style.info}>
                 <div className={style.avatar}>
@@ -37,17 +36,17 @@ class Detail extends Component {
                   <div>{props.topic.author.loginname}</div>
                   <div className={style.time}>
                     <span>
-                      创建于
-                      <TimeAgo
-                        datetime={props.topic.create_at}
-                        locale="zh_CN"
-                        live={false}
-                      />
+                        创建于
+                        <TimeAgo
+                          datetime={props.topic.create_at}
+                          locale="zh_CN"
+                          live={false}
+                        />
                     </span>
                     <span style={{ marginLeft: '6px' }}>
                       {props.topic.visit_count}
-                      次浏览
-                    </span>
+                        次浏览
+                      </span>
                   </div>
                 </div>
               </div>
@@ -61,12 +60,12 @@ class Detail extends Component {
                 </div>
                 {props.topic.replies.map(reply => (
                   <Reply {...reply} key={reply.id} />
-                ))}
+                  ))}
               </div>
             </div>
-          )}
-        </div>
-      </Container>
+          </div>
+        )}
+      </div>
     )
   }
 }

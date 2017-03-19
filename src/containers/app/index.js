@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import Helmet from 'react-helmet'
 
-import { colors } from '../../utils'
+import { colors, tabsMap } from '../../utils'
+import AppBar from '../../components/app-bar'
 import style from './app.css'
 import Login from '../login'
 import Drawer from '../drawer'
@@ -41,20 +42,53 @@ const App = props => (
         feature={props.feature}
         close={() => props.dispatch(toastActions.hide())}
       />
-      {props.children}
+      <AppBar
+        title={props.title}
+        isListPage={props.isListPage}
+        dispatch={props.dispatch}
+      />
+      <div style={{ marginTop: '56px' }}>
+        {props.children}
+      </div>
       <ErrorToast />
     </main>
   </MuiThemeProvider>
 )
 
 App.propTypes = {
+  title: PropTypes.string.isRequired,
+  isListPage: PropTypes.bool.isRequired,
   feature: PropTypes.string.isRequired,
   children: PropTypes.element.isRequired,
   dispatch: PropTypes.func.isRequired,
   isToastVisible: PropTypes.bool.isRequired,
 }
 
+function getTitle(state) {
+  const { pathname, query } = state.routing.locationBeforeTransitions
+
+  switch (pathname) {
+    case '/': {
+      return tabsMap[query.tab] || 'CNode 社区'
+    }
+    case '/about':
+      return '关于'
+    default: {
+      if (/^\/topic/.test(pathname)) {
+        return '话题'
+      }
+      return '404'
+    }
+  }
+}
+
+function getIsListPage(state) {
+  return state.routing.locationBeforeTransitions.pathname === '/'
+}
+
 const mapStateToProps = state => ({
+  isListPage: getIsListPage(state),
+  title: getTitle(state),
   input: state.auth.input,
   isLoginVisible: state.auth.isVisible,
   isToastVisible: state.toast.isVisible,

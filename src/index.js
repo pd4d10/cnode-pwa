@@ -10,9 +10,9 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import App from './containers/app'
 import List from './containers/list'
 import Detail from './containers/detail'
-import User from './containers/user'
-import NotFound from './containers/not-found'
-import Message from './containers/message'
+// import User from './containers/user'
+// import NotFound from './containers/not-found'
+// import Message from './containers/message'
 import About from './containers/about'
 import reducers from './reducers'
 import './index.css'
@@ -51,10 +51,10 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <IndexRoute component={List} />
         <Route path="/topic/:id" component={Detail} />
-        <Route path="/user/:name" component={User} />
-        <Route path="/messages" component={Message} />
+        {/* <Route path="/user/:name" component={User} />*/}
+        {/* <Route path="/messages" component={Message} />*/}
         <Route path="/about" component={About} />
-        <Route path="*" component={NotFound} />
+        {/* <Route path="*" component={NotFound} />*/}
       </Route>
     </Router>
   </Provider>,
