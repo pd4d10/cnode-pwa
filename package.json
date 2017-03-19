@@ -45,6 +45,9 @@
     "recursive-readdir": "2.1.1",
     "strip-ansi": "3.0.1",
     "style-loader": "0.13.1",
+    "stylefmt": "^5.3.0",
+    "stylelint": "^7.9.0",
+    "stylelint-config-standard": "^16.0.0",
     "sw-precache": "^5.1.0",
     "url-loader": "0.5.7",
     "webpack": "1.14.0",
@@ -121,5 +124,8 @@
       "react/jsx-filename-extension": "off",
       "react/no-danger": "off"
     }
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard"
   }
 }
