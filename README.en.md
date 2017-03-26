@@ -4,7 +4,7 @@ CNode PWA is a Progressive Web App, built with React, React Router and Redux.
 
 [![Build Status](https://travis-ci.org/pd4d10/cnode-pwa.svg?branch=master)](https://travis-ci.org/pd4d10/cnode-pwa)
 
-https://pd4d10.github.io/cnode-pwa/
+https://cnode.surge.sh
 
 <img src="assets/qrcode.png" width="250" alt="QRCode of link" />
 
