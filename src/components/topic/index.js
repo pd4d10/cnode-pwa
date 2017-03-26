@@ -12,14 +12,16 @@ const Topic = props => (
     <ListItem
       innerDivStyle={{ display: 'flex', padding: '12px' }}
     >
-      <div className={style.avatar}>
+      <div // eslint-disable-line
+        className={style.avatar}
+        // onClick={(e) => {
+        //   e.preventDefault()
+        //   props.dispatch(push(`/user/${props.author.loginname}`))
+        // }}
+      >
         <img
           src={props.author.avatar_url}
           alt={props.author.loginname}
-          // onClick={(e) => {
-          //   e.preventDefault()
-          //   props.dispatch(push(`/user/${props.author.loginname}`))
-          // }}
         />
       </div>
       <div className={style.content}>

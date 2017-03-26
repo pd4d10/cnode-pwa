@@ -51,7 +51,7 @@ class ListComponent extends Component {
           <ul key={props.location.query.tab}>
             {props.topics.map(topic => (
               <li key={topic.id} className={style.item}>
-                <Topic {...topic} />
+                <Topic {...topic} dispatch={props.dispatch} />
               </li>
               ))}
           </ul>

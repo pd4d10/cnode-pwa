@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import CircularProgress from 'material-ui/CircularProgress'
-import Container from '../../components/container'
+import { Tabs, Tab } from 'material-ui/Tabs'
 import { fetchUser } from '../../actions/user'
+import Topic from '../../components/topic'
 
 class User extends Component {
   componentDidMount() {
@@ -12,13 +13,25 @@ class User extends Component {
   render() {
     const { data, isLoading } = this.props
     return (
-      <Container title="用户">
+      <div>
         {isLoading ? <CircularProgress /> : (data && (
           <div>
             <img src={data.avatar_url} alt={data.loginname} />
+            <Tabs>
+              <Tab label="近期帖子">
+                <ul>
+                  {data.recent_topics.map(topic => <Topic />)}
+                </ul>
+              </Tab>
+              <Tab label="近期参与">
+                <ul>
+                  {data.recent_replies.map(topic => <Topic />)}
+                </ul>
+              </Tab>
+            </Tabs>
           </div>
         ))}
-      </Container>
+      </div>
     )
   }
 }
