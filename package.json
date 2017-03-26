@@ -48,6 +48,7 @@
     "stylefmt": "^5.3.0",
     "stylelint": "^7.9.0",
     "stylelint-config-standard": "^16.0.0",
+    "surge": "^0.19.0",
     "sw-precache": "^5.1.0",
     "url-loader": "0.5.7",
     "webpack": "1.14.0",
@@ -78,8 +79,9 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js && sw-precache --config=config/sw-precache-config.js",
-    "deploy": "gh-pages -d build",
+    "build": "node scripts/build.js",
+    "post-build": "sw-precache --config=config/sw-precache-config.js && cp build/index.html build/200.html",
+    "deploy": "surge build cnode.surge.sh",
     "test": "eslint src/**/*.js",
     "test-jest": "node scripts/test.js --env=jsdom"
   },
