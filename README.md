@@ -1,8 +1,6 @@
 [README in English](README.en.md)
 
-# CNode PWA
-
-[![Build Status](https://travis-ci.org/pd4d10/cnode-pwa.svg?branch=master)](https://travis-ci.org/pd4d10/cnode-pwa)
+# CNode PWA [![Build Status](https://travis-ci.org/pd4d10/cnode-pwa.svg?branch=master)](https://travis-ci.org/pd4d10/cnode-pwa)
 
 CNode PWA 是使用 React，React Router 和 Redux 构建的 Progressive Web App。
 
@@ -10,7 +8,7 @@ https://cnode.surge.sh
 
 移动设备可扫描以下二维码访问：
 
-<img src="assets/qrcode.png" width="250" alt="链接二维码" />
+![链接二维码](assets/qrcode.png)
 
 ## 安装
 
