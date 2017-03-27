@@ -5,6 +5,7 @@ var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 var DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
+var ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
 var getClientEnvironment = require('./env');
 var paths = require('./paths');
 
@@ -165,6 +166,13 @@ module.exports = {
   },
   plugins: [
     new DuplicatePackageCheckerPlugin(),
+    // Use this plugin to exclude locale files of `timeago.js`
+    // https://github.com/webpack/webpack/issues/118#issuecomment-28559053
+    // https://github.com/hustcc/timeago-react/blob/master/src/timeago-react.js#L18
+    new ContextReplacementPlugin(
+      /^timeago\.js\/locales/, // change all contexts matching this RegExp
+      /NoFileWillMatch/ // Exchange the RegExp with this new RegExp
+    ),
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">

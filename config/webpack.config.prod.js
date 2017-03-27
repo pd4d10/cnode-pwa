@@ -5,6 +5,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var ManifestPlugin = require('webpack-manifest-plugin');
 var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+var ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
 var paths = require('./paths');
 var getClientEnvironment = require('./env');
 
@@ -173,6 +174,13 @@ module.exports = {
     ];
   },
   plugins: [
+    // Use this plugin to exclude locale files of `timeago.js`
+    // https://github.com/webpack/webpack/issues/118#issuecomment-28559053
+    // https://github.com/hustcc/timeago-react/blob/master/src/timeago-react.js#L18
+    new ContextReplacementPlugin(
+      /^timeago\.js\/locales/, // change all contexts matching this RegExp
+      /NoFileWillMatch/ // Exchange the RegExp with this new RegExp
+    ),
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
