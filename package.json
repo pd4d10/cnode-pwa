@@ -81,7 +81,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "post-build": "sw-precache --config=config/sw-precache-config.js && cp build/index.html build/200.html",
-    "deploy": "surge build cnode.surge.sh",
+    "deploy": "surge build https://cnode.surge.sh",
     "test": "eslint src/**/*.js",
     "test-jest": "node scripts/test.js --env=jsdom"
   },

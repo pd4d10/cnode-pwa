@@ -29,10 +29,6 @@
   <body>
     <div id="root"></div>
     <script>
-      // Redirect to HTTPS to enable service worker
-      if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
-        location.replace('https://' + location.host + location.pathname)
-      }
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
           navigator.serviceWorker.register('%PUBLIC_URL%/service-worker.js');
