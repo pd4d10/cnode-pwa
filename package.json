@@ -62,6 +62,7 @@
     "github-markdown-css": "^2.4.1",
     "lodash": "^4.17.4",
     "material-ui": "^0.17.0",
+    "raven-js": "^3.14.0",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-dom": "^15.4.2",
@@ -80,7 +81,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "post-build": "sw-precache --config=config/sw-precache-config.js && cp build/index.html build/200.html",
+    "post-build": "cp node_modules/raven-js/dist/raven.min.js build/static/js; sw-precache --config=config/sw-precache-config.js && cp build/index.html build/200.html",
     "deploy": "surge build https://cnode.surge.sh",
     "test": "eslint src/**/*.js",
     "test-jest": "node scripts/test.js --env=jsdom"
