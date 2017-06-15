@@ -23,15 +23,14 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="CNode PWA">
-
     <meta name="theme-color" content="#444">
+  </head>
+  <body>
+    <div id="root"></div>
     <script src="%PUBLIC_URL%/static/js/raven.min.js" crossorigin="anonymous"></script>
     <script>
       Raven.config('https://7c6a88539f144b25b416d697c9593e60@sentry.io/152599').install()
     </script>
-  </head>
-  <body>
-    <div id="root"></div>
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
