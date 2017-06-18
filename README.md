@@ -4,7 +4,7 @@
 
 CNode PWA 是使用 React，React Router 和 Redux 构建的 Progressive Web App。
 
-https://cnode.surge.sh
+https://cnode.now.sh
 
 移动设备可扫描以下二维码访问：
 
