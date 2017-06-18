@@ -2,7 +2,7 @@
   "name": "cnode-pwa",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://cnode.surge.sh",
+  "homepage": "https://cnode.now.sh",
   "devDependencies": {
     "babel-core": "6.22.1",
     "babel-eslint": "7.1.1",
@@ -48,7 +48,6 @@
     "stylefmt": "^5.3.0",
     "stylelint": "^7.9.0",
     "stylelint-config-standard": "^16.0.0",
-    "surge": "^0.19.0",
     "sw-precache": "^5.1.0",
     "url-loader": "0.5.7",
     "webpack": "1.14.0",
@@ -81,8 +80,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "post-build": "cp node_modules/raven-js/dist/raven.min.js build/static/js; sw-precache --config=config/sw-precache-config.js && cp build/index.html build/200.html",
-    "deploy": "surge build https://cnode.surge.sh",
+    "post-build": "cp node_modules/raven-js/dist/raven.min.js build/static/js; sw-precache --config=config/sw-precache-config.js && cp now/package.json build",
+    "deploy": "now build",
     "test": "eslint src/**/*.js",
     "test-jest": "node scripts/test.js --env=jsdom"
   },

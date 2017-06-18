@@ -1,0 +1,10 @@
+{
+  "name": "cnode",
+  "alias": "cnode",
+  "scripts": {
+    "start": "serve --single"
+  },
+  "dependencies": {
+    "serve": "latest"
+  }
+}
