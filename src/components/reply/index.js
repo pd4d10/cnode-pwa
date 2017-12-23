@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'; import PropTypes from 'prop-types'
 // import { Link } from 'react-router'
 import Divider from 'material-ui/Divider'
 import TimeAgo from 'timeago-react'

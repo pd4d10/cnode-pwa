@@ -16,7 +16,7 @@ export default function list(state = {
     case drawerTypes.HIDE:
     case listTypes.LOAD_START:
     case messageTypes.LOAD_START:
-    case authTypes.LOAD_START:
+    // case authTypes.LOAD_START:
     case toastTypes.SHOW_TOAST:
       return {
         ...state,

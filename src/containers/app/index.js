@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'; import PropTypes from 'prop-types'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { connect } from 'react-redux'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'

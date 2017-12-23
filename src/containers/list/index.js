@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'; import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentCreate from 'material-ui/svg-icons/content/create'
