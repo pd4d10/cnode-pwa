@@ -1,11 +1,3 @@
-.container {
-  /*display: flex;*/
-}
-
-:global(.main-enter) {
-
-}
-
 :global(.back-enter) {
   opacity: 0;
   &:global(.back-enter-active) {

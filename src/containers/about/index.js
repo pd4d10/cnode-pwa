@@ -2,9 +2,8 @@ import React from 'react'; import PropTypes from 'prop-types'
 import ListItem from 'material-ui/List/ListItem'
 import Divider from 'material-ui/Divider'
 import Helmet from 'react-helmet'
-
+import styled from 'styled-components'
 import Logo from './logo'
-import style from './about.css'
 
 // Add rel="noopener noreferrer" for security
 // See https://mathiasbynens.github.io/rel-noopener/
@@ -22,10 +21,21 @@ Linker.propTypes = {
   title: PropTypes.string.isRequired,
 }
 
+const LogoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+
+  & svg {
+    width: 70%;
+  }
+`
+
 const About = () => (
   <div>
     <Helmet title="关于" />
-    <div className={style.logo}><Logo /></div>
+    <LogoWrapper><Logo /></LogoWrapper>
     <Divider />
     <Linker title="源代码" url="https://github.com/pd4d10/cnode-pwa" />
     <Divider />

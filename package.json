@@ -22,6 +22,7 @@
     "recompose": "^0.22.0",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
+    "styled-components": "^2.4.0",
     "timeago-react": "^1.0.8"
   },
   "scripts": {

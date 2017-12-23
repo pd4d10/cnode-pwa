@@ -12,7 +12,14 @@ import Topic from '../../components/topic'
 import Loading from '../../components/loading'
 import LoadingMore from '../../components/loading-more'
 import * as utils from '../../utils'
-import style from './list.css'
+import './list.css'
+import styledComponents from 'styled-components';
+
+const Item = styledComponents.li`
+border-top: 1px solid #f0f0f0;
+&:first {
+  border-top: none;
+}`
 
 class ListComponent extends Component {
   constructor(props) {
@@ -46,20 +53,21 @@ class ListComponent extends Component {
   render() {
     const { props } = this
     return (
-      <div className={style.container}>
+      <div>
         {props.isLoading ? <Loading key="loading" /> : (
           <ul key={props.location.query.tab}>
             {props.topics.map(topic => (
-              <li key={topic.id} className={style.item}>
+              <Item key={topic.id}>
                 <Topic {...topic} dispatch={props.dispatch} />
-              </li>
+              </Item>
               ))}
           </ul>
         )}
         <LoadingMore isVisible={props.isLoadingMore} />
         <FloatingActionButton
-          className={style.post}
-          style={{ zIndex: 2 }}
+          style={{ zIndex: 2,position: 'fixed',
+            right: 20,
+            bottom: 20 }}
           onClick={() => props.dispatch(toastActions.show('发贴'))}
         >
           <ContentCreate />

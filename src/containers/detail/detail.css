@@ -1,57 +1,10 @@
-.container {
-  padding: 12px;
-
-  & h2 {
-    font-size: 20px;
-  }
-}
-
-.avatar {
-  & img {
-    width: 48px;
-    border-radius: 50%;
-    margin-right: 8px;
-  }
-}
-
-.title {
-  font-size: 20px;
-  margin-bottom: 12px;
-}
-
-.info {
-  display: flex;
-  margin: 12px 0;
-}
-
-.extra {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  line-height: 24px;
-}
-
-.time {
-  font-size: 12px;
-  color: #555;
-  & time {
-    color: '#838383'
-  }
-}
-
-:global(.markdown-text) {
-  overflow: auto;
-
-  & img {
-    max-width: 100%;
-  }
-}
-
-:global(.prettyprint) {
+.markdown-text {
   overflow: auto;
 }
+.markdown-text img {
+  max-width: 100%;
+}
 
-.reply-header {
-  background: #eee;
-  padding: 6px;
+.prettyprint {
+  overflow: auto;
 }

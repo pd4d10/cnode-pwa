@@ -6,7 +6,6 @@ import Helmet from 'react-helmet'
 
 import { colors, tabsMap } from '../../utils'
 import AppBar from '../../components/app-bar'
-import style from './app.css'
 import Login from '../login'
 import Drawer from '../drawer'
 import Toast from '../../components/unfinished'
@@ -33,7 +32,7 @@ const muiTheme = getMuiTheme({
 
 const App = props => (
   <MuiThemeProvider muiTheme={muiTheme}>
-    <main className={style.container}>
+    <main>
       <Helmet titleTemplate="%s - CNode PWA" defaultTitle="CNode PWA" />
       <Login />
       <Drawer />
