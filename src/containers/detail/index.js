@@ -29,19 +29,19 @@ const Info = styled.div`
 display: flex;
   margin: 12px 0;`
 
-const Avatar = styled.img`
+export const Avatar = styled.img`
 width: 48px;
 border-radius: 50%;
 margin-right: 8px;
 `
 
-const Extra = styled.div`
+export const Extra = styled.div`
 display: flex;
   flex-direction: column;
   justify-content: space-between;
   line-height: 24px;`
 
-const Time = styled.div`
+export const Time = styled.div`
 font-size: 12px;
 color: #555;
 & time {

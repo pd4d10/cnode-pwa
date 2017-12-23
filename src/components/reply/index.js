@@ -2,29 +2,36 @@ import React from 'react'; import PropTypes from 'prop-types'
 // import { Link } from 'react-router'
 import Divider from 'material-ui/Divider'
 import TimeAgo from 'timeago-react'
+import '../../containers/detail/github-markdown.css'
+import styled from 'styled-components'
+import { Avatar, Extra, Time } from '../../containers/detail/index';
 
-import style from './reply.css'
-import markdownStyle from '../../containers/detail/github-markdown.css'
+const Content = styled.div`
+  margin-top: 6px;
+  img {
+    max-width: 100%;
+  }
+`
 
 const Reply = props => (
-  <div className={style.container}>
-    <div className={style.info}>
-      <div to={`/user/${props.author.loginname}`} className={style.avatar}>
-        <img src={props.author.avatar_url} alt={props.author.loginname} />
+  <div style={{ margin: '8px 0'}}>
+    <div style={{display: 'flex'}}>
+      <div to={`/user/${props.author.loginname}`}>
+        <Avatar src={props.author.avatar_url} alt={props.author.loginname} />
       </div>
-      <div className={style.extra}>
+      <Extra>
         <div>{props.author.loginname}</div>
-        <div className={style.time}>
+        <Time>
           发表于
           <TimeAgo
             datetime={props.create_at}
             locale="zh_CN"
             live={false}
           />
-        </div>
-      </div>
+        </Time>
+      </Extra>
     </div>
-    <div className={`${style.content} ${markdownStyle.markdownBody}`} dangerouslySetInnerHTML={{ __html: props.content }} />
+    <Content className="markdown-body" dangerouslySetInnerHTML={{ __html: props.content }} />
     <Divider />
   </div>
 )

@@ -4,16 +4,63 @@ import pure from 'recompose/pure'
 import ListItem from 'material-ui/List/ListItem'
 import TimeAgo from 'timeago-react'
 // import { push } from 'react-router-redux'
-import style from './topic.css'
+import styled from 'styled-components'
 import { getTagFromTopic, colors } from '../../utils'
 
+const Container = styled.div`
+  & h3 {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: normal;
+    color: #333;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  &:visited h3 {
+    color: #888;
+  }`
+
+const Avatar = styled.div`
+ flex-basis: 48px;
+  height: 48px;
+  margin-right: 10px;
+  & img {
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+  }`
+
+  const Content = styled.div`
+    display: flex;
+  min-width: 0; /* https://stackoverflow.com/questions/34934586/white-space-nowrap-and-flexbox-did-not-work-in-chrome */
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  height: 48px;`
+
+const Extra = styled.div`
+ display: flex;
+  align-items: center;
+  justify-content: space-between;`
+
+const Tag = styled.div`
+  color: #fff;
+  background-color: ${colors.tag};
+    font-size: 12px;
+    line-height: 20px;
+    border-radius: 2px;
+    padding: 0 4px;
+    margin-right: 8px;`
+
 const Topic = props => (
-  <Link to={`/topic/${props.id}`} className={style.container}>
+  <Container>
+  <Link to={`/topic/${props.id}`}>
     <ListItem
       innerDivStyle={{ display: 'flex', padding: '12px' }}
     >
-      <div // eslint-disable-line
-        className={style.avatar}
+      <Avatar // eslint-disable-line
         // onClick={(e) => {
         //   e.preventDefault()
         //   props.dispatch(push(`/user/${props.author.loginname}`))
@@ -23,27 +70,32 @@ const Topic = props => (
           src={props.author.avatar_url}
           alt={props.author.loginname}
         />
-      </div>
-      <div className={style.content}>
+      </Avatar>
+      <Content>
         <h3>{props.title}</h3>
-        <div className={style.extra}>
-          <div className={style.left}>
-            <div className={style.tag} style={{ backgroundColor: colors.tag }}>
+        <Extra>
+          <div style={{  display: 'flex',
+    alignItems: 'center'}}>
+            <Tag>
               {getTagFromTopic(props)}
-            </div>
-            <div className={style.count}>
-              <strong style={{ color: '#9e78c0' }}>{props.reply_count} </strong>回复 / <strong>{props.visit_count}</strong> 浏览
+            </Tag>
+            <div style={{  fontSize: 12,
+    color: '#b4b4b4'}}>
+              <span style={{ color: '#9e78c0' }}>{props.reply_count} </span>回复 / <span>{props.visit_count}</span> 浏览
             </div>
           </div>
           <TimeAgo
+          style={{ fontSize: 12,
+            color: '#778087'}}
             datetime={props.last_reply_at}
             locale="zh_CN"
             live={false}
           />
-        </div>
-      </div>
+        </Extra>
+      </Content>
     </ListItem>
   </Link>
+  </Container>
 )
 
 Topic.propTypes = {
