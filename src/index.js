@@ -12,7 +12,7 @@ import {
 import { useScroll } from 'react-router-scroll'
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
-// import injectTapEventPlugin from 'react-tap-event-plugin'
+import injectTapEventPlugin from 'react-tap-event-plugin'
 import App from './containers/app'
 import List from './containers/list'
 import Detail from './containers/detail'
@@ -29,7 +29,7 @@ const __PROD__ = process.env.NODE_ENV === 'production' // eslint-disable-line
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
-// injectTapEventPlugin()
+injectTapEventPlugin()
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose // eslint-disable-line
 
