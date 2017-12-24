@@ -5,22 +5,28 @@ import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentCreate from 'material-ui/svg-icons/content/create'
 import throttle from 'lodash/throttle'
 
-import * as listActions from '../../actions/list'
-// import * as drawerActions from '../../actions/drawer'
-// import * as authActions from '../../actions/auth'
-import * as toastActions from '../../actions/toast'
-import Topic from '../../components/topic'
-import Loading from '../../components/loading'
-import LoadingMore from '../../components/loading-more'
-import * as utils from '../../utils'
-import './list.css'
-import styledComponents from 'styled-components'
+import * as listActions from '../actions/list'
+// import * as drawerActions from '../actions/drawer'
+// import * as authActions from '../actions/auth'
+import * as toastActions from '../actions/toast'
+import Topic from '../components/topic'
+import Loading from '../components/loading'
+import LoadingMore from '../components/loading-more'
+import * as utils from '../utils'
+import styled from 'styled-components'
 
-const Item = styledComponents.li`
-border-top: 1px solid #f0f0f0;
-&:first {
-  border-top: none;
-}`
+const Item = styled.li`
+  border-top: 1px solid #f0f0f0;
+  &:first {
+    border-top: none;
+  }
+`
+
+// @keyframes spin {
+//   100% {
+//     transform: rotate(360deg);
+//   }
+// }
 
 class ListComponent extends Component {
   constructor(props) {

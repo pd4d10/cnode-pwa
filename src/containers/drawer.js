@@ -18,12 +18,12 @@ import IconJob from 'material-ui/svg-icons/action/group-work'
 import IconMessage from 'material-ui/svg-icons/communication/message'
 import IconAbout from 'material-ui/svg-icons/action/info'
 
-import * as utils from '../../utils'
-import * as drawerActions from '../../actions/drawer'
-import * as listActions from '../../actions/list'
-// import * as messageActions from '../../actions/message'
-// import * as authActions from '../../actions/auth'
-import * as toastActions from '../../actions/toast'
+import * as utils from '../utils'
+import * as drawerActions from '../actions/drawer'
+import * as listActions from '../actions/list'
+// import * as messageActions from '../actions/message'
+// import * as authActions from '../actions/auth'
+import * as toastActions from '../actions/toast'
 
 const iconsMap = {
   all: IconAll,

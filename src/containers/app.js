@@ -5,13 +5,29 @@ import { connect } from 'react-redux'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import Helmet from 'react-helmet'
 
-import { colors, tabsMap } from '../../utils'
-import AppBar from '../../components/app-bar'
-import Login from '../login'
-import Drawer from '../drawer'
-import Toast from '../../components/unfinished'
-import ErrorToast from '../../containers/toast'
-import * as toastActions from '../../actions/toast'
+import { colors, tabsMap } from '../utils'
+import AppBar from '../components/app-bar'
+import Login from './login'
+import Drawer from './drawer'
+import Toast from '../components/unfinished'
+import ErrorToast from './toast'
+import * as toastActions from '../actions/toast'
+
+// :global(.back-enter) {
+//   opacity: 0;
+//   &:global(.back-enter-active) {
+//     opacity: 1;
+//     transition: all 1000ms;
+//   }
+// }
+
+// :global(.back-leave) {
+//   opacity: 1;
+//   &:global(.back-leave-active) {
+//     opacity: 0;
+//     transition: all 1000ms;
+//   }
+// }
 
 // This replaces the textColor value on the palette
 // and then update the keys for each component that depends on it.

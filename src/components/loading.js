@@ -1,7 +1,7 @@
 import React from 'react'
 // import { fill } from 'lodash'
 import CircularProgress from 'material-ui/CircularProgress'
-import { colors } from '../../utils'
+import { colors } from '../utils'
 import styled from 'styled-components'
 
 const Container = styled.div`

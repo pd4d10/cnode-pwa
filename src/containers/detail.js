@@ -5,10 +5,9 @@ import { connect } from 'react-redux'
 import TimeAgo from 'timeago-react'
 import Helmet from 'react-helmet'
 
-import { fetchTopic } from '../../actions/detail'
-import Reply from '../../components/reply'
-import Loading from '../../components/loading'
-import './detail.css'
+import { fetchTopic } from '../actions/detail'
+import Reply from '../components/reply'
+import Loading from '../components/loading'
 import './github-markdown.css'
 import styled from 'styled-components'
 
@@ -16,6 +15,16 @@ const mapStateToProps = state => state.detail
 
 const Container = styled.div`
   padding: 12px;
+  .markdown-text {
+    overflow: auto;
+  }
+  .markdown-text img {
+    max-width: 100%;
+  }
+
+  .prettyprint {
+    overflow: auto;
+  }
 
   & h2 {
     font-size: 20px;

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import CircularProgress from 'material-ui/CircularProgress'
 import { Tabs, Tab } from 'material-ui/Tabs'
-import { fetchUser } from '../../actions/user'
-import Topic from '../../components/topic'
+import { fetchUser } from '../actions/user'
+import Topic from '../components/topic'
 
 class User extends Component {
   componentDidMount() {

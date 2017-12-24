@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import CircularProgress from 'material-ui/CircularProgress'
-import { colors } from '../../utils'
+import { colors } from '../utils'
 import styled, { css } from 'styled-components'
 
 const Container = styled.div`

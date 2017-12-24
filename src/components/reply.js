@@ -3,9 +3,8 @@ import PropTypes from 'prop-types'
 // import { Link } from 'react-router'
 import Divider from 'material-ui/Divider'
 import TimeAgo from 'timeago-react'
-import '../../containers/detail/github-markdown.css'
 import styled from 'styled-components'
-import { Avatar, Extra, Time } from '../../containers/detail/index'
+import { Avatar, Extra, Time } from '../containers/detail'
 
 const Content = styled.div`
   margin-top: 6px;

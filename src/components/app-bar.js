@@ -5,7 +5,7 @@ import MUIAppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
 import { push, goBack } from 'react-router-redux'
-import * as drawerActions from '../../actions/drawer'
+import * as drawerActions from '../actions/drawer'
 
 // Show drawer on click
 // For list page

@@ -5,9 +5,24 @@ import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 
-import * as authActions from '../../actions/auth'
+import * as authActions from '../actions/auth'
 // import { colors } from '../../utils'
 // import style from './login.css'
+
+// .container {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   background: #fff;
+//   bottom: 0;
+//   display: flex;
+//   flex-direction: column;
+//   right: 0;
+//   z-index: 9999;
+
+//   /*transform: translate(0, 10px);*/
+//   transition: all 300ms;
+// }
 
 const Login = props => (
   <Dialog

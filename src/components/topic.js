@@ -6,7 +6,7 @@ import ListItem from 'material-ui/List/ListItem'
 import TimeAgo from 'timeago-react'
 // import { push } from 'react-router-redux'
 import styled from 'styled-components'
-import { getTagFromTopic, colors } from '../../utils'
+import { getTagFromTopic, colors } from '../utils'
 
 const Container = styled.div`
   & h3 {
