@@ -1,10 +1,13 @@
 import * as types from '../actions/auth'
 
-export default function login(state = {
-  input: '',
-  isLoading: false,
-  isVisible: false,
-}, action) {
+export default function login(
+  state = {
+    input: '',
+    isLoading: false,
+    isVisible: false,
+  },
+  action
+) {
   switch (action.type) {
     case types.LOGIN_START:
       return {

@@ -1,4 +1,5 @@
-import React, { Component } from 'react'; import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentCreate from 'material-ui/svg-icons/content/create'
@@ -13,7 +14,7 @@ import Loading from '../../components/loading'
 import LoadingMore from '../../components/loading-more'
 import * as utils from '../../utils'
 import './list.css'
-import styledComponents from 'styled-components';
+import styledComponents from 'styled-components'
 
 const Item = styledComponents.li`
 border-top: 1px solid #f0f0f0;
@@ -30,8 +31,12 @@ class ListComponent extends Component {
     this.loadMore = throttle(() => {
       const height = 200
       if (
-        document.documentElement.scrollHeight - document.body.scrollTop - document.documentElement.clientHeight < height // eslint-disable-line
-        && !this.props.isLoadingMore && !this.props.isLoading
+        document.documentElement.scrollHeight -
+          document.body.scrollTop -
+          document.documentElement.clientHeight <
+          height && // eslint-disable-line
+        !this.props.isLoadingMore &&
+        !this.props.isLoading
       ) {
         this.props.dispatch(listActions.loadMore())
       }
@@ -54,20 +59,25 @@ class ListComponent extends Component {
     const { props } = this
     return (
       <div>
-        {props.isLoading ? <Loading key="loading" /> : (
+        {props.isLoading ? (
+          <Loading key="loading" />
+        ) : (
           <ul key={props.location.query.tab}>
             {props.topics.map(topic => (
               <Item key={topic.id}>
                 <Topic {...topic} dispatch={props.dispatch} />
               </Item>
-              ))}
+            ))}
           </ul>
         )}
         <LoadingMore isVisible={props.isLoadingMore} />
         <FloatingActionButton
-          style={{ zIndex: 2,position: 'fixed',
+          style={{
+            zIndex: 2,
+            position: 'fixed',
             right: 20,
-            bottom: 20 }}
+            bottom: 20,
+          }}
           onClick={() => props.dispatch(toastActions.show('发贴'))}
         >
           <ContentCreate />
@@ -89,9 +99,9 @@ ListComponent.propTypes = {
   dispatch: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const { tab } = state.routing.locationBeforeTransitions.query
-  const title = (!tab || tab === 'all') ? 'CNode 社区' : utils.tabsMap[tab]
+  const title = !tab || tab === 'all' ? 'CNode 社区' : utils.tabsMap[tab]
   return {
     ...state.list,
     title,

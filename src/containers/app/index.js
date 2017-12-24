@@ -1,4 +1,5 @@
-import React from 'react'; import PropTypes from 'prop-types'
+import React from 'react'
+import PropTypes from 'prop-types'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { connect } from 'react-redux'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
@@ -46,9 +47,7 @@ const App = props => (
         isListPage={props.isListPage}
         dispatch={props.dispatch}
       />
-      <div style={{ marginTop: '56px' }}>
-        {props.children}
-      </div>
+      <div style={{ marginTop: '56px' }}>{props.children}</div>
       <ErrorToast />
     </main>
   </MuiThemeProvider>

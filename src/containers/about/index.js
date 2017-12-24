@@ -1,4 +1,5 @@
-import React from 'react'; import PropTypes from 'prop-types'
+import React from 'react'
+import PropTypes from 'prop-types'
 import ListItem from 'material-ui/List/ListItem'
 import Divider from 'material-ui/Divider'
 import Helmet from 'react-helmet'
@@ -9,10 +10,7 @@ import Logo from './logo'
 // See https://mathiasbynens.github.io/rel-noopener/
 const Linker = props => (
   <a href={props.url} target="_blank" rel="noopener noreferrer">
-    <ListItem
-      primaryText={props.title}
-      secondaryText={props.url}
-    />
+    <ListItem primaryText={props.title} secondaryText={props.url} />
   </a>
 )
 
@@ -35,7 +33,9 @@ const LogoWrapper = styled.div`
 const About = () => (
   <div>
     <Helmet title="关于" />
-    <LogoWrapper><Logo /></LogoWrapper>
+    <LogoWrapper>
+      <Logo />
+    </LogoWrapper>
     <Divider />
     <Linker title="源代码" url="https://github.com/pd4d10/cnode-pwa" />
     <Divider />

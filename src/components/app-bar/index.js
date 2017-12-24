@@ -1,4 +1,5 @@
-import React from 'react'; import PropTypes from 'prop-types'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import MUIAppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
@@ -8,7 +9,7 @@ import * as drawerActions from '../../actions/drawer'
 
 // Show drawer on click
 // For list page
-const handleShowDrawer = dispatch => (e) => {
+const handleShowDrawer = dispatch => e => {
   // https://github.com/callemall/material-ui/issues/5070#issuecomment-244127708
   e.preventDefault()
   dispatch(drawerActions.show())
@@ -16,7 +17,7 @@ const handleShowDrawer = dispatch => (e) => {
 
 // Go back on click
 // For other pages
-const handleGoBack = dispatch => (e) => {
+const handleGoBack = dispatch => e => {
   e.preventDefault()
 
   // If no history, go to list page
@@ -45,11 +46,19 @@ const AppBar = props => (
       lineHeight: '56px',
     }}
     title={props.title}
-    iconElementLeft={props.isListPage ? undefined : (
-      <IconButton><ArrowBack /></IconButton>
-      )}
+    iconElementLeft={
+      props.isListPage ? (
+        undefined
+      ) : (
+        <IconButton>
+          <ArrowBack />
+        </IconButton>
+      )
+    }
     onLeftIconButtonTouchTap={
-      props.isListPage ? handleShowDrawer(props.dispatch) : handleGoBack(props.dispatch)
+      props.isListPage
+        ? handleShowDrawer(props.dispatch)
+        : handleGoBack(props.dispatch)
     }
   />
 )

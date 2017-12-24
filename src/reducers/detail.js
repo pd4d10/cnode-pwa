@@ -1,8 +1,11 @@
 import * as detailTypes from '../actions/detail'
 
-export default function list(state = {
-  isLoading: false,
-}, action) {
+export default function list(
+  state = {
+    isLoading: false,
+  },
+  action
+) {
   switch (action.type) {
     case detailTypes.LOAD_START:
       return {

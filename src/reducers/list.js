@@ -1,11 +1,14 @@
 import * as types from '../actions/list'
 
-export default function list(state = {
-  isLoading: false,
-  isLoadingMore: false,
-  page: 1,
-  topics: [],
-}, action) {
+export default function list(
+  state = {
+    isLoading: false,
+    isLoadingMore: false,
+    page: 1,
+    topics: [],
+  },
+  action
+) {
   switch (action.type) {
     case types.LOAD_START:
       return {

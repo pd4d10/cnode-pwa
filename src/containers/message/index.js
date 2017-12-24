@@ -1,4 +1,5 @@
-import React from 'react'; import PropTypes from 'prop-types'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 const Message = props => (
@@ -13,12 +14,16 @@ const Message = props => (
 )
 
 Message.propTypes = {
-  has_read_messages: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-  })).isRequired,
-  hasnot_read_messages: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-  })).isRequired,
+  has_read_messages: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  hasnot_read_messages: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 }
 
 const mapStateToProps = state => state.message

@@ -4,9 +4,12 @@ import * as messageTypes from '../actions/message'
 import * as authTypes from '../actions/auth'
 import * as toastTypes from '../actions/toast'
 
-export default function list(state = {
-  isVisible: false,
-}, action) {
+export default function list(
+  state = {
+    isVisible: false,
+  },
+  action
+) {
   switch (action.type) {
     case drawerTypes.SHOW:
       return {

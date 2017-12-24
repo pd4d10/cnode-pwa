@@ -18,7 +18,7 @@ const loadFail = err => ({
   message: err.message,
 })
 
-export const fetchTopic = id => async (dispatch) => {
+export const fetchTopic = id => async dispatch => {
   dispatch(loadStart())
   try {
     const { data } = await fetchAPI(`/topic/${id}`)

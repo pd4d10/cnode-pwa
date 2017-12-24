@@ -31,11 +31,13 @@ export const load = tab => async (dispatch, getState) => {
       dispatch(push(`/?${tab ? `tab=${tab}` : ''}`))
     }
 
-    const { data } = await fetchAPI(`/topics?tab=${getCorrectTab(tab)}&limit=20`)
-    dispatch(({
+    const { data } = await fetchAPI(
+      `/topics?tab=${getCorrectTab(tab)}&limit=20`
+    )
+    dispatch({
       type: LOAD_SUCCESS,
       data,
-    }))
+    })
   } catch (err) {
     dispatch({
       type: LOAD_FAIL,
@@ -53,11 +55,13 @@ export const loadMore = () => async (dispatch, getState) => {
     const state = getState()
     const page = state.list.page + 1
     const { tab } = state.routing.locationBeforeTransitions.query
-    const { data } = await fetchAPI(`/topics?tab=${getCorrectTab(tab)}&page=${page}&limit=20`)
-    dispatch(({
+    const { data } = await fetchAPI(
+      `/topics?tab=${getCorrectTab(tab)}&page=${page}&limit=20`
+    )
+    dispatch({
       type: LOAD_MORE_SUCCESS,
       data,
-    }))
+    })
   } catch (err) {
     dispatch({
       type: LOAD_MORE_FAIL,

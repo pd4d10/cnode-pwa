@@ -1,4 +1,5 @@
-import React from 'react'; import PropTypes from 'prop-types'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 // import { Snackbar } from 'material-ui'
 
@@ -26,7 +27,11 @@ const Toast = props => (
       marginLeft: '-150px',
     }}
   >
-    <div style={{ fontSize: '120px', textAlign: 'center', marginBottom: '20px' }}>:(</div>
+    <div
+      style={{ fontSize: '120px', textAlign: 'center', marginBottom: '20px' }}
+    >
+      :(
+    </div>
     <h4>无法获取数据，请检查网络</h4>
     <p>错误信息如下：</p>
     <code style={{ color: 'red' }}>{props.message}</code>

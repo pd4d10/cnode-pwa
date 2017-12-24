@@ -10,7 +10,7 @@ export const LOAD_SUCCESS = 'MESSAGE/LOAD_SUCCESS'
 //   ...data,
 // })
 
-export const loadMessage = token => async (dispatch) => {
+export const loadMessage = token => async dispatch => {
   const json = await fetchAPI(`/messages?accesstoken=${token}`)
   const { has_read_messages, hasnot_read_messages } = json.data
   dispatch({

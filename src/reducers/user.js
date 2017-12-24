@@ -1,8 +1,11 @@
 import * as userTypes from '../actions/user'
 
-export default function user(state = {
-  isLoading: false,
-}, action) {
+export default function user(
+  state = {
+    isLoading: false,
+  },
+  action
+) {
   switch (action.type) {
     case userTypes.LOAD_START:
       return {

@@ -1,4 +1,5 @@
-import React from 'react'; import PropTypes from 'prop-types'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import pure from 'recompose/pure'
@@ -34,17 +35,27 @@ const iconsMap = {
   about: IconAbout,
 }
 
-const Item = pure((props) => {
+const Item = pure(props => {
   const Icon = iconsMap[props.tab]
   return (
     <ListItem
-      leftIcon={<Icon style={props.activeItem[props.tab] ? { fill: utils.colors.primary } : {}} />}
+      leftIcon={
+        <Icon
+          style={
+            props.activeItem[props.tab] ? { fill: utils.colors.primary } : {}
+          }
+        />
+      }
       primaryText={utils.tabsMap[props.tab]}
       onClick={() => props.dispatch(listActions.load(props.tab))}
-      innerDivStyle={props.activeItem[props.tab] ? {
-        color: utils.colors.primary,
-        backgroundColor: utils.colors.avatarBackground,
-      } : {}}
+      innerDivStyle={
+        props.activeItem[props.tab]
+          ? {
+              color: utils.colors.primary,
+              backgroundColor: utils.colors.avatarBackground,
+            }
+          : {}
+      }
     />
   )
 })
@@ -55,10 +66,7 @@ Item.propTypes = {
   dispatch: PropTypes.func.isRequired,
 }
 
-function getActiveItem({
-  pathname,
-  query,
-}) {
+function getActiveItem({ pathname, query }) {
   switch (pathname) {
     case '/':
       return query.tab
@@ -80,15 +88,19 @@ const MyDrawer = props => (
     docked={false}
     open={props.isVisible}
     width={220}
-    onRequestChange={open => props.dispatch(open ? drawerActions.show() : drawerActions.hide())}
+    onRequestChange={open =>
+      props.dispatch(open ? drawerActions.show() : drawerActions.hide())
+    }
   >
     <List>
       <ListItem
         style={{ marginTop: '20px' }}
-        leftAvatar={<Avatar
-          src={props.avatar ? props.avatar : null}
-          icon={props.avatar ? null : <DefaultAvatar />}
-        />}
+        leftAvatar={
+          <Avatar
+            src={props.avatar ? props.avatar : null}
+            icon={props.avatar ? null : <DefaultAvatar />}
+          />
+        }
         primaryText={props.name}
         onClick={() => props.dispatch(toastActions.show('登录'))}
       />
@@ -125,7 +137,7 @@ MyDrawer.propTypes = {
   dispatch: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const activeItem = {
     all: false,
     good: false,
