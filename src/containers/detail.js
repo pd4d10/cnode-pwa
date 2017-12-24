@@ -8,7 +8,6 @@ import Helmet from 'react-helmet'
 import { fetchTopic } from '../actions/detail'
 import Reply from '../components/reply'
 import Loading from '../components/loading'
-import './github-markdown.css'
 import styled from 'styled-components'
 
 const mapStateToProps = state => state.detail

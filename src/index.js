@@ -22,6 +22,7 @@ import NotFound from './containers/not-found'
 import About from './containers/about'
 import reducers from './reducers'
 import registerServiceWorker from './registerServiceWorker'
+import 'github-markdown-css'
 import './index.css'
 
 const __PROD__ = process.env.NODE_ENV === 'production' // eslint-disable-line
