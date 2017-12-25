@@ -1,4 +1,4 @@
-import { push } from 'react-router-redux'
+// import { push } from 'react-router-redux'
 import { fetchAPI, tabsMap } from '../utils'
 
 export const LOAD_START = 'LIST/LOAD_START'
@@ -24,12 +24,13 @@ export const load = tab => async (dispatch, getState) => {
   })
 
   try {
-    const currentTab = getState().routing.locationBeforeTransitions.query.tab
+    // const currentTab = getState().routing.locationBeforeTransitions.query.tab
 
-    // If tab switched, push a new URL
-    if (currentTab !== tab) {
-      dispatch(push(`/?${tab ? `tab=${tab}` : ''}`))
-    }
+    // // If tab switched, push a new URL
+    // if (currentTab !== tab) {
+    //   // dispatch(push(`/?${tab ? `tab=${tab}` : ''}`))
+    // }
+    // const tab = 'all'
 
     const { data } = await fetchAPI(
       `/topics?tab=${getCorrectTab(tab)}&limit=20`

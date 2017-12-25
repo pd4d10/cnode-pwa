@@ -1,4 +1,4 @@
-import { push } from 'react-router-redux'
+// import { push } from 'react-router-redux'
 import * as authActions from './auth'
 import { fetchAPI } from '../utils'
 
@@ -18,7 +18,7 @@ export const loadMessage = token => async dispatch => {
     has_read_messages,
     hasnot_read_messages,
   })
-  dispatch(push('/messages'))
+  // dispatch(push('/messages'))
 }
 
 export const load = () => async (dispatch, getState) => {

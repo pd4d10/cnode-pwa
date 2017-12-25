@@ -2,15 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
-import {
-  Router,
-  Route,
-  IndexRoute,
-  applyRouterMiddleware,
-  browserHistory,
-} from 'react-router'
-import { useScroll } from 'react-router-scroll'
-import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
+// import {
+//   Router,
+//   Route,
+//   IndexRoute,
+//   applyRouterMiddleware,
+//   browserHistory,
+// } from 'react-router'
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+// import { useScroll } from 'react-router-scroll'
+// import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import App from './containers/app'
@@ -35,10 +36,10 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose 
 
 const store = createStore(
   reducers,
-  composeEnhancers(applyMiddleware(routerMiddleware(browserHistory), thunk))
+  composeEnhancers(applyMiddleware(/*routerMiddleware(browserHistory),*/ thunk))
 )
 
-const history = syncHistoryWithStore(browserHistory, store)
+// const history = syncHistoryWithStore(browserHistory, store)
 
 if (!__PROD__) {
   // window.Perf = require('react-addons-perf') // eslint-disable-line
@@ -47,15 +48,17 @@ if (!__PROD__) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history} render={applyRouterMiddleware(useScroll())}>
-      <Route path="/" component={App}>
-        <IndexRoute component={List} />
-        <Route path="/topic/:id" component={Detail} />
-        {/* <Route path="/user/:name" component={User} />*/}
-        {/* <Route path="/messages" component={Message} />*/}
-        <Route path="/about" component={About} />
-        <Route path="*" component={NotFound} />
-      </Route>
+    <Router /*history={history} render={applyRouterMiddleware(useScroll())}*/>
+      <App>
+        <Switch>
+          <Route exact path="/" component={List} />
+          <Route path="/topic/:id" component={Detail} />
+          {/* <Route path="/user/:name" component={User} />*/}
+          {/* <Route path="/messages" component={Message} />*/}
+          <Route path="/about" component={About} />
+          <Route component={NotFound} />
+        </Switch>
+      </App>
     </Router>
   </Provider>,
   document.getElementById('root')

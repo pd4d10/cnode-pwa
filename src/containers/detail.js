@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-// import { Link } from 'react-router'
 import TimeAgo from 'timeago-react'
 import Helmet from 'react-helmet'
 
@@ -68,7 +67,7 @@ const ReplyHeader = styled.div`
 
 class Detail extends Component {
   componentDidMount() {
-    this.props.dispatch(fetchTopic(this.props.params.id))
+    this.props.fetchTopic(this.props.match.params.id)
   }
 
   render() {
@@ -141,4 +140,4 @@ Detail.propTypes = {
   }),
 }
 
-export default connect(mapStateToProps)(Detail)
+export default connect(mapStateToProps, { fetchTopic })(Detail)

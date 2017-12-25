@@ -51,7 +51,9 @@ class ListComponent extends Component {
 
   componentDidMount() {
     if (this.props.topics.length === 0) {
-      this.props.dispatch(listActions.load(this.props.location.query.tab))
+      const params = new URLSearchParams(this.props.location.search)
+      const tab = params.get('tab') || 'all'
+      this.props.dispatch(listActions.load(tab))
     }
     // this.props.dispatch(authActions.load())
     window.addEventListener('scroll', this.loadMore)
@@ -68,7 +70,8 @@ class ListComponent extends Component {
         {props.isLoading ? (
           <Loading key="loading" />
         ) : (
-          <ul key={props.location.query.tab}>
+          // <ul key={props.location.query.tab}>
+          <ul>
             {props.topics.map(topic => (
               <Item key={topic.id}>
                 <Topic {...topic} dispatch={props.dispatch} />
@@ -106,8 +109,9 @@ ListComponent.propTypes = {
 }
 
 const mapStateToProps = state => {
-  const { tab } = state.routing.locationBeforeTransitions.query
-  const title = !tab || tab === 'all' ? 'CNode 社区' : utils.tabsMap[tab]
+  // const { tab } = state.routing.locationBeforeTransitions.query
+  // const title = !tab || tab === 'all' ? 'CNode 社区' : utils.tabsMap[tab]
+  const title = 'ABC'
   return {
     ...state.list,
     title,

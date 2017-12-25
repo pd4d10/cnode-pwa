@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import pure from 'recompose/pure'
 import ListItem from 'material-ui/List/ListItem'
 import TimeAgo from 'timeago-react'

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import pure from 'recompose/pure'
 import Avatar from 'material-ui/Avatar'
 import Drawer from 'material-ui/Drawer'
@@ -66,23 +66,6 @@ Item.propTypes = {
   dispatch: PropTypes.func.isRequired,
 }
 
-function getActiveItem({ pathname, query }) {
-  switch (pathname) {
-    case '/':
-      return query.tab
-    case '/about':
-      return 'about'
-    case '/message':
-      return 'message'
-    default: {
-      if (/^\/topics/.test(pathname)) {
-        return 'topics'
-      }
-      return undefined
-    }
-  }
-}
-
 const MyDrawer = props => (
   <Drawer
     docked={false}
@@ -138,25 +121,9 @@ MyDrawer.propTypes = {
 }
 
 const mapStateToProps = state => {
-  const activeItem = {
-    all: false,
-    good: false,
-    share: false,
-    ask: false,
-    job: false,
-    topic: false,
-    message: false,
-    about: false,
-  }
-
-  const key = getActiveItem(state.routing.locationBeforeTransitions)
-  activeItem[key] = true
-
   return {
     ...state.list,
     isVisible: state.drawer.isVisible,
-    title: utils.tabsMap[state.routing.locationBeforeTransitions.query.tab],
-    activeItem,
     avatar: state.auth.avatar,
     name: state.auth.name,
   }

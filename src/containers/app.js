@@ -52,7 +52,7 @@ const App = props => (
     <main>
       <Helmet titleTemplate="%s - CNode PWA" defaultTitle="CNode PWA" />
       <Login />
-      <Drawer />
+      <Drawer title={props.title} activeItem={props.drawerActiveItem} />
       <Toast
         isVisible={props.isToastVisible}
         feature={props.feature}
@@ -79,11 +79,14 @@ App.propTypes = {
 }
 
 function getTitle(state) {
-  const { pathname, query } = state.routing.locationBeforeTransitions
+  // TODO: Get params from router
+  const { pathname } = window.location
+  const params = new URLSearchParams(window.location.search)
+  const tab = params.get('tab') || 'all'
 
   switch (pathname) {
     case '/': {
-      return tabsMap[query.tab] || 'CNode 社区'
+      return tabsMap[tab] || 'CNode 社区'
     }
     case '/about':
       return '关于'
@@ -96,8 +99,48 @@ function getTitle(state) {
   }
 }
 
-function getIsListPage(state) {
-  return state.routing.locationBeforeTransitions.pathname === '/'
+function getIsListPage() {
+  return window.location.pathname === '/'
+  // TODO:
+  // return state.routing.locationBeforeTransitions.pathname === '/'
+}
+
+function getActiveItem() {
+  const { pathname } = window.location
+  const params = new URLSearchParams(window.location.search)
+  const tab = params.get('tab') || 'all'
+  switch (pathname) {
+    case '/':
+      return tab
+    case '/about':
+      return 'about'
+    case '/message':
+      return 'message'
+    default: {
+      if (/^\/topics/.test(pathname)) {
+        return 'topics'
+      }
+      return undefined
+    }
+  }
+}
+
+function getDrawerActiveItem() {
+  const activeItem = {
+    all: false,
+    good: false,
+    share: false,
+    ask: false,
+    job: false,
+    topic: false,
+    message: false,
+    about: false,
+  }
+
+  const key = getActiveItem()
+  activeItem[key] = true
+
+  return activeItem
 }
 
 const mapStateToProps = state => ({
@@ -107,6 +150,7 @@ const mapStateToProps = state => ({
   isLoginVisible: state.auth.isVisible,
   isToastVisible: state.toast.isVisible,
   feature: state.toast.feature,
+  drawerActiveItem: getDrawerActiveItem(),
 })
 
 export default connect(mapStateToProps)(App)

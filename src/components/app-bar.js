@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import MUIAppBar from 'material-ui/AppBar'
 import IconButton from 'material-ui/IconButton'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
-import { push, goBack } from 'react-router-redux'
+// import { push, goBack } from 'react-router-redux'
 import * as drawerActions from '../actions/drawer'
 
 // Show drawer on click
@@ -22,11 +22,11 @@ const handleGoBack = dispatch => e => {
 
   // If no history, go to list page
   if (window.history.length === 1) {
-    dispatch(push('/'))
+    // dispatch(push('/'))
     return
   }
 
-  dispatch(goBack())
+  // dispatch(goBack())
 }
 
 const AppBar = props => (
