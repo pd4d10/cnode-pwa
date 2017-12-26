@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentCreate from 'material-ui/svg-icons/content/create'
+// import ListItem from 'material-ui/List/ListItem'
 import throttle from 'lodash/throttle'
 import { load, loadMore } from '../actions/list'
 // import * as drawerActions from '../actions/drawer'
@@ -13,6 +14,7 @@ import Loading from '../components/loading'
 import LoadingMore from '../components/loading-more'
 import * as utils from '../utils'
 import styled from 'styled-components'
+// import ContentLoader from 'react-content-loader'
 import { withRouter } from 'react-router-dom'
 
 const Item = styled.li`
@@ -81,9 +83,20 @@ class ListComponent extends Component {
     return (
       <div>
         {props.isLoading ? (
+          // <ContentLoader
+          //   height={144}
+          //   width={750}
+          //   speed={2}
+          //   primaryColor={'#f3f3f3'}
+          //   secondaryColor={'#ecebeb'}
+          // >
+          //   <circle cx="48" cy="48" r="48" />
+          //   <rect x="75" y="13" rx="4" ry="4" width="100" height="13" />
+          //   <rect x="75" y="37" rx="4" ry="4" width="50" height="8" />
+          //   <rect x="0" y="70" rx="5" ry="5" width="400" height="400" />
+          // </ContentLoader>
           <Loading key="loading" />
         ) : (
-          // <ul key={props.location.query.tab}>
           <ul>
             {props.topics.map(topic => (
               <Item key={topic.id}>
@@ -123,16 +136,6 @@ ListComponent.propTypes = {
   show: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = state => {
-  // const { tab } = state.routing.locationBeforeTransitions.query
-  // const title = !tab || tab === 'all' ? 'CNode 社区' : utils.tabsMap[tab]
-  const title = 'ABC'
-  return {
-    ...state.list,
-    title,
-  }
-}
-
 export default withRouter(
-  connect(mapStateToProps, { load, loadMore, show })(ListComponent)
+  connect(s => s.list, { load, loadMore, show })(ListComponent)
 )

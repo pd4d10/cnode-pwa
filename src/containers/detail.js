@@ -9,8 +9,6 @@ import Reply from '../components/reply'
 import Loading from '../components/loading'
 import styled from 'styled-components'
 
-const mapStateToProps = state => state.detail
-
 const Container = styled.div`
   padding: 12px;
   .markdown-text {
@@ -140,4 +138,4 @@ Detail.propTypes = {
   }),
 }
 
-export default withRouter(connect(mapStateToProps, { fetchTopic })(Detail))
+export default withRouter(connect(s => s.detail, { fetchTopic })(Detail))
