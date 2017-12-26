@@ -4,11 +4,10 @@ import { connect } from 'react-redux'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentCreate from 'material-ui/svg-icons/content/create'
 import throttle from 'lodash/throttle'
-
-import * as listActions from '../actions/list'
+import { load, loadMore } from '../actions/list'
 // import * as drawerActions from '../actions/drawer'
 // import * as authActions from '../actions/auth'
-import * as toastActions from '../actions/toast'
+import { show } from '../actions/toast'
 import Topic from '../components/topic'
 import Loading from '../components/loading'
 import LoadingMore from '../components/loading-more'
@@ -45,19 +44,32 @@ class ListComponent extends Component {
         !this.props.isLoadingMore &&
         !this.props.isLoading
       ) {
-        this.props.dispatch(listActions.loadMore())
+        this.props.loadMore()
       }
     }, throttleTime)
   }
 
-  componentDidMount() {
-    // if (this.props.topics.length === 0) {
-    const params = new URLSearchParams(this.props.location.search)
+  // After upgrading to React Router v4, we should handle query string manually
+  loadListData = props => {
+    const params = new URLSearchParams(props.location.search)
     const tab = params.get('tab') || 'all'
-    this.props.dispatch(listActions.load(tab))
-    // }
+    props.load(tab)
+  }
+
+  componentDidMount() {
+    this.loadListData(this.props)
     // this.props.dispatch(authActions.load())
     window.addEventListener('scroll', this.loadMore)
+  }
+
+  // When click drawer item, there are two cases:
+  // 1. Tag is same, close drawer and do nothing
+  // 2. Tag is different, navigator to new tag URL, and refresh data
+  // Once it was implemented in actions, now move it to component
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.search !== this.props.location.search) {
+      this.loadListData(nextProps)
+    }
   }
 
   componentWillUnmount() {
@@ -88,7 +100,7 @@ class ListComponent extends Component {
             right: 20,
             bottom: 20,
           }}
-          onClick={() => props.dispatch(toastActions.show('发贴'))}
+          onClick={() => props.show('发贴')}
         >
           <ContentCreate />
         </FloatingActionButton>
@@ -106,7 +118,9 @@ ListComponent.propTypes = {
       tab: PropTypes.string,
     }).isRequired,
   }).isRequired,
-  dispatch: PropTypes.func.isRequired,
+  load: PropTypes.func.isRequired,
+  loadMore: PropTypes.func.isRequired,
+  show: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => {
@@ -119,4 +133,6 @@ const mapStateToProps = state => {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(ListComponent))
+export default withRouter(
+  connect(mapStateToProps, { load, loadMore, show })(ListComponent)
+)
