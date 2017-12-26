@@ -24,6 +24,7 @@ import * as listActions from '../actions/list'
 // import * as messageActions from '../actions/message'
 // import * as authActions from '../actions/auth'
 import * as toastActions from '../actions/toast'
+import { withRouter } from 'react-router-dom'
 
 const iconsMap = {
   all: IconAll,
@@ -35,30 +36,31 @@ const iconsMap = {
   about: IconAbout,
 }
 
-const Item = pure(props => {
-  const Icon = iconsMap[props.tab]
+const Item = p => {
+  const Icon = iconsMap[p.tab]
   return (
-    <ListItem
-      leftIcon={
-        <Icon
-          style={
-            props.activeItem[props.tab] ? { fill: utils.colors.primary } : {}
-          }
-        />
-      }
-      primaryText={utils.tabsMap[props.tab]}
-      onClick={() => props.dispatch(listActions.load(props.tab))}
-      innerDivStyle={
-        props.activeItem[props.tab]
-          ? {
-              color: utils.colors.primary,
-              backgroundColor: utils.colors.avatarBackground,
-            }
-          : {}
-      }
-    />
+    <Link to={`/?tab=${p.tab}`}>
+      <ListItem
+        leftIcon={
+          <Icon
+            style={p.activeItem[p.tab] ? { fill: utils.colors.primary } : {}}
+          />
+        }
+        primaryText={utils.tabsMap[p.tab]}
+        // onClick={() => props.dispatch(listActions.load(props.tab))}
+        // onClick
+        innerDivStyle={
+          p.activeItem[p.tab]
+            ? {
+                color: utils.colors.primary,
+                backgroundColor: utils.colors.avatarBackground,
+              }
+            : {}
+        }
+      />
+    </Link>
   )
-})
+}
 
 Item.propTypes = {
   tab: PropTypes.string.isRequired,
@@ -129,4 +131,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(MyDrawer)
+export default withRouter(connect(mapStateToProps)(MyDrawer))

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import TimeAgo from 'timeago-react'
 import Helmet from 'react-helmet'
-
+import { withRouter } from 'react-router-dom'
 import { fetchTopic } from '../actions/detail'
 import Reply from '../components/reply'
 import Loading from '../components/loading'
@@ -140,4 +140,4 @@ Detail.propTypes = {
   }),
 }
 
-export default connect(mapStateToProps, { fetchTopic })(Detail)
+export default withRouter(connect(mapStateToProps, { fetchTopic })(Detail))

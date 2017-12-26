@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 const Message = props => (
   <div>
@@ -28,4 +29,4 @@ Message.propTypes = {
 
 const mapStateToProps = state => state.message
 
-export default connect(mapStateToProps)(Message)
+export default withRouter(connect(mapStateToProps)(Message))

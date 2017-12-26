@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import CircularProgress from 'material-ui/CircularProgress'
 import { Tabs, Tab } from 'material-ui/Tabs'
+import { withRouter } from 'react-router-dom'
 import { fetchUser } from '../actions/user'
 import Topic from '../components/topic'
 
@@ -52,4 +53,4 @@ User.propTypes = {
 
 const mapStateToProps = state => state.user
 
-export default connect(mapStateToProps)(User)
+export default withRouter(connect(mapStateToProps)(User))

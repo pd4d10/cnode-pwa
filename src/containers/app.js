@@ -4,7 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { connect } from 'react-redux'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import Helmet from 'react-helmet'
-
+import { withRouter } from 'react-router-dom'
 import { colors, tabsMap } from '../utils'
 import AppBar from '../components/app-bar'
 import Login from './login'
@@ -47,27 +47,28 @@ const muiTheme = getMuiTheme({
   },
 })
 
-const App = props => (
-  <MuiThemeProvider muiTheme={muiTheme}>
-    <main>
-      <Helmet titleTemplate="%s - CNode PWA" defaultTitle="CNode PWA" />
-      <Login />
-      <Drawer title={props.title} activeItem={props.drawerActiveItem} />
-      <Toast
-        isVisible={props.isToastVisible}
-        feature={props.feature}
-        close={() => props.dispatch(toastActions.hide())}
-      />
-      <AppBar
-        title={props.title}
-        isListPage={props.isListPage}
-        dispatch={props.dispatch}
-      />
-      <div style={{ marginTop: '56px' }}>{props.children}</div>
-      <ErrorToast />
-    </main>
-  </MuiThemeProvider>
-)
+const App = p => {
+  const title = getTitle(p.location)
+  const isListPage = p.location.pathname === '/'
+
+  return (
+    <MuiThemeProvider muiTheme={muiTheme}>
+      <main>
+        <Helmet titleTemplate="%s - CNode PWA" defaultTitle="CNode PWA" />
+        <Login />
+        <Drawer title={title} activeItem={getDrawerActiveItem(p.location)} />
+        <Toast
+          isVisible={p.isToastVisible}
+          feature={p.feature}
+          close={() => p.dispatch(toastActions.hide())}
+        />
+        <AppBar title={title} isListPage={isListPage} dispatch={p.dispatch} />
+        <div style={{ marginTop: '56px' }}>{p.children}</div>
+        <ErrorToast />
+      </main>
+    </MuiThemeProvider>
+  )
+}
 
 App.propTypes = {
   title: PropTypes.string.isRequired,
@@ -78,10 +79,9 @@ App.propTypes = {
   isToastVisible: PropTypes.bool.isRequired,
 }
 
-function getTitle(state) {
-  // TODO: Get params from router
-  const { pathname } = window.location
-  const params = new URLSearchParams(window.location.search)
+function getTitle(location) {
+  const { pathname } = location
+  const params = new URLSearchParams(location.search)
   const tab = params.get('tab') || 'all'
 
   switch (pathname) {
@@ -99,15 +99,9 @@ function getTitle(state) {
   }
 }
 
-function getIsListPage() {
-  return window.location.pathname === '/'
-  // TODO:
-  // return state.routing.locationBeforeTransitions.pathname === '/'
-}
-
-function getActiveItem() {
-  const { pathname } = window.location
-  const params = new URLSearchParams(window.location.search)
+function getActiveItem(location) {
+  const { pathname } = location
+  const params = new URLSearchParams(location.search)
   const tab = params.get('tab') || 'all'
   switch (pathname) {
     case '/':
@@ -125,7 +119,7 @@ function getActiveItem() {
   }
 }
 
-function getDrawerActiveItem() {
+function getDrawerActiveItem(location) {
   const activeItem = {
     all: false,
     good: false,
@@ -137,20 +131,17 @@ function getDrawerActiveItem() {
     about: false,
   }
 
-  const key = getActiveItem()
+  const key = getActiveItem(location)
   activeItem[key] = true
 
   return activeItem
 }
 
 const mapStateToProps = state => ({
-  isListPage: getIsListPage(state),
-  title: getTitle(state),
   input: state.auth.input,
   isLoginVisible: state.auth.isVisible,
   isToastVisible: state.toast.isVisible,
   feature: state.toast.feature,
-  drawerActiveItem: getDrawerActiveItem(),
 })
 
-export default connect(mapStateToProps)(App)
+export default withRouter(connect(mapStateToProps)(App))

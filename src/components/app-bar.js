@@ -1,35 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import MUIAppBar from 'material-ui/AppBar'
+import { withRouter } from 'react-router-dom'
 import IconButton from 'material-ui/IconButton'
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
-// import { push, goBack } from 'react-router-redux'
 import * as drawerActions from '../actions/drawer'
 
-// Show drawer on click
-// For list page
-const handleShowDrawer = dispatch => e => {
-  // https://github.com/callemall/material-ui/issues/5070#issuecomment-244127708
-  e.preventDefault()
-  dispatch(drawerActions.show())
-}
-
-// Go back on click
-// For other pages
-const handleGoBack = dispatch => e => {
-  e.preventDefault()
-
-  // If no history, go to list page
-  if (window.history.length === 1) {
-    // dispatch(push('/'))
-    return
-  }
-
-  // dispatch(goBack())
-}
-
-const AppBar = props => (
+const AppBar = p => (
   <MUIAppBar
     style={{
       position: 'fixed',
@@ -45,9 +22,10 @@ const AppBar = props => (
       height: '56px',
       lineHeight: '56px',
     }}
-    title={props.title}
+    title={p.title}
     iconElementLeft={
-      props.isListPage ? (
+      // Have to be a conditional operator instead of disjunction
+      p.isListPage ? (
         undefined
       ) : (
         <IconButton>
@@ -55,11 +33,18 @@ const AppBar = props => (
         </IconButton>
       )
     }
-    onLeftIconButtonTouchTap={
-      props.isListPage
-        ? handleShowDrawer(props.dispatch)
-        : handleGoBack(props.dispatch)
-    }
+    onLeftIconButtonTouchTap={e => {
+      e.preventDefault()
+      if (p.isListPage) {
+        // https://github.com/callemall/material-ui/issues/5070#issuecomment-244127708
+        p.dispatch(drawerActions.show())
+      } else if (p.history.length === 1) {
+        // If no history, go to list page
+        p.history.push('/')
+      } else {
+        p.history.goBack()
+      }
+    }}
   />
 )
 
@@ -69,4 +54,4 @@ AppBar.propTypes = {
   isListPage: PropTypes.bool.isRequired,
 }
 
-export default connect()(AppBar)
+export default withRouter(AppBar)

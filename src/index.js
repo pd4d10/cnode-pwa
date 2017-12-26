@@ -2,16 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
-// import {
-//   Router,
-//   Route,
-//   IndexRoute,
-//   applyRouterMiddleware,
-//   browserHistory,
-// } from 'react-router'
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-// import { useScroll } from 'react-router-scroll'
-// import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
+import { HashRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import thunk from 'redux-thunk'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import App from './containers/app'
@@ -34,12 +25,7 @@ injectTapEventPlugin()
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose // eslint-disable-line
 
-const store = createStore(
-  reducers,
-  composeEnhancers(applyMiddleware(/*routerMiddleware(browserHistory),*/ thunk))
-)
-
-// const history = syncHistoryWithStore(browserHistory, store)
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)))
 
 if (!__PROD__) {
   // window.Perf = require('react-addons-perf') // eslint-disable-line
@@ -48,7 +34,7 @@ if (!__PROD__) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router /*history={history} render={applyRouterMiddleware(useScroll())}*/>
+    <Router>
       <App>
         <Switch>
           <Route exact path="/" component={List} />

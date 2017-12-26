@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
-
+import { withRouter } from 'react-router-dom'
 import * as authActions from '../actions/auth'
 // import { colors } from '../../utils'
 // import style from './login.css'
@@ -53,4 +53,4 @@ Login.propTypes = {
 
 const mapStateToProps = state => state.auth
 
-export default connect(mapStateToProps)(Login)
+export default withRouter(connect(mapStateToProps)(Login))

@@ -14,6 +14,7 @@ import Loading from '../components/loading'
 import LoadingMore from '../components/loading-more'
 import * as utils from '../utils'
 import styled from 'styled-components'
+import { withRouter } from 'react-router-dom'
 
 const Item = styled.li`
   border-top: 1px solid #f0f0f0;
@@ -50,11 +51,11 @@ class ListComponent extends Component {
   }
 
   componentDidMount() {
-    if (this.props.topics.length === 0) {
-      const params = new URLSearchParams(this.props.location.search)
-      const tab = params.get('tab') || 'all'
-      this.props.dispatch(listActions.load(tab))
-    }
+    // if (this.props.topics.length === 0) {
+    const params = new URLSearchParams(this.props.location.search)
+    const tab = params.get('tab') || 'all'
+    this.props.dispatch(listActions.load(tab))
+    // }
     // this.props.dispatch(authActions.load())
     window.addEventListener('scroll', this.loadMore)
   }
@@ -118,4 +119,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(ListComponent)
+export default withRouter(connect(mapStateToProps)(ListComponent))
