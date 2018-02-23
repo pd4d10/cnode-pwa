@@ -29,6 +29,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "cp now.json build && now --public deploy build && now alias"
+    "predeploy": "npm run build && cp now.json build",
+    "deploy": "now --public deploy build && now alias"
   }
 }
