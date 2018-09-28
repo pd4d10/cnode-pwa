@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import Dialog from 'material-ui/Dialog'
-import TextField from 'material-ui/TextField'
-import RaisedButton from 'material-ui/RaisedButton'
+import Dialog from '@material-ui/core/Dialog'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+
 import { withRouter } from 'react-router-dom'
 import * as authActions from '../actions/auth'
 // import { colors } from '../../utils'
@@ -32,16 +33,15 @@ const Login = props => (
     open={props.isVisible}
     onRequestClose={() => props.dispatch(authActions.hideLogin())}
   >
-    请在 PC 端登录后，点击右上角的<strong>设置</strong>进入设置页面获取 Access
-    Token
+    请在 PC 端登录后，点击右上角的
+    <strong>设置</strong>
+    进入设置页面获取 Access Token
     <TextField
       value={props.input}
       floatingLabelText="Access Token"
       onChange={e => props.dispatch(authActions.inputToken(e.target.value))}
     />
-    <RaisedButton onClick={() => props.dispatch(authActions.login())}>
-      登录
-    </RaisedButton>
+    <Button onClick={() => props.dispatch(authActions.login())}>登录</Button>
   </Dialog>
 )
 

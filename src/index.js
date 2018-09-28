@@ -3,8 +3,16 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+
+import BottomNavigation from '@material-ui/core/BottomNavigation'
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
+import Icon from '@material-ui/core/Icon'
+import RestoreIcon from '@material-ui/icons/Restore'
+import FavoriteIcon from '@material-ui/icons/Favorite'
+import LocationOnIcon from '@material-ui/icons/LocationOn'
+
 import thunk from 'redux-thunk'
-import injectTapEventPlugin from 'react-tap-event-plugin'
+// import injectTapEventPlugin from 'react-tap-event-plugin'
 import App from './containers/app'
 import List from './containers/list'
 import Detail from './containers/detail'
@@ -21,7 +29,7 @@ const __PROD__ = process.env.NODE_ENV === 'production' // eslint-disable-line
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
-injectTapEventPlugin()
+// injectTapEventPlugin()
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose // eslint-disable-line
 
@@ -44,6 +52,32 @@ ReactDOM.render(
           <Route path="/about" component={About} />
           <Route component={NotFound} />
         </Switch>
+
+        {/* <BottomNavigation
+          value="abc"
+          onChange={() => {}}
+        >
+          <BottomNavigationAction
+            label="Recents"
+            value="recents"
+            icon={<RestoreIcon />}
+          />
+          <BottomNavigationAction
+            label="Favorites"
+            value="favorites"
+            icon={<FavoriteIcon />}
+          />
+          <BottomNavigationAction
+            label="Nearby"
+            value="nearby"
+            icon={<LocationOnIcon />}
+          />
+          <BottomNavigationAction
+            label="Folder"
+            value="folder"
+            icon={<Icon>folder</Icon>}
+          />
+        </BottomNavigation> */}
       </App>
     </Router>
   </Provider>,

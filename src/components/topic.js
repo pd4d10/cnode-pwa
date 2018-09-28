@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import pure from 'recompose/pure'
-import ListItem from 'material-ui/List/ListItem'
+import ListItem from '@material-ui/core/ListItem'
 import TimeAgo from 'timeago-react'
 // import { push } from 'react-router-redux'
 import styled from 'styled-components'
@@ -88,8 +88,8 @@ const Topic = props => (
                   color: '#b4b4b4',
                 }}
               >
-                <span style={{ color: '#9e78c0' }}>{props.reply_count} </span>回复
-                / <span>{props.visit_count}</span> 浏览
+                <span style={{ color: '#9e78c0' }}>{props.reply_count} </span>
+                回复 / <span>{props.visit_count}</span> 浏览
               </div>
             </div>
             <TimeAgo

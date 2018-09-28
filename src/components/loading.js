@@ -1,6 +1,4 @@
 import React from 'react'
-// import { fill } from 'lodash'
-import CircularProgress from 'material-ui/CircularProgress'
 import { colors } from '../utils'
 import styled from 'styled-components'
 
@@ -60,11 +58,7 @@ const Unused = styled.div`
   }
 `
 
-const Loading = () => (
-  <Container>
-    <CircularProgress color={colors.primary} />
-  </Container>
-)
+const Loading = () => <Container />
 
 /* const arr = fill(Array(10), 0)
 

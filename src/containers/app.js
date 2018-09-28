@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import Helmet from 'react-helmet'
 import { withRouter } from 'react-router-dom'
 import { colors, tabsMap } from '../utils'
@@ -32,7 +31,7 @@ import * as toastActions from '../actions/toast'
 // This replaces the textColor value on the palette
 // and then update the keys for each component that depends on it.
 // More on Colors: http://www.material-ui.com/#/customization/colors
-const muiTheme = getMuiTheme({
+const theme = createMuiTheme({
   palette: {
     // textColor: green800,
   },
@@ -52,7 +51,7 @@ const App = p => {
   const isListPage = p.location.pathname === '/'
 
   return (
-    <MuiThemeProvider muiTheme={muiTheme}>
+    <MuiThemeProvider theme={theme}>
       <main>
         <Helmet titleTemplate="%s - CNode PWA" defaultTitle="CNode PWA" />
         <Login />

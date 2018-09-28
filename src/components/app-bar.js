@@ -1,57 +1,49 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import MUIAppBar from 'material-ui/AppBar'
+import MUIAppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
+import AccountCircle from '@material-ui/icons/AccountCircle'
+import Switch from '@material-ui/core/Switch'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormGroup from '@material-ui/core/FormGroup'
+import MenuItem from '@material-ui/core/MenuItem'
+import Menu from '@material-ui/core/Menu'
 import { withRouter } from 'react-router-dom'
-import IconButton from 'material-ui/IconButton'
-import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
+import { ArrowBack } from '@material-ui/icons'
 import * as drawerActions from '../actions/drawer'
 
-const AppBar = p => (
-  <MUIAppBar
-    style={{
-      position: 'fixed',
-      top: 0,
-    }}
-    iconStyleLeft={{
-      width: '44px',
-      height: '44px',
-      marginTop: '4px',
-    }}
-    titleStyle={{
-      fontSize: '22px',
-      height: '56px',
-      lineHeight: '56px',
-    }}
-    title={p.title}
-    iconElementLeft={
-      // Have to be a conditional operator instead of disjunction
-      p.isListPage ? (
-        undefined
-      ) : (
-        <IconButton>
-          <ArrowBack />
-        </IconButton>
-      )
-    }
-    onLeftIconButtonTouchTap={e => {
-      e.preventDefault()
-      if (p.isListPage) {
-        // https://github.com/callemall/material-ui/issues/5070#issuecomment-244127708
-        p.dispatch(drawerActions.show())
-      } else if (p.history.length === 1) {
-        // If no history, go to list page
-        p.history.push('/')
-      } else {
-        p.history.goBack()
-      }
-    }}
-  />
+const AppBar = props => (
+  <MUIAppBar position="fixed">
+    <Toolbar>
+      <IconButton
+        color="inherit"
+        aria-label="menu"
+        style={{
+          marginLeft: -12,
+          marginRight: 20,
+        }}
+        onClick={() => {
+          if (props.isListPage) {
+            // https://github.com/callemall/material-ui/issues/5070#issuecomment-244127708
+            props.dispatch(drawerActions.show())
+          } else if (props.history.length === 1) {
+            // If no history, go to list page
+            props.history.push('/')
+          } else {
+            props.history.goBack()
+          }
+        }}
+      >
+        {props.isListPage ? <MenuIcon /> : <ArrowBack />}
+      </IconButton>
+      <Typography variant="title" color="inherit" style={{ flexGrow: 1 }}>
+        {props.title}
+      </Typography>
+    </Toolbar>
+  </MUIAppBar>
 )
-
-AppBar.propTypes = {
-  title: PropTypes.string.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  isListPage: PropTypes.bool.isRequired,
-}
 
 export default withRouter(AppBar)

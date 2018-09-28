@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import FloatingActionButton from 'material-ui/FloatingActionButton'
-import ContentCreate from 'material-ui/svg-icons/content/create'
-// import ListItem from 'material-ui/List/ListItem'
+import Button from '@material-ui/core/Button'
 import throttle from 'lodash/throttle'
 import { load, loadMore } from '../actions/list'
 // import * as drawerActions from '../actions/drawer'
@@ -106,7 +104,7 @@ class ListComponent extends Component {
           </ul>
         )}
         <LoadingMore isVisible={props.isLoadingMore} />
-        <FloatingActionButton
+        <Button
           style={{
             zIndex: 2,
             position: 'fixed',
@@ -115,8 +113,9 @@ class ListComponent extends Component {
           }}
           onClick={() => props.show('发贴')}
         >
-          <ContentCreate />
-        </FloatingActionButton>
+          {/* <ContentCreate /> */}
+          add
+        </Button>
       </div>
     )
   }
@@ -137,5 +136,8 @@ ListComponent.propTypes = {
 }
 
 export default withRouter(
-  connect(s => s.list, { load, loadMore, show })(ListComponent)
+  connect(
+    s => s.list,
+    { load, loadMore, show }
+  )(ListComponent)
 )
