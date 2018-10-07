@@ -21,9 +21,9 @@ import NotFound from './containers/not-found'
 // import Message from './containers/message'
 import About from './containers/about'
 import reducers from './reducers'
-import registerServiceWorker from './registerServiceWorker'
 import 'github-markdown-css'
 import './index.css'
+import * as serviceWorker from './serviceWorker'
 
 const __PROD__ = process.env.NODE_ENV === 'production' // eslint-disable-line
 
@@ -84,4 +84,7 @@ ReactDOM.render(
   document.getElementById('root')
 )
 
-registerServiceWorker()
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: http://bit.ly/CRA-PWA
+serviceWorker.register()
