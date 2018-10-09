@@ -11,7 +11,7 @@ import Login from './login'
 import Drawer from './drawer'
 import Toast from '../components/unfinished'
 import ErrorToast from './toast'
-import * as toastActions from '../actions/toast'
+import { ListProvider, DrawerProvider } from '../contexts'
 
 // :global(.back-enter) {
 //   opacity: 0;
@@ -44,26 +44,37 @@ const theme = createMuiTheme({
   },
 })
 
-const App = p => {
-  const title = getTitle(p.location)
-  const isListPage = p.location.pathname === '/'
+const App = props => {
+  const title = getTitle(props.location)
+  const isListPage = props.location.pathname === '/'
 
   return (
-    <MuiThemeProvider theme={theme}>
-      <main>
-        <Helmet titleTemplate="%s - CNode PWA" defaultTitle="CNode PWA" />
-        <Login />
-        <Drawer title={title} activeItem={getDrawerActiveItem(p.location)} />
-        <Toast
-          isVisible={p.isToastVisible}
-          feature={p.feature}
-          close={() => p.dispatch(toastActions.hide())}
-        />
-        <AppBar title={title} isListPage={isListPage} dispatch={p.dispatch} />
-        <div style={{ marginTop: '56px' }}>{p.children}</div>
-        <ErrorToast />
-      </main>
-    </MuiThemeProvider>
+    <ListProvider>
+      <DrawerProvider>
+        <MuiThemeProvider theme={theme}>
+          <main>
+            <Helmet titleTemplate="%s - CNode PWA" defaultTitle="CNode PWA" />
+            <Login />
+            <Drawer
+              title={title}
+              activeItem={getDrawerActiveItem(props.location)}
+            />
+            <Toast
+              isVisible={props.isToastVisible}
+              feature={props.feature}
+              close={() => {}}
+            />
+            <AppBar
+              title={title}
+              isListPage={isListPage}
+              dispatch={props.dispatch}
+            />
+            <div style={{ marginTop: '56px' }}>{props.children}</div>
+            <ErrorToast />
+          </main>
+        </MuiThemeProvider>
+      </DrawerProvider>
+    </ListProvider>
   )
 }
 

@@ -1,13 +1,14 @@
-import React, { Component } from 'react'
+// @flow
+import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import TimeAgo from 'timeago-react'
 import Helmet from 'react-helmet'
 import { withRouter } from 'react-router-dom'
-import { fetchTopic } from '../actions/detail'
 import Reply from '../components/reply'
 import Loading from '../components/loading'
 import style from './detail.module.css'
+import { fetchAPI } from '../utils'
 
 export const Avatar = props => <img className={style.avatar} {...props} />
 
@@ -15,23 +16,74 @@ export const Extra = props => <div className={style.extra} {...props} />
 
 export const Time = props => <div className={style.time} {...props} />
 
-class Detail extends Component {
+type DetailProps = {}
+
+export type Author = {
+  loginname: string,
+  avatar_url: string,
+}
+
+type DetailState = {
+  topic: ?{
+    id: string,
+    author_id: string,
+    tab: string,
+    content: string,
+    title: string,
+    last_reply_at: string,
+    good: boolean,
+    top: boolean,
+    reply_count: number,
+    visit_count: number,
+    create_at: string,
+    author: Author,
+    replies: {
+      id: string,
+      author: Author,
+      content: string,
+      ups: string[],
+      create_at: string,
+      reply_id: string,
+      is_uped: boolean,
+    }[],
+    is_collect: boolean,
+  },
+  isLoading: boolean,
+}
+
+class Detail extends React.Component<{}, DetailState> {
+  state = {
+    topic: null,
+    isLoading: false,
+  }
+
+  fetchTopic = async () => {
+    try {
+      this.setState({ isLoading: true })
+      const { id } = this.props.match.params
+      const { data } = await fetchAPI(`/topic/${id}`)
+      this.setState({ topic: data })
+    } finally {
+      this.setState({ isLoading: false })
+    }
+  }
+
   componentDidMount() {
-    this.props.fetchTopic(this.props.match.params.id)
+    this.fetchTopic()
   }
 
   render() {
-    const { props } = this
+    const { topic, isLoading } = this.state
     return (
       <div>
-        {props.isLoading || !props.topic ? (
+        {isLoading || !topic ? (
           <Loading />
         ) : (
-          <div>
-            <Helmet title={props.topic.title} />
+          <>
+            <Helmet title={topic.title} />
             <div className={style.container}>
               <div style={{ fontSize: 20, marginBottom: 12 }}>
-                {props.topic.title}
+                {topic.title}
               </div>
               <div
                 style={{
@@ -42,12 +94,12 @@ class Detail extends Component {
                 <div>
                   <img
                     className={style.avatar}
-                    src={props.topic.author.avatar_url}
-                    alt={props.topic.author.loginnam}
+                    src={topic.author.avatar_url}
+                    alt={topic.author.loginname}
                   />
                 </div>
                 <div className={style.extra}>
-                  <div>{props.topic.author.loginname}</div>
+                  <div>{topic.author.loginname}</div>
                   <div
                     style={{
                       fontSize: 12,
@@ -57,14 +109,14 @@ class Detail extends Component {
                     <span>
                       创建于
                       <TimeAgo
-                        datetime={props.topic.create_at}
+                        datetime={topic.create_at}
                         locale="zh_CN"
                         live={false}
                         style={{ color: '#838383' }}
                       />
                     </span>
                     <span style={{ marginLeft: '6px' }}>
-                      {props.topic.visit_count}
+                      {topic.visit_count}
                       次浏览
                     </span>
                   </div>
@@ -72,7 +124,7 @@ class Detail extends Component {
               </div>
               <div
                 className="markdown-body"
-                dangerouslySetInnerHTML={{ __html: props.topic.content }}
+                dangerouslySetInnerHTML={{ __html: topic.content }}
               />
               <div>
                 <div
@@ -81,37 +133,20 @@ class Detail extends Component {
                     padding: 6,
                   }}
                 >
-                  {props.topic.reply_count
-                    ? `共 ${props.topic.reply_count} 条回复`
+                  {topic.reply_count
+                    ? `共 ${topic.reply_count} 条回复`
                     : '暂无回复'}
                 </div>
-                {props.topic.replies.map(reply => (
+                {topic.replies.map(reply => (
                   <Reply {...reply} key={reply.id} />
                 ))}
               </div>
             </div>
-          </div>
+          </>
         )}
       </div>
     )
   }
 }
 
-Detail.propTypes = {
-  // isLoading: PropTypes.bool.isRequired,
-  params: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-  }).isRequired,
-  dispatch: PropTypes.func.isRequired,
-  topic: PropTypes.shape({
-    // eslint-disable-line
-    content: PropTypes.string.isRequired,
-  }),
-}
-
-export default withRouter(
-  connect(
-    s => s.detail,
-    { fetchTopic },
-  )(Detail),
-)
+export default withRouter(Detail)

@@ -25,11 +25,6 @@ import {
 } from '@material-ui/icons'
 
 import * as utils from '../utils'
-import * as drawerActions from '../actions/drawer'
-import * as listActions from '../actions/list'
-// import * as messageActions from '../actions/message'
-// import * as authActions from '../actions/auth'
-import * as toastActions from '../actions/toast'
 import { withRouter } from 'react-router-dom'
 
 const Item = props => {
@@ -78,20 +73,9 @@ Item.propTypes = {
 }
 
 const MyDrawer = props => (
-  <SwipeableDrawer
-    open={props.isVisible}
-    onOpen={() => {
-      props.dispatch(drawerActions.show())
-    }}
-    onClose={() => {
-      props.dispatch(drawerActions.hide())
-    }}
-  >
+  <SwipeableDrawer open={props.isVisible} onOpen={() => {}} onClose={() => {}}>
     <List>
-      <ListItem
-        button
-        onClick={() => props.dispatch(toastActions.show('登录'))}
-      >
+      <ListItem button>
         <ListItemIcon>
           <Avatar src={props.avatar ? props.avatar : null}>
             {props.avatar || <Person />}
@@ -112,7 +96,7 @@ const MyDrawer = props => (
       <Divider />
       <Divider />
       <Link to="/about">
-        <ListItem button onClick={() => props.dispatch(drawerActions.hide())}>
+        <ListItem button>
           <ListItemIcon>
             <Info />
           </ListItemIcon>

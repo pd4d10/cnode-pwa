@@ -6,7 +6,6 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
 import { withRouter } from 'react-router-dom'
-import * as authActions from '../actions/auth'
 // import { colors } from '../../utils'
 // import style from './login.css'
 
@@ -28,10 +27,9 @@ import * as authActions from '../actions/auth'
 const Login = props => (
   <Dialog
     // title="登录"
-    // actions={actions}
     modal={false}
     open={props.isVisible}
-    onRequestClose={() => props.dispatch(authActions.hideLogin())}
+    // onRequestClose={() => props.dispatch(authActions.hideLogin())}
   >
     请在 PC 端登录后，点击右上角的
     <strong>设置</strong>
@@ -39,9 +37,9 @@ const Login = props => (
     <TextField
       value={props.input}
       floatingLabelText="Access Token"
-      onChange={e => props.dispatch(authActions.inputToken(e.target.value))}
+      // onChange={e => props.dispatch(authActions.inputToken(e.target.value))}
     />
-    <Button onClick={() => props.dispatch(authActions.login())}>登录</Button>
+    <Button onClick={() => {}}>登录</Button>
   </Dialog>
 )
 

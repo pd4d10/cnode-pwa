@@ -7,7 +7,7 @@ export const colors = {
 }
 
 export const tabsMap = {
-  all: '全部',
+  all: 'CNode 社区',
   good: '精华',
   share: '分享',
   ask: '问答',

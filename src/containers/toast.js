@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-// import * as toastActions from '../../actions/error-toast'
-
 /* const Toast = props => (
   <Snackbar
     open={props.isVisible}

@@ -1,19 +1,51 @@
-import React, { Component } from 'react'
+// @flow
+import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import { withRouter } from 'react-router-dom'
-import { fetchUser } from '../actions/user'
 import Topic from '../components/topic'
+import { fetchAPI } from '../utils'
+import type { Author } from './detail'
 
-class User extends Component {
+type RecentTopics = {
+  id: string,
+  author: Author,
+  title: string,
+  last_reply_at: string,
+}
+
+type UserState = {
+  data: ?{
+    loginname: string,
+    avatar_url: string,
+    githubUsername: string,
+    create_at: string,
+    score: number,
+    recent_topics: RecentTopics[],
+    recent_replies: RecentTopics[],
+  },
+  isLoading: boolean,
+}
+
+class User extends React.Component<{}, UserState> {
+  state = {
+    data: null,
+    isLoading: false,
+  }
+
+  fetchUser = async () => {
+    const { data } = await fetchAPI(`/user/${this.props.params.name}`)
+    this.setState({ data })
+  }
+
   componentDidMount() {
-    this.props.dispatch(fetchUser(this.props.params.name))
+    this.fetchUser()
   }
 
   render() {
-    const { data, isLoading } = this.props
+    const { data, isLoading } = this.state
     return (
       <div>
         {isLoading ? (
@@ -46,19 +78,4 @@ class User extends Component {
   }
 }
 
-User.propTypes = {
-  params: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  }).isRequired,
-  data: PropTypes.shape({
-    // eslint-disable-line
-    avatar_url: PropTypes.string.isRequired,
-    loginname: PropTypes.string.isRequired,
-  }),
-  isLoading: PropTypes.bool.isRequired,
-  dispatch: PropTypes.func.isRequired,
-}
-
-const mapStateToProps = state => state.user
-
-export default withRouter(connect(mapStateToProps)(User))
+export default withRouter(User)
