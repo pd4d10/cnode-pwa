@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
+import { teal } from '@material-ui/core/colors'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
 import { withRouter } from 'react-router-dom'
@@ -28,12 +29,9 @@ import * as toastActions from '../actions/toast'
 //   }
 // }
 
-// This replaces the textColor value on the palette
-// and then update the keys for each component that depends on it.
-// More on Colors: http://www.material-ui.com/#/customization/colors
 const theme = createMuiTheme({
   palette: {
-    // textColor: green800,
+    primary: teal,
   },
   appBar: {
     color: colors.background,

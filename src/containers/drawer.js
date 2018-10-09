@@ -4,19 +4,25 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import pure from 'recompose/pure'
 import Avatar from '@material-ui/core/Avatar'
-import Drawer from '@material-ui/core/Drawer'
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
-import Divider from '@material-ui/core/Divider'
-import DefaultAvatar from '@material-ui/icons/Delete'
 
-import IconAll from '@material-ui/icons/Delete'
-import IconGood from '@material-ui/icons/Delete'
-import IconShare from '@material-ui/icons/Delete'
-import IconAsk from '@material-ui/icons/Delete'
-import IconJob from '@material-ui/icons/Delete'
-import IconMessage from '@material-ui/icons/Delete'
-import IconAbout from '@material-ui/icons/Delete'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import Divider from '@material-ui/core/Divider'
+
+import {
+  Person,
+  Forum,
+  ThumbUp,
+  Share,
+  LiveHelp,
+  SwitchCamera,
+  Notifications,
+  Settings,
+  Info,
+} from '@material-ui/icons'
 
 import * as utils from '../utils'
 import * as drawerActions from '../actions/drawer'
@@ -26,38 +32,41 @@ import * as listActions from '../actions/list'
 import * as toastActions from '../actions/toast'
 import { withRouter } from 'react-router-dom'
 
-const iconsMap = {
-  all: IconAll,
-  good: IconGood,
-  share: IconShare,
-  ask: IconAsk,
-  job: IconJob,
-  message: IconMessage,
-  about: IconAbout,
-}
+const Item = props => {
+  const Icon = {
+    all: Forum,
+    good: ThumbUp,
+    share: Share,
+    ask: LiveHelp,
+    job: SwitchCamera,
+    message: Notifications,
+    settings: Settings,
+    about: Info,
+  }[props.tab]
 
-const Item = p => {
-  const Icon = iconsMap[p.tab]
   return (
-    <Link to={`/?tab=${p.tab}`}>
+    <Link to={`/?tab=${props.tab}`}>
       <ListItem
-        leftIcon={
-          <Icon
-            style={p.activeItem[p.tab] ? { fill: utils.colors.primary } : {}}
-          />
-        }
-        primaryText={utils.tabsMap[p.tab]}
+        button
         // onClick={() => props.dispatch(listActions.load(props.tab))}
-        // onClick
         innerDivStyle={
-          p.activeItem[p.tab]
+          props.activeItem[props.tab]
             ? {
                 color: utils.colors.primary,
                 backgroundColor: utils.colors.avatarBackground,
               }
             : {}
         }
-      />
+      >
+        <ListItemIcon>
+          <Icon
+            style={
+              props.activeItem[props.tab] ? { fill: utils.colors.primary } : {}
+            }
+          />
+        </ListItemIcon>
+        <ListItemText primary={utils.tabsMap[props.tab]} />
+      </ListItem>
     </Link>
   )
 }
@@ -69,26 +78,28 @@ Item.propTypes = {
 }
 
 const MyDrawer = props => (
-  <Drawer
-    docked={false}
+  <SwipeableDrawer
     open={props.isVisible}
-    width={220}
-    onRequestChange={open =>
-      props.dispatch(open ? drawerActions.show() : drawerActions.hide())
-    }
+    onOpen={() => {
+      props.dispatch(drawerActions.show())
+    }}
+    onClose={() => {
+      props.dispatch(drawerActions.hide())
+    }}
   >
     <List>
       <ListItem
-        style={{ marginTop: '20px' }}
-        leftAvatar={
-          <Avatar
-            src={props.avatar ? props.avatar : null}
-            icon={props.avatar ? null : <DefaultAvatar />}
-          />
-        }
-        primaryText={props.name}
+        button
         onClick={() => props.dispatch(toastActions.show('登录'))}
-      />
+      >
+        <ListItemIcon>
+          <Avatar src={props.avatar ? props.avatar : null}>
+            {props.avatar || <Person />}
+          </Avatar>
+        </ListItemIcon>
+        <ListItemText primary={props.name} />
+      </ListItem>
+
       <Divider />
       {utils.tabs.map(tab => (
         <Item
@@ -101,14 +112,15 @@ const MyDrawer = props => (
       <Divider />
       <Divider />
       <Link to="/about">
-        <ListItem
-          primaryText="关于"
-          leftIcon={<IconAbout />}
-          onClick={() => props.dispatch(drawerActions.hide())}
-        />
+        <ListItem button onClick={() => props.dispatch(drawerActions.hide())}>
+          <ListItemIcon>
+            <Info />
+          </ListItemIcon>
+          <ListItemText primary="关于" />
+        </ListItem>
       </Link>
     </List>
-  </Drawer>
+  </SwipeableDrawer>
 )
 
 MyDrawer.defaultProps = {
