@@ -2,15 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Divider from '@material-ui/core/Divider'
 import TimeAgo from 'timeago-react'
-import styled from 'styled-components'
 import { Avatar, Extra, Time } from '../containers/detail'
-
-const Content = styled.div`
-  margin-top: 6px;
-  img {
-    max-width: 100%;
-  }
-`
 
 const Reply = props => (
   <div style={{ margin: '8px 0' }}>
@@ -26,8 +18,9 @@ const Reply = props => (
         </Time>
       </Extra>
     </div>
-    <Content
+    <div
       className="markdown-body"
+      style={{ marginTop: 6 }}
       dangerouslySetInnerHTML={{ __html: props.content }}
     />
     <Divider />

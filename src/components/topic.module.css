@@ -1,0 +1,45 @@
+.avatar {
+  flex-basis: 48px;
+  height: 48px;
+  margin-right: 10px;
+}
+
+.avatar img {
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+}
+
+.title {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: normal;
+  color: #333;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.content {
+  display: flex;
+  min-width: 0; /* https://stackoverflow.com/questions/34934586/white-space-nowrap-and-flexbox-did-not-work-in-chrome */
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  height: 48px;
+}
+
+.extra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tag {
+  color: #fff;
+  font-size: 12px;
+  line-height: 20px;
+  border-radius: 2px;
+  padding: 0 4px;
+  margin-right: 8px;
+}

@@ -1,87 +1,36 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import pure from 'recompose/pure'
+import { pure } from 'recompose'
 import ListItem from '@material-ui/core/ListItem'
 import TimeAgo from 'timeago-react'
-// import { push } from 'react-router-redux'
-import styled from 'styled-components'
 import { getTagFromTopic, colors } from '../utils'
-
-const Container = styled.div`
-  & h3 {
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: normal;
-    color: #333;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-
-  &:visited h3 {
-    color: #888;
-  }
-`
-
-const Avatar = styled.div`
-  flex-basis: 48px;
-  height: 48px;
-  margin-right: 10px;
-  & img {
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-  }
-`
-
-const Content = styled.div`
-  display: flex;
-  min-width: 0; /* https://stackoverflow.com/questions/34934586/white-space-nowrap-and-flexbox-did-not-work-in-chrome */
-  flex-direction: column;
-  flex-grow: 1;
-  justify-content: space-between;
-  height: 48px;
-`
-
-const Extra = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`
-
-const Tag = styled.div`
-  color: #fff;
-  background-color: ${colors.tag};
-  font-size: 12px;
-  line-height: 20px;
-  border-radius: 2px;
-  padding: 0 4px;
-  margin-right: 8px;
-`
+import style from './topic.module.css'
 
 const Topic = props => (
-  <Container>
+  <div className={style.container}>
     <Link to={`/topic/${props.id}`}>
       <ListItem innerDivStyle={{ display: 'flex', padding: '12px' }}>
-        <Avatar // eslint-disable-line
-        // onClick={(e) => {
-        //   e.preventDefault()
-        //   props.dispatch(push(`/user/${props.author.loginname}`))
-        // }}
-        >
+        <a href="javascript:" className={style.avatar}>
           <img src={props.author.avatar_url} alt={props.author.loginname} />
-        </Avatar>
-        <Content>
-          <h3>{props.title}</h3>
-          <Extra>
+        </a>
+        <div className={style.content}>
+          <h3 className={style.title}>{props.title}</h3>
+          <div className={style.extra}>
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
               }}
             >
-              <Tag>{getTagFromTopic(props)}</Tag>
+              <div
+                className={style.tag}
+                style={{
+                  backgroundColor: colors.tag,
+                }}
+              >
+                {getTagFromTopic(props)}
+              </div>
               <div
                 style={{
                   fontSize: 12,
@@ -101,11 +50,11 @@ const Topic = props => (
               locale="zh_CN"
               live={false}
             />
-          </Extra>
-        </Content>
+          </div>
+        </div>
       </ListItem>
     </Link>
-  </Container>
+  </div>
 )
 
 Topic.propTypes = {
