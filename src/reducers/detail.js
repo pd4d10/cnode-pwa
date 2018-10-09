@@ -4,7 +4,7 @@ export default function list(
   state = {
     isLoading: false,
   },
-  action
+  action,
 ) {
   switch (action.type) {
     case detailTypes.LOAD_START:

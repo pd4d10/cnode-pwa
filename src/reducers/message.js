@@ -6,7 +6,7 @@ export default function message(
     hasnot_read_messages: [],
     has_read_messages: [],
   },
-  action
+  action,
 ) {
   switch (action.type) {
     case types.LOAD_START:

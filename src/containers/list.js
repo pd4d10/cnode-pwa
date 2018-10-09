@@ -138,6 +138,6 @@ ListComponent.propTypes = {
 export default withRouter(
   connect(
     s => s.list,
-    { load, loadMore, show }
-  )(ListComponent)
+    { load, loadMore, show },
+  )(ListComponent),
 )

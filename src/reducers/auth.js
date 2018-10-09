@@ -6,7 +6,7 @@ export default function login(
     isLoading: false,
     isVisible: false,
   },
-  action
+  action,
 ) {
   switch (action.type) {
     case types.LOGIN_START:

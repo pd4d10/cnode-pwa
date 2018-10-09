@@ -138,4 +138,9 @@ Detail.propTypes = {
   }),
 }
 
-export default withRouter(connect(s => s.detail, { fetchTopic })(Detail))
+export default withRouter(
+  connect(
+    s => s.detail,
+    { fetchTopic },
+  )(Detail),
+)

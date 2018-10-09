@@ -8,7 +8,7 @@ export default function list(
   state = {
     isVisible: false,
   },
-  action
+  action,
 ) {
   switch (action.type) {
     case drawerTypes.SHOW:

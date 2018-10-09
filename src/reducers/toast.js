@@ -7,7 +7,7 @@ export default function toast(
     message: '',
     feature: '',
   },
-  action
+  action,
 ) {
   switch (action.type) {
     case toastTypes.SHOW_TOAST:

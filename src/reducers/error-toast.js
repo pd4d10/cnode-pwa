@@ -7,7 +7,7 @@ export default function errorToast(
     isVisible: false,
     message: '',
   },
-  action
+  action,
 ) {
   switch (action.type) {
     case listTypes.LOAD_FAIL:

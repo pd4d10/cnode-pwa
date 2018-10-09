@@ -7,7 +7,7 @@ export default function list(
     page: 1,
     topics: [],
   },
-  action
+  action,
 ) {
   switch (action.type) {
     case types.LOAD_START:

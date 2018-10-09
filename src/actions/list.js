@@ -23,7 +23,7 @@ export const load = (tab = 'all') => async (dispatch, getState) => {
   })
   try {
     const { data } = await fetchAPI(
-      `/topics?tab=${getCorrectTab(tab)}&limit=20`
+      `/topics?tab=${getCorrectTab(tab)}&limit=20`,
     )
     dispatch({
       type: LOAD_SUCCESS,
@@ -47,7 +47,7 @@ export const loadMore = () => async (dispatch, getState) => {
     const page = state.list.page + 1
     const { tab } = state.routing.locationBeforeTransitions.query
     const { data } = await fetchAPI(
-      `/topics?tab=${getCorrectTab(tab)}&page=${page}&limit=20`
+      `/topics?tab=${getCorrectTab(tab)}&page=${page}&limit=20`,
     )
     dispatch({
       type: LOAD_MORE_SUCCESS,

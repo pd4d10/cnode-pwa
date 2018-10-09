@@ -4,7 +4,7 @@ export default function user(
   state = {
     isLoading: false,
   },
-  action
+  action,
 ) {
   switch (action.type) {
     case userTypes.LOAD_START:
