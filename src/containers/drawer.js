@@ -1,14 +1,15 @@
 import React from 'react'
-
 import { Link } from 'react-router-dom'
 import { pure } from 'recompose'
-import Avatar from '@material-ui/core/Avatar'
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import Divider from '@material-ui/core/Divider'
+import {
+  Avatar,
+  Divider,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  SwipeableDrawer,
+} from '@material-ui/core'
 import { Person } from '@material-ui/icons'
 import * as utils from '../utils'
 import { withRouter } from 'react-router-dom'

@@ -1,6 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button } from '@material-ui/core'
+import {
+  Button,
+  AppBar,
+  Dialog,
+  Toolbar,
+  IconButton,
+  Slide,
+  Typography,
+  FormControl,
+  Input,
+  InputLabel,
+} from '@material-ui/core'
+import { Add, Close, Send } from '@material-ui/icons'
+// import MdEditor from 'react-md-editor'
 import { withRouter } from 'react-router-dom'
 import { throttle } from 'lodash-es'
 import { Topic } from '../components'
@@ -15,7 +28,15 @@ import * as types from '../types'
 //   }
 // }
 
+const Transition = props => <Slide direction="up" {...props} />
+
 class ListComponent extends React.Component<any, any> {
+  state = {
+    title: '',
+    content: '',
+    dialogVisible: false,
+  }
+
   // TODO better infinity scrolling
   loadMore = throttle(() => {
     const height = 200
@@ -88,17 +109,71 @@ class ListComponent extends React.Component<any, any> {
         {props.isLoadingMore && <div>loading more...</div>}
 
         <Button
+          variant="fab"
+          color="primary"
           style={{
-            zIndex: 2,
+            //   zIndex: 2,
             position: 'fixed',
-            right: 20,
-            bottom: 20,
+            bottom: 16,
+            right: 16,
           }}
-          onClick={() => props.show('发贴')}
+          onClick={() => {
+            this.setState({ dialogVisible: true })
+          }}
         >
-          {/* <ContentCreate /> */}
-          add
+          <Add />
         </Button>
+        <Dialog
+          fullScreen
+          open={this.state.dialogVisible}
+          // onClose={() => {
+          //   this.setState({ dialogVisible: false })
+          // }}
+          TransitionComponent={Transition}
+        >
+          <AppBar>
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                onClick={() => {
+                  this.setState({ dialogVisible: false })
+                }}
+                aria-label="close"
+              >
+                <Close />
+              </IconButton>
+              <Typography color="inherit" style={{ flexGrow: 1 }}>
+                发布话题
+              </Typography>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  this.setState({ dialogVisible: false })
+                }}
+              >
+                <Send />
+              </Button>
+            </Toolbar>
+          </AppBar>
+          <div style={{ marginTop: 56 }}>
+            <FormControl fullWidth>
+              <InputLabel htmlFor="title">标题</InputLabel>
+              <Input
+                id="title"
+                value={this.state.title}
+                onChange={e => {
+                  this.setState({ title: e.target.value })
+                }}
+              />
+            </FormControl>
+            {/* <MdEditor
+              value={this.state.content}
+              onChange={content => {
+                this.setState({ content })
+              }}
+            /> */}
+          </div>
+        </Dialog>
       </div>
     )
   }
