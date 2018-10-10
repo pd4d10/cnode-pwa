@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import Dialog from '@material-ui/core/Dialog'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
@@ -24,11 +23,11 @@ import { withRouter } from 'react-router-dom'
 //   transition: all 300ms;
 // }
 
-const Login = props => (
+export const Login = withRouter(props => (
   <Dialog
-    // title="登录"
+    title="登录"
     modal={false}
-    open={props.isVisible}
+    open={false}
     // onRequestClose={() => props.dispatch(authActions.hideLogin())}
   >
     请在 PC 端登录后，点击右上角的
@@ -41,14 +40,4 @@ const Login = props => (
     />
     <Button onClick={() => {}}>登录</Button>
   </Dialog>
-)
-
-Login.propTypes = {
-  input: PropTypes.string.isRequired,
-  isVisible: PropTypes.bool.isRequired,
-  dispatch: PropTypes.func.isRequired,
-}
-
-const mapStateToProps = state => state.auth
-
-export default withRouter(connect(mapStateToProps)(Login))
+))

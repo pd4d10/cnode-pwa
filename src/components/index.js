@@ -1,2 +1,3 @@
-export { default as Appbar } from './app-bar'
-export { default as Topic } from './topic'
+export { Header } from './header'
+export { Topic } from './topic'
+export { Reply } from './reply'

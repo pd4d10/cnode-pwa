@@ -1,20 +1,15 @@
-// @flow
 import React from 'react'
 
 const { Consumer, Provider } = React.createContext()
 
 export const DrawerConsumer = Consumer
 
-export const withDrawer = Component => props => (
-  <Consumer>{params => <Component {...props} {...params} />}</Consumer>
-)
-
-export class DrawerProvider extends React.Component<any, { visible: boolean }> {
+export class DrawerProvider extends React.Component {
   state = {
     visible: false,
   }
 
-  setVisible = (visible: boolean) => {
+  setVisible = visible => {
     this.setState({ visible })
   }
 

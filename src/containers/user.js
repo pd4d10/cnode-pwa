@@ -1,11 +1,9 @@
 // @flow
 import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import { withRouter } from 'react-router-dom'
-import Topic from '../components/topic'
+import { Topic } from '../components'
 import { fetchAPI } from '../utils'
 import type { Author } from './detail'
 
@@ -29,7 +27,7 @@ type UserState = {
   isLoading: boolean,
 }
 
-class User extends React.Component<{}, UserState> {
+class UserComponent extends React.Component<{}, UserState> {
   state = {
     data: null,
     isLoading: false,
@@ -78,4 +76,4 @@ class User extends React.Component<{}, UserState> {
   }
 }
 
-export default withRouter(User)
+export const User = withRouter(UserComponent)

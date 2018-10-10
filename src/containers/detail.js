@@ -1,14 +1,15 @@
 // @flow
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+
 import TimeAgo from 'timeago-react'
 import Helmet from 'react-helmet'
 import { withRouter } from 'react-router-dom'
-import Reply from '../components/reply'
+import { Reply } from '../components'
 import Loading from '../components/loading'
 import style from './detail.module.css'
 import { fetchAPI } from '../utils'
+import * as types from '../types'
 
 export const Avatar = props => <img className={style.avatar} {...props} />
 
@@ -16,42 +17,12 @@ export const Extra = props => <div className={style.extra} {...props} />
 
 export const Time = props => <div className={style.time} {...props} />
 
-type DetailProps = {}
-
-export type Author = {
-  loginname: string,
-  avatar_url: string,
-}
-
 type DetailState = {
-  topic: ?{
-    id: string,
-    author_id: string,
-    tab: string,
-    content: string,
-    title: string,
-    last_reply_at: string,
-    good: boolean,
-    top: boolean,
-    reply_count: number,
-    visit_count: number,
-    create_at: string,
-    author: Author,
-    replies: {
-      id: string,
-      author: Author,
-      content: string,
-      ups: string[],
-      create_at: string,
-      reply_id: string,
-      is_uped: boolean,
-    }[],
-    is_collect: boolean,
-  },
+  topic: ?types.Topic,
   isLoading: boolean,
 }
 
-class Detail extends React.Component<{}, DetailState> {
+class DetailComponent extends React.Component<any, DetailState> {
   state = {
     topic: null,
     isLoading: false,
@@ -149,4 +120,4 @@ class Detail extends React.Component<{}, DetailState> {
   }
 }
 
-export default withRouter(Detail)
+export const Detail = withRouter(DetailComponent)

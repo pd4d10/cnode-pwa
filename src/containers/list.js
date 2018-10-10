@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import Button from '@material-ui/core/Button'
+import { Button } from '@material-ui/core'
+import { withRouter } from 'react-router-dom'
 import { throttle } from 'lodash-es'
-import Topic from '../components/topic'
+import { Topic } from '../components'
 import * as utils from '../utils'
 // import ContentLoader from 'react-content-loader'
-import { withRouter } from 'react-router-dom'
 import { ListProvider, ListConsumer, withList } from '../contexts'
+import * as types from '../types'
 
 // @keyframes spin {
 //   100% {
@@ -15,7 +15,7 @@ import { ListProvider, ListConsumer, withList } from '../contexts'
 //   }
 // }
 
-class List extends React.Component {
+class ListComponent extends React.Component<any, any> {
   // TODO better infinity scrolling
   loadMore = throttle(() => {
     const height = 200
@@ -41,7 +41,7 @@ class List extends React.Component {
   // 2. Tag is different, navigator to new tag URL, and refresh data
   // Once it was implemented in actions, now move it to component
   componentWillReceiveProps(nextProps) {
-    if (nextProps.location.search !== this.props.location.search) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
       this.props.load()
     }
   }
@@ -69,20 +69,20 @@ class List extends React.Component {
           // </ContentLoader>
           <div>loading...</div>
         ) : (
-          <ul>
+          <div>
             {props.topics.map((topic, index) => (
-              <li
-                key={topic.id}
-                style={{
-                  borderTopColor: '#f0f0f0',
-                  borderTopWidth: index ? 1 : 0,
-                  borderTopStyle: 'solid',
-                }}
-              >
-                <Topic {...topic} dispatch={props.dispatch} />
-              </li>
+              // <li
+              //   key={topic.id}
+              //   style={{
+              //     borderTopColor: '#f0f0f0',
+              //     borderTopWidth: index ? 1 : 0,
+              //     borderTopStyle: 'solid',
+              //   }}
+              // >
+              <Topic {...topic} key={topic.id} />
+              // </li>
             ))}
-          </ul>
+          </div>
         )}
 
         {props.isLoadingMore && <div>loading more...</div>}
@@ -104,4 +104,4 @@ class List extends React.Component {
   }
 }
 
-export default withRouter(withList(List))
+export const List = withRouter(withList(ListComponent))

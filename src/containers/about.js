@@ -16,7 +16,7 @@ const Linker = props => (
   </a>
 )
 
-const About = () => (
+export const About = () => (
   <>
     <Helmet title="关于" />
     <div
@@ -40,5 +40,3 @@ const About = () => (
     <Divider />
   </>
 )
-
-export default About

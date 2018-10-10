@@ -4,7 +4,7 @@ import Divider from '@material-ui/core/Divider'
 import TimeAgo from 'timeago-react'
 import { Avatar, Extra, Time } from '../containers/detail'
 
-const Reply = props => (
+export const Reply = props => (
   <div style={{ margin: '8px 0' }}>
     <div style={{ display: 'flex' }}>
       <div to={`/user/${props.author.loginname}`}>
@@ -26,14 +26,3 @@ const Reply = props => (
     <Divider />
   </div>
 )
-
-Reply.propTypes = {
-  author: PropTypes.shape({
-    avatar_url: PropTypes.string.isRequired,
-    loginname: PropTypes.string.isRequired,
-  }).isRequired,
-  create_at: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
-}
-
-export default Reply

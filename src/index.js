@@ -1,26 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware, compose } from 'redux'
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-
-import BottomNavigation from '@material-ui/core/BottomNavigation'
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
-import Icon from '@material-ui/core/Icon'
-import RestoreIcon from '@material-ui/icons/Restore'
-import FavoriteIcon from '@material-ui/icons/Favorite'
-import LocationOnIcon from '@material-ui/icons/LocationOn'
-
-import thunk from 'redux-thunk'
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
+import { BottomNavigation, BottomNavigationAction } from '@material-ui/core'
 // import injectTapEventPlugin from 'react-tap-event-plugin'
-import App from './containers/app'
-import List from './containers/list'
-import Detail from './containers/detail'
-// import User from './containers/user'
-import NotFound from './containers/not-found'
-// import Message from './containers/message'
-import About from './containers/about'
-import reducers from './reducers'
+import { App, List, Detail, About, NotFound, User, Message } from './containers'
 import 'github-markdown-css'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
@@ -31,29 +14,28 @@ const __PROD__ = process.env.NODE_ENV === 'production' // eslint-disable-line
 // http://stackoverflow.com/a/34015469/988941
 // injectTapEventPlugin()
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose // eslint-disable-line
-
-const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)))
-
 if (!__PROD__) {
   // window.Perf = require('react-addons-perf') // eslint-disable-line
   // require('why-did-you-update').whyDidYouUpdate(React)
 }
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <App>
-        <Switch>
-          <Route exact path="/" component={List} />
-          <Route path="/topic/:id" component={Detail} />
-          {/* <Route path="/user/:name" component={User} />*/}
-          {/* <Route path="/messages" component={Message} />*/}
-          <Route path="/about" component={About} />
-          <Route component={NotFound} />
-        </Switch>
+  <BrowserRouter>
+    <App>
+      <Switch>
+        <Route exact path="/" component={List} />
+        <Route path="/good" component={List} />
+        <Route path="/share" component={List} />
+        <Route path="/ask" component={List} />
+        <Route path="/job" component={List} />
+        <Route path="/topic/:id" component={Detail} />
+        {/* <Route path="/user/:name" component={User} />*/}
+        {/* <Route path="/messages" component={Message} />*/}
+        <Route path="/about" component={About} />
+        <Route component={NotFound} />
+      </Switch>
 
-        {/* <BottomNavigation
+      {/* <BottomNavigation
           value="abc"
           onChange={() => {}}
         >
@@ -78,9 +60,8 @@ ReactDOM.render(
             icon={<Icon>folder</Icon>}
           />
         </BottomNavigation> */}
-      </App>
-    </Router>
-  </Provider>,
+    </App>
+  </BrowserRouter>,
   document.getElementById('root'),
 )
 

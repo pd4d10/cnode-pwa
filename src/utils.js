@@ -1,17 +1,21 @@
+import {
+  Person,
+  Forum,
+  ThumbUp,
+  Share,
+  LiveHelp,
+  SwitchCamera,
+  Notifications,
+  Settings,
+  Info,
+} from '@material-ui/icons'
+
 export const colors = {
   background: '#444',
   primary: '#80bd01',
   tag: '#80bd01',
   avatarBorder: '#80bd01',
   avatarBackground: '#f5f5f5',
-}
-
-export const tabsMap = {
-  all: 'CNode 社区',
-  good: '精华',
-  share: '分享',
-  ask: '问答',
-  job: '招聘',
 }
 
 export async function fetchAPI(url, options) {
@@ -25,19 +29,13 @@ export async function fetchAPI(url, options) {
   return json
 }
 
-export const tabs = Object.keys(tabsMap).map(key => ({
-  key,
-  value: tabsMap[key],
-}))
-
-export function getTagFromTopic({ top, good, tab }) {
-  if (top) {
-    return '置顶'
-  }
-
-  if (good) {
-    return '精华'
-  }
-
-  return tabsMap[tab] || '未知'
+export const mapper = {
+  '/': ['CNode 社区', Forum],
+  '/good': ['精华', ThumbUp],
+  '/share': ['分享', Share],
+  '/ask': ['问答', LiveHelp],
+  '/job': ['招聘', SwitchCamera],
+  '/message': ['消息', Notifications],
+  '/setting': ['设置', Settings],
+  '/about': ['关于', Info],
 }

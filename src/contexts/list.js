@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { fetchAPI, tabsMap } from '../utils'
+import { fetchAPI } from '../utils'
 
 const { Consumer, Provider } = React.createContext()
 
@@ -9,8 +9,6 @@ export const ListConsumer = Consumer
 export const withList = Component => props => (
   <Consumer>{params => <Component {...props} {...params} />}</Consumer>
 )
-
-const correctTabs = Object.keys(tabsMap)
 
 class ListProvider extends React.Component {
   state = {
@@ -21,9 +19,12 @@ class ListProvider extends React.Component {
   }
 
   getCorrectTab = () => {
-    const params = new URLSearchParams(this.props.location.search)
-    const tab = params.get('tab')
-    return correctTabs.includes(tab) ? tab : 'all'
+    const { pathname } = this.props.location
+    if (['/good', '/share', '/ask', '/job'].includes(pathname)) {
+      return pathname.slice(1)
+    } else {
+      return 'all'
+    }
   }
 
   fetchTopics = async page => {

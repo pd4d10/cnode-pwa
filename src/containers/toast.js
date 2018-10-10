@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 /* const Toast = props => (
@@ -13,7 +12,7 @@ import { withRouter } from 'react-router-dom'
 )*/
 
 // TODO Use snackbar to show message
-const Toast = props => (
+export const Toast = props => (
   <div
     style={{
       display: props.isVisible ? 'block' : 'none',
@@ -35,13 +34,3 @@ const Toast = props => (
     <code style={{ color: 'red' }}>{props.message}</code>
   </div>
 )
-
-Toast.propTypes = {
-  isVisible: PropTypes.bool.isRequired,
-  message: PropTypes.string.isRequired,
-  // dispatch: PropTypes.func.isRequired,
-}
-
-const mapStateToProps = state => state.errorToast
-
-export default withRouter(connect(mapStateToProps)(Toast))
