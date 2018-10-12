@@ -20,8 +20,6 @@ export class AuthProvider extends React.Component<any, AuthState> {
   }
 
   render() {
-    const {} = this.state
-    const {} = this
-    return <Provider value={{}}>{this.props.children}</Provider>
+    return <Provider value={this.state}>{this.props.children}</Provider>
   }
 }

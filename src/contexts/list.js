@@ -16,6 +16,31 @@ class ListProvider extends React.Component {
     isLoadingMore: false,
     topics: [],
     page: 1,
+
+    load: async () => {
+      try {
+        const page = 1
+        this.setState({ isLoading: true })
+        const data = await this.fetchTopics(page)
+        this.setState({ topics: data, page })
+      } finally {
+        this.setState({ isLoading: false })
+      }
+    },
+
+    loadMore: async () => {
+      try {
+        const page = this.state.page + 1
+        this.setState({ isLoadingMore: true })
+        const data = await this.fetchTopics(page)
+        this.setState({
+          topics: [...this.state.topics, ...data],
+          page,
+        })
+      } finally {
+        this.setState({ isLoadingMore: false })
+      }
+    },
   }
 
   getCorrectTab = () => {
@@ -33,39 +58,8 @@ class ListProvider extends React.Component {
     return data
   }
 
-  load = async () => {
-    try {
-      const page = 1
-      this.setState({ isLoading: true })
-      const data = await this.fetchTopics(page)
-      this.setState({ topics: data, page })
-    } finally {
-      this.setState({ isLoading: false })
-    }
-  }
-
-  loadMore = async () => {
-    try {
-      const page = this.state.page + 1
-      this.setState({ isLoadingMore: true })
-      const data = await this.fetchTopics(page)
-      this.setState({
-        topics: [...this.state.topics, ...data],
-        page,
-      })
-    } finally {
-      this.setState({ isLoadingMore: false })
-    }
-  }
-
   render() {
-    const { isLoading, isLoadingMore, topics } = this.state
-    const { load, loadMore } = this
-    return (
-      <Provider value={{ isLoading, isLoadingMore, topics, load, loadMore }}>
-        {this.props.children}
-      </Provider>
-    )
+    return <Provider value={this.state}>{this.props.children}</Provider>
   }
 }
 
