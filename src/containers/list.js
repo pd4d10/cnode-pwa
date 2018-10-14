@@ -19,8 +19,9 @@ import { throttle } from 'lodash-es'
 import { Topic } from '../components'
 import * as utils from '../utils'
 // import ContentLoader from 'react-content-loader'
-import { ListProvider, ListConsumer, withList } from '../contexts'
+import { ListConsumer } from '../contexts'
 import * as types from '../types'
+import { withContext } from 'recompose'
 
 // @keyframes spin {
 //   100% {
@@ -30,7 +31,7 @@ import * as types from '../types'
 
 const Transition = props => <Slide direction="up" {...props} />
 
-class ListComponent extends React.Component<any, any> {
+class ListComponent extends React.Component<ListProps, ListState> {
   state = {
     title: '',
     content: '',
@@ -167,11 +168,11 @@ class ListComponent extends React.Component<any, any> {
               />
             </FormControl>
             {/* <MdEditor
-              value={this.state.content}
-              onChange={content => {
-                this.setState({ content })
-              }}
-            /> */}
+          value={this.state.content}
+          onChange={content => {
+            this.setState({ content })
+          }}
+        /> */}
           </div>
         </Dialog>
       </div>
@@ -179,4 +180,8 @@ class ListComponent extends React.Component<any, any> {
   }
 }
 
-export const List = withRouter(withList(ListComponent))
+export default withRouter(props => (
+  <ListConsumer>
+    {contexts => <ListComponent {...contexts} {...props} />}
+  </ListConsumer>
+))

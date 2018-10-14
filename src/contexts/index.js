@@ -7,17 +7,16 @@ import { AuthProvider, AuthConsumer } from './auth'
 export {
   ListProvider,
   ListConsumer,
-  withList,
   DrawerProvider,
   DrawerConsumer,
   AuthProvider,
   AuthConsumer,
 }
 
-export const ContextProvider = props => (
+export const ContextProvider = ({ children }) => (
   <AuthProvider>
     <ListProvider>
-      <DrawerProvider>{props.children}</DrawerProvider>
+      <DrawerProvider>{children}</DrawerProvider>
     </ListProvider>
   </AuthProvider>
 )

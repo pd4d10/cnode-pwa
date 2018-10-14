@@ -6,11 +6,7 @@ const { Consumer, Provider } = React.createContext()
 
 export const ListConsumer = Consumer
 
-export const withList = Component => props => (
-  <Consumer>{params => <Component {...props} {...params} />}</Consumer>
-)
-
-class ListProvider extends React.Component {
+export class ListProvider extends React.Component {
   state = {
     isLoading: false,
     isLoadingMore: false,
@@ -64,4 +60,3 @@ class ListProvider extends React.Component {
 }
 
 ListProvider = withRouter(ListProvider)
-export { ListProvider }

@@ -11,14 +11,8 @@ import style from './detail.module.css'
 import { fetchAPI } from '../utils'
 import * as types from '../types'
 
-export const Avatar = props => <img className={style.avatar} {...props} />
-
-export const Extra = props => <div className={style.extra} {...props} />
-
-export const Time = props => <div className={style.time} {...props} />
-
 type DetailState = {
-  topic: ?types.Topic,
+  topic: ?types.DetailTopic,
   isLoading: boolean,
 }
 
@@ -53,15 +47,8 @@ class DetailComponent extends React.Component<any, DetailState> {
           <>
             <Helmet title={topic.title} />
             <div className={style.container}>
-              <div style={{ fontSize: 20, marginBottom: 12 }}>
-                {topic.title}
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                  margin: '12px 0',
-                }}
-              >
+              <div className={style.title}>{topic.title}</div>
+              <div className={style.info}>
                 <div>
                   <img
                     className={style.avatar}
@@ -71,12 +58,7 @@ class DetailComponent extends React.Component<any, DetailState> {
                 </div>
                 <div className={style.extra}>
                   <div>{topic.author.loginname}</div>
-                  <div
-                    style={{
-                      fontSize: 12,
-                      color: '#555',
-                    }}
-                  >
+                  <div className={style.tip}>
                     <span>
                       创建于
                       <TimeAgo

@@ -1,28 +1,30 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
-import Divider from '@material-ui/core/Divider'
+import { Divider } from '@material-ui/core'
+import { pure } from 'recompose'
 import TimeAgo from 'timeago-react'
-import { Avatar, Extra, Time } from '../containers/detail'
+import { Link } from 'react-router-dom'
+import { Avatar, Extra } from './'
+import * as types from '../types'
 
-export const Reply = props => (
-  <div style={{ margin: '8px 0' }}>
-    <div style={{ display: 'flex' }}>
-      <div to={`/user/${props.author.loginname}`}>
+export const Reply = pure((props: types.Reply) => (
+  <div style={{ marginTop: 8, marginBottom: 8 }}>
+    <div style={{ display: 'flex', marginBottom: 6 }}>
+      <Link to={`/user/${props.author.loginname}`}>
         <Avatar src={props.author.avatar_url} alt={props.author.loginname} />
-      </div>
+      </Link>
       <Extra>
         <div>{props.author.loginname}</div>
-        <Time>
+        <time>
           发表于
           <TimeAgo datetime={props.create_at} locale="zh_CN" live={false} />
-        </Time>
+        </time>
       </Extra>
     </div>
     <div
       className="markdown-body"
-      style={{ marginTop: 6 }}
       dangerouslySetInnerHTML={{ __html: props.content }}
     />
     <Divider />
   </div>
-)
+))

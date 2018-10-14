@@ -1,18 +1,8 @@
 // @flow
 import React from 'react'
-import { AppBar } from '@material-ui/core'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
-import AccountCircle from '@material-ui/icons/AccountCircle'
-import Switch from '@material-ui/core/Switch'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormGroup from '@material-ui/core/FormGroup'
-import MenuItem from '@material-ui/core/MenuItem'
-import Menu from '@material-ui/core/Menu'
+import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core'
 import { withRouter } from 'react-router-dom'
-import { ArrowBack } from '@material-ui/icons'
+import { ArrowBack, Menu } from '@material-ui/icons'
 import { DrawerConsumer } from '../contexts'
 import { mapper } from '../utils'
 
@@ -28,7 +18,7 @@ function getTitle(pathname) {
   return '未知'
 }
 
-export const Header = withRouter(props => {
+export const Header = props => {
   const isList = ['', 'good', 'share', 'ask', 'job'].includes(
     props.location.pathname.slice(1),
   )
@@ -57,7 +47,7 @@ export const Header = withRouter(props => {
                 }
               }}
             >
-              {isList ? <MenuIcon /> : <ArrowBack />}
+              {isList ? <Menu /> : <ArrowBack />}
             </IconButton>
           )}
         </DrawerConsumer>
@@ -67,4 +57,6 @@ export const Header = withRouter(props => {
       </Toolbar>
     </AppBar>
   )
-})
+}
+
+export default withRouter(Header)

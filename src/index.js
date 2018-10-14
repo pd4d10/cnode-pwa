@@ -6,7 +6,7 @@ import { BottomNavigation, BottomNavigationAction } from '@material-ui/core'
 import { App, List, Detail, About, NotFound, User, Message } from './containers'
 import 'github-markdown-css'
 import './index.css'
-import * as serviceWorker from './serviceWorker'
+import * as serviceWorker from './service-worker'
 
 const __PROD__ = process.env.NODE_ENV === 'production' // eslint-disable-line
 

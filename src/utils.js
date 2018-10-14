@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   Person,
   Forum,
@@ -39,3 +40,7 @@ export const mapper = {
   '/setting': ['设置', Settings],
   '/about': ['关于', Info],
 }
+
+export const withContext = (Consumer, Component) => props => (
+  <Consumer>{contexts => <Component {...contexts} {...props} />}</Consumer>
+)

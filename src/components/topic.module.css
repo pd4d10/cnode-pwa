@@ -35,6 +35,16 @@
   justify-content: space-between;
 }
 
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.right {
+  font-size: 12px;
+  color: #b4b4b4;
+}
+
 .tag {
   color: #fff;
   font-size: 12px;
@@ -42,4 +52,9 @@
   border-radius: 2px;
   padding: 0 4px;
   margin-right: 8px;
+}
+
+.timeago {
+  font-size: 12px;
+  color: #778087;
 }

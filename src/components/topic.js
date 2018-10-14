@@ -6,24 +6,19 @@ import { ListItem } from '@material-ui/core'
 import TimeAgo from 'timeago-react'
 import { getTagFromTopic, colors } from '../utils'
 import * as types from '../types'
-import style from './topic.module.css'
+import $s from './topic.module.css'
 
-export const Topic = pure((props: types.Topic) => (
+export const Topic = pure((props: types.ListTopic) => (
   <ListItem button component={Link} to={`/topic/${props.id}`}>
-    <div className={style.avatar}>
+    <div className={$s.avatar}>
       <img src={props.author.avatar_url} alt={props.author.loginname} />
     </div>
-    <div className={style.content}>
-      <h3 className={style.title}>{props.title}</h3>
-      <div className={style.extra}>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
+    <div className={$s.content}>
+      <h3 className={$s.title}>{props.title}</h3>
+      <div className={$s.extra}>
+        <div className={$s.left}>
           <div
-            className={style.tag}
+            className={$s.tag}
             style={{
               backgroundColor: colors.tag,
             }}
@@ -40,21 +35,13 @@ export const Topic = pure((props: types.Topic) => (
                     job: '招聘',
                   }[props.tab]}
           </div>
-          <div
-            style={{
-              fontSize: 12,
-              color: '#b4b4b4',
-            }}
-          >
+          <div className={$s.right}>
             <span style={{ color: '#9e78c0' }}>{props.reply_count} </span>
             回复 / <span>{props.visit_count}</span> 浏览
           </div>
         </div>
         <TimeAgo
-          style={{
-            fontSize: 12,
-            color: '#778087',
-          }}
+          className={$s.timeago}
           datetime={props.last_reply_at}
           locale="zh_CN"
           live={false}
