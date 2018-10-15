@@ -13,7 +13,7 @@ export const Topic = pure((props: types.ListTopic) => (
     button
     component={Link}
     to={`/topic/${props.id}`}
-    className={$s.container}
+    style={{ borderBottom: '1px solid #f0f0f0' }}
   >
     <div className={$s.avatar}>
       <img src={props.author.avatar_url} alt={props.author.loginname} />

@@ -63,7 +63,7 @@ export class ListProvider extends React.Component {
       this.setState({ isLoadingMore: true })
       const data = await this.fetchTopics(page)
       pages[index] = page
-      topics[index] = data
+      topics[index] = [...topics[index], ...data]
 
       this.setState({ topics, pages })
     } finally {

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {
   Button,
   AppBar,
@@ -48,15 +47,12 @@ class ListComponent extends React.Component {
 
   // TODO better infinity scrolling
   loadMore = throttle(() => {
-    const height = 200
-    if (
+    const toBottom =
       document.documentElement.scrollHeight -
-        document.body.scrollTop -
-        document.documentElement.clientHeight <
-        height && // eslint-disable-line
-      !this.props.isLoadingMore &&
-      !this.props.isLoading
-    ) {
+      document.documentElement.scrollTop -
+      document.documentElement.clientHeight
+    console.log('toBottom', toBottom)
+    if (toBottom < 200 && !this.props.isLoadingMore && !this.props.isLoading) {
       this.props.loadMore()
     }
   }, 200)
@@ -73,7 +69,10 @@ class ListComponent extends React.Component {
   // 2. Tag is different, navigator to new tag URL, and refresh data
   // Once it was implemented in actions, now move it to component
   componentDidUpdate(prevProps) {
-    window.scrollTo(0, this.props.scrollY)
+    // Only scroll when switch tab
+    if (this.props.currentIndex !== prevProps.currentIndex) {
+      window.scrollTo(0, this.props.scrollY)
+    }
 
     if (
       this.props.topics.length === 0 &&
