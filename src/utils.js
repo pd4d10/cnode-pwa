@@ -71,3 +71,28 @@ export const navigationData = [
 ]
 
 export const firstScreenPaths = ['/', '/message', '/settings', '/about']
+
+export const tabData = [
+  {
+    pathname: '/',
+    title: '社区',
+  },
+  {
+    pathname: '/good',
+    title: '精华',
+  },
+  {
+    pathname: '/share',
+    title: '分享',
+  },
+  {
+    pathname: '/ask',
+    title: '问答',
+  },
+  {
+    pathname: '/job',
+    title: '招聘',
+  },
+]
+
+export const tabPaths = ['/', '/good', '/share', '/ask', '/job']

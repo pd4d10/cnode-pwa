@@ -11,13 +11,15 @@ import {
   FormControl,
   Input,
   InputLabel,
+  Tabs,
+  Tab,
 } from '@material-ui/core'
 import { Add, Close, Send } from '@material-ui/icons'
 // import MdEditor from 'react-md-editor'
 import { withRouter } from 'react-router-dom'
 import { throttle } from 'lodash-es'
 import { Topic } from '../components'
-import * as utils from '../utils'
+import { tabData, tabPaths } from '../utils'
 // import ContentLoader from 'react-content-loader'
 import { ListConsumer } from '../contexts'
 import * as types from '../types'
@@ -76,6 +78,19 @@ class ListComponent extends React.Component<ListProps, ListState> {
     const { props } = this
     return (
       <div>
+        <Tabs
+          fullWidth
+          value={tabPaths.indexOf(props.location.pathname)}
+          indicatorColor="primary"
+          textColor="primary"
+          onChange={(_, value) => {
+            props.history.push(tabPaths[value])
+          }}
+        >
+          {tabData.map(({ title, pathname }) => (
+            <Tab label={title} />
+          ))}
+        </Tabs>
         {props.isLoading ? (
           // <ContentLoader
           //   height={144}
@@ -109,7 +124,7 @@ class ListComponent extends React.Component<ListProps, ListState> {
 
         {props.isLoadingMore && <div>loading more...</div>}
 
-        <Button
+        {/* <Button
           variant="fab"
           color="primary"
           style={{
@@ -123,7 +138,7 @@ class ListComponent extends React.Component<ListProps, ListState> {
           }}
         >
           <Add />
-        </Button>
+        </Button> */}
         <Dialog
           fullScreen
           open={this.state.dialogVisible}
