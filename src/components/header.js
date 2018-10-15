@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core'
 import { withRouter } from 'react-router-dom'
 import { ArrowBack, Menu } from '@material-ui/icons'
 import { DrawerConsumer } from '../contexts'
-import { mapper } from '../utils'
+import { mapper, firstScreenPaths } from '../utils'
 
 function getTitle(pathname) {
   if (mapper[pathname]) {
@@ -18,15 +18,15 @@ function getTitle(pathname) {
   return '未知'
 }
 
-export const Header = props => {
-  const isList = ['', 'good', 'share', 'ask', 'job'].includes(
-    props.location.pathname.slice(1),
-  )
+const Header = props => {
+  // const isList = ['', 'good', 'share', 'ask', 'job'].includes(
+  //   props.location.pathname.slice(1),
+  // )
 
   return (
     <AppBar>
       <Toolbar>
-        <DrawerConsumer>
+        {/* <DrawerConsumer>
           {({ setVisible }) => (
             <IconButton
               color="inherit"
@@ -50,7 +50,26 @@ export const Header = props => {
               {isList ? <Menu /> : <ArrowBack />}
             </IconButton>
           )}
-        </DrawerConsumer>
+        </DrawerConsumer> */}
+        {firstScreenPaths.includes(props.location.pathname) || (
+          <IconButton
+            color="inherit"
+            style={{
+              marginLeft: -12,
+              marginRight: 20,
+            }}
+            onClick={() => {
+              if (props.history.length === 1) {
+                // If no history, go to list page
+                props.history.push('/')
+              } else {
+                props.history.goBack()
+              }
+            }}
+          >
+            <ArrowBack />
+          </IconButton>
+        )}
         <Typography variant="title" color="inherit" style={{ flexGrow: 1 }}>
           {getTitle(props.location.pathname)}
         </Typography>

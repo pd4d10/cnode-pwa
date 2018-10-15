@@ -35,3 +35,21 @@ export type DetailTopic = ListTopic & {
   replies: Reply[],
   is_collect: boolean,
 }
+
+type RecentTopics = {
+  id: string,
+  author: Author,
+  title: string,
+  last_reply_at: string,
+}
+
+// https://cnodejs.org/api/v1/user/alsotang
+export type User = {
+  loginname: string,
+  avatar_url: string,
+  githubUsername: string,
+  create_at: string,
+  score: number,
+  recent_topics: RecentTopics[],
+  recent_replies: RecentTopics[],
+}

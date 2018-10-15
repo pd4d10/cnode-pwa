@@ -41,6 +41,33 @@ export const mapper = {
   '/about': ['关于', Info],
 }
 
+export const tabsData = Object.entries(mapper)
+
 export const withContext = (Consumer, Component) => props => (
   <Consumer>{contexts => <Component {...contexts} {...props} />}</Consumer>
 )
+
+export const navigationData = [
+  {
+    pathname: '/',
+    title: '社区',
+    Icon: Forum,
+  },
+  {
+    pathname: '/message',
+    title: '消息',
+    Icon: Notifications,
+  },
+  {
+    pathname: '/settings',
+    title: '设置',
+    Icon: Settings,
+  },
+  {
+    pathname: '/about',
+    title: '关于',
+    Icon: Info,
+  },
+]
+
+export const firstScreenPaths = ['/', '/message', '/settings', '/about']

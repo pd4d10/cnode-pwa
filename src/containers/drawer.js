@@ -39,7 +39,7 @@ export const Drawer = withRouter(props => {
             </ListItem>
 
             <Divider />
-            {Object.entries(utils.mapper).map(([pathname, [title, Icon]]) => (
+            {utils.tabsData.map(([pathname, [title, Icon]]) => (
               <ListItem
                 button
                 component={Link}

@@ -5,29 +5,14 @@ import Tab from '@material-ui/core/Tab'
 import { withRouter } from 'react-router-dom'
 import { Topic } from '../components'
 import { fetchAPI } from '../utils'
-import type { Author } from './detail'
-
-type RecentTopics = {
-  id: string,
-  author: Author,
-  title: string,
-  last_reply_at: string,
-}
+import * as types from '../types'
 
 type UserState = {
-  data: ?{
-    loginname: string,
-    avatar_url: string,
-    githubUsername: string,
-    create_at: string,
-    score: number,
-    recent_topics: RecentTopics[],
-    recent_replies: RecentTopics[],
-  },
+  data: ?types.User,
   isLoading: boolean,
 }
 
-class UserComponent extends React.Component<{}, UserState> {
+class User extends React.Component<{}, UserState> {
   state = {
     data: null,
     isLoading: false,
@@ -76,4 +61,4 @@ class UserComponent extends React.Component<{}, UserState> {
   }
 }
 
-export const User = withRouter(UserComponent)
+export default withRouter(User)

@@ -1,12 +1,28 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import { teal } from '@material-ui/core/colors'
 import Helmet from 'react-helmet'
-import { withRouter } from 'react-router-dom'
+import {
+  BrowserRouter,
+  Route,
+  Link,
+  Switch,
+  withRouter,
+} from 'react-router-dom'
+// import injectTapEventPlugin from 'react-tap-event-plugin'
+import {
+  List,
+  Detail,
+  About,
+  NotFound,
+  User,
+  Message,
+  Drawer,
+  Login,
+  Navigation,
+} from './'
 import { colors } from '../utils'
 import { Header } from '../components'
-import { Drawer, Login } from './'
 import { ContextProvider } from '../contexts'
 
 // :global(.back-enter) {
@@ -42,16 +58,35 @@ const theme = createMuiTheme({
 
 export const App = props => {
   return (
-    <ContextProvider>
-      <MuiThemeProvider theme={theme}>
-        <main>
-          <Helmet titleTemplate="%s - CNode PWA" defaultTitle="CNode PWA" />
-          <Login />
-          <Drawer />
-          <Header />
-          <div style={{ marginTop: 56 }}>{props.children}</div>
-        </main>
-      </MuiThemeProvider>
-    </ContextProvider>
+    <BrowserRouter>
+      <ContextProvider>
+        <MuiThemeProvider theme={theme}>
+          <main>
+            <Helmet titleTemplate="%s - CNode PWA" defaultTitle="CNode PWA" />
+            <Login />
+            {/* <Drawer /> */}
+            <Header />
+
+            <div style={{ marginTop: 56, marginBottom: 56 }}>
+              <Route exact path="/" component={List} />
+              <Route path="/good" component={List} />
+              <Route path="/share" component={List} />
+              <Route path="/ask" component={List} />
+              <Route path="/job" component={List} />
+              <Route path="/messages" component={Message} />
+              <Route path="/settings" component={Message} />
+              <Route path="/about" component={About} />
+            </div>
+
+            <div style={{ marginTop: 56 }}>
+              <Route path="/topic/:id" component={Detail} />
+              <Route path="/user/:name" component={User} />
+            </div>
+            {/* <Route component={NotFound} /> */}
+            <Navigation />
+          </main>
+        </MuiThemeProvider>
+      </ContextProvider>
+    </BrowserRouter>
   )
 }
