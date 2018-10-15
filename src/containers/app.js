@@ -69,20 +69,18 @@ export const App = props => {
 
             <div style={{ marginTop: 56, marginBottom: 56 }}>
               <Route exact path="/" component={List} />
-              <Route path="/good" component={List} />
-              <Route path="/share" component={List} />
-              <Route path="/ask" component={List} />
-              <Route path="/job" component={List} />
-              <Route path="/messages" component={Message} />
-              <Route path="/settings" component={Message} />
-              <Route path="/about" component={About} />
+              <Route path="/topic/:id" component={Detail} />
+
+              {/* <Switch>
+                <Route path="/messages" component={Message} />
+                <Route path="/settings" component={Message} />
+                <Route path="/about" component={About} />
+                <Route path="/user/:name" component={User} />
+                <Route component={NotFound} />
+              </Switch> */}
             </div>
 
-            <div style={{ marginTop: 56 }}>
-              <Route path="/topic/:id" component={Detail} />
-              <Route path="/user/:name" component={User} />
-            </div>
-            {/* <Route component={NotFound} /> */}
+            <div style={{ marginTop: 56 }} />
             <Navigation />
           </main>
         </MuiThemeProvider>

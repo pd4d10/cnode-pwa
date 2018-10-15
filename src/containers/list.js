@@ -11,8 +11,6 @@ import {
   FormControl,
   Input,
   InputLabel,
-  Tabs,
-  Tab,
 } from '@material-ui/core'
 import { Add, Close, Send } from '@material-ui/icons'
 // import MdEditor from 'react-md-editor'
@@ -33,7 +31,7 @@ import { withContext } from 'recompose'
 
 const Transition = props => <Slide direction="up" {...props} />
 
-class ListComponent extends React.Component<ListProps, ListState> {
+class ListComponent extends React.Component {
   state = {
     title: '',
     content: '',
@@ -56,7 +54,9 @@ class ListComponent extends React.Component<ListProps, ListState> {
   }, 200)
 
   componentDidMount() {
-    this.props.load()
+    if (this.props.topics.length === 0) {
+      this.props.load()
+    }
     window.addEventListener('scroll', this.loadMore)
   }
 
@@ -64,10 +64,25 @@ class ListComponent extends React.Component<ListProps, ListState> {
   // 1. Tag is same, close drawer and do nothing
   // 2. Tag is different, navigator to new tag URL, and refresh data
   // Once it was implemented in actions, now move it to component
-  componentDidUpdate(nextProps) {
-    if (nextProps.location.pathname !== this.props.location.pathname) {
+  componentDidUpdate(prevProps) {
+    window.scrollTo(0, this.props.scrollY)
+
+    if (
+      this.props.topics.length === 0 &&
+      !this.props.isLoading &&
+      !this.props.isLoadingMore
+    ) {
       this.props.load()
+      console.log('load')
     }
+    // if (
+    //   this.props.location.pathname === '/' &&
+    //   prevProps.location.pathname === '/' &&
+    //   new URLSearchParams(this.props.location.search).get('tab') ===
+    //     new URLSearchParams(prevProps.location.search).get('tab')
+    // ) {
+    //   this.props.load()
+    // }
   }
 
   componentWillUnmount() {
@@ -78,19 +93,6 @@ class ListComponent extends React.Component<ListProps, ListState> {
     const { props } = this
     return (
       <div>
-        <Tabs
-          fullWidth
-          value={tabPaths.indexOf(props.location.pathname)}
-          indicatorColor="primary"
-          textColor="primary"
-          onChange={(_, value) => {
-            props.history.push(tabPaths[value])
-          }}
-        >
-          {tabData.map(({ title, pathname }) => (
-            <Tab label={title} />
-          ))}
-        </Tabs>
         {props.isLoading ? (
           // <ContentLoader
           //   height={144}
@@ -194,6 +196,12 @@ class ListComponent extends React.Component<ListProps, ListState> {
     )
   }
 }
+
+// class List extends React.Component {
+//   render() {
+//     return <ListComponent {...this.props} />
+//   }
+// }
 
 export default withRouter(props => (
   <ListConsumer>

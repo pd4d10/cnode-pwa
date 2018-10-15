@@ -1,49 +1,46 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { BottomNavigation, BottomNavigationAction } from '@material-ui/core'
-import {
-  Person,
-  Forum,
-  ThumbUp,
-  Share,
-  LiveHelp,
-  SwitchCamera,
-  Notifications,
-  Settings,
-  Info,
-} from '@material-ui/icons'
-import { navigationData, firstScreenPaths } from '../utils'
+import { tabData, tabPaths, firstScreenPaths, tabs } from '../utils'
+import { ListConsumer } from '../contexts'
 
-const Navigation = props => {
-  const value = firstScreenPaths.indexOf(props.location.pathname)
+class Navigation extends React.Component {
+  render() {
+    return (
+      <ListConsumer>
+        {({ setScrollY, currentIndex }) => (
+          <BottomNavigation
+            style={{
+              position: 'fixed',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              boxShadow: '0 -1px 4px rgba(0,0,0,.1)',
+            }}
+            value={currentIndex}
+            onChange={(_, index) => {
+              console.log(window.scrollY)
+              setScrollY(window.scrollY)
 
-  if (value === -1) {
-    return null
+              if (index === 0) {
+                this.props.history.push('/')
+              }
+              this.props.history.push('/?tab=' + tabs[index])
+            }}
+          >
+            {tabData.map(({ pathname, title, Icon }) => (
+              <BottomNavigationAction
+                showLabel
+                key={title}
+                label={title}
+                icon={<Icon />}
+              />
+            ))}
+          </BottomNavigation>
+        )}
+      </ListConsumer>
+    )
   }
-
-  return (
-    <BottomNavigation
-      style={{
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        boxShadow: '0 -1px 4px rgba(0,0,0,.1)',
-      }}
-      value={value}
-      onChange={(_, index) => {
-        props.history.push(navigationData[index].pathname)
-      }}
-    >
-      {navigationData.map(({ pathname, title, Icon }) => (
-        <BottomNavigationAction
-          key={title}
-          showLabel
-          label={title}
-          icon={<Icon />}
-        />
-      ))}
-    </BottomNavigation>
-  )
 }
+
 export default withRouter(Navigation)

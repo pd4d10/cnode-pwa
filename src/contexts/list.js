@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { fetchAPI } from '../utils'
+import { fetchAPI, tabPaths, tabs } from '../utils'
 
 const { Consumer, Provider } = React.createContext()
 
@@ -10,52 +10,90 @@ export class ListProvider extends React.Component {
   state = {
     isLoading: false,
     isLoadingMore: false,
-    topics: [],
-    page: 1,
-
-    load: async () => {
-      try {
-        const page = 1
-        this.setState({ isLoading: true })
-        const data = await this.fetchTopics(page)
-        this.setState({ topics: data, page })
-      } finally {
-        this.setState({ isLoading: false })
-      }
-    },
-
-    loadMore: async () => {
-      try {
-        const page = this.state.page + 1
-        this.setState({ isLoadingMore: true })
-        const data = await this.fetchTopics(page)
-        this.setState({
-          topics: [...this.state.topics, ...data],
-          page,
-        })
-      } finally {
-        this.setState({ isLoadingMore: false })
-      }
-    },
+    topics: [[], [], [], [], []],
+    pages: [1, 1, 1, 1, 1],
+    scrollYs: [0, 0, 0, 0, 0],
   }
 
-  getCorrectTab = () => {
-    const { pathname } = this.props.location
-    if (['/good', '/share', '/ask', '/job'].includes(pathname)) {
-      return pathname.slice(1)
-    } else {
-      return 'all'
-    }
+  getCurrentTab = () => {
+    const params = new URLSearchParams(this.props.location.search)
+    return params.get('tab') || 'all'
   }
+
+  getCurrentIndex = () => tabs.indexOf(this.getCurrentTab())
 
   fetchTopics = async page => {
-    const tab = this.getCorrectTab()
+    const tab = this.getCurrentTab()
     const { data } = await fetchAPI(`/topics?tab=${tab}&page=${page}&limit=20`)
     return data
   }
 
+  setScrollY = position => {
+    const scrollYs = this.state.scrollYs.slice()
+    const current = tabs.indexOf(this.getCurrentTab())
+    scrollYs[current] = position
+    this.setState({ scrollYs })
+  }
+
+  load = async () => {
+    const index = this.getCurrentIndex()
+    const topics = this.state.topics.slice()
+    const pages = this.state.pages.slice()
+
+    try {
+      const page = 1
+      this.setState({ isLoading: true })
+      const data = await this.fetchTopics(page)
+      pages[index] = page
+      topics[index] = data
+
+      this.setState({ topics, pages })
+    } finally {
+      this.setState({ isLoading: false })
+    }
+  }
+
+  loadMore = async () => {
+    const index = this.getCurrentIndex()
+    const topics = this.state.topics.slice()
+    const pages = this.state.pages.slice()
+
+    try {
+      const page = pages[index] + 1
+      this.setState({ isLoadingMore: true })
+      const data = await this.fetchTopics(page)
+      pages[index] = page
+      topics[index] = data
+
+      this.setState({ topics, pages })
+    } finally {
+      this.setState({ isLoadingMore: false })
+    }
+  }
+
   render() {
-    return <Provider value={this.state}>{this.props.children}</Provider>
+    const index = this.getCurrentIndex()
+    const { isLoading, isLoadingMore } = this.state
+    const { load, loadMore, setScrollY } = this
+    const topics = this.state.topics[index]
+    const scrollY = this.state.scrollYs[index]
+
+    return (
+      <Provider
+        value={{
+          topics,
+          scrollY,
+          isLoading,
+          isLoadingMore,
+          load,
+          loadMore,
+          setScrollY,
+          currentIndex: index,
+        }}
+      >
+        {this.props.children}
+      </Provider>
+    )
   }
 }
 

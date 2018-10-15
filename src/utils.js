@@ -76,23 +76,30 @@ export const tabData = [
   {
     pathname: '/',
     title: '社区',
+    Icon: Forum,
   },
   {
     pathname: '/good',
     title: '精华',
+    Icon: ThumbUp,
   },
   {
     pathname: '/share',
     title: '分享',
+    Icon: Share,
   },
   {
     pathname: '/ask',
     title: '问答',
+    Icon: LiveHelp,
   },
   {
     pathname: '/job',
     title: '招聘',
+    Icon: SwitchCamera,
   },
 ]
 
 export const tabPaths = ['/', '/good', '/share', '/ask', '/job']
+
+export const tabs = ['all', 'good', 'share', 'ask', 'job']

@@ -1,7 +1,6 @@
 // @flow
 import React from 'react'
-import PropTypes from 'prop-types'
-
+import { Dialog, Slide } from '@material-ui/core'
 import TimeAgo from 'timeago-react'
 import Helmet from 'react-helmet'
 import { withRouter } from 'react-router-dom'
@@ -16,6 +15,8 @@ type DetailState = {
   isLoading: boolean,
 }
 
+const Transition = props => <Slide direction="up" {...props} />
+
 class DetailComponent extends React.Component<any, DetailState> {
   state = {
     topic: null,
@@ -25,7 +26,7 @@ class DetailComponent extends React.Component<any, DetailState> {
   fetchTopic = async () => {
     try {
       this.setState({ isLoading: true })
-      const { id } = this.props.match.params
+      const id = this.props.match.params.id
       const { data } = await fetchAPI(`/topic/${id}`)
       this.setState({ topic: data })
     } finally {
@@ -33,14 +34,30 @@ class DetailComponent extends React.Component<any, DetailState> {
     }
   }
 
-  componentDidMount() {
-    this.fetchTopic()
+  isTopicScreen = props => /^\/topic\//.test(props.location.pathname)
+
+  componentDidUpdate(prevProps) {
+    console.log(prevProps, this.props)
+    if (
+      this.isTopicScreen(this.props) &&
+      (!this.isTopicScreen(prevProps) ||
+        prevProps.match.params.id !== this.props.match.params.id)
+    ) {
+      this.fetchTopic()
+    }
   }
 
   render() {
     const { topic, isLoading } = this.state
     return (
-      <div>
+      <Dialog
+        fullScreen
+        open={this.isTopicScreen(this.props)}
+        onClose={() => {
+          this.props.history.push('/')
+        }}
+        TransitionComponent={Transition}
+      >
         {isLoading || !topic ? (
           <Loading />
         ) : (
@@ -97,7 +114,7 @@ class DetailComponent extends React.Component<any, DetailState> {
             </div>
           </>
         )}
-      </div>
+      </Dialog>
     )
   }
 }
