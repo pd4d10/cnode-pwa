@@ -1,6 +1,14 @@
 // @flow
 import React from 'react'
-import { Dialog, Slide } from '@material-ui/core'
+import {
+  Dialog,
+  Slide,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+} from '@material-ui/core'
+import { ArrowBack, Share } from '@material-ui/icons'
 import TimeAgo from 'timeago-react'
 import Helmet from 'react-helmet'
 import { withRouter } from 'react-router-dom'
@@ -14,8 +22,6 @@ type DetailState = {
   topic: ?types.DetailTopic,
   isLoading: boolean,
 }
-
-const Transition = props => <Slide direction="up" {...props} />
 
 class Detail extends React.Component<any, DetailState> {
   state = {
@@ -36,6 +42,10 @@ class Detail extends React.Component<any, DetailState> {
 
   isTopicScreen = props => /^\/topic\//.test(props.location.pathname)
 
+  componentDidMount() {
+    this.fetchTopic()
+  }
+
   componentDidUpdate(prevProps) {
     console.log(prevProps, this.props)
     if (
@@ -49,20 +59,55 @@ class Detail extends React.Component<any, DetailState> {
 
   render() {
     const { topic, isLoading } = this.state
+    const { history } = this.props
     return (
-      <Dialog
-        fullScreen
-        open={this.isTopicScreen(this.props)}
-        onClose={() => {
-          this.props.history.push('/')
-        }}
-        TransitionComponent={Transition}
-      >
+      <div>
         {isLoading || !topic ? (
           <Loading />
         ) : (
           <>
             <Helmet title={topic.title} />
+
+            <AppBar>
+              <Toolbar variant="dense">
+                <IconButton
+                  color="inherit"
+                  style={{ marginLeft: -12, marginRight: 20 }}
+                  onClick={() => {
+                    if (history.length === 1) {
+                      // If no history, go to homepage
+                      history.push('/')
+                    } else {
+                      history.goBack()
+                    }
+                  }}
+                >
+                  <ArrowBack />
+                </IconButton>
+                <Typography
+                  variant="title"
+                  color="inherit"
+                  style={{ flexGrow: 1 }}
+                >
+                  话题
+                </Typography>
+                <IconButton
+                  color="inherit"
+                  onClick={() => {
+                    if (navigator.share) {
+                      navigator.share({
+                        title: topic.title,
+                        text: 'Hello World',
+                        url: window.location.href,
+                      })
+                    }
+                  }}
+                >
+                  <Share />
+                </IconButton>
+              </Toolbar>
+            </AppBar>
+
             <div className={style.container}>
               <div className={style.title}>{topic.title}</div>
               <div className={style.info}>
@@ -114,7 +159,7 @@ class Detail extends React.Component<any, DetailState> {
             </div>
           </>
         )}
-      </Dialog>
+      </div>
     )
   }
 }

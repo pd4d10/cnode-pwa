@@ -10,17 +10,7 @@ import {
   withRouter,
 } from 'react-router-dom'
 // import injectTapEventPlugin from 'react-tap-event-plugin'
-import {
-  List,
-  Detail,
-  About,
-  NotFound,
-  User,
-  Message,
-  Drawer,
-  Login,
-  Navigation,
-} from './'
+import { List, Detail, About, NotFound, User, Message, Drawer, Login } from './'
 import { colors } from '../utils'
 import { Header } from '../components'
 import { ContextProvider } from '../contexts'
@@ -65,7 +55,7 @@ export const App = props => {
             <Helmet titleTemplate="%s - CNode PWA" defaultTitle="CNode PWA" />
             <Login />
 
-            <div style={{ marginTop: 56, marginBottom: 56 }}>
+            <div style={{ marginTop: 48, marginBottom: 56 }}>
               <Route exact path="/" component={List} />
               <Route path="/topic/:id" component={Detail} />
 
@@ -79,7 +69,6 @@ export const App = props => {
             </div>
 
             <div style={{ marginTop: 56 }} />
-            <Navigation />
           </main>
         </MuiThemeProvider>
       </ContextProvider>

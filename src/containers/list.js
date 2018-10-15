@@ -24,6 +24,7 @@ import {
 import { withRouter } from 'react-router-dom'
 import { throttle } from 'lodash-es'
 import { Topic } from '../components'
+import { Navigation } from './'
 import { tabData, tabPaths } from '../utils'
 // import ContentLoader from 'react-content-loader'
 import { ListConsumer } from '../contexts'
@@ -180,6 +181,8 @@ class ListComponent extends React.Component {
         /> */}
           </div>
         </Dialog>
+
+        <Navigation />
       </div>
     )
   }
