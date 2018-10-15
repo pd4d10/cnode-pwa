@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { BottomNavigation, BottomNavigationAction } from '@material-ui/core'
-import { tabData, tabPaths, firstScreenPaths, tabs } from '../utils'
+import { tabData, tabs } from '../utils'
 import { ListConsumer } from '../contexts'
 
 class Navigation extends React.Component {

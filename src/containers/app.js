@@ -2,17 +2,10 @@ import React from 'react'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import { teal } from '@material-ui/core/colors'
 import Helmet from 'react-helmet'
-import {
-  BrowserRouter,
-  Route,
-  Link,
-  Switch,
-  withRouter,
-} from 'react-router-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
 // import injectTapEventPlugin from 'react-tap-event-plugin'
-import { List, Detail, About, NotFound, User, Message, Drawer, Login } from './'
+import { List, Detail, Login } from './'
 import { colors } from '../utils'
-import { Header } from '../components'
 import { ContextProvider } from '../contexts'
 
 // :global(.back-enter) {

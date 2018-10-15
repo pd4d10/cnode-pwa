@@ -1,13 +1,6 @@
 // @flow
 import React from 'react'
-import {
-  Dialog,
-  Slide,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-} from '@material-ui/core'
+import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core'
 import { ArrowBack, Share } from '@material-ui/icons'
 import TimeAgo from 'timeago-react'
 import Helmet from 'react-helmet'

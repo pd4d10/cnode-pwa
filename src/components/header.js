@@ -2,8 +2,7 @@
 import React from 'react'
 import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core'
 import { withRouter } from 'react-router-dom'
-import { ArrowBack, Menu } from '@material-ui/icons'
-import { DrawerConsumer } from '../contexts'
+import { ArrowBack } from '@material-ui/icons'
 import { mapper, firstScreenPaths } from '../utils'
 
 function getTitle(pathname) {

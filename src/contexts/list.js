@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { fetchAPI, tabPaths, tabs } from '../utils'
+import { fetchAPI, tabs } from '../utils'
 
 const { Consumer, Provider } = React.createContext()
 

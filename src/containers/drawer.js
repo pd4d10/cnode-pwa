@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { pure } from 'recompose'
 import {
   Avatar,
   Divider,

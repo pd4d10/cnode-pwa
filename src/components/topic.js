@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { pure } from 'recompose'
 import { ListItem } from '@material-ui/core'
 import TimeAgo from 'timeago-react'
-import { getTagFromTopic, colors } from '../utils'
+import { colors } from '../utils'
 import * as types from '../types'
 import $s from './topic.module.css'
 

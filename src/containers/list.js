@@ -12,23 +12,14 @@ import {
   Badge,
   InputLabel,
 } from '@material-ui/core'
-import {
-  Add,
-  Close,
-  Edit,
-  Notifications,
-  AccountCircle,
-} from '@material-ui/icons'
+import { Close, Edit, Notifications, AccountCircle } from '@material-ui/icons'
 // import MdEditor from 'react-md-editor'
 import { withRouter } from 'react-router-dom'
 import { throttle } from 'lodash-es'
 import { Topic } from '../components'
 import { Navigation } from './'
-import { tabData, tabPaths } from '../utils'
 // import ContentLoader from 'react-content-loader'
 import { ListConsumer } from '../contexts'
-import * as types from '../types'
-import { withContext } from 'recompose'
 
 // @keyframes spin {
 //   100% {

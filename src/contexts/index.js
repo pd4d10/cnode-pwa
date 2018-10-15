@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ListProvider, ListConsumer, withList } from './list'
+import { ListProvider, ListConsumer } from './list'
 import { DrawerProvider, DrawerConsumer } from './drawer'
 import { AuthProvider, AuthConsumer } from './auth'
 
