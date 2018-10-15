@@ -4,12 +4,13 @@ import { fetchAPI, tabs } from '../utils'
 
 const { Consumer, Provider } = React.createContext()
 
-export const ListConsumer = Consumer
+export const TopicConsumer = Consumer
 
-export class ListProvider extends React.Component {
+export class TopicProvider extends React.Component {
   state = {
     isLoading: false,
     isLoadingMore: false,
+    topicMapper: {},
     topics: [[], [], [], [], []],
     pages: [1, 1, 1, 1, 1],
     scrollYs: [0, 0, 0, 0, 0],
@@ -25,6 +26,13 @@ export class ListProvider extends React.Component {
   fetchTopics = async page => {
     const tab = this.getCurrentTab()
     const { data } = await fetchAPI(`/topics?tab=${tab}&page=${page}&limit=20`)
+    const topicMapper = {}
+    data.forEach(item => {
+      topicMapper[item.id] = item
+    })
+    this.setState({
+      topicMapper: { ...this.state.topicMapper, ...topicMapper },
+    })
     return data
   }
 
@@ -73,7 +81,7 @@ export class ListProvider extends React.Component {
 
   render() {
     const index = this.getCurrentIndex()
-    const { isLoading, isLoadingMore } = this.state
+    const { isLoading, isLoadingMore, topicMapper } = this.state
     const { load, loadMore, setScrollY } = this
     const topics = this.state.topics[index]
     const scrollY = this.state.scrollYs[index]
@@ -89,6 +97,7 @@ export class ListProvider extends React.Component {
           loadMore,
           setScrollY,
           currentIndex: index,
+          topicMapper,
         }}
       >
         {this.props.children}
@@ -97,4 +106,4 @@ export class ListProvider extends React.Component {
   }
 }
 
-ListProvider = withRouter(ListProvider)
+TopicProvider = withRouter(TopicProvider)

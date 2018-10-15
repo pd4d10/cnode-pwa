@@ -19,7 +19,7 @@ import { throttle } from 'lodash-es'
 import { Topic } from '../components'
 import { Navigation } from './'
 // import ContentLoader from 'react-content-loader'
-import { ListConsumer } from '../contexts'
+import { TopicConsumer } from '../contexts'
 
 // @keyframes spin {
 //   100% {
@@ -179,7 +179,7 @@ class ListComponent extends React.Component {
 }
 
 export default withRouter(props => (
-  <ListConsumer>
+  <TopicConsumer>
     {contexts => <ListComponent {...contexts} {...props} />}
-  </ListConsumer>
+  </TopicConsumer>
 ))

@@ -2,12 +2,12 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { BottomNavigation, BottomNavigationAction } from '@material-ui/core'
 import { tabData, tabs } from '../utils'
-import { ListConsumer } from '../contexts'
+import { TopicConsumer } from '../contexts'
 
 class Navigation extends React.Component {
   render() {
     return (
-      <ListConsumer>
+      <TopicConsumer>
         {({ setScrollY, currentIndex }) => (
           <BottomNavigation
             style={{
@@ -38,7 +38,7 @@ class Navigation extends React.Component {
             ))}
           </BottomNavigation>
         )}
-      </ListConsumer>
+      </TopicConsumer>
     )
   }
 }
