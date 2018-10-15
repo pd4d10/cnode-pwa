@@ -62,7 +62,7 @@ class ListComponent extends React.Component<ListProps, ListState> {
   // 1. Tag is same, close drawer and do nothing
   // 2. Tag is different, navigator to new tag URL, and refresh data
   // Once it was implemented in actions, now move it to component
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(nextProps) {
     if (nextProps.location.pathname !== this.props.location.pathname) {
       this.props.load()
     }
