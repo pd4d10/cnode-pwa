@@ -1,6 +1,6 @@
 export { App } from './app'
 export { default as List } from './list'
-export { Detail } from './detail'
+export { default as Detail } from './detail'
 export { About } from './about'
 export { NotFound } from './not-found'
 export { Drawer } from './drawer'

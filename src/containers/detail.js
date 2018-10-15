@@ -17,7 +17,7 @@ type DetailState = {
 
 const Transition = props => <Slide direction="up" {...props} />
 
-class DetailComponent extends React.Component<any, DetailState> {
+class Detail extends React.Component<any, DetailState> {
   state = {
     topic: null,
     isLoading: false,
@@ -119,4 +119,4 @@ class DetailComponent extends React.Component<any, DetailState> {
   }
 }
 
-export const Detail = withRouter(DetailComponent)
+export default withRouter(Detail)

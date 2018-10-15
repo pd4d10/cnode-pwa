@@ -9,7 +9,12 @@ import * as types from '../types'
 import $s from './topic.module.css'
 
 export const Topic = pure((props: types.ListTopic) => (
-  <ListItem button component={Link} to={`/topic/${props.id}`}>
+  <ListItem
+    button
+    component={Link}
+    to={`/topic/${props.id}`}
+    className={$s.container}
+  >
     <div className={$s.avatar}>
       <img src={props.author.avatar_url} alt={props.author.loginname} />
     </div>

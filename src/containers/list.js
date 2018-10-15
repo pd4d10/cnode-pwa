@@ -10,9 +10,16 @@ import {
   Typography,
   FormControl,
   Input,
+  Badge,
   InputLabel,
 } from '@material-ui/core'
-import { Add, Close, Send } from '@material-ui/icons'
+import {
+  Add,
+  Close,
+  Edit,
+  Notifications,
+  AccountCircle,
+} from '@material-ui/icons'
 // import MdEditor from 'react-md-editor'
 import { withRouter } from 'react-router-dom'
 import { throttle } from 'lodash-es'
@@ -93,54 +100,35 @@ class ListComponent extends React.Component {
     const { props } = this
     return (
       <div>
+        <AppBar>
+          <Toolbar variant="dense">
+            <Typography variant="title" color="inherit" style={{ flexGrow: 1 }}>
+              {['社区', '精华', '分享', '问答', '招聘'][props.currentIndex]}
+            </Typography>
+            <IconButton color="inherit">
+              <Edit />
+            </IconButton>
+            <IconButton color="inherit" onClick={() => {}}>
+              <Badge badgeContent={1} color="secondary">
+                <Notifications />
+              </Badge>
+            </IconButton>
+            <IconButton color="inherit">
+              <AccountCircle />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
         {props.isLoading ? (
-          // <ContentLoader
-          //   height={144}
-          //   width={750}
-          //   speed={2}
-          //   primaryColor={'#f3f3f3'}
-          //   secondaryColor={'#ecebeb'}
-          // >
-          //   <circle cx="48" cy="48" r="48" />
-          //   <rect x="75" y="13" rx="4" ry="4" width="100" height="13" />
-          //   <rect x="75" y="37" rx="4" ry="4" width="50" height="8" />
-          //   <rect x="0" y="70" rx="5" ry="5" width="400" height="400" />
-          // </ContentLoader>
           <div>loading...</div>
         ) : (
           <div>
             {props.topics.map((topic, index) => (
-              // <li
-              //   key={topic.id}
-              //   style={{
-              //     borderTopColor: '#f0f0f0',
-              //     borderTopWidth: index ? 1 : 0,
-              //     borderTopStyle: 'solid',
-              //   }}
-              // >
               <Topic {...topic} key={topic.id} />
-              // </li>
             ))}
           </div>
         )}
 
         {props.isLoadingMore && <div>loading more...</div>}
-
-        {/* <Button
-          variant="fab"
-          color="primary"
-          style={{
-            //   zIndex: 2,
-            position: 'fixed',
-            bottom: 16,
-            right: 16,
-          }}
-          onClick={() => {
-            this.setState({ dialogVisible: true })
-          }}
-        >
-          <Add />
-        </Button> */}
         <Dialog
           fullScreen
           open={this.state.dialogVisible}
@@ -149,7 +137,7 @@ class ListComponent extends React.Component {
           // }}
           TransitionComponent={Transition}
         >
-          <AppBar>
+          <AppBar color="secondary">
             <Toolbar>
               <IconButton
                 color="inherit"
@@ -169,7 +157,7 @@ class ListComponent extends React.Component {
                   this.setState({ dialogVisible: false })
                 }}
               >
-                <Send />
+                <Edit />
               </Button>
             </Toolbar>
           </AppBar>
@@ -196,12 +184,6 @@ class ListComponent extends React.Component {
     )
   }
 }
-
-// class List extends React.Component {
-//   render() {
-//     return <ListComponent {...this.props} />
-//   }
-// }
 
 export default withRouter(props => (
   <ListConsumer>

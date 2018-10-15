@@ -64,8 +64,6 @@ export const App = props => {
           <main>
             <Helmet titleTemplate="%s - CNode PWA" defaultTitle="CNode PWA" />
             <Login />
-            {/* <Drawer /> */}
-            <Header />
 
             <div style={{ marginTop: 56, marginBottom: 56 }}>
               <Route exact path="/" component={List} />
