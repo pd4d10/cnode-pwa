@@ -35,12 +35,13 @@ class Navigation extends React.Component {
               }
             }}
           >
-            {tabData.map(({ pathname, title, Icon }) => (
+            {tabData.map(({ title, Icon }) => (
               <BottomNavigationAction
                 showLabel
                 key={title}
                 label={title}
                 icon={<Icon />}
+                style={{ minWidth: 0 }} // small device
               />
             ))}
           </BottomNavigation>
