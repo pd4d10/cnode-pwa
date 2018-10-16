@@ -10,9 +10,7 @@ import * as types from '../types'
 export const Reply = pure((props: types.Reply) => (
   <div style={{ marginTop: 8, marginBottom: 8 }}>
     <div style={{ display: 'flex', marginBottom: 6 }}>
-      <Link to={`/user/${props.author.loginname}`}>
-        <Avatar src={props.author.avatar_url} alt={props.author.loginname} />
-      </Link>
+      <Avatar {...props.author} />
       <Extra>
         <div>{props.author.loginname}</div>
         <time>

@@ -5,6 +5,7 @@ import { pure } from 'recompose'
 import { ListItem } from '@material-ui/core'
 import TimeAgo from 'timeago-react'
 import { colors } from '../utils'
+import { Avatar } from './'
 import * as types from '../types'
 import $s from './topic.module.css'
 
@@ -15,9 +16,7 @@ export const Topic = pure((props: types.ListTopic) => (
     to={`/topic/${props.id}`}
     style={{ borderBottom: '1px solid #f0f0f0' }}
   >
-    <div className={$s.avatar}>
-      <img src={props.author.avatar_url} alt={props.author.loginname} />
-    </div>
+    <Avatar {...props.author} />
     <div className={$s.content}>
       <h3 className={$s.title}>{props.title}</h3>
       <div className={$s.extra}>

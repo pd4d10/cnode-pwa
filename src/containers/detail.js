@@ -5,7 +5,7 @@ import { ArrowBack, Share } from '@material-ui/icons'
 import TimeAgo from 'timeago-react'
 import Helmet from 'react-helmet'
 import { withRouter } from 'react-router-dom'
-import { Reply } from '../components'
+import { Reply, Avatar } from '../components'
 import Loading from '../components/loading'
 import { TopicConsumer } from '../contexts'
 import $s from './detail.module.css'
@@ -107,13 +107,7 @@ class Detail extends React.Component<any, DetailState> {
               <div className={$s.container}>
                 <div className={$s.title}>{topic.title}</div>
                 <div className={$s.info}>
-                  <div>
-                    <img
-                      className={$s.avatar}
-                      src={topic.author.avatar_url}
-                      alt={topic.author.loginname}
-                    />
-                  </div>
+                  <Avatar {...topic.author} />
                   <div className={$s.extra}>
                     <div>{topic.author.loginname}</div>
                     <div className={$s.tip}>
