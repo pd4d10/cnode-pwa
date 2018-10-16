@@ -1,11 +1,11 @@
 // @flow
 import React from 'react'
-import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core'
-import { ArrowBack, Share } from '@material-ui/icons'
+import { IconButton } from '@material-ui/core'
+import { Share } from '@material-ui/icons'
 import TimeAgo from 'timeago-react'
 import Helmet from 'react-helmet'
 import { withRouter } from 'react-router-dom'
-import { Reply, Avatar } from '../components'
+import { Reply, Avatar, Header } from '../components'
 import Loading from '../components/loading'
 import { TopicConsumer } from '../contexts'
 import $s from './detail.module.css'
@@ -63,30 +63,9 @@ class Detail extends React.Component<any, DetailState> {
           return (
             <>
               <Helmet title={topic.title} />
-
-              <AppBar>
-                <Toolbar variant="dense">
-                  <IconButton
-                    color="inherit"
-                    style={{ marginLeft: -12, marginRight: 20 }}
-                    onClick={() => {
-                      if (history.length === 1) {
-                        // If no history, go to homepage
-                        history.push('/')
-                      } else {
-                        history.goBack()
-                      }
-                    }}
-                  >
-                    <ArrowBack />
-                  </IconButton>
-                  <Typography
-                    variant="title"
-                    color="inherit"
-                    style={{ flexGrow: 1 }}
-                  >
-                    话题
-                  </Typography>
+              <Header
+                title="话题"
+                rightWidget={() => (
                   <IconButton
                     color="inherit"
                     onClick={() => {
@@ -101,8 +80,8 @@ class Detail extends React.Component<any, DetailState> {
                   >
                     <Share />
                   </IconButton>
-                </Toolbar>
-              </AppBar>
+                )}
+              />
 
               <div className={$s.container}>
                 <div className={$s.title}>{topic.title}</div>

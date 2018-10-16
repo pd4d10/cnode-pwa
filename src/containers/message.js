@@ -1,7 +1,9 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import { IconButton } from '@material-ui/core'
+import { DoneAll } from '@material-ui/icons'
 import { withContext, AuthConsumer } from '../contexts'
-import { MessageItem } from '../components'
+import { MessageItem, Header } from '../components'
 
 class Message extends React.Component {
   componentDidMount() {
@@ -12,6 +14,19 @@ class Message extends React.Component {
   render() {
     return (
       <div>
+        <Header
+          title="消息"
+          rightWidget={() => (
+            <IconButton
+              color="inherit"
+              onClick={() => {
+                this.props.markAllAsRead()
+              }}
+            >
+              <DoneAll />
+            </IconButton>
+          )}
+        />
         {this.props.unreadMessages.map(message => (
           <MessageItem key={message.id} {...message} />
         ))}

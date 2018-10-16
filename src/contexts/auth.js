@@ -65,9 +65,21 @@ export class AuthProvider extends React.Component<any, AuthState> {
     })
   }
 
+  markAllAsRead = async () => {
+    await fetchAPI('/message/mark_all', {
+      accesstoken: this.state.token,
+    })
+    this.fetchMessages()
+  }
+
   render() {
     const { count, unreadMessages, readMessages } = this.state
-    const { fetchUnreadCount, fetchMessages, runAfterTokenVerified } = this
+    const {
+      fetchUnreadCount,
+      fetchMessages,
+      runAfterTokenVerified,
+      markAllAsRead,
+    } = this
     return (
       <Provider
         value={{
@@ -77,6 +89,7 @@ export class AuthProvider extends React.Component<any, AuthState> {
           fetchUnreadCount,
           fetchMessages,
           runAfterTokenVerified,
+          markAllAsRead,
         }}
       >
         {this.props.children}
