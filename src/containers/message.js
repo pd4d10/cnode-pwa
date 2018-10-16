@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 import { IconButton } from '@material-ui/core'
 import { DoneAll } from '@material-ui/icons'
 import { withContext, AuthConsumer } from '../contexts'
@@ -7,12 +7,12 @@ import { MessageItem, Header } from '../components'
 
 class Message extends React.Component {
   componentDidMount() {
-    this.props.runAfterTokenVerified(this.props.fetchMessages)
-    // this.props.fetchMessages()
+    // this.props.runAfterTokenVerified(this.props.fetchMessages)
+    if (this.props.token) this.props.fetchMessages()
   }
 
   render() {
-    return (
+    return this.props.token ? (
       <div>
         <Header
           title="消息"
@@ -34,6 +34,8 @@ class Message extends React.Component {
           <MessageItem key={message.id} {...message} />
         ))}
       </div>
+    ) : (
+      <Redirect to="/login" />
     )
   }
 }

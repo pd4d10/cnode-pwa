@@ -21,13 +21,7 @@ export class AuthProvider extends React.Component<any, AuthState> {
   async componentDidMount() {
     const token = localStorage.getItem('token')
     if (token) {
-      const isValid = await this.verifyToken(token)
-      if (isValid) {
-        this.setState({ token })
-        this.fetchUnreadCount(token)
-        this.queueAfterToken.forEach(callback => callback())
-        this.queueAfterToken = []
-      }
+      await this.verifyToken(token)
     }
   }
 
@@ -42,7 +36,11 @@ export class AuthProvider extends React.Component<any, AuthState> {
       const { id, loginname, avatar_url } = await fetchAPI('/accesstoken', {
         accesstoken: token,
       })
-      // this.setState({ })
+      this.setState({ token })
+      this.fetchUnreadCount(token)
+      localStorage.setItem('token', token)
+      // this.queueAfterToken.forEach(callback => callback())
+      // this.queueAfterToken = []
       return true
     } catch (err) {
       return false
@@ -73,16 +71,18 @@ export class AuthProvider extends React.Component<any, AuthState> {
   }
 
   render() {
-    const { count, unreadMessages, readMessages } = this.state
+    const { token, count, unreadMessages, readMessages } = this.state
     const {
       fetchUnreadCount,
       fetchMessages,
       runAfterTokenVerified,
       markAllAsRead,
+      verifyToken,
     } = this
     return (
       <Provider
         value={{
+          token,
           count,
           unreadMessages,
           readMessages,
@@ -90,6 +90,7 @@ export class AuthProvider extends React.Component<any, AuthState> {
           fetchMessages,
           runAfterTokenVerified,
           markAllAsRead,
+          verifyToken,
         }}
       >
         {this.props.children}

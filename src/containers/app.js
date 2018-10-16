@@ -47,12 +47,11 @@ class App extends React.Component {
           <MuiThemeProvider theme={theme}>
             <main>
               <Helmet titleTemplate="%s - CNode PWA" defaultTitle="CNode PWA" />
-              <Login />
-
               <div style={{ marginTop: 48, marginBottom: 56 }}>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/message" component={Message} />
                 <Route path="/topic/:id" component={Detail} />
+                <Route path="/login" component={Login} />
 
                 {/* <Switch>
                   <Route path="/messages" component={Message} />

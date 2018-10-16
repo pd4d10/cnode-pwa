@@ -5761,6 +5761,11 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+jsqr@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/jsqr/-/jsqr-1.1.1.tgz#a0d7f95e6c3b0bec913dfef2ca64a877f28ed05f"
+  integrity sha512-FVoMU2ncTyjaOqN/vwvDnZ7jaAVvFzM3LK3vG3jvQZFWJQlAwJ1XTCOgAEKo+4Rkd6ydMXTTvqGV/4w5VunmTw==
+
 jss-camel-case@^6.0.0, jss-camel-case@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/jss-camel-case/-/jss-camel-case-6.1.0.tgz#ccb1ff8d6c701c02a1fed6fb6fb6b7896e11ce44"
@@ -8133,6 +8138,15 @@ react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-qr-reader@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-qr-reader/-/react-qr-reader-2.1.1.tgz#25fdb9812d61f727ef20614342eb54394f8e0ab6"
+  integrity sha512-Xid7aBPZMMl9Xh4mdz9w8HZZsbL1BVbRLuoE2ixs5zwtgF0IGarWZ5cbJVaxCydus6vzEL4FQf4gpItC/jz8hg==
+  dependencies:
+    jsqr "^1.1.1"
+    prop-types "^15.5.8"
+    webrtc-adapter "^6.4.0"
+
 react-redux@^5.0.3:
   version "5.0.7"
   resolved "http://registry.npmjs.org/react-redux/-/react-redux-5.0.7.tgz#0dc1076d9afb4670f993ffaef44b8f8c1155a4c8"
@@ -8689,6 +8703,13 @@ rsvp@^3.3.3:
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-3.6.2.tgz#2e96491599a96cde1b515d5674a8f7a91452926a"
   integrity sha512-OfWGQTb9vnwRjwtA2QwpG2ICclHC3pgXZO5xt8H2EfgDquO0qVdSb5T88L4qJVAEugbS56pAuV4XZM58UX8ulw==
 
+rtcpeerconnection-shim@^1.2.14:
+  version "1.2.14"
+  resolved "https://registry.yarnpkg.com/rtcpeerconnection-shim/-/rtcpeerconnection-shim-1.2.14.tgz#67903d6f7b7bf508d6d1e4791de3e3b49c3754c0"
+  integrity sha512-/sl1vgarkFPU2rbXy+EMmytMQIzCKNbIm3fChjPnsdytKAROgoivB0KLE7PQRjKx/d/nr/Yx+6qu0/eCpoxn/A==
+  dependencies:
+    sdp "^2.6.0"
+
 run-async@^2.2.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/run-async/-/run-async-2.3.0.tgz#0371ab4ae0bdd720d4166d7dfda64ff7a445a6c0"
@@ -8795,6 +8816,11 @@ schema-utils@^1.0.0:
     ajv "^6.1.0"
     ajv-errors "^1.0.0"
     ajv-keywords "^3.1.0"
+
+sdp@^2.6.0, sdp@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/sdp/-/sdp-2.9.0.tgz#2eed2d9c0b26c81ff87593107895c68d6fb9a0a6"
+  integrity sha512-XAVZQO4qsfzVTHorF49zCpkdxiGmPNjA8ps8RcJGtGP3QJ/A8I9/SVg/QnkAFDMXIyGbHZBBFwYBw6WdnhT96w==
 
 select-hose@^2.0.0:
   version "2.0.0"
@@ -10084,6 +10110,14 @@ webpack@4.19.1:
     uglifyjs-webpack-plugin "^1.2.4"
     watchpack "^1.5.0"
     webpack-sources "^1.2.0"
+
+webrtc-adapter@^6.4.0:
+  version "6.4.3"
+  resolved "https://registry.yarnpkg.com/webrtc-adapter/-/webrtc-adapter-6.4.3.tgz#6a13baafa6ea4a313ab72c30416bb274a14da8fc"
+  integrity sha512-hWbIPXnCLsDP9QHtIM6LF8wjQ73FmgZxkCNS7poAAwRi2lGZfiu8FJq7Su5SO7fbzufaQ7flmQzGdepxerzJvQ==
+  dependencies:
+    rtcpeerconnection-shim "^1.2.14"
+    sdp "^2.9.0"
 
 websocket-driver@>=0.5.1:
   version "0.7.0"

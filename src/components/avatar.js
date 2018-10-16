@@ -12,6 +12,7 @@ export const Avatar = withRouter(
         borderRadius: '50%',
         ...imgStyle,
       }}
+      alt={loginname}
       onClick={e => {
         e.preventDefault()
         history.push(`/user/${loginname}`)
