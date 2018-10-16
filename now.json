@@ -1,4 +1,13 @@
 {
   "name": "cnode",
-  "alias": "cnode"
+  "alias": "cnode",
+  "type": "static",
+  "static": {
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
 }
