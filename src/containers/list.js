@@ -109,15 +109,12 @@ class ListComponent extends React.Component {
             </IconButton>
           </Toolbar>
         </AppBar>
-        {props.isLoading ? (
-          <div>loading...</div>
-        ) : (
-          <div>
-            {props.topics.map((topic, index) => (
-              <Topic {...topic} key={topic.id} />
-            ))}
-          </div>
-        )}
+        {props.isLoading && <div>loading...</div>}
+        <div>
+          {props.topics.map((topic, index) => (
+            <Topic {...topic} key={topic.id} />
+          ))}
+        </div>
 
         {props.isLoadingMore && <div>loading more...</div>}
         <Dialog

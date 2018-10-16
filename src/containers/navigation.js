@@ -8,7 +8,7 @@ class Navigation extends React.Component {
   render() {
     return (
       <TopicConsumer>
-        {({ setScrollY, currentIndex }) => (
+        {({ setScrollY, currentIndex, load }) => (
           <BottomNavigation
             style={{
               position: 'fixed',
@@ -19,13 +19,20 @@ class Navigation extends React.Component {
             }}
             value={currentIndex}
             onChange={(_, index) => {
-              console.log(window.scrollY)
-              setScrollY(window.scrollY)
+              // console.log(window.scrollY)
+              if (currentIndex === index) {
+                // scroll to top and refresh
+                window.scrollTo(0, 0)
+                load()
+              } else {
+                // save scroll position and push new route
+                setScrollY(window.scrollY)
 
-              if (index === 0) {
-                this.props.history.push('/')
+                if (index === 0) {
+                  this.props.history.push('/')
+                }
+                this.props.history.push('/?tab=' + tabs[index])
               }
-              this.props.history.push('/?tab=' + tabs[index])
             }}
           >
             {tabData.map(({ pathname, title, Icon }) => (
