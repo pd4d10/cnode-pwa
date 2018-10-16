@@ -4,9 +4,9 @@ import { teal } from '@material-ui/core/colors'
 import Helmet from 'react-helmet'
 import { BrowserRouter, Route } from 'react-router-dom'
 // import injectTapEventPlugin from 'react-tap-event-plugin'
-import { List, Detail, Login } from './'
+import { Home, Detail, Login, Message } from './'
 import { colors } from '../utils'
-import { ContextProvider } from '../contexts'
+import { ContextProvider, withContext, AuthConsumer } from '../contexts'
 
 // :global(.back-enter) {
 //   opacity: 0;
@@ -39,32 +39,37 @@ const theme = createMuiTheme({
   },
 })
 
-export const App = props => {
-  return (
-    <BrowserRouter>
-      <ContextProvider>
-        <MuiThemeProvider theme={theme}>
-          <main>
-            <Helmet titleTemplate="%s - CNode PWA" defaultTitle="CNode PWA" />
-            <Login />
+class App extends React.Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <ContextProvider>
+          <MuiThemeProvider theme={theme}>
+            <main>
+              <Helmet titleTemplate="%s - CNode PWA" defaultTitle="CNode PWA" />
+              <Login />
 
-            <div style={{ marginTop: 48, marginBottom: 56 }}>
-              <Route exact path="/" component={List} />
-              <Route path="/topic/:id" component={Detail} />
+              <div style={{ marginTop: 48, marginBottom: 56 }}>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/message" component={Message} />
+                <Route path="/topic/:id" component={Detail} />
 
-              {/* <Switch>
-                <Route path="/messages" component={Message} />
-                <Route path="/settings" component={Message} />
-                <Route path="/about" component={About} />
-                <Route path="/user/:name" component={User} />
-                <Route component={NotFound} />
-              </Switch> */}
-            </div>
+                {/* <Switch>
+                  <Route path="/messages" component={Message} />
+                  <Route path="/settings" component={Message} />
+                  <Route path="/about" component={About} />
+                  <Route path="/user/:name" component={User} />
+                  <Route component={NotFound} />
+                </Switch> */}
+              </div>
 
-            <div style={{ marginTop: 56 }} />
-          </main>
-        </MuiThemeProvider>
-      </ContextProvider>
-    </BrowserRouter>
-  )
+              <div style={{ marginTop: 56 }} />
+            </main>
+          </MuiThemeProvider>
+        </ContextProvider>
+      </BrowserRouter>
+    )
+  }
 }
+
+export default withContext(AuthConsumer)(App)

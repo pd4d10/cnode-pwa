@@ -18,7 +18,18 @@ export const colors = {
   avatarBackground: '#f5f5f5',
 }
 
-export async function fetchAPI(url, options) {
+export async function fetchAPI(url, body) {
+  let options = {}
+  if (body) {
+    options.method = 'POST'
+    options.headers = {
+      // 'Content-Type': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
+    }
+    // options.body = JSON.stringify(body)
+    options.body = new URLSearchParams(body).toString()
+  }
+
   const res = await fetch(`https://cnodejs.org/api/v1${url}`, options)
   const json = await res.json()
 

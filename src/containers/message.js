@@ -1,16 +1,26 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import { withContext, AuthConsumer } from '../contexts'
+import { MessageItem } from '../components'
 
-const Message = props => (
-  <div>
-    {/* {props.hasnot_read_messages.map(message => (
-      <div key={message.id}>{message.topic.title}</div>
-    ))}
-    {props.has_read_messages.map(message => (
-      <div key={message.id}>{message.topic.title}</div>
-    ))} */}
-    message
-  </div>
-)
+class Message extends React.Component {
+  componentDidMount() {
+    this.props.runAfterTokenVerified(this.props.fetchMessages)
+    // this.props.fetchMessages()
+  }
 
-export default withRouter(Message)
+  render() {
+    return (
+      <div>
+        {this.props.unreadMessages.map(message => (
+          <MessageItem key={message.id} {...message} />
+        ))}
+        {this.props.readMessages.map(message => (
+          <MessageItem key={message.id} {...message} />
+        ))}
+      </div>
+    )
+  }
+}
+
+export default withRouter(withContext(AuthConsumer)(Message))

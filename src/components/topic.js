@@ -7,6 +7,7 @@ import TimeAgo from 'timeago-react'
 import { colors } from '../utils'
 import { Avatar } from './'
 import * as types from '../types'
+import $c from './common.module.css'
 import $s from './topic.module.css'
 
 export const Topic = pure((props: types.ListTopic) => (
@@ -14,11 +15,11 @@ export const Topic = pure((props: types.ListTopic) => (
     button
     component={Link}
     to={`/topic/${props.id}`}
-    style={{ borderBottom: '1px solid #f0f0f0' }}
+    className={$c.item}
   >
     <Avatar {...props.author} />
-    <div className={$s.content}>
-      <h3 className={$s.title}>{props.title}</h3>
+    <div className={$c.content}>
+      <h3 className={$c.title}>{props.title}</h3>
       <div className={$s.extra}>
         <div className={$s.left}>
           <div

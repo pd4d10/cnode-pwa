@@ -1,5 +1,5 @@
-export { App } from './app'
-export { default as List } from './list'
+export { default as App } from './app'
+export { default as Home } from './home'
 export { default as Detail } from './detail'
 export { About } from './about'
 export { NotFound } from './not-found'

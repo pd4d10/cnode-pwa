@@ -19,7 +19,7 @@ import { throttle } from 'lodash-es'
 import { Topic } from '../components'
 import { Navigation } from './'
 // import ContentLoader from 'react-content-loader'
-import { TopicConsumer } from '../contexts'
+import { TopicConsumer, AuthConsumer, withContext } from '../contexts'
 
 // @keyframes spin {
 //   100% {
@@ -29,7 +29,7 @@ import { TopicConsumer } from '../contexts'
 
 const Transition = props => <Slide direction="up" {...props} />
 
-class ListComponent extends React.Component {
+class Home extends React.Component {
   state = {
     title: '',
     content: '',
@@ -99,10 +99,23 @@ class ListComponent extends React.Component {
             <IconButton color="inherit">
               <Edit />
             </IconButton>
-            <IconButton color="inherit" onClick={() => {}}>
-              <Badge badgeContent={1} color="secondary">
-                <Notifications />
-              </Badge>
+            <IconButton
+              color="inherit"
+              onClick={() => {
+                this.props.history.push('/message')
+              }}
+            >
+              <AuthConsumer>
+                {({ count }) =>
+                  count ? (
+                    <Badge badgeContent={count} color="secondary">
+                      <Notifications />
+                    </Badge>
+                  ) : (
+                    <Notifications />
+                  )
+                }
+              </AuthConsumer>
             </IconButton>
             <IconButton color="inherit">
               <AccountCircle />
@@ -175,8 +188,4 @@ class ListComponent extends React.Component {
   }
 }
 
-export default withRouter(props => (
-  <TopicConsumer>
-    {contexts => <ListComponent {...contexts} {...props} />}
-  </TopicConsumer>
-))
+export default withRouter(withContext(TopicConsumer)(Home))

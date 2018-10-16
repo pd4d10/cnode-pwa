@@ -53,3 +53,27 @@ export type User = {
   recent_topics: RecentTopics[],
   recent_replies: RecentTopics[],
 }
+
+// /messages
+type MessageReply = {
+  id: string,
+  content: string,
+  ups: any[],
+  create_at: string,
+}
+
+type MessageTopic = {
+  id: string,
+  title: string,
+  last_reply_at: string,
+}
+
+export type MessageItem = {
+  id: string,
+  type: string,
+  has_read: boolean,
+  author: Author,
+  topic: MessageTopic,
+  reply: MessageReply,
+  create_at: string,
+}

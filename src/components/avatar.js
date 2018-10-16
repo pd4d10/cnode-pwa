@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
-export const Avatar = ({ avatar_url, loginname, imgStyle }) => (
-  <Link to={`/user/${loginname}`}>
+export const Avatar = withRouter(
+  ({ avatar_url, loginname, imgStyle, history }) => (
     <img
       src={avatar_url}
       style={{
@@ -12,8 +12,12 @@ export const Avatar = ({ avatar_url, loginname, imgStyle }) => (
         borderRadius: '50%',
         ...imgStyle,
       }}
+      onClick={e => {
+        e.preventDefault()
+        history.push(`/user/${loginname}`)
+      }}
     />
-  </Link>
+  ),
 )
 
 export const Extra = props => (
