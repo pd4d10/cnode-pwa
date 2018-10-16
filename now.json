@@ -1,6 +1,5 @@
 {
   "name": "cnode",
-  "alias": "cnode",
   "type": "static",
   "static": {
     "rewrites": [
