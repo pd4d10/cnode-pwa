@@ -70,6 +70,16 @@ export class AuthProvider extends React.Component<any, AuthState> {
     this.fetchMessages()
   }
 
+  postTopic = async ({ title, tab, content }) => {
+    const { topic_id } = await fetchAPI('/topics', {
+      title,
+      tab: 'dev', // for test
+      content,
+      accesstoken: this.state.token,
+    })
+    return topic_id
+  }
+
   render() {
     const { token, count, unreadMessages, readMessages } = this.state
     const {
@@ -78,6 +88,7 @@ export class AuthProvider extends React.Component<any, AuthState> {
       runAfterTokenVerified,
       markAllAsRead,
       verifyToken,
+      postTopic,
     } = this
     return (
       <Provider
@@ -91,6 +102,7 @@ export class AuthProvider extends React.Component<any, AuthState> {
           runAfterTokenVerified,
           markAllAsRead,
           verifyToken,
+          postTopic,
         }}
       >
         {this.props.children}

@@ -4,7 +4,7 @@ import { teal } from '@material-ui/core/colors'
 import Helmet from 'react-helmet'
 import { BrowserRouter, Route } from 'react-router-dom'
 // import injectTapEventPlugin from 'react-tap-event-plugin'
-import { Home, Detail, Login, Message } from './'
+import { Home, Detail, Login, Message, Post } from './'
 import { colors } from '../utils'
 import { ContextProvider, withContext, AuthConsumer } from '../contexts'
 
@@ -52,6 +52,7 @@ class App extends React.Component {
                 <Route exact path="/message" component={Message} />
                 <Route path="/topic/:id" component={Detail} />
                 <Route path="/login" component={Login} />
+                <Route path="/post" component={Post} />
 
                 {/* <Switch>
                   <Route path="/messages" component={Message} />
