@@ -2,7 +2,7 @@
   "name": "cnode-pwa",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://cnode.now.sh",
+  "homepage": "https://cnode.rocks",
   "dependencies": {
     "@material-ui/core": "^3.1.1",
     "@material-ui/icons": "^3.0.1",
