@@ -1,11 +1,11 @@
 import React from 'react'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
-import { teal } from '@material-ui/core/colors'
+import { colors } from '@material-ui/core'
 import Helmet from 'react-helmet'
 import { BrowserRouter, Route } from 'react-router-dom'
 // import injectTapEventPlugin from 'react-tap-event-plugin'
 import { Home, Detail, Login, Message, Post } from './'
-import { colors } from '../utils'
+// import { colors } from '../utils'
 import { ContextProvider, withContext, AuthConsumer } from '../contexts'
 
 // :global(.back-enter) {
@@ -26,20 +26,28 @@ import { ContextProvider, withContext, AuthConsumer } from '../contexts'
 
 const theme = createMuiTheme({
   palette: {
-    primary: teal,
+    // primary: lightGreen,
+    // type: 'dark',
+
+    primary: colors.teal,
+    secondary: colors.green,
   },
   appBar: {
-    color: colors.background,
+    // color: colors.background,
   },
   floatingActionButton: {
-    color: colors.primary,
+    // color: colors.primary,
   },
   raisedButton: {
-    secondaryColor: colors.primary,
+    // secondaryColor: colors.primary,
   },
 })
 
 class App extends React.Component {
+  componentDidCatch(error, info) {
+    console.log(error, info)
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -47,9 +55,11 @@ class App extends React.Component {
           <MuiThemeProvider theme={theme}>
             <main>
               <Helmet titleTemplate="%s - CNode PWA" defaultTitle="CNode PWA" />
-              <div style={{ marginTop: 48, marginBottom: 56 }}>
+              <div
+              // style={{ marginTop: 48, marginBottom: 56 }}
+              >
                 <Route exact path="/" component={Home} />
-                <Route exact path="/message" component={Message} />
+                <Route path="/message" component={Message} />
                 <Route path="/topic/:id" component={Detail} />
                 <Route path="/login" component={Login} />
                 <Route path="/post" component={Post} />
@@ -63,7 +73,7 @@ class App extends React.Component {
                 </Switch> */}
               </div>
 
-              <div style={{ marginTop: 56 }} />
+              {/* <div style={{ marginTop: 56 }} /> */}
             </main>
           </MuiThemeProvider>
         </ContextProvider>

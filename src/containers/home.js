@@ -7,7 +7,10 @@ import {
   IconButton,
   Slide,
   Typography,
+  Paper,
   Badge,
+  Tabs,
+  Tab,
 } from '@material-ui/core'
 import { Close, Edit, Notifications, AccountCircle } from '@material-ui/icons'
 // import MdEditor from 'react-md-editor'
@@ -16,6 +19,7 @@ import { throttle } from 'lodash-es'
 import { Topic } from '../components'
 import { Navigation } from './'
 // import ContentLoader from 'react-content-loader'
+import { tabData, tabs } from '../utils'
 import { TopicConsumer, AuthConsumer, withContext } from '../contexts'
 
 // @keyframes spin {
@@ -96,32 +100,68 @@ class Home extends React.Component {
     const { props } = this
     return (
       <div>
-        <AppBar>
-          <Toolbar variant="dense">
-            <Typography variant="title" color="inherit" style={{ flexGrow: 1 }}>
-              {['社区', '精华', '分享', '问答', '招聘'][props.currentIndex]}
-            </Typography>
-            <IconButton color="inherit" onClick={this.goToPost}>
-              <Edit />
-            </IconButton>
-            <IconButton color="inherit" onClick={this.goToMessage}>
-              <AuthConsumer>
-                {({ count }) =>
-                  count ? (
-                    <Badge badgeContent={count} color="secondary">
-                      <Notifications />
-                    </Badge>
-                  ) : (
-                    <Notifications />
-                  )
-                }
-              </AuthConsumer>
-            </IconButton>
-            <IconButton color="inherit">
-              <AccountCircle />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
+        <TopicConsumer>
+          {({ setScrollY, currentIndex, load }) => (
+            <Paper square style={{ position: 'sticky', top: -48, zIndex: 1 }}>
+              <Toolbar variant="dense">
+                <Typography
+                  variant="title"
+                  color="inherit"
+                  style={{ flexGrow: 1 }}
+                >
+                  {['社区', '精华', '分享', '问答', '招聘'][props.currentIndex]}
+                </Typography>
+                <IconButton color="inherit" onClick={this.goToPost}>
+                  <Edit />
+                </IconButton>
+                <IconButton color="inherit" onClick={this.goToMessage}>
+                  <AuthConsumer>
+                    {({ count }) =>
+                      count ? (
+                        <Badge badgeContent={count} color="secondary">
+                          <Notifications />
+                        </Badge>
+                      ) : (
+                        <Notifications />
+                      )
+                    }
+                  </AuthConsumer>
+                </IconButton>
+                <IconButton color="inherit">
+                  <AccountCircle />
+                </IconButton>
+              </Toolbar>
+              <Tabs
+                style={{ background: '#fff' }}
+                value={currentIndex}
+                onChange={(_, index) => {
+                  // console.log(window.scrollY)
+                  if (currentIndex === index) {
+                    // scroll to top and refresh
+                    window.scrollTo(0, 0)
+                    load()
+                  } else {
+                    // save scroll position and push new route
+                    setScrollY(window.scrollY)
+
+                    if (index === 0) {
+                      this.props.history.push('/')
+                    }
+                    this.props.history.push('/?tab=' + tabs[index])
+                  }
+                }}
+                indicatorColor="primary"
+                textColor="primary"
+                fullWidth
+              >
+                {tabData.map(tab => (
+                  <Tab key={tab.pathname} label={tab.title} value={tab.ids} />
+                ))}
+              </Tabs>
+            </Paper>
+          )}
+        </TopicConsumer>
+
         {props.isLoading && <div>loading...</div>}
         <div>
           {props.topics.map((topic, index) => (
@@ -130,7 +170,7 @@ class Home extends React.Component {
         </div>
 
         {props.isLoadingMore && <div>loading more...</div>}
-        <Navigation />
+        {/* <Navigation /> */}
       </div>
     )
   }
