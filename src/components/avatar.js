@@ -6,7 +6,7 @@ export const Avatar = withRouter(
     <img
       src={avatar_url}
       style={{
-        display: 'block',
+        minWidth: 48, // fix width at chrome
         width: 48,
         height: 48,
         borderRadius: '50%',
