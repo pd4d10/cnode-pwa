@@ -8,31 +8,20 @@
     "@material-ui/icons": "^3.0.1",
     "github-markdown-css": "^2.4.1",
     "lodash-es": "^4.17.11",
-    "prop-types": "^15.6.0",
-    "raven-js": "^3.14.0",
     "react": "^16.5.2",
-    "react-addons-css-transition-group": "^15.4.2",
-    "react-content-loader": "^1.7.3",
     "react-dom": "^16.5.2",
     "react-helmet": "^5.2.0",
     "react-qr-reader": "^2.1.1",
-    "react-redux": "^5.0.3",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.4",
-    "react-tap-event-plugin": "^3.0.2",
     "recompose": "^0.30.0",
-    "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0",
-    "styled-components": "^2.4.0",
     "timeago-react": "^1.0.8"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "exit 0",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build && cp now.json build",
-    "deploy": "now --public deploy build && now alias"
+    "eject": "react-scripts eject"
   },
   "browserslist": [
     ">0.2%",
