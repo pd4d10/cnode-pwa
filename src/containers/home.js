@@ -16,7 +16,7 @@ import { Close, Edit, Notifications, AccountCircle } from '@material-ui/icons'
 // import MdEditor from 'react-md-editor'
 import { withRouter } from 'react-router-dom'
 import { throttle } from 'lodash-es'
-import { Topic } from '../components'
+import { Topic, Loading } from '../components'
 import { Navigation } from './'
 // import ContentLoader from 'react-content-loader'
 import { tabData, tabs } from '../utils'
@@ -44,10 +44,10 @@ class Home extends React.Component {
       document.documentElement.scrollTop -
       document.documentElement.clientHeight
     console.log('toBottom', toBottom)
-    if (toBottom < 200 && !this.props.isLoadingMore && !this.props.isLoading) {
+    if (toBottom < 96 && !this.props.isLoadingMore && !this.props.isLoading) {
       this.props.loadMore()
     }
-  }, 200)
+  }, 500)
 
   componentDidMount() {
     if (this.props.topics.length === 0) {
@@ -99,7 +99,7 @@ class Home extends React.Component {
   render() {
     const { props } = this
     return (
-      <div>
+      <div style={{ marginBottom: 48 }}>
         <TopicConsumer>
           {({ setScrollY, currentIndex, load }) => (
             <Paper square style={{ position: 'sticky', top: -48, zIndex: 1 }}>
@@ -162,14 +162,14 @@ class Home extends React.Component {
           )}
         </TopicConsumer>
 
-        {props.isLoading && <div>loading...</div>}
+        {props.isLoading && <Loading />}
         <div>
           {props.topics.map((topic, index) => (
             <Topic {...topic} key={topic.id} />
           ))}
         </div>
 
-        {props.isLoadingMore && <div>loading more...</div>}
+        {props.isLoadingMore && <Loading />}
         {/* <Navigation /> */}
       </div>
     )
