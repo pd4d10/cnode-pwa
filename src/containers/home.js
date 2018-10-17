@@ -1,12 +1,9 @@
 import React from 'react'
 import {
   Button,
-  AppBar,
-  Dialog,
   Toolbar,
   IconButton,
   Slide,
-  Typography,
   Paper,
   Badge,
   Tabs,
@@ -17,8 +14,7 @@ import { Close, Edit, Notifications, AccountCircle } from '@material-ui/icons'
 import { withRouter } from 'react-router-dom'
 import { throttle } from 'lodash-es'
 import { Topic, Loading } from '../components'
-import { Navigation } from './'
-// import ContentLoader from 'react-content-loader'
+import { ReactComponent as Logo } from '../logo.svg'
 import { tabData, tabs } from '../utils'
 import { TopicConsumer, AuthConsumer, withContext } from '../contexts'
 
@@ -99,22 +95,14 @@ class Home extends React.Component {
   render() {
     const { props } = this
     return (
-      <div style={{ marginBottom: 48 }}>
+      <div style={{ marginBottom: 48, marginTop: -48 }}>
         <TopicConsumer>
           {({ setScrollY, currentIndex, load }) => (
             <Paper square style={{ position: 'sticky', top: -48, zIndex: 1 }}>
               <Toolbar variant="dense">
-                <Typography
-                  variant="title"
-                  color="inherit"
-                  style={{ flexGrow: 1 }}
-                >
-                  {['社区', '精华', '分享', '问答', '招聘'][props.currentIndex]}
-                </Typography>
-                <IconButton color="inherit" onClick={this.goToPost}>
-                  <Edit />
-                </IconButton>
-                <IconButton color="inherit" onClick={this.goToMessage}>
+                <Logo width={24} height={24} />
+                <div style={{ flexGrow: 1 }} />
+                <IconButton color="default" onClick={this.goToMessage}>
                   <AuthConsumer>
                     {({ count }) =>
                       count ? (
@@ -127,7 +115,7 @@ class Home extends React.Component {
                     }
                   </AuthConsumer>
                 </IconButton>
-                <IconButton color="inherit">
+                <IconButton color="default">
                   <AccountCircle />
                 </IconButton>
               </Toolbar>
@@ -171,6 +159,15 @@ class Home extends React.Component {
 
         {props.isLoadingMore && <Loading />}
         {/* <Navigation /> */}
+
+        <Button
+          variant="fab"
+          // color="secondary"
+          style={{ position: 'fixed', bottom: 16, right: 16 }}
+          onClick={this.goToPost}
+        >
+          <Edit />
+        </Button>
       </div>
     )
   }

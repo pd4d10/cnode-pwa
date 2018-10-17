@@ -26,11 +26,8 @@ import { ContextProvider, withContext, AuthConsumer } from '../contexts'
 
 const theme = createMuiTheme({
   palette: {
-    // primary: lightGreen,
-    // type: 'dark',
-
     primary: colors.teal,
-    secondary: colors.green,
+    secondary: colors.grey,
   },
   appBar: {
     // color: colors.background,
@@ -55,9 +52,7 @@ class App extends React.Component {
           <MuiThemeProvider theme={theme}>
             <main>
               <Helmet titleTemplate="%s - CNode PWA" defaultTitle="CNode PWA" />
-              <div
-              // style={{ marginTop: 48, marginBottom: 56 }}
-              >
+              <div style={{ marginTop: 48 }}>
                 <Route exact path="/" component={Home} />
                 <Route path="/message" component={Message} />
                 <Route path="/topic/:id" component={Detail} />
