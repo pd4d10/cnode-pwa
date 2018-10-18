@@ -36,7 +36,7 @@ export type DetailTopic = ListTopic & {
   is_collect: boolean,
 }
 
-type RecentTopics = {
+export type RecentTopics = {
   id: string,
   author: Author,
   title: string,

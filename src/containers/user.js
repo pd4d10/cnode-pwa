@@ -2,12 +2,12 @@
 import React from 'react'
 import { Tabs, Tab } from '@material-ui/core'
 import { withRouter } from 'react-router-dom'
-import { Topic, Header } from '../components'
+import { Header, UserTopic } from '../components'
 import { fetchAPI } from '../utils'
 import * as types from '../types'
 
 type UserState = {
-  data: ?types.User,
+  data: types.User,
   isLoading: boolean,
 }
 
@@ -15,11 +15,20 @@ class User extends React.Component<{}, UserState> {
   state = {
     data: null,
     isLoading: false,
+    tabIndex: 0,
+    tabData: [[], [], []],
   }
 
   fetchUser = async () => {
-    const { data } = await fetchAPI(`/user/${this.props.params.name}`)
-    this.setState({ data })
+    const { loginname } = this.props.match.params
+    const [{ data }, { data: collectData }] = await Promise.all([
+      fetchAPI(`/user/${loginname}`),
+      fetchAPI(`/topic_collect/${loginname}`),
+    ])
+    this.setState({
+      data,
+      tabData: [data.recent_replies, data.recent_topics, collectData],
+    })
   }
 
   componentDidMount() {
@@ -27,32 +36,35 @@ class User extends React.Component<{}, UserState> {
   }
 
   render() {
-    const { data, isLoading } = this.state
+    const { data, collectData, isLoading } = this.state
     return (
       <div>
-        <Header />
         {isLoading ? (
           <div />
         ) : (
           data && (
             <div>
               <img src={data.avatar_url} alt={data.loginname} />
-              <Tabs>
-                <Tab label="近期帖子">
-                  <ul>
-                    {data.recent_topics.map(topic => (
-                      <Topic />
-                    ))}
-                  </ul>
-                </Tab>
-                <Tab label="近期参与">
-                  <ul>
-                    {data.recent_replies.map(topic => (
-                      <Topic />
-                    ))}
-                  </ul>
-                </Tab>
+              <Tabs
+                style={{ background: '#fff' }}
+                value={this.state.tabIndex}
+                onChange={(_, index) => {
+                  this.setState({ tabIndex: index })
+                }}
+                indicatorColor="primary"
+                textColor="primary"
+                fullWidth
+              >
+                <Tab label="最近参与" />
+                <Tab label="最近发布" />
+                <Tab label="话题收藏" />
               </Tabs>
+              <div>
+                {this.state.tabData[this.state.tabIndex].map(topic => (
+                  <UserTopic key={topic.id} {...topic} />
+                ))}
+              </div>
+              <div>-- 没有更多了 --</div>
             </div>
           )
         )}

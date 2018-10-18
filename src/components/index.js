@@ -1,5 +1,5 @@
 export { default as Header } from './header'
-export { Topic } from './topic'
+export { Topic, UserTopic } from './topic'
 export { Reply } from './reply'
 export { Avatar, Extra } from './avatar'
 export { default as MessageItem } from './message-item'

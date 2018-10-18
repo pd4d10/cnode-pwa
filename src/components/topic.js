@@ -33,8 +33,6 @@ export const Topic = pure((props: types.ListTopic) => (
               : props.good
                 ? '精华'
                 : {
-                    all: 'CNode 社区',
-                    good: '精华',
                     share: '分享',
                     ask: '问答',
                     job: '招聘',
@@ -55,3 +53,26 @@ export const Topic = pure((props: types.ListTopic) => (
     </div>
   </ListItem>
 ))
+
+export const UserTopic = (props: types.RecentTopics) => (
+  <ListItem
+    button
+    component={Link}
+    to={`/topic/${props.id}`}
+    className={$c.item}
+  >
+    <Avatar {...props.author} />
+    <div className={$c.content}>
+      <h3 className={$c.title}>{props.title}</h3>
+      <div className={$s.extra}>
+        <div className={$s.left}>{props.author.loginname}</div>
+        <TimeAgo
+          className={$s.timeago}
+          datetime={props.last_reply_at}
+          locale="zh_CN"
+          live={false}
+        />
+      </div>
+    </div>
+  </ListItem>
+)
