@@ -104,8 +104,9 @@ class Home extends React.Component {
                 onChange={(_, index) => {
                   if (index === 0) {
                     this.props.history.push('/')
+                  } else {
+                    this.props.history.push('/?tab=' + tabs[index])
                   }
-                  this.props.history.push('/?tab=' + tabs[index])
                 }}
                 indicatorColor="primary"
                 textColor="primary"
