@@ -5,7 +5,7 @@ import { ArrowBack } from '@material-ui/icons'
 
 const Header = ({ title, rightWidget: Widget, history }) => {
   return (
-    <AppBar color="default">
+    <AppBar color="default" style={{ background: '#fff' }}>
       <Toolbar variant="dense">
         <IconButton
           style={{ marginLeft: -12, marginRight: 20 }}

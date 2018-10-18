@@ -1,25 +1,18 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import $s from './avatar.module.css'
 
-export const Avatar = withRouter(
-  ({ avatar_url, loginname, imgStyle, history }) => (
-    <img
-      src={avatar_url}
-      style={{
-        minWidth: 48, // fix width at chrome
-        width: 48,
-        height: 48,
-        borderRadius: '50%',
-        ...imgStyle,
-      }}
-      alt={loginname}
-      onClick={e => {
-        e.preventDefault()
-        history.push(`/user/${loginname}`)
-      }}
-    />
-  ),
-)
+export const Avatar = withRouter(({ avatar_url, loginname, history }) => (
+  <img
+    src={avatar_url}
+    className={$s.avatar}
+    alt={loginname}
+    onClick={e => {
+      e.preventDefault()
+      history.push(`/user/${loginname}`)
+    }}
+  />
+))
 
 export const Extra = props => (
   <div
