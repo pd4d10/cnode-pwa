@@ -2,27 +2,17 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import $s from './avatar.module.css'
 
-export const Avatar = withRouter(({ avatar_url, loginname, history }) => (
-  <img
-    src={avatar_url}
-    className={$s.avatar}
-    alt={loginname}
-    onClick={e => {
-      e.preventDefault()
-      history.push(`/user/${loginname}`)
-    }}
-  />
+export const AvatarRow = withRouter(({ author, history, children }) => (
+  <div className={$s.container}>
+    <img
+      src={author.avatar_url}
+      className={$s.avatar}
+      alt={author.loginname}
+      onClick={e => {
+        e.preventDefault()
+        history.push(`/user/${author.loginname}`)
+      }}
+    />
+    <div className={$s.content}>{children}</div>
+  </div>
 ))
-
-export const Extra = props => (
-  <div
-    {...props}
-    style={{
-      ...props.style,
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      lineHeight: '24px',
-    }}
-  />
-)

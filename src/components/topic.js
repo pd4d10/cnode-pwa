@@ -5,7 +5,7 @@ import { pure } from 'recompose'
 import { ListItem } from '@material-ui/core'
 import TimeAgo from 'timeago-react'
 import { colors } from '../utils'
-import { Avatar } from './'
+import { AvatarRow } from './'
 import * as types from '../types'
 import $c from './common.module.css'
 import $s from './topic.module.css'
@@ -17,8 +17,7 @@ export const Topic = pure((props: types.ListTopic) => (
     to={`/topic/${props.id}`}
     className={$c.item}
   >
-    <Avatar {...props.author} />
-    <div className={$c.content}>
+    <AvatarRow author={props.author}>
       <h3 className={$c.title}>{props.title}</h3>
       <div className={$s.extra}>
         <div className={$s.left}>
@@ -50,7 +49,7 @@ export const Topic = pure((props: types.ListTopic) => (
           live={false}
         />
       </div>
-    </div>
+    </AvatarRow>
   </ListItem>
 ))
 
@@ -61,8 +60,7 @@ export const UserTopic = (props: types.RecentTopics) => (
     to={`/topic/${props.id}`}
     className={$c.item}
   >
-    <Avatar {...props.author} />
-    <div className={$c.content}>
+    <AvatarRow author={props.author}>
       <h3 className={$c.title}>{props.title}</h3>
       <div className={$s.extra}>
         <div className={$s.left}>{props.author.loginname}</div>
@@ -73,6 +71,6 @@ export const UserTopic = (props: types.RecentTopics) => (
           live={false}
         />
       </div>
-    </div>
+    </AvatarRow>
   </ListItem>
 )

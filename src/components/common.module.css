@@ -2,16 +2,6 @@
   border-bottom: 1px solid #f0f0f0 !important;
 }
 
-.content {
-  display: flex;
-  min-width: 0; /* https://stackoverflow.com/questions/34934586/white-space-nowrap-and-flexbox-did-not-work-in-chrome */
-  flex-direction: column;
-  flex-grow: 1;
-  justify-content: space-between;
-  height: 48px;
-  margin-left: 10px;
-}
-
 .title {
   font-size: 16px;
   line-height: 24px;

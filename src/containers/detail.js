@@ -5,7 +5,7 @@ import { Share } from '@material-ui/icons'
 import TimeAgo from 'timeago-react'
 import Helmet from 'react-helmet'
 import { withRouter } from 'react-router-dom'
-import { Reply, Avatar, Header, Loading } from '../components'
+import { Reply, AvatarRow, Header, Loading } from '../components'
 import $s from './detail.module.css'
 import { fetchAPI } from '../utils'
 import * as types from '../types'
@@ -65,27 +65,24 @@ class Detail extends React.Component<any, DetailState> {
         ) : (
           <div className={$s.container}>
             <div className={$s.title}>{topic.title}</div>
-            <div className={$s.info}>
-              <Avatar {...topic.author} />
-              <div className={$s.extra}>
-                <div>{topic.author.loginname}</div>
-                <div className={$s.tip}>
-                  <span>
-                    创建于
-                    <TimeAgo
-                      datetime={topic.create_at}
-                      locale="zh_CN"
-                      live={false}
-                      style={{ color: '#838383' }}
-                    />
-                  </span>
-                  <span style={{ marginLeft: '6px' }}>
-                    {topic.visit_count}
-                    次浏览
-                  </span>
-                </div>
+            <AvatarRow author={topic.author}>
+              <div>{topic.author.loginname}</div>
+              <div className={$s.tip}>
+                <span>
+                  创建于
+                  <TimeAgo
+                    datetime={topic.create_at}
+                    locale="zh_CN"
+                    live={false}
+                    style={{ color: '#838383' }}
+                  />
+                </span>
+                <span style={{ marginLeft: '6px' }}>
+                  {topic.visit_count}
+                  次浏览
+                </span>
               </div>
-            </div>
+            </AvatarRow>
             <div
               className="markdown-body"
               dangerouslySetInnerHTML={{ __html: topic.content }}

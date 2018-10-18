@@ -1,6 +1,6 @@
 export { default as Header } from './header'
 export { Topic, UserTopic } from './topic'
 export { Reply } from './reply'
-export { Avatar, Extra } from './avatar'
+export { AvatarRow } from './avatar'
 export { default as MessageItem } from './message-item'
 export { Loading, LoadingMore } from './loading'

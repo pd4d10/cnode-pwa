@@ -1,6 +1,21 @@
+.container {
+  display: flex;
+  min-width: 0;
+}
+
 .avatar {
   min-width: 48px; /* fix width at chrome */
   width: 48px;
   height: 48px;
   border-radius: 50%;
+}
+
+.content {
+  display: flex;
+  min-width: 0; /* https://stackoverflow.com/questions/34934586/white-space-nowrap-and-flexbox-did-not-work-in-chrome */
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  height: 48px;
+  margin-left: 10px;
 }
