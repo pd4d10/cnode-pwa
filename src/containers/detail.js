@@ -23,13 +23,10 @@ class Detail extends React.Component<any, DetailState> {
     isLoading: false,
   }
 
-  getTopicId = () => this.props.match.params.id
-
   fetchTopic = async () => {
     try {
       this.setState({ isLoading: true })
-      const id = this.getTopicId()
-      const { data } = await fetchAPI(`/topic/${id}`)
+      const { data } = await fetchAPI(`/topic/${this.props.match.params.id}`)
       this.setState({ topic: data })
     } finally {
       this.setState({ isLoading: false })
@@ -59,7 +56,8 @@ class Detail extends React.Component<any, DetailState> {
     return (
       <TopicConsumer>
         {({ topicMapper }) => {
-          const topic = topicMapper[this.getTopicId()]
+          const topic: types.DetailTopic =
+            topicMapper[this.props.match.params.id]
           return (
             <>
               <Helmet title={topic.title} />

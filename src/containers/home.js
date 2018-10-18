@@ -12,10 +12,12 @@ import {
 import { Close, Edit, Notifications, AccountCircle } from '@material-ui/icons'
 import { withRouter } from 'react-router-dom'
 import { throttle } from 'lodash-es'
+import { compose } from 'recompose'
 import { Topic, Loading } from '../components'
 import { ReactComponent as Logo } from '../logo.svg'
 import { tabData, tabs } from '../utils'
-import { TopicConsumer, AuthConsumer, withContext } from '../contexts'
+import { TopicConsumer, AuthConsumer } from '../contexts'
+import { withContext } from '../utils'
 
 const Transition = props => <Slide direction="up" {...props} />
 
@@ -113,7 +115,7 @@ class Home extends React.Component {
                 fullWidth
               >
                 {tabData.map(tab => (
-                  <Tab key={tab.pathname} label={tab.title} value={tab.ids} />
+                  <Tab key={tab.pathname} label={tab.title} />
                 ))}
               </Tabs>
             </Paper>
@@ -145,4 +147,7 @@ class Home extends React.Component {
   }
 }
 
-export default withRouter(withContext(TopicConsumer)(Home))
+export default compose(
+  withRouter,
+  withContext(TopicConsumer),
+)(Home)

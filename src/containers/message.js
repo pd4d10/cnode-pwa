@@ -2,7 +2,8 @@ import React from 'react'
 import { withRouter, Redirect } from 'react-router-dom'
 import { IconButton } from '@material-ui/core'
 import { DoneAll } from '@material-ui/icons'
-import { withContext, AuthConsumer } from '../contexts'
+import { AuthConsumer } from '../contexts'
+import { withContext } from '../utils'
 import { MessageItem, Header } from '../components'
 
 class Message extends React.Component {

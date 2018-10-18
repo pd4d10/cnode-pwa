@@ -6,7 +6,8 @@ import { withStyles } from '@material-ui/core/styles'
 import { Send } from '@material-ui/icons'
 import { Header } from '../components'
 import { fetchAPI } from '../utils'
-import { withContext, AuthConsumer } from '../contexts'
+import { AuthConsumer } from '../contexts'
+import { withContext } from '../utils'
 import $s from './post.module.css'
 
 const postTabs = [

@@ -13,7 +13,3 @@ export const ContextProvider = ({ children }) => (
     </TopicProvider>
   </AuthProvider>
 )
-
-export const withContext = Consumer => Component => props => (
-  <Consumer>{contexts => <Component {...contexts} {...props} />}</Consumer>
-)

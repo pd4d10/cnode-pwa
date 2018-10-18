@@ -40,47 +40,9 @@ export async function fetchAPI(url, body) {
   return json
 }
 
-export const mapper = {
-  '/': ['CNode 社区', Forum],
-  '/good': ['精华', ThumbUp],
-  '/share': ['分享', Share],
-  '/ask': ['问答', LiveHelp],
-  '/job': ['招聘', SwitchCamera],
-  '/message': ['消息', Notifications],
-  '/setting': ['设置', Settings],
-  '/about': ['关于', Info],
-}
-
-export const tabsData = Object.entries(mapper)
-
-export const withContext = (Consumer, Component) => props => (
+export const withContext = Consumer => Component => props => (
   <Consumer>{contexts => <Component {...contexts} {...props} />}</Consumer>
 )
-
-export const navigationData = [
-  {
-    pathname: '/',
-    title: '社区',
-    Icon: Forum,
-  },
-  {
-    pathname: '/message',
-    title: '消息',
-    Icon: Notifications,
-  },
-  {
-    pathname: '/settings',
-    title: '设置',
-    Icon: Settings,
-  },
-  {
-    pathname: '/about',
-    title: '关于',
-    Icon: Info,
-  },
-]
-
-export const firstScreenPaths = ['/', '/message', '/settings', '/about']
 
 export const tabData = [
   {
@@ -109,7 +71,5 @@ export const tabData = [
     Icon: SwitchCamera,
   },
 ]
-
-export const tabPaths = ['/', '/good', '/share', '/ask', '/job']
 
 export const tabs = ['all', 'good', 'share', 'ask', 'job']

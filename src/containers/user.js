@@ -1,9 +1,8 @@
 // @flow
 import React from 'react'
-import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab'
+import { Tabs, Tab } from '@material-ui/core'
 import { withRouter } from 'react-router-dom'
-import { Topic } from '../components'
+import { Topic, Header } from '../components'
 import { fetchAPI } from '../utils'
 import * as types from '../types'
 
@@ -31,6 +30,7 @@ class User extends React.Component<{}, UserState> {
     const { data, isLoading } = this.state
     return (
       <div>
+        <Header />
         {isLoading ? (
           <div />
         ) : (
