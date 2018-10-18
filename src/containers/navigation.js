@@ -26,7 +26,7 @@ class Navigation extends React.Component {
                 load()
               } else {
                 // save scroll position and push new route
-                setScrollY(window.scrollY)
+                // setScrollY(window.scrollY)
 
                 if (index === 0) {
                   this.props.history.push('/')

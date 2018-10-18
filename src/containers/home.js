@@ -10,19 +10,12 @@ import {
   Tab,
 } from '@material-ui/core'
 import { Close, Edit, Notifications, AccountCircle } from '@material-ui/icons'
-// import MdEditor from 'react-md-editor'
 import { withRouter } from 'react-router-dom'
 import { throttle } from 'lodash-es'
 import { Topic, Loading } from '../components'
 import { ReactComponent as Logo } from '../logo.svg'
 import { tabData, tabs } from '../utils'
 import { TopicConsumer, AuthConsumer, withContext } from '../contexts'
-
-// @keyframes spin {
-//   100% {
-//     transform: rotate(360deg);
-//   }
-// }
 
 const Transition = props => <Slide direction="up" {...props} />
 
@@ -39,8 +32,8 @@ class Home extends React.Component {
       document.documentElement.scrollHeight -
       document.documentElement.scrollTop -
       document.documentElement.clientHeight
-    console.log('toBottom', toBottom)
-    if (toBottom < 96 && !this.props.isLoadingMore && !this.props.isLoading) {
+    // console.log('toBottom', toBottom)
+    if (toBottom < 120 && !this.props.isLoadingMore && !this.props.isLoading) {
       this.props.loadMore()
     }
   }, 500)
@@ -52,32 +45,18 @@ class Home extends React.Component {
     window.addEventListener('scroll', this.loadMore)
   }
 
-  // When click drawer item, there are two cases:
-  // 1. Tag is same, close drawer and do nothing
-  // 2. Tag is different, navigator to new tag URL, and refresh data
-  // Once it was implemented in actions, now move it to component
   componentDidUpdate(prevProps) {
-    // Only scroll when switch tab
-    if (this.props.currentIndex !== prevProps.currentIndex) {
-      window.scrollTo(0, this.props.scrollY)
-    }
-
+    // if tab switchs then load the latest data
     if (
-      this.props.topics.length === 0 &&
+      this.props.location.key !== prevProps.location.key &&
+      this.props.location.pathname === '/' &&
+      prevProps.location.pathname === '/' &&
       !this.props.isLoading &&
       !this.props.isLoadingMore
     ) {
+      console.log('reload')
       this.props.load()
-      console.log('load')
     }
-    // if (
-    //   this.props.location.pathname === '/' &&
-    //   prevProps.location.pathname === '/' &&
-    //   new URLSearchParams(this.props.location.search).get('tab') ===
-    //     new URLSearchParams(prevProps.location.search).get('tab')
-    // ) {
-    //   this.props.load()
-    // }
   }
 
   componentWillUnmount() {
@@ -95,7 +74,7 @@ class Home extends React.Component {
   render() {
     const { props } = this
     return (
-      <div style={{ marginBottom: 48, marginTop: -48 }}>
+      <div style={{ marginBottom: 84, marginTop: -48 }}>
         <TopicConsumer>
           {({ setScrollY, currentIndex, load }) => (
             <Paper square style={{ position: 'sticky', top: -48, zIndex: 1 }}>
@@ -123,20 +102,10 @@ class Home extends React.Component {
                 style={{ background: '#fff' }}
                 value={currentIndex}
                 onChange={(_, index) => {
-                  // console.log(window.scrollY)
-                  if (currentIndex === index) {
-                    // scroll to top and refresh
-                    window.scrollTo(0, 0)
-                    load()
-                  } else {
-                    // save scroll position and push new route
-                    setScrollY(window.scrollY)
-
-                    if (index === 0) {
-                      this.props.history.push('/')
-                    }
-                    this.props.history.push('/?tab=' + tabs[index])
+                  if (index === 0) {
+                    this.props.history.push('/')
                   }
+                  this.props.history.push('/?tab=' + tabs[index])
                 }}
                 indicatorColor="primary"
                 textColor="primary"
@@ -150,15 +119,17 @@ class Home extends React.Component {
           )}
         </TopicConsumer>
 
-        {props.isLoading && <Loading />}
-        <div>
-          {props.topics.map((topic, index) => (
-            <Topic {...topic} key={topic.id} />
-          ))}
-        </div>
+        {props.isLoading ? (
+          <Loading />
+        ) : (
+          <div>
+            {props.topics.map((topic, index) => (
+              <Topic {...topic} key={topic.id} />
+            ))}
+          </div>
+        )}
 
         {props.isLoadingMore && <Loading />}
-        {/* <Navigation /> */}
 
         <Button
           variant="fab"

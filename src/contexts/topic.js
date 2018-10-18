@@ -13,7 +13,6 @@ export class TopicProvider extends React.Component {
     topicMapper: {},
     topics: [[], [], [], [], []],
     pages: [1, 1, 1, 1, 1],
-    scrollYs: [0, 0, 0, 0, 0],
   }
 
   getCurrentTab = () => {
@@ -34,13 +33,6 @@ export class TopicProvider extends React.Component {
       topicMapper: { ...this.state.topicMapper, ...topicMapper },
     })
     return data
-  }
-
-  setScrollY = position => {
-    const scrollYs = this.state.scrollYs.slice()
-    const current = tabs.indexOf(this.getCurrentTab())
-    scrollYs[current] = position
-    this.setState({ scrollYs })
   }
 
   load = async () => {
@@ -84,18 +76,15 @@ export class TopicProvider extends React.Component {
     const { isLoading, isLoadingMore, topicMapper } = this.state
     const { load, loadMore, setScrollY } = this
     const topics = this.state.topics[index]
-    const scrollY = this.state.scrollYs[index]
 
     return (
       <Provider
         value={{
           topics,
-          scrollY,
           isLoading,
           isLoadingMore,
           load,
           loadMore,
-          setScrollY,
           currentIndex: index,
           topicMapper,
         }}

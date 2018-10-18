@@ -6,10 +6,10 @@ export const Loading = () => (
     style={{
       display: 'flex',
       justifyContent: 'center',
-      padding: 12,
+      padding: 24,
     }}
   >
-    <CircularProgress size={24} />
+    <CircularProgress size={36} />
   </div>
 )
 
