@@ -3,7 +3,17 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import { colors } from '@material-ui/core'
 import Helmet from 'react-helmet'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { Home, Detail, Login, Message, Post, User, About, NotFound } from './'
+import {
+  Home,
+  Detail,
+  Login,
+  Message,
+  Post,
+  User,
+  About,
+  NotFound,
+  Hint,
+} from './'
 // import { colors } from '../utils'
 import { ContextProvider, AuthConsumer } from '../contexts'
 import { withContext } from '../utils'
@@ -54,6 +64,8 @@ class App extends React.Component {
               </div>
 
               {/* <div style={{ marginTop: 56 }} /> */}
+
+              <Hint />
             </main>
           </MuiThemeProvider>
         </ContextProvider>

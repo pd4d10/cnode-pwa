@@ -6,6 +6,7 @@ import TimeAgo from 'timeago-react'
 import Helmet from 'react-helmet'
 import { withRouter } from 'react-router-dom'
 import { Reply, AvatarRow, Header, Loading } from '../components'
+import { HintConsumer } from '../contexts'
 import $s from './detail.module.css'
 import { fetchAPI, copy } from '../utils'
 import * as types from '../types'
@@ -43,22 +44,27 @@ class Detail extends React.Component<any, DetailState> {
         <Header
           title="话题"
           rightWidget={() => (
-            <IconButton
-              color="inherit"
-              onClick={() => {
-                if (navigator.share) {
-                  navigator.share({
-                    title: topic.title,
-                    text: 'Hello World',
-                    url: window.location.href,
-                  })
-                } else {
-                  copy(window.location.href)
-                }
-              }}
-            >
-              <Share />
-            </IconButton>
+            <HintConsumer>
+              {({ show }) => (
+                <IconButton
+                  color="inherit"
+                  onClick={() => {
+                    if (navigator.share) {
+                      navigator.share({
+                        title: topic.title,
+                        text: 'Hello World',
+                        url: window.location.href,
+                      })
+                    } else {
+                      copy(window.location.href)
+                      show('链接已复制至剪贴板')
+                    }
+                  }}
+                >
+                  <Share />
+                </IconButton>
+              )}
+            </HintConsumer>
           )}
         />
 

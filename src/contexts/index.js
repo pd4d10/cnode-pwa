@@ -1,15 +1,15 @@
 import React from 'react'
 
 import { TopicProvider, TopicConsumer } from './topic'
-import { DrawerProvider, DrawerConsumer } from './drawer'
+import { HintProvider, HintConsumer } from './hint'
 import { AuthProvider, AuthConsumer } from './auth'
 
-export { TopicConsumer, DrawerConsumer, AuthConsumer }
+export { TopicConsumer, HintConsumer, AuthConsumer }
 
 export const ContextProvider = ({ children }) => (
   <AuthProvider>
     <TopicProvider>
-      <DrawerProvider>{children}</DrawerProvider>
+      <HintProvider>{children}</HintProvider>
     </TopicProvider>
   </AuthProvider>
 )
