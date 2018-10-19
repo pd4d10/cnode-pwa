@@ -45,7 +45,7 @@ class App extends React.Component {
         <ContextProvider>
           <MuiThemeProvider theme={theme}>
             <main>
-              <Helmet titleTemplate="%s - CNode PWA" defaultTitle="CNode PWA" />
+              <Helmet titleTemplate="%s - CNode社区" />
               <div style={{ marginTop: 48 }}>
                 <Switch>
                   <Route exact path="/" component={Home} />

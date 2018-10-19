@@ -15,7 +15,7 @@ export const Topic = pure((props: types.ListTopic) => (
     button
     component={Link}
     to={`/topic/${props.id}`}
-    className={$c.item}
+    className={$c.link}
   >
     <AvatarRow author={props.author}>
       <Title>{props.title}</Title>

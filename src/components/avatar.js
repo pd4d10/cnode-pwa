@@ -2,8 +2,8 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import $s from './avatar.module.css'
 
-export const AvatarRow = ({ author, children }) => (
-  <div className={$s.container}>
+export const AvatarRow = ({ author, children, ...props }) => (
+  <div className={$s.container} {...props}>
     <Route>
       {({ history }) => (
         <img

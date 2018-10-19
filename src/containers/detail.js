@@ -77,21 +77,21 @@ class Detail extends React.Component<any, DetailState> {
               <div>{topic.author.loginname}</div>
               <div className={$s.tip}>
                 <span>
-                  创建于
+                  发布于
                   <TimeAgo
                     datetime={topic.create_at}
                     locale="zh_CN"
                     live={false}
-                    style={{ color: '#838383' }}
                   />
                 </span>
-                <span style={{ marginLeft: '6px' }}>
+                <span style={{ marginLeft: 12 }}>
                   {topic.visit_count}
                   次浏览
                 </span>
               </div>
             </AvatarRow>
             <div
+              style={{ marginTop: 12 }}
               className="markdown-body"
               dangerouslySetInnerHTML={{ __html: topic.content }}
             />
