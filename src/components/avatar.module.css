@@ -1,6 +1,7 @@
 .container {
   display: flex;
   min-width: 0;
+  width: 100%;
 }
 
 .avatar {

@@ -2,7 +2,7 @@ import React from 'react'
 import { ListItem } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import * as types from '../types'
-import { AvatarRow } from '.'
+import { AvatarRow, Title } from '.'
 import $c from './common.module.css'
 import $s from './message-item.module.css'
 import { colors } from '../utils'
@@ -19,7 +19,7 @@ const MessageItem = (props: types.MessageItem) => (
         <span style={{ color: colors.tag }}>{props.author.loginname}</span>{' '}
         回复了你的话题
       </div>
-      <div className={$c.title}>{props.topic.title}</div>
+      <Title>{props.topic.title}</Title>
     </AvatarRow>
   </ListItem>
 )

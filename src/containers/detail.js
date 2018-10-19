@@ -7,9 +7,10 @@ import Helmet from 'react-helmet'
 import { withRouter } from 'react-router-dom'
 import { Reply, AvatarRow, Header, Loading } from '../components'
 import { HintConsumer } from '../contexts'
-import $s from './detail.module.css'
 import { fetchAPI, copy } from '../utils'
 import * as types from '../types'
+import 'github-markdown-css'
+import $s from './detail.module.css'
 
 type DetailState = {
   topic: ?types.DetailTopic,

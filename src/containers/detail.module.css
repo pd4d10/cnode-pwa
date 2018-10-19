@@ -1,12 +1,6 @@
 .container {
   padding: 12px;
 }
-.container :global(.markdown-text) {
-  overflow: auto;
-}
-.container :global(.markdown-text) img {
-  max-width: 100%;
-}
 
 .title {
   font-size: 20px;

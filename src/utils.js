@@ -20,6 +20,7 @@ export const colors = {
 
 export async function fetchAPI(url, body) {
   let options = {}
+  // if body passed in then use posts
   if (body) {
     options.method = 'POST'
     options.headers = {
@@ -46,33 +47,33 @@ export const withContext = Consumer => Component => props => (
 
 export const tabData = [
   {
-    pathname: '/',
-    title: '社区',
+    id: 'all',
+    title: '全部',
     Icon: Forum,
   },
   {
-    pathname: '/good',
+    id: 'good',
     title: '精华',
     Icon: ThumbUp,
   },
   {
-    pathname: '/share',
+    id: 'share',
     title: '分享',
     Icon: Share,
   },
   {
-    pathname: '/ask',
+    id: 'ask',
     title: '问答',
     Icon: LiveHelp,
   },
   {
-    pathname: '/job',
+    id: 'job',
     title: '招聘',
     Icon: SwitchCamera,
   },
 ]
 
-export const tabs = ['all', 'good', 'share', 'ask', 'job']
+export const tabs = tabData.map(({ id }) => id)
 
 export function copy(text) {
   const $ = document.createElement('textarea')

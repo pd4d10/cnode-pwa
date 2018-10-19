@@ -112,8 +112,8 @@ class Home extends React.Component {
             textColor="primary"
             fullWidth
           >
-            {tabData.map(tab => (
-              <Tab key={tab.pathname} label={tab.title} />
+            {tabData.map(({ id, title }) => (
+              <Tab key={id} label={title} />
             ))}
           </Tabs>
         </Paper>
