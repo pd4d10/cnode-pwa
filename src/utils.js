@@ -73,7 +73,10 @@ export const tabData = [
   },
 ]
 
-export const tabs = tabData.map(({ id }) => id)
+export function getCurrentTab(location) {
+  const params = new URLSearchParams(location.search)
+  return params.get('tab') || 'all'
+}
 
 export function copy(text) {
   const $ = document.createElement('textarea')

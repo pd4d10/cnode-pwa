@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { fetchAPI, tabs } from '../utils'
+import { fetchAPI, getCurrentTab } from '../utils'
 
 const { Consumer, Provider } = React.createContext()
 
@@ -14,13 +14,8 @@ export class TopicProvider extends React.Component {
     page: 1,
   }
 
-  getCurrentTab = () => {
-    const params = new URLSearchParams(this.props.location.search)
-    return params.get('tab') || 'all'
-  }
-
   fetchTopics = async page => {
-    const tab = this.getCurrentTab()
+    const tab = getCurrentTab(this.props.location)
     const { data } = await fetchAPI(`/topics?tab=${tab}&page=${page}&limit=20`)
     return data
   }
@@ -48,7 +43,6 @@ export class TopicProvider extends React.Component {
   }
 
   render() {
-    const currentIndex = tabs.indexOf(this.getCurrentTab())
     const { isLoading, isLoadingMore, topics } = this.state
     const { load, loadMore } = this
 
@@ -60,7 +54,6 @@ export class TopicProvider extends React.Component {
           isLoadingMore,
           load,
           loadMore,
-          currentIndex,
         }}
       >
         {this.props.children}

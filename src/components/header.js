@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core'
 import { Route } from 'react-router-dom'
 import { ArrowBack } from '@material-ui/icons'
-import { tabData, tabs } from '../utils'
+import { tabData, getCurrentTab } from '../utils'
 import { TopicConsumer, AuthConsumer } from '../contexts'
 import { Close, Edit, Notifications, AccountCircle } from '@material-ui/icons'
 import { ReactComponent as Logo } from '../logo.svg'
@@ -58,7 +58,7 @@ export const Header = ({ title, rightWidget: Widget }) => {
 
 export const HomeHeader = () => (
   <Route>
-    {({ history }) => (
+    {({ history, location }) => (
       <StyledAppBar color="default" position="sticky" style={{ top: -48 }}>
         <Toolbar variant="dense" disableGutters>
           <IconButton>
@@ -87,24 +87,21 @@ export const HomeHeader = () => (
             <AccountCircle />
           </IconButton>
         </Toolbar>
-        <TopicConsumer>
-          {({ currentIndex }) => (
-            <Tabs
-              style={{ background: '#fff' }}
-              value={currentIndex}
-              onChange={(_, index) => {
-                history.push(index === 0 ? '/' : '/?tab=' + tabs[index])
-              }}
-              indicatorColor="primary"
-              textColor="primary"
-              fullWidth
-            >
-              {tabData.map(({ id, title }) => (
-                <Tab key={id} label={title} />
-              ))}
-            </Tabs>
-          )}
-        </TopicConsumer>
+        <Tabs
+          style={{ background: '#fff' }}
+          value={getCurrentTab(location)}
+          onChange={(_, value) => {
+            // debugger
+            history.push(value === 'all' ? '/' : '/?tab=' + value)
+          }}
+          indicatorColor="primary"
+          textColor="primary"
+          fullWidth
+        >
+          {tabData.map(({ id, title }) => (
+            <Tab key={id} label={title} value={id} />
+          ))}
+        </Tabs>
       </StyledAppBar>
     )}
   </Route>
