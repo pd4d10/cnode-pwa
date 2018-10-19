@@ -1,4 +1,4 @@
-export { default as Header } from './header'
+export { Header, HomeHeader } from './header'
 export { Topic, UserTopic } from './topic'
 export { Reply } from './reply'
 export { AvatarRow } from './avatar'

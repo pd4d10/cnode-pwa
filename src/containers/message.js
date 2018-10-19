@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { IconButton } from '@material-ui/core'
 import { compose } from 'recompose'
 import { DoneAll } from '@material-ui/icons'
@@ -20,7 +20,7 @@ class Message extends React.Component {
           title="消息"
           rightWidget={() => (
             <IconButton
-              color="inherit"
+              color="default"
               onClick={() => {
                 this.props.markAllAsRead()
               }}
@@ -42,7 +42,4 @@ class Message extends React.Component {
   }
 }
 
-export default compose(
-  withRouter,
-  withContext(AuthConsumer),
-)(Message)
+export default withContext(AuthConsumer)(Message)

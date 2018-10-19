@@ -3,7 +3,7 @@ import Dialog from '@material-ui/core/Dialog'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import { AuthConsumer } from '../contexts'
-import { withRouter } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import QrReader from 'react-qr-reader'
 // import { colors } from '../../utils'
 // import style from './login.css'
@@ -28,21 +28,25 @@ const Login = props => (
 
   <AuthConsumer>
     {({ verifyToken }) => (
-      <QrReader
-        onError={console.error}
-        onScan={async token => {
-          console.log('scan', token)
-          if (!token) return
+      <Route>
+        {({ history }) => (
+          <QrReader
+            onError={console.error}
+            onScan={async token => {
+              console.log('scan', token)
+              if (!token) return
 
-          const isValid = await verifyToken(token)
-          if (isValid) {
-            props.history.push('/')
-          }
-        }}
-        // style={{ width: "100%" }}
-      />
+              const isValid = await verifyToken(token)
+              if (isValid) {
+                history.push('/')
+              }
+            }}
+            // style={{ width: "100%" }}
+          />
+        )}
+      </Route>
     )}
   </AuthConsumer>
 )
 
-export default withRouter(Login)
+export default Login

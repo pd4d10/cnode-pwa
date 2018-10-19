@@ -4,7 +4,6 @@ import { IconButton } from '@material-ui/core'
 import { Share } from '@material-ui/icons'
 import TimeAgo from 'timeago-react'
 import Helmet from 'react-helmet'
-import { withRouter } from 'react-router-dom'
 import { Reply, AvatarRow, Header, Loading } from '../components'
 import { HintConsumer } from '../contexts'
 import { fetchAPI, copy } from '../utils'
@@ -48,7 +47,7 @@ class Detail extends React.Component<any, DetailState> {
             <HintConsumer>
               {({ show }) => (
                 <IconButton
-                  color="inherit"
+                  color="default"
                   onClick={() => {
                     if (navigator.share) {
                       navigator.share({
@@ -118,4 +117,4 @@ class Detail extends React.Component<any, DetailState> {
   }
 }
 
-export default withRouter(Detail)
+export default Detail

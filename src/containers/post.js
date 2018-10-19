@@ -57,7 +57,7 @@ class Post extends React.Component {
         <Header
           title="发布话题"
           rightWidget={() => (
-            <IconButton color="inherit" type="submit">
+            <IconButton color="default" type="submit">
               <Send />
             </IconButton>
           )}
