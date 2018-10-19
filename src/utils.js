@@ -73,3 +73,12 @@ export const tabData = [
 ]
 
 export const tabs = ['all', 'good', 'share', 'ask', 'job']
+
+export function copy(text) {
+  const $ = document.createElement('textarea')
+  $.value = text
+  document.body.appendChild($)
+  $.select()
+  document.execCommand('copy')
+  document.body.removeChild($)
+}

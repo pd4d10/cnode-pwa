@@ -7,7 +7,7 @@ import Helmet from 'react-helmet'
 import { withRouter } from 'react-router-dom'
 import { Reply, AvatarRow, Header, Loading } from '../components'
 import $s from './detail.module.css'
-import { fetchAPI } from '../utils'
+import { fetchAPI, copy } from '../utils'
 import * as types from '../types'
 
 type DetailState = {
@@ -52,6 +52,8 @@ class Detail extends React.Component<any, DetailState> {
                     text: 'Hello World',
                     url: window.location.href,
                   })
+                } else {
+                  copy(window.location.href)
                 }
               }}
             >

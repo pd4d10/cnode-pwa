@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter, Redirect } from 'react-router-dom'
 import { IconButton } from '@material-ui/core'
+import { compose } from 'recompose'
 import { DoneAll } from '@material-ui/icons'
 import { AuthConsumer } from '../contexts'
 import { withContext } from '../utils'
@@ -41,4 +42,7 @@ class Message extends React.Component {
   }
 }
 
-export default withRouter(withContext(AuthConsumer)(Message))
+export default compose(
+  withRouter,
+  withContext(AuthConsumer),
+)(Message)
