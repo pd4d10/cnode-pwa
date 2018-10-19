@@ -10,9 +10,8 @@ export class TopicProvider extends React.Component {
   state = {
     isLoading: false,
     isLoadingMore: false,
-    topicMapper: {},
-    topics: [[], [], [], [], []],
-    pages: [1, 1, 1, 1, 1],
+    topics: [],
+    page: 1,
   }
 
   getCurrentTab = () => {
@@ -20,62 +19,38 @@ export class TopicProvider extends React.Component {
     return params.get('tab') || 'all'
   }
 
-  getCurrentIndex = () => tabs.indexOf(this.getCurrentTab())
-
   fetchTopics = async page => {
     const tab = this.getCurrentTab()
     const { data } = await fetchAPI(`/topics?tab=${tab}&page=${page}&limit=20`)
-    const topicMapper = {}
-    data.forEach(item => {
-      topicMapper[item.id] = item
-    })
-    this.setState({
-      topicMapper: { ...this.state.topicMapper, ...topicMapper },
-    })
     return data
   }
 
   load = async () => {
-    const index = this.getCurrentIndex()
-    const topics = this.state.topics.slice()
-    const pages = this.state.pages.slice()
-
     try {
       const page = 1
       this.setState({ isLoading: true })
-      const data = await this.fetchTopics(page)
-      pages[index] = page
-      topics[index] = data
-
-      this.setState({ topics, pages })
+      const topics = await this.fetchTopics(page)
+      this.setState({ topics, page })
     } finally {
       this.setState({ isLoading: false })
     }
   }
 
   loadMore = async () => {
-    const index = this.getCurrentIndex()
-    const topics = this.state.topics.slice()
-    const pages = this.state.pages.slice()
-
     try {
-      const page = pages[index] + 1
+      const page = this.state.page + 1
       this.setState({ isLoadingMore: true })
-      const data = await this.fetchTopics(page)
-      pages[index] = page
-      topics[index] = [...topics[index], ...data]
-
-      this.setState({ topics, pages })
+      const topics = await this.fetchTopics(page)
+      this.setState({ topics: [...this.state.topics, ...topics], page })
     } finally {
       this.setState({ isLoadingMore: false })
     }
   }
 
   render() {
-    const index = this.getCurrentIndex()
-    const { isLoading, isLoadingMore, topicMapper } = this.state
-    const { load, loadMore, setScrollY } = this
-    const topics = this.state.topics[index]
+    const currentIndex = tabs.indexOf(this.getCurrentTab())
+    const { isLoading, isLoadingMore, topics } = this.state
+    const { load, loadMore } = this
 
     return (
       <Provider
@@ -85,8 +60,7 @@ export class TopicProvider extends React.Component {
           isLoadingMore,
           load,
           loadMore,
-          currentIndex: index,
-          topicMapper,
+          currentIndex,
         }}
       >
         {this.props.children}

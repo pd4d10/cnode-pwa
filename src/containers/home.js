@@ -77,50 +77,46 @@ class Home extends React.Component {
     const { props } = this
     return (
       <div style={{ marginBottom: 84, marginTop: -48 }}>
-        <TopicConsumer>
-          {({ setScrollY, currentIndex, load }) => (
-            <Paper square style={{ position: 'sticky', top: -48, zIndex: 1 }}>
-              <Toolbar variant="dense">
-                <Logo width={24} height={24} />
-                <div style={{ flexGrow: 1 }} />
-                <IconButton color="default" onClick={this.goToMessage}>
-                  <AuthConsumer>
-                    {({ count }) =>
-                      count ? (
-                        <Badge badgeContent={count} color="secondary">
-                          <Notifications />
-                        </Badge>
-                      ) : (
-                        <Notifications />
-                      )
-                    }
-                  </AuthConsumer>
-                </IconButton>
-                <IconButton color="default">
-                  <AccountCircle />
-                </IconButton>
-              </Toolbar>
-              <Tabs
-                style={{ background: '#fff' }}
-                value={currentIndex}
-                onChange={(_, index) => {
-                  if (index === 0) {
-                    this.props.history.push('/')
-                  } else {
-                    this.props.history.push('/?tab=' + tabs[index])
-                  }
-                }}
-                indicatorColor="primary"
-                textColor="primary"
-                fullWidth
-              >
-                {tabData.map(tab => (
-                  <Tab key={tab.pathname} label={tab.title} />
-                ))}
-              </Tabs>
-            </Paper>
-          )}
-        </TopicConsumer>
+        <Paper square style={{ position: 'sticky', top: -48, zIndex: 1 }}>
+          <Toolbar variant="dense">
+            <Logo width={24} height={24} />
+            <div style={{ flexGrow: 1 }} />
+            <IconButton color="default" onClick={this.goToMessage}>
+              <AuthConsumer>
+                {({ count }) =>
+                  count ? (
+                    <Badge badgeContent={count} color="secondary">
+                      <Notifications />
+                    </Badge>
+                  ) : (
+                    <Notifications />
+                  )
+                }
+              </AuthConsumer>
+            </IconButton>
+            <IconButton color="default">
+              <AccountCircle />
+            </IconButton>
+          </Toolbar>
+          <Tabs
+            style={{ background: '#fff' }}
+            value={props.currentIndex}
+            onChange={(_, index) => {
+              if (index === 0) {
+                this.props.history.push('/')
+              } else {
+                this.props.history.push('/?tab=' + tabs[index])
+              }
+            }}
+            indicatorColor="primary"
+            textColor="primary"
+            fullWidth
+          >
+            {tabData.map(tab => (
+              <Tab key={tab.pathname} label={tab.title} />
+            ))}
+          </Tabs>
+        </Paper>
 
         {props.isLoading ? (
           <Loading />
