@@ -13,6 +13,7 @@ type AuthState = {
 export class AuthProvider extends React.Component<any, AuthState> {
   state = {
     token: null,
+    loginname: null,
     count: 0,
   }
 
@@ -34,7 +35,7 @@ export class AuthProvider extends React.Component<any, AuthState> {
       const { id, loginname, avatar_url } = await fetchAPI('/accesstoken', {
         accesstoken: token,
       })
-      this.setState({ token })
+      this.setState({ token, loginname })
       this.fetchUnreadCount(token)
       localStorage.setItem('token', token)
       // this.queueAfterToken.forEach(callback => callback())
@@ -76,7 +77,7 @@ export class AuthProvider extends React.Component<any, AuthState> {
   }
 
   render() {
-    const { token, count } = this.state
+    const { token, loginname, count } = this.state
     const {
       fetchUnreadCount,
       fetchMessages,
@@ -89,6 +90,7 @@ export class AuthProvider extends React.Component<any, AuthState> {
       <Provider
         value={{
           token,
+          loginname,
           count,
           fetchUnreadCount,
           fetchMessages,

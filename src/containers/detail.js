@@ -1,12 +1,17 @@
 // @flow
 import React from 'react'
-import { IconButton } from '@material-ui/core'
-import { Share } from '@material-ui/icons'
 import TimeAgo from 'timeago-react'
 import Helmet from 'react-helmet'
-import { Reply, AvatarRow, Header, Loading, NoMore } from '../components'
+import {
+  Reply,
+  AvatarRow,
+  Header,
+  Loading,
+  NoMore,
+  ShareTo,
+} from '../components'
 import { HintConsumer } from '../contexts'
-import { fetchAPI, copy } from '../utils'
+import { fetchAPI } from '../utils'
 import * as types from '../types'
 import 'github-markdown-css'
 import $s from './detail.module.css'
@@ -43,29 +48,7 @@ class Detail extends React.Component<any, DetailState> {
         {topic && <Helmet title={topic.title} />}
         <Header
           title="话题"
-          rightWidget={() => (
-            <HintConsumer>
-              {({ show }) => (
-                <IconButton
-                  color="default"
-                  onClick={() => {
-                    if (navigator.share) {
-                      navigator.share({
-                        title: topic.title,
-                        text: 'Hello World',
-                        url: window.location.href,
-                      })
-                    } else {
-                      copy(window.location.href)
-                      show('链接已复制至剪贴板')
-                    }
-                  }}
-                >
-                  <Share />
-                </IconButton>
-              )}
-            </HintConsumer>
-          )}
+          rightWidget={() => <ShareTo text={topic ? topic.title : ''} />}
         />
 
         {!topic ? (

@@ -61,7 +61,7 @@ export const UserTopic = (props: types.RecentTopics) => (
     className={$c.item}
   >
     <AvatarRow author={props.author}>
-      <h3 className={$c.title}>{props.title}</h3>
+      <Title>{props.title}</Title>
       <div className={$s.extra}>
         <div className={$s.left}>{props.author.loginname}</div>
         <TimeAgo

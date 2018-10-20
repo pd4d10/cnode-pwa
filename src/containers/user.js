@@ -1,19 +1,25 @@
 // @flow
 import React from 'react'
 import { Tabs, Tab } from '@material-ui/core'
-import { Header, UserTopic, NoMore } from '../components'
+import {
+  Header,
+  UserTopic,
+  NoMore,
+  Loading,
+  ShareTo,
+  AvatarRow,
+} from '../components'
+import TimeAgo from 'timeago-react'
 import { fetchAPI } from '../utils'
 import * as types from '../types'
 
 type UserState = {
   data: types.User,
-  isLoading: boolean,
 }
 
 class User extends React.Component<{}, UserState> {
   state = {
     data: null,
-    isLoading: false,
     tabIndex: 0,
     tabData: [[], [], []],
   }
@@ -35,37 +41,51 @@ class User extends React.Component<{}, UserState> {
   }
 
   render() {
-    const { data, collectData, isLoading } = this.state
+    const { data, collectData } = this.state
     return (
       <div>
-        {isLoading ? (
-          <div />
-        ) : (
-          data && (
-            <div>
-              <img src={data.avatar_url} alt={data.loginname} />
-              <Tabs
-                style={{ background: '#fff' }}
-                value={this.state.tabIndex}
-                onChange={(_, index) => {
-                  this.setState({ tabIndex: index })
-                }}
-                indicatorColor="primary"
-                textColor="primary"
-                fullWidth
-              >
-                <Tab label="最近参与" />
-                <Tab label="最近发布" />
-                <Tab label="话题收藏" />
-              </Tabs>
+        <Header
+          title="用户"
+          rightWidget={() => <ShareTo text={data ? data.loginname : ''} />}
+        />
+        {data ? (
+          <div>
+            <AvatarRow author={data} style={{ padding: 16 }}>
+              <div>{data.loginname}</div>
               <div>
-                {this.state.tabData[this.state.tabIndex].map(topic => (
-                  <UserTopic key={topic.id} {...topic} />
-                ))}
+                <div>
+                  创建于{' '}
+                  <TimeAgo
+                    datetime={data.create_at}
+                    locale="zh_CN"
+                    live={false}
+                  />
+                </div>
               </div>
-              <NoMore />
+            </AvatarRow>
+            <Tabs
+              style={{ background: '#fff' }}
+              value={this.state.tabIndex}
+              onChange={(_, index) => {
+                this.setState({ tabIndex: index })
+              }}
+              indicatorColor="primary"
+              textColor="primary"
+              fullWidth
+            >
+              <Tab label="最近参与" />
+              <Tab label="最近发布" />
+              <Tab label="话题收藏" />
+            </Tabs>
+            <div>
+              {this.state.tabData[this.state.tabIndex].map(topic => (
+                <UserTopic key={topic.id} {...topic} />
+              ))}
             </div>
-          )
+            <NoMore />
+          </div>
+        ) : (
+          <Loading />
         )}
       </div>
     )

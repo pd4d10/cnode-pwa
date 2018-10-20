@@ -17,15 +17,14 @@ import { TopicConsumer, AuthConsumer } from '../contexts'
 import { Close, Edit, Notifications, AccountCircle } from '@material-ui/icons'
 import { ReactComponent as Logo } from '../logo.svg'
 
-const StyledAppBar = withStyles({
-  colorDefault: {
-    backgroundColor: '#fff',
-  },
-})(AppBar)
+const appBarStyle = {
+  background: '#fff',
+  boxShadow: '0px 2px 4px 0px rgba(0, 0, 0, 0.2)',
+}
 
 export const Header = ({ title, rightWidget: Widget }) => {
   return (
-    <StyledAppBar color="default">
+    <AppBar color="default" style={appBarStyle}>
       <Toolbar variant="dense" disableGutters>
         <Route>
           {({ history }) => (
@@ -52,40 +51,56 @@ export const Header = ({ title, rightWidget: Widget }) => {
         </Typography>
         <Widget />
       </Toolbar>
-    </StyledAppBar>
+    </AppBar>
   )
 }
 
 export const HomeHeader = () => (
   <Route>
     {({ history, location }) => (
-      <StyledAppBar color="default" position="sticky" style={{ top: -48 }}>
+      <AppBar
+        color="default"
+        position="sticky"
+        style={{
+          ...appBarStyle,
+          top: -48,
+        }}
+      >
         <Toolbar variant="dense" disableGutters>
           <IconButton>
             <Logo width={24} height={24} />
           </IconButton>
           <div style={{ flexGrow: 1 }} />
-          <IconButton
-            color="default"
-            onClick={() => {
-              history.push('/message')
-            }}
-          >
-            <AuthConsumer>
-              {({ count }) =>
-                count ? (
-                  <Badge badgeContent={count} color="secondary">
+
+          <AuthConsumer>
+            {({ count, loginname }) => (
+              <>
+                {' '}
+                <IconButton
+                  color="default"
+                  onClick={() => {
+                    history.push('/message')
+                  }}
+                >
+                  {count ? (
+                    <Badge badgeContent={count} color="secondary">
+                      <Notifications />
+                    </Badge>
+                  ) : (
                     <Notifications />
-                  </Badge>
-                ) : (
-                  <Notifications />
-                )
-              }
-            </AuthConsumer>
-          </IconButton>
-          <IconButton color="default">
-            <AccountCircle />
-          </IconButton>
+                  )}
+                </IconButton>
+                <IconButton
+                  color="default"
+                  onClick={() => {
+                    history.push(loginname ? `/user/${loginname}` : '/login')
+                  }}
+                >
+                  <AccountCircle />
+                </IconButton>
+              </>
+            )}
+          </AuthConsumer>
         </Toolbar>
         <Tabs
           style={{ background: '#fff' }}
@@ -102,7 +117,7 @@ export const HomeHeader = () => (
             <Tab key={id} label={title} value={id} />
           ))}
         </Tabs>
-      </StyledAppBar>
+      </AppBar>
     )}
   </Route>
 )
