@@ -4,7 +4,7 @@ import { IconButton } from '@material-ui/core'
 import { Share } from '@material-ui/icons'
 import TimeAgo from 'timeago-react'
 import Helmet from 'react-helmet'
-import { Reply, AvatarRow, Header, Loading } from '../components'
+import { Reply, AvatarRow, Header, Loading, NoMore } from '../components'
 import { HintConsumer } from '../contexts'
 import { fetchAPI, copy } from '../utils'
 import * as types from '../types'
@@ -106,9 +106,10 @@ class Detail extends React.Component<any, DetailState> {
                   ? `共 ${topic.reply_count} 条回复`
                   : '暂无回复'}
               </div>
-              {(topic.replies || []).map(reply => (
+              {topic.replies.map(reply => (
                 <Reply {...reply} key={reply.id} />
               ))}
+              <NoMore />
             </div>
           </div>
         )}

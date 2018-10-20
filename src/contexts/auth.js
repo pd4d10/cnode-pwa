@@ -14,8 +14,6 @@ export class AuthProvider extends React.Component<any, AuthState> {
   state = {
     token: null,
     count: 0,
-    unreadMessages: [],
-    readMessages: [],
   }
 
   async componentDidMount() {
@@ -57,23 +55,20 @@ export class AuthProvider extends React.Component<any, AuthState> {
 
   fetchMessages = async () => {
     const { data } = await fetchAPI('/messages?accesstoken=' + this.state.token)
-    this.setState({
-      unreadMessages: data.hasnot_read_messages,
-      readMessages: data.has_read_messages,
-    })
+    return data
   }
 
   markAllAsRead = async () => {
     await fetchAPI('/message/mark_all', {
       accesstoken: this.state.token,
     })
-    this.fetchMessages()
   }
 
   postTopic = async ({ title, tab, content }) => {
     const { topic_id } = await fetchAPI('/topics', {
       title,
       tab: 'dev', // for test
+      // tab,
       content,
       accesstoken: this.state.token,
     })
@@ -81,7 +76,7 @@ export class AuthProvider extends React.Component<any, AuthState> {
   }
 
   render() {
-    const { token, count, unreadMessages, readMessages } = this.state
+    const { token, count } = this.state
     const {
       fetchUnreadCount,
       fetchMessages,
@@ -95,8 +90,6 @@ export class AuthProvider extends React.Component<any, AuthState> {
         value={{
           token,
           count,
-          unreadMessages,
-          readMessages,
           fetchUnreadCount,
           fetchMessages,
           runAfterTokenVerified,

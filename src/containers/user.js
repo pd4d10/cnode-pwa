@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import { Tabs, Tab } from '@material-ui/core'
-import { Header, UserTopic } from '../components'
+import { Header, UserTopic, NoMore } from '../components'
 import { fetchAPI } from '../utils'
 import * as types from '../types'
 
@@ -63,7 +63,7 @@ class User extends React.Component<{}, UserState> {
                   <UserTopic key={topic.id} {...topic} />
                 ))}
               </div>
-              <div>-- 没有更多了 --</div>
+              <NoMore />
             </div>
           )
         )}
