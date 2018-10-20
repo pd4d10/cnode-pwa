@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import TimeAgo from 'timeago-react'
 import Helmet from 'react-helmet'
 import {
   Reply,
@@ -9,6 +8,7 @@ import {
   Loading,
   NoMore,
   ShareTo,
+  TimeAgo,
 } from '../components'
 import { HintConsumer } from '../contexts'
 import { fetchAPI } from '../utils'
@@ -59,14 +59,7 @@ class Detail extends React.Component<any, DetailState> {
             <AvatarRow author={topic.author}>
               <div>{topic.author.loginname}</div>
               <div className={$s.tip}>
-                <span>
-                  发布于
-                  <TimeAgo
-                    datetime={topic.create_at}
-                    locale="zh_CN"
-                    live={false}
-                  />
-                </span>
+                <TimeAgo text="发布于" time={topic.create_at} />
                 <span style={{ marginLeft: 12 }}>
                   {topic.visit_count}
                   次浏览

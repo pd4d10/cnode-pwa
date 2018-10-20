@@ -13,6 +13,7 @@ const MessageItem = (props: types.MessageItem) => (
     component={Link}
     to={`/topic/${props.topic.id}`}
     className={$c.item}
+    style={props.has_read ? {} : { background: '#f4fcf0' }}
   >
     <AvatarRow author={props.author}>
       <div className={$s.up}>

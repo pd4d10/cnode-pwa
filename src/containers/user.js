@@ -8,8 +8,8 @@ import {
   Loading,
   ShareTo,
   AvatarRow,
+  TimeAgo,
 } from '../components'
-import TimeAgo from 'timeago-react'
 import { fetchAPI } from '../utils'
 import * as types from '../types'
 
@@ -53,14 +53,7 @@ class User extends React.Component<{}, UserState> {
             <AvatarRow author={data} style={{ padding: 16 }}>
               <div>{data.loginname}</div>
               <div>
-                <div>
-                  创建于{' '}
-                  <TimeAgo
-                    datetime={data.create_at}
-                    locale="zh_CN"
-                    live={false}
-                  />
-                </div>
+                <TimeAgo text="创建于" time={data.create_at} />
               </div>
             </AvatarRow>
             <Tabs

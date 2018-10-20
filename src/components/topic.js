@@ -3,9 +3,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { pure } from 'recompose'
 import { ListItem } from '@material-ui/core'
-import TimeAgo from 'timeago-react'
 import { colors } from '../utils'
-import { AvatarRow, Title } from './'
+import { AvatarRow, Title, TimeAgo } from './'
 import * as types from '../types'
 import $c from './common.module.css'
 import $s from './topic.module.css'
@@ -42,12 +41,7 @@ export const Topic = pure((props: types.ListTopic) => (
             回复 / <span>{props.visit_count}</span> 浏览
           </div>
         </div>
-        <TimeAgo
-          className={$s.timeago}
-          datetime={props.last_reply_at}
-          locale="zh_CN"
-          live={false}
-        />
+        <TimeAgo time={props.last_reply_at} />
       </div>
     </AvatarRow>
   </ListItem>
@@ -64,12 +58,7 @@ export const UserTopic = (props: types.RecentTopics) => (
       <Title>{props.title}</Title>
       <div className={$s.extra}>
         <div className={$s.left}>{props.author.loginname}</div>
-        <TimeAgo
-          className={$s.timeago}
-          datetime={props.last_reply_at}
-          locale="zh_CN"
-          live={false}
-        />
+        <TimeAgo time={props.last_reply_at} />
       </div>
     </AvatarRow>
   </ListItem>

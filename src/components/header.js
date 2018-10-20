@@ -15,7 +15,7 @@ import { ArrowBack } from '@material-ui/icons'
 import { tabData, getCurrentTab } from '../utils'
 import { TopicConsumer, AuthConsumer } from '../contexts'
 import { Close, Edit, Notifications, AccountCircle } from '@material-ui/icons'
-import { ReactComponent as Logo } from '../logo.svg'
+import { ReactComponent as Logo } from '../cnodejs.svg'
 
 const appBarStyle = {
   background: '#fff',
@@ -68,10 +68,15 @@ export const HomeHeader = () => (
       >
         <Toolbar variant="dense" disableGutters>
           <IconButton>
-            <Logo width={24} height={24} />
+            <Logo height={24} />
           </IconButton>
-          <div style={{ flexGrow: 1 }} />
-
+          <Typography
+            variant="title"
+            color="textSecondary"
+            style={{ flexGrow: 1 }}
+          >
+            {''}
+          </Typography>
           <AuthConsumer>
             {({ count, loginname }) => (
               <>
