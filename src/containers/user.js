@@ -40,6 +40,13 @@ class User extends React.Component<{}, UserState> {
     this.fetchUser()
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params !== this.props.match.params) {
+      // reload data when switch to another user
+      this.fetchUser()
+    }
+  }
+
   render() {
     const { data, collectData } = this.state
     return (
