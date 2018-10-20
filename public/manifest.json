@@ -1,15 +1,15 @@
 {
-  "name": "CNode 中文社区",
-  "short_name": "CNode PWA",
+  "name": "CNode - Node.js中文社区",
+  "short_name": "CNode社区",
   "icons": [
     {
-      "src": "images/icon.png",
+      "src": "icon.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#444",
-  "theme_color": "#444"
+  "background_color": "#fff",
+  "theme_color": "#fff"
 }
