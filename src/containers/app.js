@@ -32,6 +32,9 @@ const theme = createMuiTheme({
   raisedButton: {
     // secondaryColor: colors.primary,
   },
+  typography: {
+    useNextVariants: true,
+  },
 })
 
 class App extends React.Component {

@@ -42,11 +42,7 @@ export const Header = ({ title, rightWidget: Widget }) => {
             </IconButton>
           )}
         </Route>
-        <Typography
-          variant="title"
-          color="textSecondary"
-          style={{ flexGrow: 1 }}
-        >
+        <Typography variant="h6" color="textSecondary" style={{ flexGrow: 1 }}>
           {title}
         </Typography>
         {Widget && <Widget />}
@@ -71,7 +67,7 @@ export const HomeHeader = () => (
             <Logo height={24} />
           </IconButton>
           <Typography
-            variant="title"
+            variant="h6"
             color="textSecondary"
             style={{ flexGrow: 1 }}
           >
