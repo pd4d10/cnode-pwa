@@ -1,15 +1,13 @@
-// @flow
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { pure } from 'recompose'
 import { ListItem } from '@material-ui/core'
 import { colors } from '../utils'
 import { AvatarRow, Title, TimeAgo } from './'
-import * as types from '../types'
 import $c from './common.module.css'
 import $s from './topic.module.css'
 
-export const Topic = pure((props: types.ListTopic) => (
+export const Topic = pure(props => (
   <ListItem
     button
     component={Link}
@@ -47,7 +45,7 @@ export const Topic = pure((props: types.ListTopic) => (
   </ListItem>
 ))
 
-export const UserTopic = (props: types.RecentTopics) => (
+export const UserTopic = props => (
   <ListItem
     button
     component={Link}

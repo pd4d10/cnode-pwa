@@ -1,4 +1,3 @@
-// @flow
 import React from 'react'
 import Helmet from 'react-helmet'
 import {
@@ -12,16 +11,10 @@ import {
 } from '../components'
 import { HintConsumer } from '../contexts'
 import { fetchAPI } from '../utils'
-import * as types from '../types'
 import 'github-markdown-css'
 import $s from './detail.module.css'
 
-type DetailState = {
-  topic: ?types.DetailTopic,
-  isLoading: boolean,
-}
-
-class Detail extends React.Component<any, DetailState> {
+class Detail extends React.Component {
   state = {
     topic: null,
     isLoading: false,

@@ -1,11 +1,9 @@
-// @flow
 import React from 'react'
 import { Divider } from '@material-ui/core'
 import { pure } from 'recompose'
 import { AvatarRow, TimeAgo } from './'
-import * as types from '../types'
 
-export const Reply = (props: types.Reply) => (
+export const Reply = props => (
   <div style={{ marginTop: 8, marginBottom: 8 }}>
     <div style={{ display: 'flex', marginBottom: 6 }}>
       <AvatarRow author={props.author}>

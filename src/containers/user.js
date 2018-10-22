@@ -1,4 +1,3 @@
-// @flow
 import React from 'react'
 import { Tabs, Tab } from '@material-ui/core'
 import {
@@ -11,13 +10,8 @@ import {
   TimeAgo,
 } from '../components'
 import { fetchAPI } from '../utils'
-import * as types from '../types'
 
-type UserState = {
-  data: types.User,
-}
-
-class User extends React.Component<{}, UserState> {
+class User extends React.Component {
   state = {
     data: null,
     tabIndex: 0,

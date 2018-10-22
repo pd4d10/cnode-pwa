@@ -1,4 +1,3 @@
-// @flow
 import React from 'react'
 import { fetchAPI } from '../utils'
 
@@ -6,11 +5,7 @@ const { Consumer, Provider } = React.createContext()
 
 export const AuthConsumer = Consumer
 
-type AuthState = {
-  token: ?string,
-}
-
-export class AuthProvider extends React.Component<any, AuthState> {
+export class AuthProvider extends React.Component {
   state = {
     token: null,
     loginname: null,
