@@ -57,14 +57,7 @@ class App extends React.Component {
                   <Route path="/user/:loginname" component={User} />
                   <Route component={NotFound} />
                 </Switch>
-                {/* <Switch>
-                  <Route path="/messages" component={Message} />
-                  <Route path="/settings" component={Message} />
-                </Switch> */}
               </div>
-
-              {/* <div style={{ marginTop: 56 }} /> */}
-
               <Hint />
             </main>
           </MuiThemeProvider>

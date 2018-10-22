@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '@material-ui/core'
+import { Button, Slide } from '@material-ui/core'
 import { Edit } from '@material-ui/icons'
 import { withRouter } from 'react-router-dom'
 import { throttle } from 'lodash-es'
@@ -7,6 +7,8 @@ import { compose } from 'recompose'
 import { Topic, Loading, HomeHeader } from '../components'
 import { TopicConsumer } from '../contexts'
 import { withContext } from '../utils'
+
+const Transition = props => <Slide direction="up" {...props} />
 
 class Home extends React.Component {
   state = {

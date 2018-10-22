@@ -1,23 +1,27 @@
 import React from 'react'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
-import Divider from '@material-ui/core/Divider'
+import { ListItem, ListItemText, Divider } from '@material-ui/core'
 import Helmet from 'react-helmet'
 import { ReactComponent as Logo } from '../cnodejs.svg'
+import { Header } from '../components'
 
 // Add rel="noopener noreferrer" for security
 // See https://mathiasbynens.github.io/rel-noopener/
 const Linker = props => (
-  <a href={props.url} target="_blank" rel="noopener noreferrer">
-    <ListItem button>
-      <ListItemText primary={props.title} secondary={props.url} />
-    </ListItem>
-  </a>
+  <ListItem
+    button
+    component="a"
+    href={props.url}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <ListItemText primary={props.title} secondary={props.url} />
+  </ListItem>
 )
 
 export const About = () => (
   <>
     <Helmet title="关于" />
+    <Header title="关于" />
     <div
       style={{
         display: 'flex',

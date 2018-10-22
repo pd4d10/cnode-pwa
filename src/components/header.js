@@ -49,7 +49,7 @@ export const Header = ({ title, rightWidget: Widget }) => {
         >
           {title}
         </Typography>
-        <Widget />
+        {Widget && <Widget />}
       </Toolbar>
     </AppBar>
   )
