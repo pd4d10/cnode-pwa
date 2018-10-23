@@ -23,15 +23,6 @@ const theme = createMuiTheme({
     primary: colors.teal,
     secondary: colors.grey,
   },
-  appBar: {
-    // color: colors.background,
-  },
-  floatingActionButton: {
-    // color: colors.primary,
-  },
-  raisedButton: {
-    // secondaryColor: colors.primary,
-  },
   typography: {
     useNextVariants: true,
   },

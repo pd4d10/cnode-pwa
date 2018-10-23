@@ -1,5 +1,10 @@
 import React from 'react'
-import { IconButton, TextField } from '@material-ui/core'
+import {
+  IconButton,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+} from '@material-ui/core'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
 import { withStyles } from '@material-ui/core/styles'
@@ -22,19 +27,23 @@ class Post extends React.Component {
     tab: 'ask',
     title: '',
     content: '',
+    addSuffix: true,
     titleErrorVisible: false,
     contentErrorVisible: false,
   }
 
   handleSubmit = async e => {
     e.preventDefault()
-    const { tab, title, content } = this.state
+    let { tab, title, content, addSuffix } = this.state
     if (!title || !content) {
       this.setState({
         titleErrorVisible: !title,
         contentErrorVisible: !content,
       })
       return
+    }
+    if (addSuffix) {
+      content += '\n\n来自 [cnode.rocks](https://cnode.rocks)'
     }
     const id = await this.props.postTopic({ tab, title, content })
     this.props.history.replace(`/topic/${id}`)
@@ -117,13 +126,18 @@ class Post extends React.Component {
             error={showContentError}
             helperText={showContentError ? '请输入内容' : null}
           />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={this.state.addSuffix}
+                onChange={e => {
+                  this.setState({ addSuffix: e.target.checked })
+                }}
+              />
+            }
+            label="添加后缀"
+          />
         </div>
-        {/* <MdEditor
-          value={this.state.content}
-          onChange={content => {
-            this.setState({ content })
-          }}
-        /> */}
       </form>
     )
   }
