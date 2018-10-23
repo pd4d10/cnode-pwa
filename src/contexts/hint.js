@@ -24,9 +24,9 @@ export class HintProvider extends React.Component {
 
   render() {
     const { visible, message } = this.state
-    const { setVisible, show, hide } = this
+    const { show, hide } = this
     return (
-      <Provider value={{ visible, message, setVisible, show, hide }}>
+      <Provider value={{ visible, message, show, hide }}>
         {this.props.children}
       </Provider>
     )

@@ -6,7 +6,7 @@ export default class Hint extends React.Component {
   render() {
     return (
       <HintConsumer>
-        {({ visible, message, setVisible, hide }) => (
+        {({ visible, message, hide }) => (
           <Snackbar
             open={visible}
             autoHideDuration={3000}
