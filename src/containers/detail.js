@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Helmet from 'react-helmet'
 import {
   Reply,
   AvatarRow,
@@ -34,9 +33,17 @@ export const Detail = props => {
     [props.match.params.id],
   )
 
+  useEffect(
+    () => {
+      if (topic) {
+        document.title = topic.title
+      }
+    },
+    [topic],
+  )
+
   return (
     <>
-      {topic && <Helmet title={topic.title} />}
       <Header
         title="话题"
         rightWidget={() => <ShareTo text={topic ? topic.title : ''} />}

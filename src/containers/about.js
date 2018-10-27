@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ListItem, ListItemText, Divider } from '@material-ui/core'
-import Helmet from 'react-helmet'
 import { ReactComponent as Logo } from '../cnodejs.svg'
 import { Header } from '../components'
 
@@ -18,28 +17,33 @@ const Linker = props => (
   </ListItem>
 )
 
-export const About = () => (
-  <>
-    <Helmet title="关于" />
-    <Header title="关于" />
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: '20px 0',
-      }}
-    >
-      <Logo style={{ width: '70%' }} />
-    </div>
-    <Divider />
-    <Linker title="源代码" url="https://github.com/pd4d10/cnode-pwa" />
-    <Divider />
-    <Linker title="关于 CNode 社区" url="https://cnodejs.org/about" />
-    <Divider />
-    <ListItem button>
-      <ListItemText primary="License" secondary="MIT" />
-    </ListItem>
-    <Divider />
-  </>
-)
+export const About = () => {
+  useEffect(() => {
+    document.title = '关于'
+  }, [])
+
+  return (
+    <>
+      <Header title="关于" />
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          padding: '20px 0',
+        }}
+      >
+        <Logo style={{ width: '70%' }} />
+      </div>
+      <Divider />
+      <Linker title="源代码" url="https://github.com/pd4d10/cnode-pwa" />
+      <Divider />
+      <Linker title="关于 CNode 社区" url="https://cnodejs.org/about" />
+      <Divider />
+      <ListItem button>
+        <ListItemText primary="License" secondary="MIT" />
+      </ListItem>
+      <Divider />
+    </>
+  )
+}

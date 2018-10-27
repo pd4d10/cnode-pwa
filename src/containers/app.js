@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import { colors } from '@material-ui/core'
-import Helmet from 'react-helmet'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import {
   Home,
@@ -41,7 +40,6 @@ export const App = () => {
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>
         <main>
-          <Helmet titleTemplate="%s - CNode社区" />
           <div style={{ marginTop: 48 }}>
             <Switch>
               <Route exact path="/" component={Home} />
