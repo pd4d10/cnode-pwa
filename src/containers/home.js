@@ -1,90 +1,91 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Slide } from '@material-ui/core'
 import { Edit } from '@material-ui/icons'
-import { withRouter } from 'react-router-dom'
 import { throttle } from 'lodash-es'
 import { compose } from 'recompose'
 import { Topic, Loading, HomeHeader } from '../components'
-import { TopicConsumer } from '../contexts'
-import { withContext } from '../utils'
+import { getCurrentTab, fetchAPI } from '../utils'
 
-const Transition = props => <Slide direction="up" {...props} />
+export const Home = props => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [isLoadingMore, setIsLoadingMore] = useState(false)
+  const [topics, setTopics] = useState([])
+  const [page, setPage] = useState(1)
 
-class Home extends React.Component {
-  state = {
-    title: '',
-    content: '',
-    dialogVisible: false,
+  const fetchTopics = async page => {
+    const tab = getCurrentTab(props.location)
+    const { data } = await fetchAPI(`/topics?tab=${tab}&page=${page}&limit=20`)
+    return data
+  }
+
+  const load = async () => {
+    try {
+      const nextPage = 1
+      setIsLoading(true)
+      const data = await fetchTopics(nextPage)
+      setTopics(data)
+      setPage(nextPage)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   // TODO better infinity scrolling
-  loadMore = throttle(() => {
+  const loadMore = throttle(async () => {
     const toBottom =
       document.documentElement.scrollHeight -
       document.documentElement.scrollTop -
       document.documentElement.clientHeight
     // console.log('toBottom', toBottom)
-    if (toBottom < 120 && !this.props.isLoadingMore && !this.props.isLoading) {
-      this.props.loadMore()
+    if (toBottom < 120 && !isLoadingMore && !isLoading) {
+      try {
+        const nextPage = page + 1
+        setIsLoadingMore(true)
+        const data = await fetchTopics(nextPage)
+        setTopics([...topics, ...data])
+        setPage(nextPage)
+      } finally {
+        setIsLoadingMore(false)
+      }
     }
   }, 500)
 
-  componentDidMount() {
-    if (this.props.topics.length === 0) {
-      this.props.load()
-    }
-    window.addEventListener('scroll', this.loadMore)
-  }
+  useEffect(
+    () => {
+      load()
+      window.addEventListener('scroll', loadMore)
+      return () => {
+        window.removeEventListener('scroll', loadMore)
+      }
+    },
+    [props.location.key],
+  )
 
-  componentDidUpdate(prevProps) {
-    // if tab switchs then load the latest data
-    if (
-      this.props.location.key !== prevProps.location.key &&
-      this.props.location.pathname === '/' &&
-      prevProps.location.pathname === '/' &&
-      !this.props.isLoading &&
-      !this.props.isLoadingMore
-    ) {
-      console.log('reload')
-      this.props.load()
-    }
-  }
+  // console.log(props.location.key)
 
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.loadMore)
-  }
-
-  render() {
-    const { props } = this
-    return (
-      <div style={{ marginBottom: 84, marginTop: -48 }}>
-        <HomeHeader />
-        {props.isLoading ? (
-          <Loading />
-        ) : (
-          <div>
-            {props.topics.map((topic, index) => (
-              <Topic {...topic} key={topic.id} />
-            ))}
-          </div>
-        )}
-        {props.isLoadingMore && <Loading />}
-        <Button
-          variant="fab"
-          // color="secondary"
-          style={{ position: 'fixed', bottom: 16, right: 16 }}
-          onClick={() => {
-            this.props.history.push('/post')
-          }}
-        >
-          <Edit />
-        </Button>
-      </div>
-    )
-  }
+  return (
+    <div style={{ marginBottom: 84, marginTop: -48 }}>
+      <HomeHeader />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div>
+          {topics.map((topic, index) => (
+            <Topic {...topic} key={topic.id} />
+          ))}
+        </div>
+      )}
+      {isLoadingMore && <Loading />}
+      <Button
+        variant="fab"
+        // color="secondary"
+        style={{ position: 'fixed', bottom: 16, right: 16 }}
+        onClick={() => {
+          props.history.push('/post')
+        }}
+      >
+        <Edit />
+      </Button>
+    </div>
+  )
 }
-
-export default compose(
-  withRouter,
-  withContext(TopicConsumer),
-)(Home)

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import { colors } from '@material-ui/core'
 import Helmet from 'react-helmet'
@@ -14,9 +14,8 @@ import {
   NotFound,
   Hint,
 } from './'
+import { useAuth } from '../hooks'
 // import { colors } from '../utils'
-import { ContextProvider, AuthConsumer } from '../contexts'
-import { withContext } from '../utils'
 
 const theme = createMuiTheme({
   palette: {
@@ -28,37 +27,36 @@ const theme = createMuiTheme({
   },
 })
 
-class App extends React.Component {
-  componentDidCatch(error, info) {
-    console.log(error, info)
-  }
+export const App = () => {
+  const { verifyToken } = useAuth()
 
-  render() {
-    return (
-      <BrowserRouter>
-        <ContextProvider>
-          <MuiThemeProvider theme={theme}>
-            <main>
-              <Helmet titleTemplate="%s - CNode社区" />
-              <div style={{ marginTop: 48 }}>
-                <Switch>
-                  <Route exact path="/" component={Home} />
-                  <Route path="/message" component={Message} />
-                  <Route path="/topic/:id" component={Detail} />
-                  <Route path="/login" component={Login} />
-                  <Route path="/post" component={Post} />
-                  <Route path="/about" component={About} />
-                  <Route path="/user/:loginname" component={User} />
-                  <Route component={NotFound} />
-                </Switch>
-              </div>
-              <Hint />
-            </main>
-          </MuiThemeProvider>
-        </ContextProvider>
-      </BrowserRouter>
-    )
-  }
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      verifyToken(token)
+    }
+  }, [])
+
+  return (
+    <BrowserRouter>
+      <MuiThemeProvider theme={theme}>
+        <main>
+          <Helmet titleTemplate="%s - CNode社区" />
+          <div style={{ marginTop: 48 }}>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/message" component={Message} />
+              <Route path="/topic/:id" component={Detail} />
+              <Route path="/login" component={Login} />
+              <Route path="/post" component={Post} />
+              <Route path="/about" component={About} />
+              <Route path="/user/:loginname" component={User} />
+              <Route component={NotFound} />
+            </Switch>
+          </div>
+          <Hint />
+        </main>
+      </MuiThemeProvider>
+    </BrowserRouter>
+  )
 }
-
-export default withContext(AuthConsumer)(App)

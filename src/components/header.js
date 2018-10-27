@@ -13,7 +13,7 @@ import {
 import { Route } from 'react-router-dom'
 import { ArrowBack } from '@material-ui/icons'
 import { tabData, getCurrentTab } from '../utils'
-import { TopicConsumer, AuthConsumer } from '../contexts'
+import { useAuth } from '../hooks'
 import { Close, Edit, Notifications, AccountCircle } from '@material-ui/icons'
 import { ReactComponent as Logo } from '../cnodejs.svg'
 
@@ -51,74 +51,74 @@ export const Header = ({ title, rightWidget: Widget }) => {
   )
 }
 
-export const HomeHeader = () => (
-  <Route>
-    {({ history, location }) => (
-      <AppBar
-        color="default"
-        position="sticky"
-        style={{
-          ...appBarStyle,
-          top: -48,
-        }}
-      >
-        <Toolbar variant="dense" disableGutters>
-          <IconButton>
-            <Logo height={24} />
-          </IconButton>
-          <Typography
-            variant="h6"
-            color="textSecondary"
-            style={{ flexGrow: 1 }}
-          >
-            {''}
-          </Typography>
-          <AuthConsumer>
-            {({ count, loginname }) => (
-              <>
-                {' '}
-                <IconButton
-                  color="default"
-                  onClick={() => {
-                    history.push('/message')
-                  }}
-                >
-                  {count ? (
-                    <Badge badgeContent={count} color="secondary">
-                      <Notifications />
-                    </Badge>
-                  ) : (
-                    <Notifications />
-                  )}
-                </IconButton>
-                <IconButton
-                  color="default"
-                  onClick={() => {
-                    history.push(loginname ? `/user/${loginname}` : '/login')
-                  }}
-                >
-                  <AccountCircle />
-                </IconButton>
-              </>
-            )}
-          </AuthConsumer>
-        </Toolbar>
-        <Tabs
-          style={{ background: '#fff' }}
-          value={getCurrentTab(location)}
-          onChange={(_, value) => {
-            // debugger
-            history.push(value === 'all' ? '/' : '/?tab=' + value)
+export const HomeHeader = () => {
+  const { count, loginname } = useAuth()
+
+  return (
+    <Route>
+      {({ history, location }) => (
+        <AppBar
+          color="default"
+          position="sticky"
+          style={{
+            ...appBarStyle,
+            top: -48,
           }}
-          indicatorColor="primary"
-          textColor="primary"
-          fullWidth
         >
-          {tabData.map(({ id, title }) => (
-            <Tab key={id} label={title} value={id} />
-          ))}
-        </Tabs>
-      </AppBar>
-    )}
-  </Route>
-)
+          <Toolbar variant="dense" disableGutters>
+            <IconButton>
+              <Logo height={24} />
+            </IconButton>
+            <Typography
+              variant="h6"
+              color="textSecondary"
+              style={{ flexGrow: 1 }}
+            >
+              {''}
+            </Typography>
+
+            <>
+              <IconButton
+                color="default"
+                onClick={() => {
+                  history.push('/message')
+                }}
+              >
+                {count ? (
+                  <Badge badgeContent={count} color="secondary">
+                    <Notifications />
+                  </Badge>
+                ) : (
+                  <Notifications />
+                )}
+              </IconButton>
+              <IconButton
+                color="default"
+                onClick={() => {
+                  history.push(loginname ? `/user/${loginname}` : '/login')
+                }}
+              >
+                <AccountCircle />
+              </IconButton>
+            </>
+          </Toolbar>
+          <Tabs
+            style={{ background: '#fff' }}
+            value={getCurrentTab(location)}
+            onChange={(_, value) => {
+              // debugger
+              history.push(value === 'all' ? '/' : '/?tab=' + value)
+            }}
+            indicatorColor="primary"
+            textColor="primary"
+            fullWidth
+          >
+            {tabData.map(({ id, title }) => (
+              <Tab key={id} label={title} value={id} />
+            ))}
+          </Tabs>
+        </AppBar>
+      )}
+    </Route>
+  )
+}

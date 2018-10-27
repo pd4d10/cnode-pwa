@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Tabs, Tab } from '@material-ui/core'
 import {
   Header,
@@ -11,79 +11,66 @@ import {
 } from '../components'
 import { fetchAPI } from '../utils'
 
-class User extends React.Component {
-  state = {
-    data: null,
-    tabIndex: 0,
-    tabData: [[], [], []],
-  }
+export const User = props => {
+  const [author, setAuthor] = useState(null)
+  const [tabIndex, setTabIndex] = useState(0)
+  const [tabData, setTabData] = useState([[], [], []])
 
-  fetchUser = async () => {
-    const { loginname } = this.props.match.params
+  const fetchUser = async () => {
+    const { loginname } = props.match.params
     const [{ data }, { data: collectData }] = await Promise.all([
       fetchAPI(`/user/${loginname}`),
       fetchAPI(`/topic_collect/${loginname}`),
     ])
-    this.setState({
-      data,
-      tabData: [data.recent_replies, data.recent_topics, collectData],
-    })
+    setAuthor(data)
+    setTabData([data.recent_replies, data.recent_topics, collectData])
   }
 
-  componentDidMount() {
-    this.fetchUser()
-  }
+  useEffect(
+    () => {
+      fetchUser()
+    },
+    [props.match.params],
+  )
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.match.params !== this.props.match.params) {
-      // reload data when switch to another user
-      this.fetchUser()
-    }
-  }
-
-  render() {
-    const { data, collectData } = this.state
-    return (
-      <div>
-        <Header
-          title="用户"
-          rightWidget={() => <ShareTo text={data ? data.loginname : ''} />}
-        />
-        {data ? (
-          <div>
-            <AvatarRow author={data} style={{ padding: 16 }}>
-              <div>{data.loginname}</div>
-              <div>
-                <TimeAgo text="创建于" time={data.create_at} />
-              </div>
-            </AvatarRow>
-            <Tabs
-              style={{ background: '#fff' }}
-              value={this.state.tabIndex}
-              onChange={(_, index) => {
-                this.setState({ tabIndex: index })
-              }}
-              indicatorColor="primary"
-              textColor="primary"
-              fullWidth
-            >
-              <Tab label="最近参与" />
-              <Tab label="最近发布" />
-              <Tab label="话题收藏" />
-            </Tabs>
+  return (
+    <div>
+      <Header
+        title="用户"
+        rightWidget={() => <ShareTo text={author ? author.loginname : ''} />}
+      />
+      {author ? (
+        <div>
+          <AvatarRow author={author} style={{ padding: 16 }}>
+            <div>{author.loginname}</div>
             <div>
-              {this.state.tabData[this.state.tabIndex].map(topic => (
-                <UserTopic key={topic.id} {...topic} />
-              ))}
+              <TimeAgo text="创建于" time={author.create_at} />
             </div>
-            <NoMore />
+          </AvatarRow>
+          <Tabs
+            style={{ background: '#fff' }}
+            value={tabIndex}
+            onChange={(_, index) => {
+              setTabIndex(index)
+            }}
+            indicatorColor="primary"
+            textColor="primary"
+            fullWidth
+          >
+            <Tab label="最近参与" />
+            <Tab label="最近发布" />
+            <Tab label="话题收藏" />
+          </Tabs>
+          <div>
+            {tabData[tabIndex].map(topic => (
+              <UserTopic key={topic.id} {...topic} />
+            ))}
           </div>
-        ) : (
-          <Loading />
-        )}
-      </div>
-    )
-  }
+          <NoMore />
+        </div>
+      ) : (
+        <Loading />
+      )}
+    </div>
+  )
 }
-
-export default User

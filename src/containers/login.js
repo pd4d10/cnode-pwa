@@ -2,13 +2,13 @@ import React from 'react'
 import Dialog from '@material-ui/core/Dialog'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import { AuthConsumer } from '../contexts'
+import { useAuth } from '../hooks'
 import { Route } from 'react-router-dom'
 import QrReader from 'react-qr-reader'
 // import { colors } from '../../utils'
 // import style from './login.css'
 
-const Login = props => (
+export const Login = props => {
   // <Dialog
   //   title="登录"
   //   modal={false}
@@ -26,27 +26,25 @@ const Login = props => (
   //   <Button onClick={() => {}}>登录</Button>
   // </Dialog>
 
-  <AuthConsumer>
-    {({ verifyToken }) => (
-      <Route>
-        {({ history }) => (
-          <QrReader
-            onError={console.error}
-            onScan={async token => {
-              console.log('scan', token)
-              if (!token) return
+  const { verifyToken } = useAuth()
 
-              const isValid = await verifyToken(token)
-              if (isValid) {
-                history.push('/')
-              }
-            }}
-            // style={{ width: "100%" }}
-          />
-        )}
-      </Route>
-    )}
-  </AuthConsumer>
-)
+  return (
+    <Route>
+      {({ history }) => (
+        <QrReader
+          onError={console.error}
+          onScan={async token => {
+            console.log('scan', token)
+            if (!token) return
 
-export default Login
+            const isValid = await verifyToken(token)
+            if (isValid) {
+              history.push('/')
+            }
+          }}
+          // style={{ width: "100%" }}
+        />
+      )}
+    </Route>
+  )
+}

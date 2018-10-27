@@ -41,10 +41,6 @@ export async function fetchAPI(url, body) {
   return json
 }
 
-export const withContext = Consumer => Component => props => (
-  <Consumer>{contexts => <Component {...contexts} {...props} />}</Consumer>
-)
-
 export const tabData = [
   {
     id: 'all',
