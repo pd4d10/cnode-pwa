@@ -6,7 +6,6 @@ import {
   Checkbox,
 } from '@material-ui/core'
 import { Route } from 'react-router-dom'
-import { compose } from 'recompose'
 import { withStyles } from '@material-ui/core/styles'
 import { Send } from '@material-ui/icons'
 import { Header } from '../components'

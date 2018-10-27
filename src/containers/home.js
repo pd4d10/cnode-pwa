@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Button, Slide } from '@material-ui/core'
 import { Edit } from '@material-ui/icons'
 import { throttle } from 'lodash-es'
-import { compose } from 'recompose'
 import { Topic, Loading, HomeHeader } from '../components'
 import { getCurrentTab, fetchAPI } from '../utils'
 

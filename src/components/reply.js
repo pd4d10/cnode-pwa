@@ -1,6 +1,5 @@
 import React from 'react'
 import { Divider } from '@material-ui/core'
-import { pure } from 'recompose'
 import { AvatarRow, TimeAgo } from './'
 
 export const Reply = props => (

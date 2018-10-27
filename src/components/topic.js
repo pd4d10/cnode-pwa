@@ -1,13 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { pure } from 'recompose'
 import { ListItem } from '@material-ui/core'
 import { colors } from '../utils'
 import { AvatarRow, Title, TimeAgo } from './'
 import $c from './common.module.css'
 import $s from './topic.module.css'
 
-export const Topic = pure(props => (
+export const Topic = React.memo(props => (
   <ListItem
     button
     component={Link}
