@@ -13,7 +13,7 @@ import {
   NotFound,
   Hint,
 } from './'
-import { useAuth } from '../hooks'
+import { useAuth, useTopic } from '../hooks'
 // import { colors } from '../utils'
 
 const theme = createMuiTheme({
@@ -27,12 +27,16 @@ const theme = createMuiTheme({
 })
 
 export const App = () => {
-  const { verifyToken } = useAuth()
+  // const { topics } = useTopic()
+  const { verifyToken, fetchUnreadCount } = useAuth()
 
-  useEffect(() => {
+  useEffect(async () => {
     const token = localStorage.getItem('token')
     if (token) {
-      verifyToken(token)
+      const isValid = await verifyToken(token)
+      if (isValid) {
+        fetchUnreadCount(token)
+      }
     }
   }, [])
 

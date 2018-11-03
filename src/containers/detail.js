@@ -12,14 +12,14 @@ import { fetchAPI } from '../utils'
 import 'github-markdown-css'
 import $s from './detail.module.css'
 
-export const Detail = props => {
+export const Detail = ({ match }) => {
   const [topic, setTopic] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
   const fetchTopic = async () => {
     try {
       setIsLoading(true)
-      const { data } = await fetchAPI(`/topic/${props.match.params.id}`)
+      const { data } = await fetchAPI(`/topic/${match.params.id}`)
       setTopic(data)
     } finally {
       setIsLoading(false)
@@ -30,7 +30,7 @@ export const Detail = props => {
     () => {
       fetchTopic()
     },
-    [props.match.params.id],
+    [match.params.id],
   )
 
   useEffect(
