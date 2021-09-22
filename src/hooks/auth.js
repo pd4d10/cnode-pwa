@@ -8,11 +8,11 @@ export const useAuth = () => {
 
   const queueAfterToken = []
 
-  const runAfterTokenVerified = callback => {
+  const runAfterTokenVerified = (callback) => {
     queueAfterToken.push(callback)
   }
 
-  const fetchUnreadCount = async token => {
+  const fetchUnreadCount = async (token) => {
     const { data } = await fetchAPI('/message/count?accesstoken=' + token)
     setCount(data)
     setTimeout(() => {
@@ -20,7 +20,7 @@ export const useAuth = () => {
     }, 10000)
   }
 
-  const verifyToken = async token => {
+  const verifyToken = async (token) => {
     try {
       const { id, loginname, avatar_url } = await fetchAPI('/accesstoken', {
         accesstoken: token,

@@ -6,7 +6,7 @@ import { useAuth, useHint } from '../hooks'
 import { fetchAPI } from '../utils'
 import { MessageItem, Header, Loading, NoMore } from '../components'
 
-export const Message = props => {
+export const Message = (props) => {
   const [unread, setUnread] = useState([])
   const [read, setRead] = useState([])
   const [isLoading, setIsLoading] = useState(false)
@@ -63,10 +63,10 @@ export const Message = props => {
         <Loading />
       ) : (
         <>
-          {unread.map(message => (
+          {unread.map((message) => (
             <MessageItem key={message.id} {...message} />
           ))}
-          {read.map(message => (
+          {read.map((message) => (
             <MessageItem key={message.id} {...message} />
           ))}
           <NoMore />

@@ -26,21 +26,15 @@ export const Detail = ({ match }) => {
     }
   }
 
-  useEffect(
-    () => {
-      fetchTopic()
-    },
-    [match.params.id],
-  )
+  useEffect(() => {
+    fetchTopic()
+  }, [match.params.id])
 
-  useEffect(
-    () => {
-      if (topic) {
-        document.title = topic.title
-      }
-    },
-    [topic],
-  )
+  useEffect(() => {
+    if (topic) {
+      document.title = topic.title
+    }
+  }, [topic])
 
   return (
     <>
@@ -80,7 +74,7 @@ export const Detail = ({ match }) => {
                 ? `共 ${topic.reply_count} 条回复`
                 : '暂无回复'}
             </div>
-            {topic.replies.map(reply => (
+            {topic.replies.map((reply) => (
               <Reply {...reply} key={reply.id} />
             ))}
             <NoMore />

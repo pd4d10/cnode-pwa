@@ -4,7 +4,7 @@ export const useHint = () => {
   const [visible, setVisible] = useState(false)
   const [message, setMessage] = useState('')
 
-  const show = message => {
+  const show = (message) => {
     setMessage(message)
     setVisible(true)
   }

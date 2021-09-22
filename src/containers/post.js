@@ -20,7 +20,7 @@ const postTabs = [
   { id: 'dev', name: '客户端测试' },
 ]
 
-export const Post = props => {
+export const Post = (props) => {
   const [tab, setTab] = useState('ask')
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
@@ -37,7 +37,7 @@ export const Post = props => {
     <Route>
       {({ history }) => (
         <form
-          onSubmit={async e => {
+          onSubmit={async (e) => {
             e.preventDefault()
             if (!title || !content) {
               setTitleErrorVisible(!title)
@@ -75,7 +75,7 @@ export const Post = props => {
               InputProps={{
                 id: 'title',
                 value: title,
-                onChange: e => {
+                onChange: (e) => {
                   setTitle(e.target.value)
                 },
                 error: showTitleError,
@@ -93,7 +93,7 @@ export const Post = props => {
                 native: true,
                 id: 'tab',
                 value: tab,
-                onChange: e => {
+                onChange: (e) => {
                   setTab(e.target.value)
                 },
               }}
@@ -115,7 +115,7 @@ export const Post = props => {
               InputProps={{
                 id: 'content',
                 value: content,
-                onChange: e => {
+                onChange: (e) => {
                   setContent(e.target.value)
                 },
                 error: showContentError,

@@ -10,15 +10,12 @@ export const Home = ({ location, history }) => {
 
   const tab = getCurrentTab(location)
 
-  useEffect(
-    () => {
-      console.log(topics)
-      if (topics.length === 0) {
-        load(tab)
-      }
-    },
-    [location.key],
-  )
+  useEffect(() => {
+    console.log(topics)
+    if (topics.length === 0) {
+      load(tab)
+    }
+  }, [location.key])
 
   const handleLoadMore = () => loadMore(tab)
 

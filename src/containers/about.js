@@ -5,7 +5,7 @@ import { Header } from '../components'
 
 // Add rel="noopener noreferrer" for security
 // See https://mathiasbynens.github.io/rel-noopener/
-const Linker = props => (
+const Linker = (props) => (
   <ListItem
     button
     component="a"

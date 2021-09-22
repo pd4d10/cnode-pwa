@@ -10,7 +10,7 @@ export const AvatarRow = ({ author, children, ...props }) => (
           src={author.avatar_url}
           className={$s.avatar}
           alt={author.loginname}
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault()
             history.push(`/user/${author.loginname}`)
           }}

@@ -6,7 +6,7 @@ import { AvatarRow, Title, TimeAgo } from './'
 import $c from './common.module.css'
 import $s from './topic.module.css'
 
-export const Topic = React.memo(props => (
+export const Topic = React.memo((props) => (
   <ListItem
     button
     component={Link}
@@ -26,12 +26,12 @@ export const Topic = React.memo(props => (
             {props.top
               ? '置顶'
               : props.good
-                ? '精华'
-                : {
-                    share: '分享',
-                    ask: '问答',
-                    job: '招聘',
-                  }[props.tab]}
+              ? '精华'
+              : {
+                  share: '分享',
+                  ask: '问答',
+                  job: '招聘',
+                }[props.tab]}
           </div>
           <div className={$s.right}>
             <span style={{ color: '#9e78c0' }}>{props.reply_count} </span>
@@ -44,7 +44,7 @@ export const Topic = React.memo(props => (
   </ListItem>
 ))
 
-export const UserTopic = props => (
+export const UserTopic = (props) => (
   <ListItem
     button
     component={Link}

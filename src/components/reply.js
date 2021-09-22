@@ -2,7 +2,7 @@ import React from 'react'
 import { Divider } from '@material-ui/core'
 import { AvatarRow, TimeAgo } from './'
 
-export const Reply = props => (
+export const Reply = (props) => (
   <div style={{ marginTop: 8, marginBottom: 8 }}>
     <div style={{ display: 'flex', marginBottom: 6 }}>
       <AvatarRow author={props.author}>

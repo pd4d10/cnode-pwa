@@ -8,7 +8,7 @@ import QrReader from 'react-qr-reader'
 // import { colors } from '../../utils'
 // import style from './login.css'
 
-export const Login = props => {
+export const Login = (props) => {
   // <Dialog
   //   title="登录"
   //   modal={false}
@@ -33,7 +33,7 @@ export const Login = props => {
       {({ history }) => (
         <QrReader
           onError={console.error}
-          onScan={async token => {
+          onScan={async (token) => {
             console.log('scan', token)
             if (!token) return
 

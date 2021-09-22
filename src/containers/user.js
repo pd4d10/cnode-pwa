@@ -11,7 +11,7 @@ import {
 } from '../components'
 import { fetchAPI } from '../utils'
 
-export const User = props => {
+export const User = (props) => {
   const [author, setAuthor] = useState(null)
   const [tabIndex, setTabIndex] = useState(0)
   const [tabData, setTabData] = useState([[], [], []])
@@ -26,12 +26,9 @@ export const User = props => {
     setTabData([data.recent_replies, data.recent_topics, collectData])
   }
 
-  useEffect(
-    () => {
-      fetchUser()
-    },
-    [props.match.params],
-  )
+  useEffect(() => {
+    fetchUser()
+  }, [props.match.params])
 
   return (
     <div>
@@ -62,7 +59,7 @@ export const User = props => {
             <Tab label="话题收藏" />
           </Tabs>
           <div>
-            {tabData[tabIndex].map(topic => (
+            {tabData[tabIndex].map((topic) => (
               <UserTopic key={topic.id} {...topic} />
             ))}
           </div>

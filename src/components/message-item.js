@@ -6,7 +6,7 @@ import $c from './common.module.css'
 import $s from './message-item.module.css'
 import { colors } from '../utils'
 
-const MessageItem = props => (
+const MessageItem = (props) => (
   <ListItem
     button
     component={Link}

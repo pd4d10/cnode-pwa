@@ -13,7 +13,7 @@ export const useTopic = () => {
     return data
   }
 
-  const load = async tab => {
+  const load = async (tab) => {
     try {
       setIsLoading(true)
       const data = await fetchTopics(1, tab)
@@ -24,7 +24,7 @@ export const useTopic = () => {
     }
   }
 
-  const loadMore = throttle(async tab => {
+  const loadMore = throttle(async (tab) => {
     const toBottom =
       document.documentElement.scrollHeight -
       document.documentElement.scrollTop -
@@ -34,8 +34,8 @@ export const useTopic = () => {
       try {
         setIsLoadingMore(true)
         const data = await fetchTopics(page + 1, tab)
-        setTopics(topics => [...topics, ...data])
-        setPage(page => page + 1)
+        setTopics((topics) => [...topics, ...data])
+        setPage((page) => page + 1)
       } finally {
         setIsLoadingMore(false)
       }

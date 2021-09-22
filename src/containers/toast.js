@@ -11,7 +11,7 @@ import PropTypes from 'prop-types'
 )*/
 
 // TODO Use snackbar to show message
-export const Toast = props => (
+export const Toast = (props) => (
   <div
     style={{
       display: props.isVisible ? 'block' : 'none',
