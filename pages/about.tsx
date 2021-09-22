@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { ListItem, ListItemText, Divider } from '@material-ui/core'
+import { ListItem, ListItemText, Divider } from '@mui/material'
 // import { ReactComponent as Logo } from '../cnodejs.svg'
 import { Header } from '../src/components'
 

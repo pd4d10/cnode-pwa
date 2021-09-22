@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Tabs, Tab } from '@material-ui/core'
+import { Tabs, Tab } from '@mui/material'
 import {
   Header,
   UserTopic,

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'next/link'
-import { ListItem } from '@material-ui/core'
+import { ListItem } from '@mui/material'
 import { colors } from '../utils'
 import { AvatarRow, Title, TimeAgo } from './'
 import $c from './common.module.css'

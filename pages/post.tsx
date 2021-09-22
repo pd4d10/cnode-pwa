@@ -4,10 +4,10 @@ import {
   TextField,
   FormControlLabel,
   Checkbox,
-} from '@material-ui/core'
+} from '@mui/material'
 import { useRouter } from 'next/router'
-import { withStyles } from '@material-ui/core/styles'
-import { Send } from '@material-ui/icons'
+import withStyles from '@mui/styles/withStyles';
+import { Send } from '@mui/icons-material'
 import { Header } from '../src/components'
 import { fetchAPI } from '../src/utils'
 import $s from './post.module.css'
@@ -60,7 +60,7 @@ const Post = (props) => {
       <Header
         title="发布话题"
         rightWidget={() => (
-          <IconButton color="default" type="submit">
+          <IconButton color="default" type="submit" size="large">
             <Send />
           </IconButton>
         )}
@@ -124,7 +124,7 @@ const Post = (props) => {
         />
       </div>
     </form>
-  )
+  );
 }
 
 export default Post

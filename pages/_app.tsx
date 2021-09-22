@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
-import { colors } from '@material-ui/core'
+import { createTheme, ThemeProvider, Theme, StyledEngineProvider, adaptV4Theme } from '@mui/material/styles';
+import { colors } from '@mui/material'
 import { useAuth, useTopic } from '../src/hooks'
 // import { colors } from '../utils'
 import '../styles/globals.css'
 
-const theme = createMuiTheme({
+const theme = createTheme(adaptV4Theme({
   palette: {
     primary: colors.teal,
     secondary: colors.grey,
@@ -13,7 +13,7 @@ const theme = createMuiTheme({
   typography: {
     useNextVariants: true,
   },
-})
+}))
 
 const App = ({ Component, pageProps }) => {
   // const { topics } = useTopic()
@@ -30,14 +30,16 @@ const App = ({ Component, pageProps }) => {
   }, [])
 
   return (
-    <MuiThemeProvider theme={theme}>
-      <main>
-        <div style={{ marginTop: 48 }}>
-          <Component {...pageProps} />
-        </div>
-      </main>
-    </MuiThemeProvider>
-  )
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <main>
+          <div style={{ marginTop: 48 }}>
+            <Component {...pageProps} />
+          </div>
+        </main>
+      </ThemeProvider>
+    </StyledEngineProvider>
+  );
 }
 
 export default App

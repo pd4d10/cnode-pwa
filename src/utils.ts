@@ -8,7 +8,7 @@ import {
   Notifications,
   Settings,
   Info,
-} from '@material-ui/icons'
+} from '@mui/icons-material'
 
 export const colors = {
   background: '#444',

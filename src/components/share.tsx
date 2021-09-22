@@ -1,6 +1,6 @@
 import React from 'react'
-import { IconButton } from '@material-ui/core'
-import { Share } from '@material-ui/icons'
+import { IconButton } from '@mui/material'
+import { Share } from '@mui/icons-material'
 import { useHint } from '../hooks'
 import { copy } from '../utils'
 
@@ -22,8 +22,8 @@ export const ShareTo = ({ text }) => {
           show('链接已复制至剪贴板')
         }
       }}
-    >
+      size="large">
       <Share />
     </IconButton>
-  )
+  );
 }

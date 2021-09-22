@@ -1,20 +1,11 @@
 import React from 'react'
-import {
-  AppBar,
-  Typography,
-  Button,
-  Toolbar,
-  IconButton,
-  Badge,
-  Tabs,
-  Tab,
-  withStyles,
-} from '@material-ui/core'
+import { AppBar, Typography, Button, Toolbar, IconButton, Badge, Tabs, Tab } from '@mui/material';
+import withStyles from '@mui/styles/withStyles';
 import { useRouter } from 'next/router'
-import { ArrowBack } from '@material-ui/icons'
+import { ArrowBack } from '@mui/icons-material'
 import { tabData, getCurrentTab } from '../utils'
 import { useAuth } from '../hooks'
-import { Close, Edit, Notifications, AccountCircle } from '@material-ui/icons'
+import { Close, Edit, Notifications, AccountCircle } from '@mui/icons-material'
 // import { ReactComponent as Logo } from '../cnodejs.svg'
 
 const appBarStyle = {
@@ -36,7 +27,7 @@ export const Header = ({ title, rightWidget: Widget }) => {
               router.goBack()
             }
           }}
-        >
+          size="large">
           <ArrowBack />
         </IconButton>
         <Typography variant="h6" color="textSecondary" style={{ flexGrow: 1 }}>
@@ -45,7 +36,7 @@ export const Header = ({ title, rightWidget: Widget }) => {
         {Widget && <Widget />}
       </Toolbar>
     </AppBar>
-  )
+  );
 }
 
 export const HomeHeader = () => {
@@ -62,7 +53,7 @@ export const HomeHeader = () => {
       }}
     >
       <Toolbar variant="dense" disableGutters>
-        <IconButton>{/* <Logo height={24} /> */}</IconButton>
+        <IconButton size="large">{/* <Logo height={24} /> */}</IconButton>
         <Typography variant="h6" color="textSecondary" style={{ flexGrow: 1 }}>
           {''}
         </Typography>
@@ -73,7 +64,7 @@ export const HomeHeader = () => {
             onClick={() => {
               router.push('/message')
             }}
-          >
+            size="large">
             {count ? (
               <Badge badgeContent={count} color="secondary">
                 <Notifications />
@@ -87,7 +78,7 @@ export const HomeHeader = () => {
             onClick={() => {
               router.push(loginname ? `/user/${loginname}` : '/login')
             }}
-          >
+            size="large">
             <AccountCircle />
           </IconButton>
         </>
@@ -108,5 +99,5 @@ export const HomeHeader = () => {
         ))}
       </Tabs>
     </AppBar>
-  )
+  );
 }

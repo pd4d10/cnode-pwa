@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListItem } from '@material-ui/core'
+import { ListItem } from '@mui/material'
 import { Link } from 'next/router'
 import { AvatarRow, Title } from '.'
 import $c from './common.module.css'

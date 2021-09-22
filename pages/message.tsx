@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { IconButton } from '@material-ui/core'
-import { DoneAll } from '@material-ui/icons'
+import { IconButton } from '@mui/material'
+import { DoneAll } from '@mui/icons-material'
 import { useAuth, useHint } from '../src/hooks'
 import { fetchAPI } from '../src/utils'
 import { MessageItem, Header, Loading, NoMore } from '../src/components'
@@ -54,7 +54,7 @@ const Message = (props) => {
               show('已标记全部消息为已读')
               await updateMessages()
             }}
-          >
+            size="large">
             <DoneAll />
           </IconButton>
         )}
@@ -73,7 +73,7 @@ const Message = (props) => {
         </>
       )}
     </div>
-  )
+  );
 }
 
 export default Message

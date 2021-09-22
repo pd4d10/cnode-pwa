@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Slide } from '@material-ui/core'
-import { Edit } from '@material-ui/icons'
+import { Button, Slide } from '@mui/material'
+import { Edit } from '@mui/icons-material'
 import { Topic, Loading, HomeHeader } from '../src/components'
 import { getCurrentTab } from '../src/utils'
 import { useTopic } from '../src/hooks'
