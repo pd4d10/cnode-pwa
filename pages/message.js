@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import { IconButton } from '@material-ui/core'
 import { DoneAll } from '@material-ui/icons'
-import { useAuth, useHint } from '../hooks'
-import { fetchAPI } from '../utils'
-import { MessageItem, Header, Loading, NoMore } from '../components'
+import { useAuth, useHint } from '../src/hooks'
+import { fetchAPI } from '../src/utils'
+import { MessageItem, Header, Loading, NoMore } from '../src/components'
 
-export const Message = (props) => {
+const Message = (props) => {
   const [unread, setUnread] = useState([])
   const [read, setRead] = useState([])
   const [isLoading, setIsLoading] = useState(false)
@@ -39,7 +39,7 @@ export const Message = (props) => {
   }, [])
 
   if (!token) {
-    return <Redirect to="/login" />
+    // return <Redirect to="/login" /> // TODO:
   }
 
   return (
@@ -75,3 +75,5 @@ export const Message = (props) => {
     </div>
   )
 }
+
+export default Message

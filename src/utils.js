@@ -69,8 +69,8 @@ export const tabData = [
   },
 ]
 
-export function getCurrentTab(location) {
-  const params = new URLSearchParams(location.search)
+export function getCurrentTab() {
+  const params = new URLSearchParams('') // TODO:
   return params.get('tab') || 'all'
 }
 

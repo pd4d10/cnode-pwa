@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'next/link'
 import { ListItem } from '@material-ui/core'
 import { colors } from '../utils'
 import { AvatarRow, Title, TimeAgo } from './'

@@ -1,30 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Slide } from '@material-ui/core'
 import { Edit } from '@material-ui/icons'
-import { Topic, Loading, HomeHeader } from '../components'
-import { getCurrentTab } from '../utils'
-import { useTopic } from '../hooks'
+import { Topic, Loading, HomeHeader } from '../src/components'
+import { getCurrentTab } from '../src/utils'
+import { useTopic } from '../src/hooks'
 
-export const Home = ({ location, history }) => {
+const Home = ({ location, history }) => {
   const { topics, isLoading, isLoadingMore, load, loadMore } = useTopic()
 
-  const tab = getCurrentTab(location)
+  // const tab = getCurrentTab(location)
 
-  useEffect(() => {
-    console.log(topics)
-    if (topics.length === 0) {
-      load(tab)
-    }
-  }, [location.key])
+  // useEffect(() => {
+  //   console.log(topics)
+  //   if (topics.length === 0) {
+  //     load(tab)
+  //   }
+  // }, [location.key])
 
-  const handleLoadMore = () => loadMore(tab)
+  // const handleLoadMore = () => loadMore(tab)
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleLoadMore)
-    return () => {
-      window.removeEventListener('scroll', handleLoadMore)
-    }
-  }, [])
+  // useEffect(() => {
+  //   window.addEventListener('scroll', handleLoadMore)
+  //   return () => {
+  //     window.removeEventListener('scroll', handleLoadMore)
+  //   }
+  // }, [])
 
   // console.log(location.key)
 
@@ -54,3 +54,5 @@ export const Home = ({ location, history }) => {
     </div>
   )
 }
+
+export default Home

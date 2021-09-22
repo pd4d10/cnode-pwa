@@ -1,14 +1,15 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 import Dialog from '@material-ui/core/Dialog'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import { useAuth } from '../hooks'
-import { Route } from 'react-router-dom'
+import { useAuth } from '../src/hooks'
 import QrReader from 'react-qr-reader'
 // import { colors } from '../../utils'
 // import style from './login.css'
 
-export const Login = (props) => {
+const Login = (props) => {
+  const router = useRouter()
   // <Dialog
   //   title="登录"
   //   modal={false}
@@ -29,22 +30,20 @@ export const Login = (props) => {
   const { verifyToken } = useAuth()
 
   return (
-    <Route>
-      {({ history }) => (
-        <QrReader
-          onError={console.error}
-          onScan={async (token) => {
-            console.log('scan', token)
-            if (!token) return
+    <QrReader
+      onError={console.error}
+      onScan={async (token) => {
+        console.log('scan', token)
+        if (!token) return
 
-            const isValid = await verifyToken(token)
-            if (isValid) {
-              history.push('/')
-            }
-          }}
-          // style={{ width: "100%" }}
-        />
-      )}
-    </Route>
+        const isValid = await verifyToken(token)
+        if (isValid) {
+          router.push('/')
+        }
+      }}
+      // style={{ width: "100%" }}
+    />
   )
 }
+
+export default Login

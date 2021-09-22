@@ -8,10 +8,10 @@ import {
   ShareTo,
   AvatarRow,
   TimeAgo,
-} from '../components'
-import { fetchAPI } from '../utils'
+} from '../../src/components'
+import { fetchAPI } from '../../src/utils'
 
-export const User = (props) => {
+const User = (props) => {
   const [author, setAuthor] = useState(null)
   const [tabIndex, setTabIndex] = useState(0)
   const [tabData, setTabData] = useState([[], [], []])
@@ -71,3 +71,5 @@ export const User = (props) => {
     </div>
   )
 }
+
+export default User

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { ListItem, ListItemText, Divider } from '@material-ui/core'
-import { ReactComponent as Logo } from '../cnodejs.svg'
-import { Header } from '../components'
+// import { ReactComponent as Logo } from '../cnodejs.svg'
+import { Header } from '../src/components'
 
 // Add rel="noopener noreferrer" for security
 // See https://mathiasbynens.github.io/rel-noopener/
@@ -17,7 +17,7 @@ const Linker = (props) => (
   </ListItem>
 )
 
-export const About = () => {
+const About = () => {
   useEffect(() => {
     document.title = '关于'
   }, [])
@@ -33,7 +33,7 @@ export const About = () => {
           padding: '20px 0',
         }}
       >
-        <Logo style={{ width: '70%' }} />
+        {/* <Logo style={{ width: '70%' }} /> */}
       </div>
       <Divider />
       <Linker title="源代码" url="https://github.com/pd4d10/cnode-pwa" />
@@ -47,3 +47,5 @@ export const About = () => {
     </>
   )
 }
+
+export default About

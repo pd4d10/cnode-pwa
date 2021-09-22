@@ -1,6 +1,6 @@
 import React from 'react'
 import { ListItem } from '@material-ui/core'
-import { Link } from 'react-router-dom'
+import { Link } from 'next/router'
 import { AvatarRow, Title } from '.'
 import $c from './common.module.css'
 import $s from './message-item.module.css'

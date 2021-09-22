@@ -2,29 +2,20 @@
   "name": "cnode-pwa",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://cnode.rocks",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
   "dependencies": {
+    "next": "11.1.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "@material-ui/core": "^3.1.1",
     "@material-ui/icons": "^3.0.1",
     "github-markdown-css": "^2.4.1",
     "lodash-es": "^4.17.11",
-    "react": "^16.7.0-alpha.0",
-    "react-dom": "^16.7.0-alpha.0",
     "react-qr-reader": "^2.1.1",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "2.0.4",
     "timeago-react": "^1.0.8"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "exit 0",
-    "eject": "react-scripts eject"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  }
 }

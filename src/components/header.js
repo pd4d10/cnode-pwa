@@ -10,12 +10,12 @@ import {
   Tab,
   withStyles,
 } from '@material-ui/core'
-import { Route } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import { ArrowBack } from '@material-ui/icons'
 import { tabData, getCurrentTab } from '../utils'
 import { useAuth } from '../hooks'
 import { Close, Edit, Notifications, AccountCircle } from '@material-ui/icons'
-import { ReactComponent as Logo } from '../cnodejs.svg'
+// import { ReactComponent as Logo } from '../cnodejs.svg'
 
 const appBarStyle = {
   background: '#fff',
@@ -23,25 +23,22 @@ const appBarStyle = {
 }
 
 export const Header = ({ title, rightWidget: Widget }) => {
+  const router = useRouter()
   return (
     <AppBar color="default" style={appBarStyle}>
       <Toolbar variant="dense" disableGutters>
-        <Route>
-          {({ history }) => (
-            <IconButton
-              onClick={() => {
-                if (history.length === 1) {
-                  // If no history, go to homepage
-                  history.push('/')
-                } else {
-                  history.goBack()
-                }
-              }}
-            >
-              <ArrowBack />
-            </IconButton>
-          )}
-        </Route>
+        <IconButton
+          onClick={() => {
+            if (history.length === 1) {
+              // If no history, go to homepage
+              router.push('/')
+            } else {
+              router.goBack()
+            }
+          }}
+        >
+          <ArrowBack />
+        </IconButton>
         <Typography variant="h6" color="textSecondary" style={{ flexGrow: 1 }}>
           {title}
         </Typography>
@@ -52,73 +49,64 @@ export const Header = ({ title, rightWidget: Widget }) => {
 }
 
 export const HomeHeader = () => {
+  const router = useRouter()
   const { count, loginname } = useAuth()
 
   return (
-    <Route>
-      {({ history, location }) => (
-        <AppBar
-          color="default"
-          position="sticky"
-          style={{
-            ...appBarStyle,
-            top: -48,
-          }}
-        >
-          <Toolbar variant="dense" disableGutters>
-            <IconButton>
-              <Logo height={24} />
-            </IconButton>
-            <Typography
-              variant="h6"
-              color="textSecondary"
-              style={{ flexGrow: 1 }}
-            >
-              {''}
-            </Typography>
+    <AppBar
+      color="default"
+      position="sticky"
+      style={{
+        ...appBarStyle,
+        top: -48,
+      }}
+    >
+      <Toolbar variant="dense" disableGutters>
+        <IconButton>{/* <Logo height={24} /> */}</IconButton>
+        <Typography variant="h6" color="textSecondary" style={{ flexGrow: 1 }}>
+          {''}
+        </Typography>
 
-            <>
-              <IconButton
-                color="default"
-                onClick={() => {
-                  history.push('/message')
-                }}
-              >
-                {count ? (
-                  <Badge badgeContent={count} color="secondary">
-                    <Notifications />
-                  </Badge>
-                ) : (
-                  <Notifications />
-                )}
-              </IconButton>
-              <IconButton
-                color="default"
-                onClick={() => {
-                  history.push(loginname ? `/user/${loginname}` : '/login')
-                }}
-              >
-                <AccountCircle />
-              </IconButton>
-            </>
-          </Toolbar>
-          <Tabs
-            style={{ background: '#fff' }}
-            value={getCurrentTab(location)}
-            onChange={(_, value) => {
-              // debugger
-              history.push(value === 'all' ? '/' : '/?tab=' + value)
+        <>
+          <IconButton
+            color="default"
+            onClick={() => {
+              router.push('/message')
             }}
-            indicatorColor="primary"
-            textColor="primary"
-            fullWidth
           >
-            {tabData.map(({ id, title }) => (
-              <Tab key={id} label={title} value={id} />
-            ))}
-          </Tabs>
-        </AppBar>
-      )}
-    </Route>
+            {count ? (
+              <Badge badgeContent={count} color="secondary">
+                <Notifications />
+              </Badge>
+            ) : (
+              <Notifications />
+            )}
+          </IconButton>
+          <IconButton
+            color="default"
+            onClick={() => {
+              router.push(loginname ? `/user/${loginname}` : '/login')
+            }}
+          >
+            <AccountCircle />
+          </IconButton>
+        </>
+      </Toolbar>
+      <Tabs
+        style={{ background: '#fff' }}
+        value={getCurrentTab()}
+        onChange={(_, value) => {
+          // debugger
+          history.push(value === 'all' ? '/' : '/?tab=' + value)
+        }}
+        indicatorColor="primary"
+        textColor="primary"
+        fullWidth
+      >
+        {tabData.map(({ id, title }) => (
+          <Tab key={id} label={title} value={id} />
+        ))}
+      </Tabs>
+    </AppBar>
   )
 }
