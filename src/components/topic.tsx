@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'next/link'
+import Link from 'next/link'
 import { ListItem } from '@mui/material'
 import { colors } from '../utils'
 import { AvatarRow, Title, TimeAgo } from './'
@@ -8,7 +8,7 @@ import $s from './topic.module.css'
 
 export const Topic = React.memo((props) => (
   <ListItem
-    button
+    // button
     component={Link}
     to={`/topic/${props.id}`}
     className={$c.link}
@@ -46,7 +46,7 @@ export const Topic = React.memo((props) => (
 
 export const UserTopic = (props) => (
   <ListItem
-    button
+    // button
     component={Link}
     to={`/topic/${props.id}`}
     className={$c.item}

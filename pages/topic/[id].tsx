@@ -11,15 +11,18 @@ import {
 import { fetchAPI } from '../../src/utils'
 import 'github-markdown-css'
 import $s from './detail.module.css'
+import { NextPage } from 'next'
+import { useRouter } from 'next/router'
 
-export const Detail = ({ match }) => {
+export const Detail: NextPage = () => {
+  const router = useRouter()
   const [topic, setTopic] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
   const fetchTopic = async () => {
     try {
       setIsLoading(true)
-      const { data } = await fetchAPI(`/topic/${match.params.id}`)
+      const { data } = await fetchAPI(`/topic/${router.query.id}`)
       setTopic(data)
     } finally {
       setIsLoading(false)
@@ -28,7 +31,7 @@ export const Detail = ({ match }) => {
 
   useEffect(() => {
     fetchTopic()
-  }, [match.params.id])
+  }, [router.query.id])
 
   useEffect(() => {
     if (topic) {

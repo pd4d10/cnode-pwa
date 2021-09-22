@@ -1,6 +1,14 @@
-import React from 'react'
-import { AppBar, Typography, Button, Toolbar, IconButton, Badge, Tabs, Tab } from '@mui/material';
-import withStyles from '@mui/styles/withStyles';
+import React, { FC } from 'react'
+import {
+  AppBar,
+  Typography,
+  Button,
+  Toolbar,
+  IconButton,
+  Badge,
+  Tabs,
+  Tab,
+} from '@mui/material'
 import { useRouter } from 'next/router'
 import { ArrowBack } from '@mui/icons-material'
 import { tabData, getCurrentTab } from '../utils'
@@ -13,7 +21,10 @@ const appBarStyle = {
   boxShadow: '0px 2px 4px 0px rgba(0, 0, 0, 0.2)',
 }
 
-export const Header = ({ title, rightWidget: Widget }) => {
+export const Header: FC<{ title: string; rightWidget?: FC }> = ({
+  title,
+  rightWidget: Widget,
+}) => {
   const router = useRouter()
   return (
     <AppBar color="default" style={appBarStyle}>
@@ -24,10 +35,11 @@ export const Header = ({ title, rightWidget: Widget }) => {
               // If no history, go to homepage
               router.push('/')
             } else {
-              router.goBack()
+              router.back()
             }
           }}
-          size="large">
+          size="large"
+        >
           <ArrowBack />
         </IconButton>
         <Typography variant="h6" color="textSecondary" style={{ flexGrow: 1 }}>
@@ -36,7 +48,7 @@ export const Header = ({ title, rightWidget: Widget }) => {
         {Widget && <Widget />}
       </Toolbar>
     </AppBar>
-  );
+  )
 }
 
 export const HomeHeader = () => {
@@ -64,7 +76,8 @@ export const HomeHeader = () => {
             onClick={() => {
               router.push('/message')
             }}
-            size="large">
+            size="large"
+          >
             {count ? (
               <Badge badgeContent={count} color="secondary">
                 <Notifications />
@@ -78,7 +91,8 @@ export const HomeHeader = () => {
             onClick={() => {
               router.push(loginname ? `/user/${loginname}` : '/login')
             }}
-            size="large">
+            size="large"
+          >
             <AccountCircle />
           </IconButton>
         </>
@@ -88,16 +102,16 @@ export const HomeHeader = () => {
         value={getCurrentTab()}
         onChange={(_, value) => {
           // debugger
-          history.push(value === 'all' ? '/' : '/?tab=' + value)
+          router.push(value === 'all' ? '/' : '/?tab=' + value)
         }}
         indicatorColor="primary"
         textColor="primary"
-        fullWidth
+        // fullWidth
       >
         {tabData.map(({ id, title }) => (
           <Tab key={id} label={title} value={id} />
         ))}
       </Tabs>
     </AppBar>
-  );
+  )
 }

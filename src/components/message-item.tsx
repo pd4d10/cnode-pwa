@@ -1,6 +1,6 @@
 import React from 'react'
 import { ListItem } from '@mui/material'
-import { Link } from 'next/router'
+import Link from 'next/router'
 import { AvatarRow, Title } from '.'
 import $c from './common.module.css'
 import $s from './message-item.module.css'
@@ -8,7 +8,7 @@ import { colors } from '../utils'
 
 const MessageItem = (props) => (
   <ListItem
-    button
+    // button
     component={Link}
     to={`/topic/${props.topic.id}`}
     className={$c.item}

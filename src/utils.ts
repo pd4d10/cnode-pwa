@@ -18,7 +18,7 @@ export const colors = {
   avatarBackground: '#f5f5f5',
 }
 
-export async function fetchAPI(url, body) {
+export async function fetchAPI(url: string, body: Record<string, string> = {}) {
   let options = {}
   // if body passed in then use posts
   if (body) {

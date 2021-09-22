@@ -52,7 +52,7 @@ const User = (props) => {
             }}
             indicatorColor="primary"
             textColor="primary"
-            fullWidth
+            // fullWidth
           >
             <Tab label="最近参与" />
             <Tab label="最近发布" />

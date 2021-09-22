@@ -1,17 +1,11 @@
 import React, { useState } from 'react'
-import {
-  IconButton,
-  TextField,
-  FormControlLabel,
-  Checkbox,
-} from '@mui/material'
+import { IconButton, TextField } from '@mui/material'
 import { useRouter } from 'next/router'
-import withStyles from '@mui/styles/withStyles';
 import { Send } from '@mui/icons-material'
 import { Header } from '../src/components'
 import { fetchAPI } from '../src/utils'
 import $s from './post.module.css'
-import { useAuth, useHint } from '../hooks'
+import { useAuth, useHint } from '../src/hooks'
 
 const postTabs = [
   { id: 'ask', name: '问答' },
@@ -124,7 +118,7 @@ const Post = (props) => {
         />
       </div>
     </form>
-  );
+  )
 }
 
 export default Post
