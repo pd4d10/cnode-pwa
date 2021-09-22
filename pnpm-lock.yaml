@@ -12,6 +12,7 @@ specifiers:
   react-dom: 17.0.2
   react-qr-reader: ^2.2.1
   timeago-react: ^3.0.4
+  typescript: ^4.4.3
 
 dependencies:
   '@emotion/react': 11.4.1_react@17.0.2
@@ -20,11 +21,12 @@ dependencies:
   '@material-ui/icons': 4.11.2_fced322086cd04afb0b6feec9e866920
   github-markdown-css: 4.0.0
   lodash-es: 4.17.21
-  next: 11.1.2_react-dom@17.0.2+react@17.0.2
+  next: 11.1.2_bd7797d63db473de6e2318609a63c933
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-qr-reader: 2.2.1_react-dom@17.0.2+react@17.0.2
   timeago-react: 3.0.4_react@17.0.2
+  typescript: 4.4.3
 
 packages:
 
@@ -1579,7 +1581,7 @@ packages:
       querystring: 0.2.1
     dev: false
 
-  /next/11.1.2_react-dom@17.0.2+react@17.0.2:
+  /next/11.1.2_bd7797d63db473de6e2318609a63c933:
     resolution: {integrity: sha512-azEYL0L+wFjv8lstLru3bgvrzPvK0P7/bz6B/4EJ9sYkXeW8r5Bjh78D/Ol7VOg0EIPz0CXoe72hzAlSAXo9hw==}
     engines: {node: '>=12.0.0'}
     hasBin: true
@@ -1630,7 +1632,7 @@ packages:
       os-browserify: 0.3.0
       p-limit: 3.1.0
       path-browserify: 1.0.1
-      pnp-webpack-plugin: 1.6.4
+      pnp-webpack-plugin: 1.6.4_typescript@4.4.3
       postcss: 8.2.15
       process: 0.11.10
       querystring-es3: 0.2.1
@@ -1850,11 +1852,11 @@ packages:
     resolution: {integrity: sha512-fnWVljUchTro6RiCFvCXBbNhJc2NijN7oIQxbwsyL0buWJPG85v81ehlHI9fXrJsMNgTofEoWIQeClKpgxFLrg==}
     dev: false
 
-  /pnp-webpack-plugin/1.6.4:
+  /pnp-webpack-plugin/1.6.4_typescript@4.4.3:
     resolution: {integrity: sha512-7Wjy+9E3WwLOEL30D+m8TSTF7qJJUJLONBnwQp0518siuMxUQUbgZwssaFX+QKlZkjHZcw/IpZCt/H0srrntSg==}
     engines: {node: '>=6'}
     dependencies:
-      ts-pnp: 1.2.0
+      ts-pnp: 1.2.0_typescript@4.4.3
     transitivePeerDependencies:
       - typescript
     dev: false
@@ -2351,7 +2353,7 @@ packages:
       punycode: 2.1.1
     dev: false
 
-  /ts-pnp/1.2.0:
+  /ts-pnp/1.2.0_typescript@4.4.3:
     resolution: {integrity: sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==}
     engines: {node: '>=6'}
     peerDependencies:
@@ -2359,6 +2361,8 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+    dependencies:
+      typescript: 4.4.3
     dev: false
 
   /tty-browserify/0.0.0:
@@ -2372,6 +2376,12 @@ packages:
   /type-fest/0.7.1:
     resolution: {integrity: sha512-Ne2YiiGN8bmrmJJEuTWTLJR32nh/JdL1+PSicowtNb0WFpn59GK8/lfD61bVtzguz7b3PBt74nxpv/Pw5po5Rg==}
     engines: {node: '>=8'}
+    dev: false
+
+  /typescript/4.4.3:
+    resolution: {integrity: sha512-4xfscpisVgqqDfPaJo5vkd+Qd/ItkoagnHpufr+i2QCHBsNYp+G7UAoyFl8aPtx879u38wPV65rZ8qbGZijalA==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
     dev: false
 
   /unbox-primitive/1.0.1:
