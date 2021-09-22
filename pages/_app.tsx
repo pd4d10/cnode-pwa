@@ -2,29 +2,24 @@ import React, { useEffect } from 'react'
 import {
   createTheme,
   ThemeProvider,
-  Theme,
   StyledEngineProvider,
-  adaptV4Theme,
 } from '@mui/material/styles'
 import { colors } from '@mui/material'
-import { useAuth, useTopic } from '../src/hooks'
-// import { colors } from '../utils'
+import { useAuth } from '../src/hooks'
 import '../styles/globals.css'
+import { AppType } from 'next/dist/shared/lib/utils'
 
-const theme = createTheme(
-  adaptV4Theme({
-    palette: {
-      primary: colors.teal,
-      secondary: colors.grey,
-    },
-    typography: {
-      // useNextVariants: true,
-    },
-  }),
-)
+const theme = createTheme({
+  palette: {
+    primary: colors.teal,
+    secondary: colors.grey,
+  },
+  typography: {
+    // useNextVariants: true,
+  },
+})
 
-const App = ({ Component, pageProps }) => {
-  // const { topics } = useTopic()
+const App: AppType = ({ Component, pageProps }) => {
   const { verifyToken, fetchUnreadCount } = useAuth()
 
   useEffect(() => {

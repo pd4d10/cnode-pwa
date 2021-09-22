@@ -4,8 +4,9 @@ import { Edit } from '@mui/icons-material'
 import { Topic, Loading, HomeHeader } from '../src/components'
 import { getCurrentTab } from '../src/utils'
 import { useTopic } from '../src/hooks'
+import { NextPage } from 'next'
 
-const Home = ({ location, history }) => {
+const Home: NextPage = () => {
   const { topics, isLoading, isLoadingMore, load, loadMore } = useTopic()
 
   // const tab = getCurrentTab(location)
@@ -42,7 +43,7 @@ const Home = ({ location, history }) => {
       )}
       {isLoadingMore && <Loading />}
       <Button
-        variant="fab"
+        // variant="fab"
         // color="secondary"
         style={{ position: 'fixed', bottom: 16, right: 16 }}
         onClick={() => {
