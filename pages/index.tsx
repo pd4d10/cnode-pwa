@@ -1,53 +1,67 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Slide } from '@mui/material'
 import { Edit } from '@mui/icons-material'
+import useSWRInfinite from 'swr/infinite'
 import { Topic, Loading, HomeHeader } from '../src/components'
-import { getCurrentTab } from '../src/utils'
-import { useTopic } from '../src/hooks'
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import { fetchAPI } from '../src/utils'
+import { TopicProps } from '../src/components/topic'
 
 const Home: NextPage = () => {
-  const { topics, isLoading, isLoadingMore, load, loadMore } = useTopic()
+  const router = useRouter()
+  const tab = router.query.tab ?? 'all'
 
-  // const tab = getCurrentTab(location)
+  const fetcher = (url: string) => fetchAPI(url).then((json) => json.data)
 
-  // useEffect(() => {
-  //   console.log(topics)
-  //   if (topics.length === 0) {
-  //     load(tab)
-  //   }
-  // }, [location.key])
+  const { data, error, isValidating, size, setSize } = useSWRInfinite<
+    TopicProps[]
+  >(
+    (index, previousPageData) => {
+      if (previousPageData && !previousPageData.length) return null
+      return `/topics?tab=${tab}&page=${index}&limit=20`
+    },
+    fetcher,
+    {},
+  )
 
-  // const handleLoadMore = () => loadMore(tab)
+  const handleScroll = () => {
+    const toBottom =
+      document.documentElement.scrollHeight -
+      document.documentElement.scrollTop -
+      document.documentElement.clientHeight
+    // console.log('toBottom', toBottom)
+    if (toBottom < 120 && !isValidating) {
+      setSize(size + 1)
+    }
+  }
 
-  // useEffect(() => {
-  //   window.addEventListener('scroll', handleLoadMore)
-  //   return () => {
-  //     window.removeEventListener('scroll', handleLoadMore)
-  //   }
-  // }, [])
-
-  // console.log(location.key)
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   return (
     <div style={{ marginBottom: 84, marginTop: -48 }}>
-      <HomeHeader />
-      {isLoading ? (
+      <HomeHeader tab={tab} />
+      {!data ? (
         <Loading />
       ) : (
         <div>
-          {topics.map((topic, index) => (
+          {data.flat().map((topic) => (
             <Topic {...topic} key={topic.id} />
           ))}
         </div>
       )}
-      {isLoadingMore && <Loading />}
+      {isValidating && <Loading />}
       <Button
         // variant="fab"
         // color="secondary"
         style={{ position: 'fixed', bottom: 16, right: 16 }}
         onClick={() => {
-          history.push('/post')
+          router.push('/post')
         }}
       >
         <Edit />

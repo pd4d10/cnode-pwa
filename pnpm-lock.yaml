@@ -11,6 +11,7 @@ specifiers:
   react: 17.0.2
   react-dom: 17.0.2
   react-qr-reader: ^2.2.1
+  swr: ^1.0.1
   timeago-react: ^3.0.4
   typescript: ^4.4.3
 
@@ -25,6 +26,7 @@ dependencies:
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-qr-reader: 2.2.1_react-dom@17.0.2+react@17.0.2
+  swr: 1.0.1_react@17.0.2
   timeago-react: 3.0.4_react@17.0.2
   typescript: 4.4.3
 
@@ -946,6 +948,11 @@ packages:
   /depd/1.1.2:
     resolution: {integrity: sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=}
     engines: {node: '>= 0.6'}
+    dev: false
+
+  /dequal/2.0.2:
+    resolution: {integrity: sha512-q9K8BlJVxK7hQYqa6XISGmBZbtQQWVXSrRrWreHC94rMt1QL/Impruc+7p2CYSYuVIUr+YCt6hjrs1kkdJRTug==}
+    engines: {node: '>=6'}
     dev: false
 
   /des.js/1.0.1:
@@ -2269,6 +2276,15 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       has-flag: 4.0.0
+    dev: false
+
+  /swr/1.0.1_react@17.0.2:
+    resolution: {integrity: sha512-EPQAxSjoD4IaM49rpRHK0q+/NzcwoT8c0/Ylu/u3/6mFj/CWnQVjNJ0MV2Iuw/U+EJSd2TX5czdAwKPYZIG0YA==}
+    peerDependencies:
+      react: ^16.11.0 || ^17.0.0
+    dependencies:
+      dequal: 2.0.2
+      react: 17.0.2
     dev: false
 
   /timeago-react/3.0.4_react@17.0.2:

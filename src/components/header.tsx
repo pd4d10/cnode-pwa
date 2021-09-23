@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import { useRouter } from 'next/router'
 import { ArrowBack } from '@mui/icons-material'
-import { tabData, getCurrentTab } from '../utils'
+import { tabData } from '../utils'
 import { useAuth } from '../hooks'
 import { Close, Edit, Notifications, AccountCircle } from '@mui/icons-material'
 // import { ReactComponent as Logo } from '../cnodejs.svg'
@@ -51,7 +51,7 @@ export const Header: FC<{ title: string; rightWidget?: FC }> = ({
   )
 }
 
-export const HomeHeader = () => {
+export const HomeHeader: FC<{ tab: string }> = ({ tab }) => {
   const router = useRouter()
   const { count, loginname } = useAuth()
 
@@ -99,7 +99,7 @@ export const HomeHeader = () => {
       </Toolbar>
       <Tabs
         style={{ background: '#fff' }}
-        value={getCurrentTab()}
+        value={tab}
         onChange={(_, value) => {
           // debugger
           router.push(value === 'all' ? '/' : '/?tab=' + value)

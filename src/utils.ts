@@ -18,7 +18,7 @@ export const colors = {
   avatarBackground: '#f5f5f5',
 }
 
-export async function fetchAPI(url: string, body: Record<string, string> = {}) {
+export async function fetchAPI(url: string, body?: Record<string, string>) {
   let options = {}
   // if body passed in then use posts
   if (body) {
@@ -68,11 +68,6 @@ export const tabData = [
     Icon: SwitchCamera,
   },
 ]
-
-export function getCurrentTab() {
-  const params = new URLSearchParams('') // TODO:
-  return params.get('tab') || 'all'
-}
 
 export function copy(text) {
   const $ = document.createElement('textarea')
