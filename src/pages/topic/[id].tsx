@@ -7,6 +7,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { SendOutline } from 'antd-mobile-icons'
 import { Header } from '../../components/header'
+import { Viewer } from '@bytemd/react'
 
 const Detail: NextPage = () => {
   const router = useRouter()
@@ -19,7 +20,9 @@ const Detail: NextPage = () => {
     const init = async () => {
       try {
         setIsLoading(true)
-        const { data } = await fetchAPI(`/topic/${router.query.id}`)
+        const { data } = await fetchAPI(
+          `/topic/${router.query.id}?mdrender=false`,
+        )
         setTopic(data)
       } finally {
         setIsLoading(false)
@@ -53,7 +56,7 @@ const Detail: NextPage = () => {
       ) : (
         <div className={$s.container}>
           <div className={$s.title}>{topic.title}</div>
-          <AvatarRow author={topic.author}>
+          <AvatarRow author={topic.author} style={{ marginBottom: 12 }}>
             <div>{topic.author.loginname}</div>
             <div className={$s.tip}>
               <TimeAgo text="发布于" time={topic.create_at} />
@@ -63,11 +66,7 @@ const Detail: NextPage = () => {
               </span>
             </div>
           </AvatarRow>
-          <div
-            style={{ marginTop: 12 }}
-            className="markdown-body"
-            dangerouslySetInnerHTML={{ __html: topic.content }}
-          />
+          <Viewer value={topic.content} />
           <div>
             <div
               style={{

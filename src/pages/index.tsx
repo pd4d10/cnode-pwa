@@ -23,7 +23,7 @@ const Home: NextPage = () => {
   >(
     (index, previousPageData) => {
       if (previousPageData && !previousPageData.length) return null
-      return `/topics?tab=${tab}&page=${index}&limit=20`
+      return `/topics?mdrender=false&tab=${tab}&page=${index}&limit=20`
     },
     fetcher,
     {},
