@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Reply,
   AvatarRow,
@@ -14,23 +14,25 @@ import $s from './detail.module.css'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
-export const Detail: NextPage = () => {
+const Detail: NextPage = () => {
   const router = useRouter()
   const [topic, setTopic] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
-  const fetchTopic = async () => {
-    try {
-      setIsLoading(true)
-      const { data } = await fetchAPI(`/topic/${router.query.id}`)
-      setTopic(data)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
   useEffect(() => {
-    fetchTopic()
+    if (!router.query.id) return
+
+    const init = async () => {
+      try {
+        setIsLoading(true)
+        const { data } = await fetchAPI(`/topic/${router.query.id}`)
+        setTopic(data)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    init()
   }, [router.query.id])
 
   useEffect(() => {
@@ -87,3 +89,5 @@ export const Detail: NextPage = () => {
     </>
   )
 }
+
+export default Detail
