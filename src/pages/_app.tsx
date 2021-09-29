@@ -2,6 +2,9 @@ import { useEffect } from 'react'
 import { useAuth } from '../hooks/auth'
 import './globals.css'
 import { AppType } from 'next/dist/shared/lib/utils'
+import { QueryClient, QueryClientProvider } from 'react-query'
+
+const queryClient = new QueryClient()
 
 const App: AppType = ({ Component, pageProps }) => {
   const { verifyToken, fetchUnreadCount } = useAuth()
@@ -20,9 +23,11 @@ const App: AppType = ({ Component, pageProps }) => {
   }, [])
 
   return (
-    <main>
-      <Component {...pageProps} />
-    </main>
+    <QueryClientProvider client={queryClient}>
+      <main>
+        <Component {...pageProps} />
+      </main>
+    </QueryClientProvider>
   )
 }
 
