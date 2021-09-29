@@ -1,8 +1,5 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import Dialog from '@mui/material/Dialog'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
 import { useAuth } from '../src/hooks'
 import QrReader from 'react-qr-reader'
 // import { colors } from '../../utils'

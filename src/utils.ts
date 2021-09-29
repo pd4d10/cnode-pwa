@@ -1,15 +1,3 @@
-import React from 'react'
-import {
-  Forum,
-  ThumbUp,
-  Share,
-  LiveHelp,
-  SwitchCamera,
-  Notifications,
-  Settings,
-  Info,
-} from '@mui/icons-material'
-
 export const colors = {
   background: '#444',
   primary: '#80bd01',
@@ -45,27 +33,22 @@ export const tabData = [
   {
     id: 'all',
     title: '全部',
-    Icon: Forum,
   },
   {
     id: 'good',
     title: '精华',
-    Icon: ThumbUp,
   },
   {
     id: 'share',
     title: '分享',
-    Icon: Share,
   },
   {
     id: 'ask',
     title: '问答',
-    Icon: LiveHelp,
   },
   {
     id: 'job',
     title: '招聘',
-    Icon: SwitchCamera,
   },
 ]
 

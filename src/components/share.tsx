@@ -1,6 +1,5 @@
+import { SendOutline } from 'antd-mobile-icons'
 import React from 'react'
-import { IconButton } from '@mui/material'
-import { Share } from '@mui/icons-material'
 import { useHint } from '../hooks'
 import { copy } from '../utils'
 
@@ -8,7 +7,7 @@ export const ShareTo = ({ text }) => {
   const { show } = useHint()
 
   return (
-    <IconButton
+    <a
       color="default"
       onClick={() => {
         if (navigator.share) {
@@ -22,8 +21,8 @@ export const ShareTo = ({ text }) => {
           show('链接已复制至剪贴板')
         }
       }}
-      size="large">
-      <Share />
-    </IconButton>
-  );
+    >
+      <SendOutline />
+    </a>
+  )
 }

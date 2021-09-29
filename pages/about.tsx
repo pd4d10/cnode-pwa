@@ -1,20 +1,21 @@
+import { Divider, List } from 'antd-mobile'
 import React, { useEffect } from 'react'
-import { ListItem, ListItemText, Divider } from '@mui/material'
 // import { ReactComponent as Logo } from '../cnodejs.svg'
 import { Header } from '../src/components'
 
 // Add rel="noopener noreferrer" for security
 // See https://mathiasbynens.github.io/rel-noopener/
 const Linker = (props) => (
-  <ListItem
-    button
-    component="a"
-    href={props.url}
-    target="_blank"
-    rel="noopener noreferrer"
+  <List.Item
+    onClick={() => {
+      // href={props.url}
+    }}
+    // target="_blank"
+    // rel="noopener noreferrer"
+    extra={props.url}
   >
-    <ListItemText primary={props.title} secondary={props.url} />
-  </ListItem>
+    {props.title}
+  </List.Item>
 )
 
 const About = () => {
@@ -40,9 +41,7 @@ const About = () => {
       <Divider />
       <Linker title="关于 CNode 社区" url="https://cnodejs.org/about" />
       <Divider />
-      <ListItem button>
-        <ListItemText primary="License" secondary="MIT" />
-      </ListItem>
+      <List.Item extra="MIT">License</List.Item>
       <Divider />
     </>
   )

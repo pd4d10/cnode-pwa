@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { IconButton, TextField } from '@mui/material'
 import { useRouter } from 'next/router'
-import { Send } from '@mui/icons-material'
 import { Header } from '../src/components'
 import { fetchAPI } from '../src/utils'
 import $s from './post.module.css'
 import { useAuth, useHint } from '../src/hooks'
+import { PlayOutline } from 'antd-mobile-icons'
+import { Input } from 'antd-mobile'
 
 const postTabs = [
   { id: 'ask', name: '问答' },
@@ -53,31 +53,25 @@ const Post = (props) => {
     >
       <Header
         title="发布话题"
-        rightWidget={() => (
-          <IconButton color="default" type="submit" size="large">
-            <Send />
-          </IconButton>
-        )}
+        rightWidget={() => <PlayOutline></PlayOutline>}
       />
       <div style={{ padding: 10 }}>
-        <TextField
-          fullWidth
+        <Input
           className={$s.control}
-          label="标题"
-          InputLabelProps={{ htmlFor: 'title' }}
-          InputProps={{
-            id: 'title',
-            value: title,
-            onChange: (e) => {
-              setTitle(e.target.value)
-            },
-            error: showTitleError,
-          }}
-          error={showTitleError}
-          helperText={showTitleError ? '请输入标题' : null}
+          // label="标题"
+          // InputProps={{
+          //   id: 'title',
+          //   value: title,
+          //   onChange: (e) => {
+          //     setTitle(e.target.value)
+          //   },
+          //   error: showTitleError,
+          // }}
+          // error={showTitleError}
+          // helperText={showTitleError ? '请输入标题' : null}
         />
-        <TextField
-          fullWidth
+        <Input
+          // fullWidth
           className={$s.control}
           select
           label="分区"
@@ -96,25 +90,25 @@ const Post = (props) => {
               {name}
             </option>
           ))}
-        </TextField>
-        <TextField
+        </Input>
+        <Input
           // TODO: markdown
-          multiline
-          rows="10"
-          fullWidth
+          // multiline
+          // rows="10"
+          // fullWidth
           className={$s.control}
-          label="内容"
-          InputLabelProps={{ htmlFor: 'content' }}
-          InputProps={{
-            id: 'content',
-            value: content,
-            onChange: (e) => {
-              setContent(e.target.value)
-            },
-            error: showContentError,
-          }}
-          error={showContentError}
-          helperText={showContentError ? '请输入内容' : null}
+          // label="内容"
+          // InputLabelProps={{ htmlFor: 'content' }}
+          // InputProps={{
+          //   id: 'content',
+          //   value: content,
+          //   onChange: (e) => {
+          //     setContent(e.target.value)
+          //   },
+          //   error: showContentError,
+          // }}
+          // error={showContentError}
+          // helperText={showContentError ? '请输入内容' : null}
         />
       </div>
     </form>

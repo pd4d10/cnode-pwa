@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { IconButton } from '@mui/material'
-import { DoneAll } from '@mui/icons-material'
 import { useAuth, useHint } from '../src/hooks'
 import { fetchAPI } from '../src/utils'
 import { MessageItem, Header, Loading, NoMore } from '../src/components'
+import { CheckOutline } from 'antd-mobile-icons'
 
 const Message = (props) => {
   const [unread, setUnread] = useState([])
@@ -47,16 +46,13 @@ const Message = (props) => {
       <Header
         title="消息"
         rightWidget={() => (
-          <IconButton
-            color="default"
+          <CheckOutline
             onClick={async () => {
               await markAllAsRead()
               show('已标记全部消息为已读')
               await updateMessages()
             }}
-            size="large">
-            <DoneAll />
-          </IconButton>
+          ></CheckOutline>
         )}
       />
       {isLoading ? (
@@ -73,7 +69,7 @@ const Message = (props) => {
         </>
       )}
     </div>
-  );
+  )
 }
 
 export default Message

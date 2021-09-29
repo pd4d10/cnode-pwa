@@ -1,5 +1,4 @@
 import React from 'react'
-import { Divider } from '@mui/material'
 import { AvatarRow, TimeAgo } from './'
 
 export const Reply = (props) => (
@@ -14,6 +13,6 @@ export const Reply = (props) => (
       className="markdown-body"
       dangerouslySetInnerHTML={{ __html: props.content }}
     />
-    <Divider />
+    {/* <Divider /> */}
   </div>
 )

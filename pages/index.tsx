@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import { Button, Slide } from '@mui/material'
-import { Edit } from '@mui/icons-material'
+import React, { useEffect } from 'react'
 import useSWRInfinite from 'swr/infinite'
 import { Topic, Loading, HomeHeader } from '../src/components'
 import { NextPage } from 'next'
@@ -45,7 +43,9 @@ const Home: NextPage = () => {
 
   return (
     <div style={{ marginBottom: 84, marginTop: -48 }}>
-      <HomeHeader tab={tab} />
+      <HomeHeader
+        tab={tab as string} // TODO
+      />
       {!data ? (
         <Loading />
       ) : (
@@ -56,16 +56,14 @@ const Home: NextPage = () => {
         </div>
       )}
       {isValidating && <Loading />}
-      <Button
-        // variant="fab"
-        // color="secondary"
+      {/* <Button
         style={{ position: 'fixed', bottom: 16, right: 16 }}
         onClick={() => {
           router.push('/post')
         }}
       >
         <Edit />
-      </Button>
+      </Button> */}
     </div>
   )
 }

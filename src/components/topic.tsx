@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 import Link from 'next/link'
-import { ListItemButton } from '@mui/material'
 import { colors } from '../utils'
 import $c from './common.module.css'
 import $s from './topic.module.css'
 import { AvatarRow } from './avatar'
 import { Title } from './styled'
 import { TimeAgo } from './timeago'
+import { List } from 'antd-mobile'
 
 export interface TopicProps {
   id: string
@@ -29,7 +29,7 @@ export interface TopicProps {
 export const Topic: FC<TopicProps> = (props) => {
   return (
     <Link href={`/topic/${props.id}`}>
-      <ListItemButton className={$c.link}>
+      <List.Item className={$c.link}>
         <AvatarRow author={props.author}>
           <Title>{props.title}</Title>
           <div className={$s.extra}>
@@ -58,14 +58,14 @@ export const Topic: FC<TopicProps> = (props) => {
             <TimeAgo time={props.last_reply_at} />
           </div>
         </AvatarRow>
-      </ListItemButton>
+      </List.Item>
     </Link>
   )
 }
 
 export const UserTopic: FC<TopicProps> = (props) => (
   <Link href={`/topic/${props.id}`}>
-    <ListItemButton className={$c.item}>
+    <List.Item className={$c.item}>
       <AvatarRow author={props.author}>
         <Title>{props.title}</Title>
         <div className={$s.extra}>
@@ -73,6 +73,6 @@ export const UserTopic: FC<TopicProps> = (props) => (
           <TimeAgo time={props.last_reply_at} />
         </div>
       </AvatarRow>
-    </ListItemButton>
+    </List.Item>
   </Link>
 )

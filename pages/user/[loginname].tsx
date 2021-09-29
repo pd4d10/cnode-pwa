@@ -1,5 +1,5 @@
+import { Tabs } from 'antd-mobile'
 import React, { useState, useEffect } from 'react'
-import { Tabs, Tab } from '@mui/material'
 import {
   Header,
   UserTopic,
@@ -46,17 +46,17 @@ const User = (props) => {
           </AvatarRow>
           <Tabs
             style={{ background: '#fff' }}
-            value={tabIndex}
-            onChange={(_, index) => {
-              setTabIndex(index)
-            }}
-            indicatorColor="primary"
-            textColor="primary"
+            // value={tabIndex}
+            // onChange={(_, index) => {
+            //   setTabIndex(index)
+            // }}
+            // indicatorColor="primary"
+            // textColor="primary"
             // fullWidth
           >
-            <Tab label="最近参与" />
-            <Tab label="最近发布" />
-            <Tab label="话题收藏" />
+            <Tabs.TabPane title="最近参与" />
+            <Tabs.TabPane title="最近发布" />
+            <Tabs.TabPane title="话题收藏" />
           </Tabs>
           <div>
             {tabData[tabIndex].map((topic) => (

@@ -1,5 +1,5 @@
 import React from 'react'
-import { CircularProgress } from '@mui/material'
+import { Loading as AntdLoading } from 'antd-mobile'
 
 export const Loading = () => (
   <div
@@ -9,8 +9,8 @@ export const Loading = () => (
       padding: 24,
     }}
   >
-    <CircularProgress size={36} />
+    <AntdLoading />
   </div>
 )
 
-export const LoadingMore = () => <CircularProgress />
+export const LoadingMore = () => <AntdLoading />
