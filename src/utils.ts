@@ -1,3 +1,5 @@
+import { Toast } from 'antd-mobile'
+
 export const colors = {
   background: '#444',
   primary: '#80bd01',
@@ -7,7 +9,7 @@ export const colors = {
 }
 
 export async function fetchAPI(url: string, body?: Record<string, string>) {
-  let options = {}
+  const options: RequestInit = {}
   // if body passed in then use posts
   if (body) {
     options.method = 'POST'
@@ -29,34 +31,24 @@ export async function fetchAPI(url: string, body?: Record<string, string>) {
   return json
 }
 
-export const tabData = [
-  {
-    id: 'all',
-    title: '全部',
-  },
-  {
-    id: 'good',
-    title: '精华',
-  },
-  {
-    id: 'share',
-    title: '分享',
-  },
-  {
-    id: 'ask',
-    title: '问答',
-  },
-  {
-    id: 'job',
-    title: '招聘',
-  },
-]
-
-export function copy(text) {
+export function copy(text: string) {
   const $ = document.createElement('textarea')
   $.value = text
   document.body.appendChild($)
   $.select()
   document.execCommand('copy')
   document.body.removeChild($)
+}
+
+export function shareCurrentUrl(text: string) {
+  if (navigator.share) {
+    return navigator.share({
+      title: text,
+      text: text,
+      url: window.location.href,
+    })
+  } else {
+    copy(window.location.href)
+    Toast.show('链接已复制至剪贴板')
+  }
 }

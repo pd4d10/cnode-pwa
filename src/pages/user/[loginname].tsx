@@ -1,17 +1,17 @@
 import { Tabs, List } from 'antd-mobile'
+import { SendOutline } from 'antd-mobile-icons'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import {
-  Header,
   UserTopic,
   NoMore,
   Loading,
-  ShareTo,
   AvatarRow,
   TimeAgo,
 } from '../../components'
-import { fetchAPI } from '../../utils'
+import { Header } from '../../components/header'
+import { fetchAPI, shareCurrentUrl } from '../../utils'
 
 const User: NextPage = (props) => {
   const router = useRouter()
@@ -38,9 +38,16 @@ const User: NextPage = (props) => {
   return (
     <div>
       <Header
-        title="用户"
-        rightWidget={() => <ShareTo text={author ? author.loginname : ''} />}
-      />
+        right={
+          <SendOutline
+            onClick={() => {
+              shareCurrentUrl(author ? author.loginname : '')
+            }}
+          />
+        }
+      >
+        用户
+      </Header>
       {author ? (
         <div>
           <AvatarRow author={author} style={{ padding: 16 }}>

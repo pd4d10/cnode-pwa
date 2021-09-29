@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useAuth } from '../hooks'
+import { useAuth } from '../hooks/auth'
 import './globals.css'
 import { AppType } from 'next/dist/shared/lib/utils'
 

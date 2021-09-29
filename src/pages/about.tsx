@@ -1,7 +1,7 @@
 import { Divider, List } from 'antd-mobile'
 import { useEffect } from 'react'
 // import { ReactComponent as Logo } from '../cnodejs.svg'
-import { Header } from '../components'
+import { Header } from '../components/header'
 
 // Add rel="noopener noreferrer" for security
 // See https://mathiasbynens.github.io/rel-noopener/
@@ -25,7 +25,7 @@ const About = () => {
 
   return (
     <>
-      <Header title="关于" />
+      <Header>关于</Header>
       <div
         style={{
           display: 'flex',

@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { Header } from '../components'
+import { Header } from '../components/header'
 import { fetchAPI } from '../utils'
 import $s from './post.module.css'
-import { useAuth, useHint } from '../hooks'
+import { useAuth } from '../hooks/auth'
 import { PlayOutline } from 'antd-mobile-icons'
-import { Input } from 'antd-mobile'
+import { Input, Toast } from 'antd-mobile'
 
 const postTabs = [
   { id: 'ask', name: '问答' },
@@ -23,7 +23,6 @@ const Post = (props) => {
   const [contentErrorVisible, setContentErrorVisible] = useState(false)
 
   const { token } = useAuth()
-  const { show } = useHint()
 
   const showTitleError = titleErrorVisible && !title
   const showContentError = contentErrorVisible && !content
@@ -47,14 +46,11 @@ const Post = (props) => {
           })
           router.replace(`/topic/${topic_id}`)
         } catch (err) {
-          show(err.message)
+          Toast.show(err.message)
         }
       }}
     >
-      <Header
-        title="发布话题"
-        rightWidget={() => <PlayOutline></PlayOutline>}
-      />
+      <Header right={<PlayOutline />}>发布话题</Header>
       <div style={{ padding: 10 }}>
         <Input
           className={$s.control}
@@ -70,7 +66,7 @@ const Post = (props) => {
           // error={showTitleError}
           // helperText={showTitleError ? '请输入标题' : null}
         />
-        <Input
+        {/* <Input
           // fullWidth
           className={$s.control}
           select
@@ -90,7 +86,7 @@ const Post = (props) => {
               {name}
             </option>
           ))}
-        </Input>
+        </Input> */}
         <Input
           // TODO: markdown
           // multiline

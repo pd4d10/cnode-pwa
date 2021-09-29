@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useAuth } from '../hooks'
+import { useAuth } from '../hooks/auth'
 import QrReader from 'react-qr-reader'
 // import { colors } from '../../utils'
 // import style from './login.css'

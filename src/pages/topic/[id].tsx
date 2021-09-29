@@ -1,18 +1,12 @@
 import { useState, useEffect } from 'react'
-import {
-  Reply,
-  AvatarRow,
-  Header,
-  Loading,
-  NoMore,
-  ShareTo,
-  TimeAgo,
-} from '../../components'
-import { fetchAPI } from '../../utils'
+import { Reply, AvatarRow, Loading, NoMore, TimeAgo } from '../../components'
+import { fetchAPI, shareCurrentUrl } from '../../utils'
 import 'github-markdown-css'
 import $s from './detail.module.css'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import { SendOutline } from 'antd-mobile-icons'
+import { Header } from '../../components/header'
 
 const Detail: NextPage = () => {
   const router = useRouter()
@@ -44,10 +38,16 @@ const Detail: NextPage = () => {
   return (
     <>
       <Header
-        title="话题"
-        rightWidget={() => <ShareTo text={topic ? topic.title : ''} />}
-      />
-
+        right={
+          <SendOutline
+            onClick={() => {
+              shareCurrentUrl(topic ? topic.title : '')
+            }}
+          />
+        }
+      >
+        话题
+      </Header>
       {!topic ? (
         <Loading />
       ) : (

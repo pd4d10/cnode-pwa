@@ -1,16 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, FC } from 'react'
 import { useRouter } from 'next/router'
-import { useAuth, useHint } from '../hooks'
+import { useAuth } from '../hooks/auth'
 import { fetchAPI } from '../utils'
-import { MessageItem, Header, Loading, NoMore } from '../components'
+import { MessageItem, Loading, NoMore } from '../components'
 import { CheckOutline } from 'antd-mobile-icons'
+import { Header } from '../components/header'
+import { Toast } from 'antd-mobile'
 
-const Message = (props) => {
+const Message: FC = (props) => {
   const [unread, setUnread] = useState([])
   const [read, setRead] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const { token } = useAuth()
-  const { show } = useHint()
 
   const updateMessages = async () => {
     setIsLoading(true)
@@ -44,17 +45,18 @@ const Message = (props) => {
   return (
     <div>
       <Header
-        title="消息"
-        rightWidget={() => (
+        right={
           <CheckOutline
             onClick={async () => {
               await markAllAsRead()
-              show('已标记全部消息为已读')
+              Toast.show('已标记全部消息为已读')
               await updateMessages()
             }}
           ></CheckOutline>
-        )}
-      />
+        }
+      >
+        消息
+      </Header>
       {isLoading ? (
         <Loading />
       ) : (

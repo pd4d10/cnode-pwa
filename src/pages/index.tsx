@@ -1,15 +1,20 @@
 import { useEffect } from 'react'
 import useSWRInfinite from 'swr/infinite'
-import { Topic, Loading, HomeHeader } from '../components'
+import { Topic, Loading } from '../components'
 import { NextPage } from 'next'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { fetchAPI } from '../utils'
 import { TopicProps } from '../components/topic'
-import { List } from 'antd-mobile'
+import { Badge, List, NavBar, Space, Tabs } from 'antd-mobile'
+import { BellOutline, UserOutline } from 'antd-mobile-icons'
+import { useAuth } from '../hooks/auth'
+import { Header } from '../components/header'
 
 const Home: NextPage = () => {
   const router = useRouter()
   const tab = router.query.tab ?? 'all'
+  const { count, loginname } = useAuth()
 
   const fetcher = (url: string) => fetchAPI(url).then((json) => json.data)
 
@@ -44,9 +49,43 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <HomeHeader
-        tab={tab as string} // TODO
-      />
+      <Header
+        backArrow={false}
+        right={
+          <Space>
+            <Link href="/message">
+              {count ? (
+                <Badge content={count}>
+                  <BellOutline />
+                </Badge>
+              ) : (
+                <BellOutline />
+              )}
+            </Link>
+            <Link href={loginname ? `/user/${loginname}` : '/login'}>
+              <UserOutline />
+            </Link>
+          </Space>
+        }
+      >
+        CNode
+      </Header>
+      <Tabs
+        onChange={(key) => {
+          router.push(key === 'all' ? '/' : '/?tab=' + key)
+        }}
+      >
+        {[
+          { id: 'all', title: '全部' },
+          { id: 'good', title: '精华' },
+          { id: 'share', title: '分享' },
+          { id: 'ask', title: '问答' },
+          { id: 'job', title: '招聘' },
+        ].map(({ id, title }) => (
+          <Tabs.TabPane title={title} key={id} />
+        ))}
+      </Tabs>
+
       {!data ? (
         <Loading />
       ) : (
