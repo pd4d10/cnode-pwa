@@ -1,5 +1,5 @@
 import { SendOutline } from 'antd-mobile-icons'
-import React from 'react'
+
 import { useHint } from '../hooks'
 import { copy } from '../utils'
 

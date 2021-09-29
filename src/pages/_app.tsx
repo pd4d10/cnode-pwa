@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useAuth } from '../hooks'
 import './globals.css'
 import { AppType } from 'next/dist/shared/lib/utils'

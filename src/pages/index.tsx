@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import useSWRInfinite from 'swr/infinite'
 import { Topic, Loading, HomeHeader } from '../components'
 import { NextPage } from 'next'

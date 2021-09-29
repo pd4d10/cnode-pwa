@@ -1,4 +1,3 @@
-import React from 'react'
 import { AvatarRow, TimeAgo } from './'
 
 export const Reply = (props) => (

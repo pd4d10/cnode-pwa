@@ -1,5 +1,5 @@
 import { Divider, List } from 'antd-mobile'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 // import { ReactComponent as Logo } from '../cnodejs.svg'
 import { Header } from '../components'
 

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Loading as AntdLoading } from 'antd-mobile'
 
 export const Loading = () => (
