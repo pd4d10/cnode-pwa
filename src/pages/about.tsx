@@ -1,7 +1,7 @@
 import { Divider, List } from 'antd-mobile'
 import React, { useEffect } from 'react'
 // import { ReactComponent as Logo } from '../cnodejs.svg'
-import { Header } from '../src/components'
+import { Header } from '../components'
 
 // Add rel="noopener noreferrer" for security
 // See https://mathiasbynens.github.io/rel-noopener/

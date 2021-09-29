@@ -10,8 +10,8 @@ import {
   ShareTo,
   AvatarRow,
   TimeAgo,
-} from '../../src/components'
-import { fetchAPI } from '../../src/utils'
+} from '../../components'
+import { fetchAPI } from '../../utils'
 
 const User: NextPage = (props) => {
   const router = useRouter()

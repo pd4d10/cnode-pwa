@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
-import { Header } from '../src/components'
-import { fetchAPI } from '../src/utils'
+import { Header } from '../components'
+import { fetchAPI } from '../utils'
 import $s from './post.module.css'
-import { useAuth, useHint } from '../src/hooks'
+import { useAuth, useHint } from '../hooks'
 import { PlayOutline } from 'antd-mobile-icons'
 import { Input } from 'antd-mobile'
 

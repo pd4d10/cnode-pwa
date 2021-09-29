@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useAuth, useHint } from '../src/hooks'
-import { fetchAPI } from '../src/utils'
-import { MessageItem, Header, Loading, NoMore } from '../src/components'
+import { useAuth, useHint } from '../hooks'
+import { fetchAPI } from '../utils'
+import { MessageItem, Header, Loading, NoMore } from '../components'
 import { CheckOutline } from 'antd-mobile-icons'
 
 const Message = (props) => {

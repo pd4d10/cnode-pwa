@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import { useAuth } from '../src/hooks'
-import '../styles/globals.css'
+import { useAuth } from '../hooks'
+import './globals.css'
 import { AppType } from 'next/dist/shared/lib/utils'
 
 const App: AppType = ({ Component, pageProps }) => {

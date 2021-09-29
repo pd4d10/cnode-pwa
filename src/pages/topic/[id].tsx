@@ -7,8 +7,8 @@ import {
   NoMore,
   ShareTo,
   TimeAgo,
-} from '../../src/components'
-import { fetchAPI } from '../../src/utils'
+} from '../../components'
+import { fetchAPI } from '../../utils'
 import 'github-markdown-css'
 import $s from './detail.module.css'
 import { NextPage } from 'next'

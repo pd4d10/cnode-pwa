@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import useSWRInfinite from 'swr/infinite'
-import { Topic, Loading, HomeHeader } from '../src/components'
+import { Topic, Loading, HomeHeader } from '../components'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { fetchAPI } from '../src/utils'
-import { TopicProps } from '../src/components/topic'
+import { fetchAPI } from '../utils'
+import { TopicProps } from '../components/topic'
 import { List } from 'antd-mobile'
 
 const Home: NextPage = () => {
