@@ -1,11 +1,10 @@
-import { useEffect } from 'react'
 import { Topic, Loading } from '../components'
 import { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { fetchAPI } from '../utils'
 import { TopicProps } from '../components/topic'
-import { Badge, List, Space, Tabs } from 'antd-mobile'
+import { Badge, InfiniteScroll, List, Space, Tabs } from 'antd-mobile'
 import { BellOutline, UserOutline } from 'antd-mobile-icons'
 import { useAuth } from '../hooks/auth'
 import { Header } from '../components/header'
@@ -16,41 +15,23 @@ const Home: NextPage = () => {
   const tab = router.query.tab ?? 'all'
   const { count, loginname } = useAuth()
 
-  const { isFetching, isFetchingNextPage, data, fetchNextPage, hasNextPage } =
-    useInfiniteQuery<{
-      data: TopicProps[]
-      cursor: number
-    }>(
-      ['topics', tab],
-      async ({ pageParam = 1 }) => {
-        const json = await fetchAPI(
-          `/topics?mdrender=false&tab=${tab}&page=${pageParam}&limit=20`,
-        )
-        json.cursor = pageParam + 1
-        return json
-      },
-      {
-        enabled: router.isReady,
-        getNextPageParam: (lastPage) => lastPage.cursor,
-      },
-    )
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const toBottom =
-        document.documentElement.scrollHeight -
-        document.documentElement.scrollTop -
-        document.documentElement.clientHeight
-      console.log(toBottom, hasNextPage, isFetching, isFetchingNextPage)
-      if (toBottom < 120 && hasNextPage && !isFetching && !isFetchingNextPage) {
-        fetchNextPage()
-      }
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [hasNextPage, isFetching, isFetchingNextPage])
+  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery<{
+    data: TopicProps[]
+    cursor: number
+  }>(
+    ['topics', tab],
+    async ({ pageParam = 1 }) => {
+      const json = await fetchAPI(
+        `/topics?mdrender=false&tab=${tab}&page=${pageParam}&limit=20`,
+      )
+      json.cursor = pageParam + 1
+      return json
+    },
+    {
+      enabled: router.isReady,
+      getNextPageParam: (lastPage) => lastPage.cursor,
+    },
+  )
 
   return (
     <div>
@@ -104,7 +85,12 @@ const Home: NextPage = () => {
             .flat()}
         </List>
       )}
-      {isFetchingNextPage && <Loading />}
+      <InfiniteScroll
+        loadMore={async () => {
+          await fetchNextPage()
+        }}
+        hasMore={hasNextPage}
+      />
 
       {/* <Button
         style={{ position: 'fixed', bottom: 16, right: 16 }}
