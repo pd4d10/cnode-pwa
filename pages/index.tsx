@@ -5,6 +5,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { fetchAPI } from '../src/utils'
 import { TopicProps } from '../src/components/topic'
+import { List } from 'antd-mobile'
 
 const Home: NextPage = () => {
   const router = useRouter()
@@ -42,18 +43,18 @@ const Home: NextPage = () => {
   }, [])
 
   return (
-    <div style={{ marginBottom: 84, marginTop: -48 }}>
+    <div>
       <HomeHeader
         tab={tab as string} // TODO
       />
       {!data ? (
         <Loading />
       ) : (
-        <div>
+        <List>
           {data.flat().map((topic) => (
             <Topic {...topic} key={topic.id} />
           ))}
-        </div>
+        </List>
       )}
       {isValidating && <Loading />}
       {/* <Button

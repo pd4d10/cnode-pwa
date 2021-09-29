@@ -1,6 +1,7 @@
-import React from 'react'
+import { FC } from 'react'
 import { useRouter } from 'next/router'
 import $s from './avatar.module.css'
+import { TopicProps } from './topic'
 
 export const AvatarRow = ({ author, children, ...props }) => {
   const router = useRouter()
@@ -17,5 +18,21 @@ export const AvatarRow = ({ author, children, ...props }) => {
       />
       <div className={$s.content}>{children}</div>
     </div>
+  )
+}
+
+export const Avatar: FC<TopicProps['author']> = (author) => {
+  const router = useRouter()
+  return (
+    <img
+      style={{ display: 'block' }}
+      src={author.avatar_url}
+      className={$s.avatar}
+      alt={author.loginname}
+      onClick={(e) => {
+        e.preventDefault()
+        router.push(`/user/${author.loginname}`)
+      }}
+    />
   )
 }

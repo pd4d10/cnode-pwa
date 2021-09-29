@@ -1,5 +1,7 @@
-import { Tabs } from 'antd-mobile'
-import React, { useState, useEffect } from 'react'
+import { Tabs, List } from 'antd-mobile'
+import { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
 import {
   Header,
   UserTopic,
@@ -11,24 +13,27 @@ import {
 } from '../../src/components'
 import { fetchAPI } from '../../src/utils'
 
-const User = (props) => {
+const User: NextPage = (props) => {
+  const router = useRouter()
   const [author, setAuthor] = useState(null)
-  const [tabIndex, setTabIndex] = useState(0)
+  const [tabKey, setTabKey] = useState('0')
   const [tabData, setTabData] = useState([[], [], []])
 
-  const fetchUser = async () => {
-    const { loginname } = props.match.params
-    const [{ data }, { data: collectData }] = await Promise.all([
-      fetchAPI(`/user/${loginname}`),
-      fetchAPI(`/topic_collect/${loginname}`),
-    ])
-    setAuthor(data)
-    setTabData([data.recent_replies, data.recent_topics, collectData])
-  }
-
   useEffect(() => {
-    fetchUser()
-  }, [props.match.params])
+    const init = async () => {
+      const { loginname } = router.query
+      if (!loginname) return
+
+      const [{ data }, { data: collectData }] = await Promise.all([
+        fetchAPI(`/user/${loginname}`),
+        fetchAPI(`/topic_collect/${loginname}`),
+      ])
+      setAuthor(data)
+      setTabData([data.recent_replies, data.recent_topics, collectData])
+    }
+
+    init()
+  }, [router.query.loginname])
 
   return (
     <div>
@@ -45,24 +50,20 @@ const User = (props) => {
             </div>
           </AvatarRow>
           <Tabs
-            style={{ background: '#fff' }}
-            // value={tabIndex}
-            // onChange={(_, index) => {
-            //   setTabIndex(index)
-            // }}
-            // indicatorColor="primary"
-            // textColor="primary"
-            // fullWidth
+            activeKey={tabKey}
+            onChange={(key) => {
+              setTabKey(key)
+            }}
           >
-            <Tabs.TabPane title="最近参与" />
-            <Tabs.TabPane title="最近发布" />
-            <Tabs.TabPane title="话题收藏" />
+            {['最近参与', '最近发布', '话题收藏'].map((title, index) => {
+              return <Tabs.TabPane title={title} key={index} />
+            })}
           </Tabs>
-          <div>
-            {tabData[tabIndex].map((topic) => (
+          <List>
+            {tabData[tabKey].map((topic) => (
               <UserTopic key={topic.id} {...topic} />
             ))}
-          </div>
+          </List>
           <NoMore />
         </div>
       ) : (

@@ -3,10 +3,10 @@ import Link from 'next/link'
 import { colors } from '../utils'
 import $c from './common.module.css'
 import $s from './topic.module.css'
-import { AvatarRow } from './avatar'
+import { Avatar, AvatarRow } from './avatar'
 import { Title } from './styled'
 import { TimeAgo } from './timeago'
-import { List } from 'antd-mobile'
+import { Ellipsis, List, Tag } from 'antd-mobile'
 
 export interface TopicProps {
   id: string
@@ -29,17 +29,14 @@ export interface TopicProps {
 export const Topic: FC<TopicProps> = (props) => {
   return (
     <Link href={`/topic/${props.id}`}>
-      <List.Item className={$c.link}>
-        <AvatarRow author={props.author}>
-          <Title>{props.title}</Title>
+      <List.Item
+        className={$c.link}
+        arrow={false}
+        prefix={<Avatar {...props.author} />}
+        description={
           <div className={$s.extra}>
             <div className={$s.left}>
-              <div
-                className={$s.tag}
-                style={{
-                  backgroundColor: colors.tag,
-                }}
-              >
+              <Tag color={colors.tag}>
                 {props.top
                   ? '置顶'
                   : props.good
@@ -49,7 +46,7 @@ export const Topic: FC<TopicProps> = (props) => {
                       ask: '问答',
                       job: '招聘',
                     }[props.tab]}
-              </div>
+              </Tag>
               <div className={$s.right}>
                 <span style={{ color: '#9e78c0' }}>{props.reply_count} </span>
                 回复 / <span>{props.visit_count}</span> 浏览
@@ -57,7 +54,9 @@ export const Topic: FC<TopicProps> = (props) => {
             </div>
             <TimeAgo time={props.last_reply_at} />
           </div>
-        </AvatarRow>
+        }
+      >
+        <Ellipsis content={props.title} />
       </List.Item>
     </Link>
   )
@@ -65,14 +64,18 @@ export const Topic: FC<TopicProps> = (props) => {
 
 export const UserTopic: FC<TopicProps> = (props) => (
   <Link href={`/topic/${props.id}`}>
-    <List.Item className={$c.item}>
-      <AvatarRow author={props.author}>
-        <Title>{props.title}</Title>
+    <List.Item
+      className={$c.item}
+      prefix={<Avatar {...props.author} />}
+      arrow={false}
+      description={
         <div className={$s.extra}>
           <div className={$s.left}>{props.author.loginname}</div>
           <TimeAgo time={props.last_reply_at} />
         </div>
-      </AvatarRow>
+      }
+    >
+      <Ellipsis content={props.title} />
     </List.Item>
   </Link>
 )

@@ -21,9 +21,7 @@ const App: AppType = ({ Component, pageProps }) => {
 
   return (
     <main>
-      <div style={{ marginTop: 48 }}>
-        <Component {...pageProps} />
-      </div>
+      <Component {...pageProps} />
     </main>
   )
 }

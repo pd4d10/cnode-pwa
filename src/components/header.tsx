@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { tabData } from '../utils'
 import { useAuth } from '../hooks'
-import { Badge, NavBar, Tabs } from 'antd-mobile'
+import { Badge, NavBar, Space, Tabs } from 'antd-mobile'
 import { BellOutline, UserOutline } from 'antd-mobile-icons'
 // import { ReactComponent as Logo } from '../cnodejs.svg'
 
@@ -37,20 +37,22 @@ export const HomeHeader: FC<{ tab: string }> = ({ tab }) => {
     <>
       <NavBar
         right={
-          <>
-            <Link href="/message">
-              {count ? (
-                <Badge content={count}>
+          <div style={{ fontSize: 18 }}>
+            <Space>
+              <Link href="/message">
+                {count ? (
+                  <Badge content={count}>
+                    <BellOutline />
+                  </Badge>
+                ) : (
                   <BellOutline />
-                </Badge>
-              ) : (
-                <BellOutline />
-              )}
-            </Link>
-            <Link href={loginname ? `/user/${loginname}` : '/login'}>
-              <UserOutline />
-            </Link>
-          </>
+                )}
+              </Link>
+              <Link href={loginname ? `/user/${loginname}` : '/login'}>
+                <UserOutline />
+              </Link>
+            </Space>
+          </div>
         }
         onBack={() => {
           if (history.length === 1) {
@@ -60,7 +62,9 @@ export const HomeHeader: FC<{ tab: string }> = ({ tab }) => {
             router.back()
           }
         }}
-      ></NavBar>
+      >
+        CNode
+      </NavBar>
       <Tabs
         onChange={(key) => {
           router.push(key === 'all' ? '/' : '/?tab=' + key)
