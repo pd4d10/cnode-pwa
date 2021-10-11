@@ -1,5 +1,5 @@
 import { useState, useEffect, FC } from 'react'
-import { useRouter } from 'next/router'
+import { definePage, useRouter } from '@norm/app'
 import { useAuth } from '../hooks/auth'
 import { fetchAPI } from '../utils'
 import { MessageItem, Loading, NoMore } from '../components'
@@ -7,7 +7,7 @@ import { CheckOutline } from 'antd-mobile-icons'
 import { Header } from '../components/header'
 import { Toast } from 'antd-mobile'
 
-const Message: FC = (props) => {
+export default definePage((props) => {
   const [unread, setUnread] = useState([])
   const [read, setRead] = useState([])
   const [isLoading, setIsLoading] = useState(false)
@@ -72,6 +72,4 @@ const Message: FC = (props) => {
       )}
     </div>
   )
-}
-
-export default Message
+})

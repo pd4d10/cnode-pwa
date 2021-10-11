@@ -1,12 +1,13 @@
 import { useEffect } from 'react'
+import { definePage } from '@norm/app'
 import { useAuth } from '../hooks/auth'
 import './globals.css'
-import { AppType } from 'next/dist/shared/lib/utils'
+
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 const queryClient = new QueryClient()
 
-const App: AppType = ({ Component, pageProps }) => {
+export default definePage(({ children }) => {
   const { verifyToken, fetchUnreadCount } = useAuth()
 
   useEffect(() => {
@@ -23,12 +24,6 @@ const App: AppType = ({ Component, pageProps }) => {
   }, [])
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <main>
-        <Component {...pageProps} />
-      </main>
-    </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   )
-}
-
-export default App
+})

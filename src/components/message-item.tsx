@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import { useRouter } from '@norm/app'
 import { AvatarRow, Title } from '.'
 import $c from './common.module.css'
 import $s from './message-item.module.css'

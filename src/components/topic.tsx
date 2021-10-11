@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import Link from 'next/link'
+import { Link } from '@norm/app'
 import { colors } from '../utils'
 import $c from './common.module.css'
 import $s from './topic.module.css'

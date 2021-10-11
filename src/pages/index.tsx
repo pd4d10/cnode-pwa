@@ -1,7 +1,6 @@
 import { Topic, Loading } from '../components'
-import { NextPage } from 'next'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { definePage, Link } from '@norm/app'
+import { useRouter } from '@norm/app'
 import { fetchAPI } from '../utils'
 import { TopicProps } from '../components/topic'
 import { Badge, InfiniteScroll, List, Space, Tabs } from 'antd-mobile'
@@ -10,7 +9,7 @@ import { useAuth } from '../hooks/auth'
 import { Header } from '../components/header'
 import { useInfiniteQuery } from 'react-query'
 
-const Home: NextPage = () => {
+export default definePage(() => {
   const router = useRouter()
   const tab = router.query.tab ?? 'all'
   const { count, loginname } = useAuth()
@@ -28,7 +27,7 @@ const Home: NextPage = () => {
       return json
     },
     {
-      enabled: router.isReady,
+      enabled: router.ready,
       getNextPageParam: (lastPage) => lastPage.cursor,
     },
   )
@@ -102,6 +101,4 @@ const Home: NextPage = () => {
       </Button> */}
     </div>
   )
-}
-
-export default Home
+})

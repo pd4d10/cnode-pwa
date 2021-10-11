@@ -1,10 +1,10 @@
-import { useRouter } from 'next/router'
+import { definePage, useRouter } from '@norm/app'
 import { useAuth } from '../hooks/auth'
 import QrReader from 'react-qr-reader'
 // import { colors } from '../../utils'
 // import style from './login.css'
 
-const Login = (props) => {
+export default definePage((props) => {
   const router = useRouter()
   // <Dialog
   //   title="登录"
@@ -40,6 +40,4 @@ const Login = (props) => {
       // style={{ width: "100%" }}
     />
   )
-}
-
-export default Login
+})

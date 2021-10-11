@@ -3,25 +3,24 @@ import { Reply, AvatarRow, Loading, NoMore, TimeAgo } from '../../components'
 import { fetchAPI, shareCurrentUrl } from '../../utils'
 import 'github-markdown-css'
 import $s from './detail.module.css'
-import { NextPage } from 'next'
-import { useRouter } from 'next/router'
+import { definePage, useRouter } from '@norm/app'
 import { SendOutline } from 'antd-mobile-icons'
 import { Header } from '../../components/header'
 import { Viewer } from '@bytemd/react'
 
-const Detail: NextPage = () => {
-  const router = useRouter()
+export default definePage(() => {
+  const router = useRouter<{ id: string }>()
   const [topic, setTopic] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    if (!router.query.id) return
+    if (!router.params.id) return
 
     const init = async () => {
       try {
         setIsLoading(true)
         const { data } = await fetchAPI(
-          `/topic/${router.query.id}?mdrender=false`,
+          `/topic/${router.params.id}?mdrender=false`,
         )
         setTopic(data)
       } finally {
@@ -30,7 +29,7 @@ const Detail: NextPage = () => {
     }
 
     init()
-  }, [router.query.id])
+  }, [router.params.id])
 
   useEffect(() => {
     if (topic) {
@@ -87,6 +86,4 @@ const Detail: NextPage = () => {
       )}
     </>
   )
-}
-
-export default Detail
+})

@@ -1,7 +1,6 @@
 import { Tabs, List } from 'antd-mobile'
 import { SendOutline } from 'antd-mobile-icons'
-import { NextPage } from 'next'
-import { useRouter } from 'next/router'
+import { definePage, useRouter } from '@norm/app'
 import { useState, useEffect } from 'react'
 import {
   UserTopic,
@@ -13,15 +12,15 @@ import {
 import { Header } from '../../components/header'
 import { fetchAPI, shareCurrentUrl } from '../../utils'
 
-const User: NextPage = (props) => {
-  const router = useRouter()
+export default definePage(() => {
+  const router = useRouter<{ loginname: string }>()
   const [author, setAuthor] = useState(null)
   const [tabKey, setTabKey] = useState('0')
   const [tabData, setTabData] = useState([[], [], []])
 
   useEffect(() => {
     const init = async () => {
-      const { loginname } = router.query
+      const { loginname } = router.params
       if (!loginname) return
 
       const [{ data }, { data: collectData }] = await Promise.all([
@@ -33,7 +32,7 @@ const User: NextPage = (props) => {
     }
 
     init()
-  }, [router.query.loginname])
+  }, [router.params.loginname])
 
   return (
     <div>
@@ -78,6 +77,4 @@ const User: NextPage = (props) => {
       )}
     </div>
   )
-}
-
-export default User
+})

@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from '@norm/app'
 import $s from './avatar.module.css'
 import { TopicProps } from './topic'
 

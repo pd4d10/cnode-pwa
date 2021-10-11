@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useRouter } from 'next/router'
+import { definePage, useRouter } from '@norm/app'
 import { Header } from '../components/header'
 import { fetchAPI } from '../utils'
 import $s from './post.module.css'
@@ -14,7 +14,7 @@ const postTabs = [
   { id: 'dev', name: '客户端测试' },
 ]
 
-const Post = (props) => {
+export default definePage((props) => {
   const router = useRouter()
   const [tab, setTab] = useState('ask')
   const [title, setTitle] = useState('')
@@ -109,6 +109,4 @@ const Post = (props) => {
       </div>
     </form>
   )
-}
-
-export default Post
+})

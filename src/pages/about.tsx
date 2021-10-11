@@ -1,3 +1,4 @@
+import { definePage } from '@norm/app'
 import { Divider, List } from 'antd-mobile'
 import { useEffect } from 'react'
 // import { ReactComponent as Logo } from '../cnodejs.svg'
@@ -18,7 +19,7 @@ const Linker = (props) => (
   </List.Item>
 )
 
-const About = () => {
+export default definePage(() => {
   useEffect(() => {
     document.title = '关于'
   }, [])
@@ -45,6 +46,4 @@ const About = () => {
       <Divider />
     </>
   )
-}
-
-export default About
+})

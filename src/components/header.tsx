@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from '@norm/app'
 import { NavBar } from 'antd-mobile'
 import { NavBarProps } from 'antd-mobile/es/components/nav-bar'
 // import { ReactComponent as Logo } from '../cnodejs.svg'
