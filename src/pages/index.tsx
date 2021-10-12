@@ -21,7 +21,7 @@ export default definePage(() => {
     ['topics', tab],
     async ({ pageParam = 1 }) => {
       const json = await fetchAPI(
-        `/topics?mdrender=false&tab=${tab}&page=${pageParam}&limit=20`,
+        `/topics?mdrender=false&tab=${tab}&page=${pageParam}&limit=20`
       )
       json.cursor = pageParam + 1
       return json
@@ -29,7 +29,7 @@ export default definePage(() => {
     {
       enabled: router.ready,
       getNextPageParam: (lastPage) => lastPage.cursor,
-    },
+    }
   )
 
   return (

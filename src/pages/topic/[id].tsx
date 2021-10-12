@@ -20,7 +20,7 @@ export default definePage(() => {
       try {
         setIsLoading(true)
         const { data } = await fetchAPI(
-          `/topic/${router.params.id}?mdrender=false`,
+          `/topic/${router.params.id}?mdrender=false`
         )
         setTopic(data)
       } finally {

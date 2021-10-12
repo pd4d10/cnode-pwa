@@ -10,5 +10,5 @@ ReactDOM.render(
       <App routes={routes} />
     </Layout>
   </BrowserRouter>,
-  document.getElementById('norm'),
+  document.getElementById('norm')
 )
