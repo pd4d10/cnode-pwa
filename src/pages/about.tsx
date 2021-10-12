@@ -1,22 +1,19 @@
-import { definePage } from '@norm/app'
-import { Divider, List } from 'antd-mobile'
-import { useEffect } from 'react'
-// import { ReactComponent as Logo } from '../cnodejs.svg'
+import { definePage, Link } from '@norm/app'
+import { List } from 'antd-mobile'
+import { FC, useEffect } from 'react'
+import { ReactComponent as Logo } from '../cnodejs.svg'
 import { Header } from '../components/header'
 
-// Add rel="noopener noreferrer" for security
-// See https://mathiasbynens.github.io/rel-noopener/
-const Linker = (props) => (
-  <List.Item
-    onClick={() => {
-      // href={props.url}
-    }}
-    // target="_blank"
-    // rel="noopener noreferrer"
-    extra={props.url}
-  >
-    {props.title}
-  </List.Item>
+const Linker: FC<{ title: string; url: string; description?: string }> = ({
+  title,
+  url,
+  description = url,
+}) => (
+  <Link href={url}>
+    <List.Item clickable description={description}>
+      {title}
+    </List.Item>
+  </Link>
 )
 
 export default definePage(() => {
@@ -35,15 +32,17 @@ export default definePage(() => {
           padding: '20px 0',
         }}
       >
-        {/* <Logo style={{ width: '70%' }} /> */}
+        <Logo style={{ width: '70%' }} />
       </div>
-      <Divider />
-      <Linker title="源代码" url="https://github.com/pd4d10/cnode-pwa" />
-      <Divider />
-      <Linker title="关于 CNode 社区" url="https://cnodejs.org/about" />
-      <Divider />
-      <List.Item extra="MIT">License</List.Item>
-      <Divider />
+      <List>
+        <Linker title="源代码" url="https://github.com/pd4d10/cnode-pwa" />
+        <Linker title="关于 CNode 社区" url="https://cnodejs.org/about" />
+        <Linker
+          title="License"
+          url="https://github.com/pd4d10/cnode-pwa/blob/master/LICENSE"
+          description="MIT"
+        />
+      </List>
     </>
   )
 })

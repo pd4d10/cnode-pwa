@@ -2,7 +2,6 @@ import { FC } from 'react'
 import { useRouter } from '@norm/app'
 import { NavBar } from 'antd-mobile'
 import { NavBarProps } from 'antd-mobile/es/components/nav-bar'
-// import { ReactComponent as Logo } from '../cnodejs.svg'
 
 export const Header: FC<NavBarProps> = ({ right, ...props }) => {
   const router = useRouter()
@@ -10,6 +9,7 @@ export const Header: FC<NavBarProps> = ({ right, ...props }) => {
   return (
     <NavBar
       onBack={() => {
+        // TODO:
         if (history.length === 1) {
           // If no history, go to homepage
           router.push('/')
