@@ -1,6 +1,6 @@
-import { definePage, Link } from '@norm/app'
+import { definePage, Head, Link } from '@norm/app'
 import { List } from 'antd-mobile'
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import { ReactComponent as Logo } from '../cnodejs.svg'
 import { Header } from '../components/header'
 
@@ -17,12 +17,11 @@ const Linker: FC<{ title: string; url: string; description?: string }> = ({
 )
 
 export default definePage(() => {
-  useEffect(() => {
-    document.title = '关于'
-  }, [])
-
   return (
     <>
+      <Head>
+        <title>关于</title>
+      </Head>
       <Header>关于</Header>
       <div
         style={{
