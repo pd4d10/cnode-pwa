@@ -3,7 +3,7 @@ import { Reply, AvatarRow, Loading, NoMore, TimeAgo } from '../../components'
 import { fetchAPI, shareCurrentUrl } from '../../utils'
 import 'github-markdown-css'
 import $s from './detail.module.css'
-import { definePage, Head, useRouter } from '@norm/app'
+import { definePage, Helmet, useRouter } from '@norm/app'
 import { SendOutline } from 'antd-mobile-icons'
 import { Header } from '../../components/header'
 import { Viewer } from '@bytemd/react'
@@ -34,9 +34,9 @@ export default definePage(() => {
   return (
     <>
       {topic && (
-        <Head>
+        <Helmet>
           <title>{topic.title}</title>
-        </Head>
+        </Helmet>
       )}
       <Header
         right={

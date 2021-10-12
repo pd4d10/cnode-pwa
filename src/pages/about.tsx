@@ -1,4 +1,4 @@
-import { definePage, Head, Link } from '@norm/app'
+import { definePage, Helmet } from '@norm/app'
 import { List } from 'antd-mobile'
 import { FC } from 'react'
 import { ReactComponent as Logo } from '../cnodejs.svg'
@@ -9,19 +9,23 @@ const Linker: FC<{ title: string; url: string; description?: string }> = ({
   url,
   description = url,
 }) => (
-  <Link href={url}>
-    <List.Item clickable description={description}>
-      {title}
-    </List.Item>
-  </Link>
+  <List.Item
+    clickable
+    description={description}
+    onClick={() => {
+      window.open(url)
+    }}
+  >
+    {title}
+  </List.Item>
 )
 
 export default definePage(() => {
   return (
     <>
-      <Head>
+      <Helmet>
         <title>关于</title>
-      </Head>
+      </Helmet>
       <Header>关于</Header>
       <div
         style={{
