@@ -1,5 +1,5 @@
-import { Viewer } from '@bytemd/react'
 import { AvatarRow, TimeAgo } from './'
+import { MarkdownViewer } from './markdown'
 
 export const Reply = (props) => (
   <div style={{ marginTop: 8, marginBottom: 8 }}>
@@ -9,7 +9,7 @@ export const Reply = (props) => (
         <TimeAgo text="发布于" time={props.create_at} />
       </AvatarRow>
     </div>
-    <Viewer value={props.content} />
+    <MarkdownViewer value={props.content} />
     {/* <Divider /> */}
   </div>
 )

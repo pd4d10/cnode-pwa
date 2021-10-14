@@ -6,6 +6,8 @@
     "build": "norm build"
   },
   "dependencies": {
+    "@bytemd/plugin-gfm": "^1.10.13",
+    "@bytemd/plugin-medium-zoom": "^1.10.13",
     "@bytemd/react": "^1.10.13",
     "@types/react": "^17.0.29",
     "@types/react-dom": "^17.0.9",

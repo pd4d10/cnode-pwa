@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Reply, AvatarRow, Loading, NoMore, TimeAgo } from '../../components'
 import { fetchAPI, shareCurrentUrl } from '../../utils'
-import 'github-markdown-css'
 import $s from './detail.module.css'
 import { definePage, Helmet, useRouter } from '@norm/app'
 import { SendOutline } from 'antd-mobile-icons'
 import { Header } from '../../components/header'
-import { Viewer } from '@bytemd/react'
+import { MarkdownViewer } from '@/components/markdown'
 
 export default definePage(() => {
   const router = useRouter<{ id: string }>()
@@ -64,7 +63,7 @@ export default definePage(() => {
               </span>
             </div>
           </AvatarRow>
-          <Viewer value={topic.content} />
+          <MarkdownViewer value={topic.content} />
           <div>
             <div
               style={{
