@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { definePage } from '@norm/app'
-import { useAuth } from '../hooks/auth'
+import { useAuth } from '@/hooks/auth'
 import './globals.css'
 
 import { QueryClient, QueryClientProvider } from 'react-query'

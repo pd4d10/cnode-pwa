@@ -1,13 +1,13 @@
-import { Topic, Loading } from '../components'
 import { definePage, Link } from '@norm/app'
 import { useRouter } from '@norm/app'
-import { fetchAPI } from '../utils'
-import { TopicProps } from '../components/topic'
+import { fetchAPI } from '@/utils'
+import { Topic, TopicProps } from '@/components/topic'
 import { Badge, InfiniteScroll, List, Space, Tabs } from 'antd-mobile'
 import { BellOutline, UserOutline } from 'antd-mobile-icons'
-import { useAuth } from '../hooks/auth'
-import { Header } from '../components/header'
+import { useAuth } from '@/hooks/auth'
+import { Header } from '@/components/header'
 import { useInfiniteQuery } from 'react-query'
+import { Loading } from '@/components/loading'
 
 export default definePage(() => {
   const router = useRouter()

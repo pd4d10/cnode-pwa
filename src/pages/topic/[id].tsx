@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react'
-import { Reply, AvatarRow, Loading, NoMore, TimeAgo } from '../../components'
-import { fetchAPI, shareCurrentUrl } from '../../utils'
+import { fetchAPI, shareCurrentUrl } from '@/utils'
 import $s from './detail.module.css'
 import { definePage, Helmet, useRouter } from '@norm/app'
 import { SendOutline } from 'antd-mobile-icons'
-import { Header } from '../../components/header'
+import { Header } from '@/components/header'
 import { MarkdownViewer } from '@/components/markdown'
+import { Reply } from '@/components/reply'
+import { AvatarRow } from '@/components/avatar'
+import { Loading } from '@/components/loading'
+import { NoMore } from '@/components/no-more'
+import { TimeAgo } from '@/components/timeago'
 
 export default definePage(() => {
   const router = useRouter<{ id: string }>()

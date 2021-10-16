@@ -2,7 +2,7 @@ import { definePage, Helmet } from '@norm/app'
 import { List } from 'antd-mobile'
 import { FC } from 'react'
 import { ReactComponent as Logo } from '../cnodejs.svg'
-import { Header } from '../components/header'
+import { Header } from '@/components/header'
 
 const Linker: FC<{ title: string; url: string; description?: string }> = ({
   title,

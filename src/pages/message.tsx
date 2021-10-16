@@ -1,13 +1,36 @@
 import { useState, useEffect, FC } from 'react'
 import { definePage, useRouter } from '@norm/app'
-import { useAuth } from '../hooks/auth'
-import { fetchAPI } from '../utils'
-import { MessageItem, Loading, NoMore } from '../components'
+import { useAuth } from '@/hooks/auth'
+import { colors, fetchAPI } from '@/utils'
 import { CheckOutline } from 'antd-mobile-icons'
-import { Header } from '../components/header'
-import { Toast } from 'antd-mobile'
+import { Header } from '@/components/header'
+import { List, Toast } from 'antd-mobile'
+import { Loading } from '@/components/loading'
+import { NoMore } from '@/components/no-more'
+import { AvatarRow } from '@/components/avatar'
+import { Title } from '@/components/styled'
 
-export default definePage((props) => {
+const MessageItem: FC<any> = (props) => {
+  const router = useRouter()
+  return (
+    <List.Item
+      onClick={() => {
+        router.push(`/topic/${props.topic.id}`)
+      }}
+      style={props.has_read ? {} : { background: '#f4fcf0' }}
+    >
+      <AvatarRow author={props.author}>
+        <div style={{ fontSize: 14, color: '#aaa' }}>
+          <span style={{ color: colors.tag }}>{props.author.loginname}</span>{' '}
+          回复了你的话题
+        </div>
+        <Title>{props.topic.title}</Title>
+      </AvatarRow>
+    </List.Item>
+  )
+}
+
+export default definePage(() => {
   const [unread, setUnread] = useState([])
   const [read, setRead] = useState([])
   const [isLoading, setIsLoading] = useState(false)

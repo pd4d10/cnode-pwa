@@ -2,15 +2,13 @@ import { Tabs, List } from 'antd-mobile'
 import { SendOutline } from 'antd-mobile-icons'
 import { definePage, useRouter } from '@norm/app'
 import { useState, useEffect } from 'react'
-import {
-  UserTopic,
-  NoMore,
-  Loading,
-  AvatarRow,
-  TimeAgo,
-} from '../../components'
-import { Header } from '../../components/header'
-import { fetchAPI, shareCurrentUrl } from '../../utils'
+import { Header } from '@/components/header'
+import { fetchAPI, shareCurrentUrl } from '@/utils'
+import { UserTopic } from '@/components/topic'
+import { NoMore } from '@/components/no-more'
+import { Loading } from '@/components/loading'
+import { AvatarRow } from '@/components/avatar'
+import { TimeAgo } from '@/components/timeago'
 
 export default definePage(() => {
   const router = useRouter<{ loginname: string }>()

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { fetchAPI } from '../utils'
+import { fetchAPI } from '@/utils'
 
 export const useAuth = () => {
   const [token, setToken] = useState(null)

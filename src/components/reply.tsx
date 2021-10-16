@@ -1,5 +1,6 @@
-import { AvatarRow, TimeAgo } from './'
+import { AvatarRow } from './avatar'
 import { MarkdownViewer } from './markdown'
+import { TimeAgo } from './timeago'
 
 export const Reply = (props) => (
   <div style={{ marginTop: 8, marginBottom: 8 }}>

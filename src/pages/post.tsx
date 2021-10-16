@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { definePage, useRouter } from '@norm/app'
-import { Header } from '../components/header'
-import { fetchAPI } from '../utils'
+import { Header } from '@/components/header'
+import { fetchAPI } from '@/utils'
 import $s from './post.module.css'
-import { useAuth } from '../hooks/auth'
+import { useAuth } from '@/hooks/auth'
 import { PlayOutline } from 'antd-mobile-icons'
 import { Input, Toast } from 'antd-mobile'
 

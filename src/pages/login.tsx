@@ -1,5 +1,5 @@
 import { definePage, useRouter } from '@norm/app'
-import { useAuth } from '../hooks/auth'
+import { useAuth } from '@/hooks/auth'
 import QrReader from 'react-qr-reader'
 // import { colors } from '../../utils'
 // import style from './login.css'
