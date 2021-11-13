@@ -1,10 +1,10 @@
 import { FC } from 'react'
-import { useRouter } from '@norm/app'
+import { useNavigate } from 'react-router-dom'
 import $s from './avatar.module.css'
 import { TopicProps } from './topic'
 
 export const AvatarRow = ({ author, children, ...props }) => {
-  const router = useRouter()
+  const navigate = useNavigate()
   return (
     <div className={$s.container} {...props}>
       <img
@@ -13,7 +13,7 @@ export const AvatarRow = ({ author, children, ...props }) => {
         alt={author.loginname}
         onClick={(e) => {
           e.preventDefault()
-          router.push(`/user/${author.loginname}`)
+          navigate(`/user/${author.loginname}`)
         }}
       />
       <div className={$s.content}>{children}</div>
@@ -22,7 +22,7 @@ export const AvatarRow = ({ author, children, ...props }) => {
 }
 
 export const Avatar: FC<TopicProps['author']> = (author) => {
-  const router = useRouter()
+  const navigate = useNavigate()
   return (
     <img
       style={{ display: 'block' }}
@@ -31,7 +31,7 @@ export const Avatar: FC<TopicProps['author']> = (author) => {
       alt={author.loginname}
       onClick={(e) => {
         e.preventDefault()
-        router.push(`/user/${author.loginname}`)
+        navigate(`/user/${author.loginname}`)
       }}
     />
   )

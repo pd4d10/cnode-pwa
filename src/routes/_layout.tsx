@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { definePage } from '@norm/app'
+import { defineLayout } from '@norm/client'
 import { useAuth } from '@/hooks/auth'
 import './globals.css'
 
@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 
 const queryClient = new QueryClient()
 
-export default definePage(({ children }) => {
+export default defineLayout(({ children }) => {
   const { verifyToken, fetchUnreadCount } = useAuth()
 
   useEffect(() => {

@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { definePage, useRouter } from '@norm/app'
+import { definePage } from '@norm/client'
+import { useNavigate } from 'react-router-dom'
 import { Header } from '@/components/header'
 import { fetchAPI } from '@/utils'
 import $s from './post.module.css'
@@ -15,7 +16,7 @@ const postTabs = [
 ]
 
 export default definePage((props) => {
-  const router = useRouter()
+  const navigate = useNavigate()
   const [tab, setTab] = useState('ask')
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
@@ -44,7 +45,7 @@ export default definePage((props) => {
             content,
             accesstoken: token,
           })
-          router.replace(`/topic/${topic_id}`)
+          navigate(`/topic/${topic_id}`, { replace: true })
         } catch (err) {
           Toast.show(err.message)
         }

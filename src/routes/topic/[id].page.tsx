@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { fetchAPI, shareCurrentUrl } from '@/utils'
 import $s from './detail.module.css'
-import { definePage, Helmet, useRouter } from '@norm/app'
+import { definePage } from '@norm/client'
 import { SendOutline } from 'antd-mobile-icons'
 import { Header } from '@/components/header'
 import { MarkdownViewer } from '@/components/markdown'
@@ -10,21 +10,21 @@ import { AvatarRow } from '@/components/avatar'
 import { Loading } from '@/components/loading'
 import { NoMore } from '@/components/no-more'
 import { TimeAgo } from '@/components/timeago'
+import { useParams } from 'react-router-dom'
 
 export default definePage(() => {
-  const router = useRouter<{ id: string }>()
+  const params = useParams<'id'>()
+
   const [topic, setTopic] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    if (!router.params.id) return
+    if (!params.id) return
 
     const init = async () => {
       try {
         setIsLoading(true)
-        const { data } = await fetchAPI(
-          `/topic/${router.params.id}?mdrender=false`
-        )
+        const { data } = await fetchAPI(`/topic/${params.id}?mdrender=false`)
         setTopic(data)
       } finally {
         setIsLoading(false)
@@ -32,15 +32,10 @@ export default definePage(() => {
     }
 
     init()
-  }, [router.params.id])
+  }, [params.id])
 
   return (
     <>
-      {topic && (
-        <Helmet>
-          <title>{topic.title}</title>
-        </Helmet>
-      )}
       <Header
         right={
           <SendOutline

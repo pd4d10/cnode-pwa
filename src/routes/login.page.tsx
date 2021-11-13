@@ -1,11 +1,12 @@
-import { definePage, useRouter } from '@norm/app'
+import { definePage } from '@norm/client'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '@/hooks/auth'
 import QrReader from 'react-qr-reader'
 // import { colors } from '../../utils'
 // import style from './login.css'
 
 export default definePage((props) => {
-  const router = useRouter()
+  const navigate = useNavigate()
   // <Dialog
   //   title="登录"
   //   modal={false}
@@ -34,7 +35,7 @@ export default definePage((props) => {
 
         const isValid = await verifyToken(token)
         if (isValid) {
-          router.push('/')
+          navigate('/')
         }
       }}
       // style={{ width: "100%" }}

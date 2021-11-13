@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Link } from '@norm/app'
+import { useNavigate } from 'react-router-dom'
 import { colors } from '../utils'
 import $c from './common.module.css'
 import $s from './topic.module.css'
@@ -26,43 +26,47 @@ export interface TopicProps {
 }
 
 export const Topic: FC<TopicProps> = (props) => {
+  const navigate = useNavigate()
   return (
-    <Link href={`/topic/${props.id}`}>
-      <List.Item
-        className={$c.link}
-        arrow={false}
-        prefix={<Avatar {...props.author} />}
-        description={
-          <div className={$s.extra}>
-            <div className={$s.left}>
-              <Tag color={colors.tag}>
-                {props.top
-                  ? '置顶'
-                  : props.good
-                  ? '精华'
-                  : {
-                      share: '分享',
-                      ask: '问答',
-                      job: '招聘',
-                    }[props.tab]}
-              </Tag>
-              <div className={$s.right}>
-                <span style={{ color: '#9e78c0' }}>{props.reply_count} </span>
-                回复 / <span>{props.visit_count}</span> 浏览
-              </div>
+    <List.Item
+      className={$c.link}
+      arrow={false}
+      prefix={<Avatar {...props.author} />}
+      description={
+        <div className={$s.extra}>
+          <div className={$s.left}>
+            <Tag color={colors.tag}>
+              {props.top
+                ? '置顶'
+                : props.good
+                ? '精华'
+                : {
+                    share: '分享',
+                    ask: '问答',
+                    job: '招聘',
+                  }[props.tab]}
+            </Tag>
+            <div className={$s.right}>
+              <span style={{ color: '#9e78c0' }}>{props.reply_count} </span>
+              回复 / <span>{props.visit_count}</span> 浏览
             </div>
-            <TimeAgo time={props.last_reply_at} />
           </div>
-        }
-      >
-        <Ellipsis content={props.title} />
-      </List.Item>
-    </Link>
+          <TimeAgo time={props.last_reply_at} />
+        </div>
+      }
+      onClick={() => {
+        navigate(`/topic/${props.id}`)
+      }}
+    >
+      <Ellipsis content={props.title} />
+    </List.Item>
   )
 }
 
-export const UserTopic: FC<TopicProps> = (props) => (
-  <Link href={`/topic/${props.id}`}>
+export const UserTopic: FC<TopicProps> = (props) => {
+  const navigate = useNavigate()
+
+  return (
     <List.Item
       className={$c.item}
       prefix={<Avatar {...props.author} />}
@@ -73,8 +77,11 @@ export const UserTopic: FC<TopicProps> = (props) => (
           <TimeAgo time={props.last_reply_at} />
         </div>
       }
+      onClick={() => {
+        navigate(`/topic/${props.id}`)
+      }}
     >
       <Ellipsis content={props.title} />
     </List.Item>
-  </Link>
-)
+  )
+}

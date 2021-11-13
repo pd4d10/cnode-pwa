@@ -1,4 +1,4 @@
-import { definePage, Helmet } from '@norm/app'
+import { definePage } from '@norm/client'
 import { List } from 'antd-mobile'
 import { FC } from 'react'
 import { ReactComponent as Logo } from '../cnodejs.svg'
@@ -23,9 +23,6 @@ const Linker: FC<{ title: string; url: string; description?: string }> = ({
 export default definePage(() => {
   return (
     <>
-      <Helmet>
-        <title>关于</title>
-      </Helmet>
       <Header>关于</Header>
       <div
         style={{

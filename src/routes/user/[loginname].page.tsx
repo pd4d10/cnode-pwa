@@ -1,6 +1,6 @@
 import { Tabs, List } from 'antd-mobile'
 import { SendOutline } from 'antd-mobile-icons'
-import { definePage, useRouter } from '@norm/app'
+import { definePage } from '@norm/client'
 import { useState, useEffect } from 'react'
 import { Header } from '@/components/header'
 import { fetchAPI, shareCurrentUrl } from '@/utils'
@@ -9,16 +9,16 @@ import { NoMore } from '@/components/no-more'
 import { Loading } from '@/components/loading'
 import { AvatarRow } from '@/components/avatar'
 import { TimeAgo } from '@/components/timeago'
+import { useParams } from 'react-router-dom'
 
 export default definePage(() => {
-  const router = useRouter<{ loginname: string }>()
+  const { loginname } = useParams<'loginname'>()
   const [author, setAuthor] = useState(null)
   const [tabKey, setTabKey] = useState('0')
   const [tabData, setTabData] = useState([[], [], []])
 
   useEffect(() => {
     const init = async () => {
-      const { loginname } = router.params
       if (!loginname) return
 
       const [{ data }, { data: collectData }] = await Promise.all([
@@ -30,7 +30,7 @@ export default definePage(() => {
     }
 
     init()
-  }, [router.params.loginname])
+  }, [loginname])
 
   return (
     <div>

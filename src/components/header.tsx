@@ -1,10 +1,10 @@
 import { FC } from 'react'
-import { useRouter } from '@norm/app'
+import { useNavigate } from 'react-router-dom'
 import { NavBar } from 'antd-mobile'
 import { NavBarProps } from 'antd-mobile/es/components/nav-bar'
 
 export const Header: FC<NavBarProps> = ({ right, ...props }) => {
-  const router = useRouter()
+  const navigate = useNavigate()
 
   return (
     <NavBar
@@ -12,9 +12,9 @@ export const Header: FC<NavBarProps> = ({ right, ...props }) => {
         // TODO:
         if (history.length === 1) {
           // If no history, go to homepage
-          router.push('/')
+          navigate('/')
         } else {
-          router.back()
+          navigate(-1)
         }
       }}
       right={right ? <div style={{ fontSize: 18 }}>{right}</div> : null}

@@ -1,5 +1,5 @@
-import { definePage, Link } from '@norm/app'
-import { useRouter } from '@norm/app'
+import { definePage } from '@norm/client'
+import { useSearchParams, useNavigate, Link } from 'react-router-dom'
 import { fetchAPI } from '@/utils'
 import { Topic, TopicProps } from '@/components/topic'
 import { Badge, InfiniteScroll, List, Space, Tabs } from 'antd-mobile'
@@ -10,8 +10,10 @@ import { useInfiniteQuery } from 'react-query'
 import { Loading } from '@/components/loading'
 
 export default definePage(() => {
-  const router = useRouter()
-  const tab = router.query.tab ?? 'all'
+  const [searchParams] = useSearchParams()
+  const tab = searchParams.get('tab') ?? 'all'
+  const navigate = useNavigate()
+
   const { count, loginname } = useAuth()
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery<{
@@ -27,7 +29,6 @@ export default definePage(() => {
       return json
     },
     {
-      enabled: router.ready,
       getNextPageParam: (lastPage) => lastPage.cursor,
     }
   )
@@ -38,7 +39,7 @@ export default definePage(() => {
         backArrow={false}
         right={
           <Space>
-            <Link href="/message">
+            <Link to="/message">
               {count ? (
                 <Badge content={count}>
                   <BellOutline />
@@ -47,7 +48,7 @@ export default definePage(() => {
                 <BellOutline />
               )}
             </Link>
-            <Link href={loginname ? `/user/${loginname}` : '/login'}>
+            <Link to={loginname ? `/user/${loginname}` : '/login'}>
               <UserOutline />
             </Link>
           </Space>
@@ -57,7 +58,7 @@ export default definePage(() => {
       </Header>
       <Tabs
         onChange={(key) => {
-          router.push(key === 'all' ? '/' : '/?tab=' + key)
+          navigate(key === 'all' ? '/' : '/?tab=' + key)
         }}
       >
         {[

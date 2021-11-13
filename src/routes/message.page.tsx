@@ -1,5 +1,6 @@
 import { useState, useEffect, FC } from 'react'
-import { definePage, useRouter } from '@norm/app'
+import { definePage } from '@norm/client'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '@/hooks/auth'
 import { colors, fetchAPI } from '@/utils'
 import { CheckOutline } from 'antd-mobile-icons'
@@ -11,11 +12,11 @@ import { AvatarRow } from '@/components/avatar'
 import { Title } from '@/components/styled'
 
 const MessageItem: FC<any> = (props) => {
-  const router = useRouter()
+  const navigate = useNavigate()
   return (
     <List.Item
       onClick={() => {
-        router.push(`/topic/${props.topic.id}`)
+        navigate(`/topic/${props.topic.id}`)
       }}
       style={props.has_read ? {} : { background: '#f4fcf0' }}
     >
