@@ -1,10 +1,10 @@
 import { Suspense, useEffect } from 'react'
-import { render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router, useRoutes } from 'react-router-dom'
-import routes from '~react-pages'
 import { useAuth } from '@/hooks/auth'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import './globals.css'
+import routes from '~react-pages'
 
 const queryClient = new QueryClient()
 
@@ -25,12 +25,15 @@ const App = () => {
   }, [])
 
   return (
-    <Router>
-      <QueryClientProvider client={queryClient}>
-        <Suspense fallback={<p>Loading...</p>}>{useRoutes(routes)}</Suspense>
-      </QueryClientProvider>
-    </Router>
+    <QueryClientProvider client={queryClient}>
+      <Suspense fallback={<p>Loading...</p>}>{useRoutes(routes)}</Suspense>
+    </QueryClientProvider>
   )
 }
 
-render(<App />, document.getElementById('root'))
+const root = createRoot(document.getElementById('root')!)
+root.render(
+  <Router>
+    <App />
+  </Router>
+)

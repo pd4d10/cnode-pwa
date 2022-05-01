@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '@/hooks/auth'
-import QrReader from 'react-qr-reader'
+import { QrReader } from 'react-qr-reader'
 // import { colors } from '../../utils'
 // import style from './login.css'
 
-export default function Login(props) {
+export default function Login() {
   const navigate = useNavigate()
   // <Dialog
   //   title="登录"
@@ -27,8 +27,8 @@ export default function Login(props) {
 
   return (
     <QrReader
-      onError={console.error}
-      onScan={async (token) => {
+      onResult={async (res) => {
+        const token = res?.getText()
         console.log('scan', token)
         if (!token) return
 
@@ -37,7 +37,9 @@ export default function Login(props) {
           navigate('/')
         }
       }}
-      // style={{ width: "100%" }}
+      constraints={{
+        facingMode: 'environment',
+      }} // style={{ width: "100%" }}
     />
   )
 }
