@@ -2,10 +2,10 @@
   "name": "cnode-pwa",
   "private": true,
   "scripts": {
-    "dev": "norm",
-    "build": "norm build"
+    "dev": "vite",
+    "build": "vite build"
   },
-  "dependencies": {
+  "devDependencies": {
     "@bytemd/plugin-gfm": "^1.10.13",
     "@bytemd/plugin-medium-zoom": "^1.10.13",
     "@bytemd/react": "^1.10.13",
@@ -21,6 +21,7 @@
     "react-query": "^3.26.0",
     "react-router-dom": "^6.0.2",
     "timeago-react": "^3.0.4",
-    "typescript": "^4.4.4"
+    "typescript": "^4.4.4",
+    "vite": "^2.9.6"
   }
 }

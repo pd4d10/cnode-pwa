@@ -1,12 +1,9 @@
 {
-  "extends": "@norm/cli/config/tsconfig.json",
   "compilerOptions": {
-    "types": ["@norm/cli/config/runtime"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     }
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": ["src"]
 }
