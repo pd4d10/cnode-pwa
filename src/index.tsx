@@ -1,13 +1,14 @@
-import { useEffect } from 'react'
-import { defineLayout } from '@norm/client'
+import { Suspense, useEffect } from 'react'
+import { render } from 'react-dom'
+import { BrowserRouter as Router, useRoutes } from 'react-router-dom'
+import routes from '~react-pages'
 import { useAuth } from '@/hooks/auth'
-import './globals.css'
-
 import { QueryClient, QueryClientProvider } from 'react-query'
+import './globals.css'
 
 const queryClient = new QueryClient()
 
-export default defineLayout(({ children }) => {
+const App = () => {
   const { verifyToken, fetchUnreadCount } = useAuth()
 
   useEffect(() => {
@@ -24,6 +25,12 @@ export default defineLayout(({ children }) => {
   }, [])
 
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <Router>
+      <QueryClientProvider client={queryClient}>
+        <Suspense fallback={<p>Loading...</p>}>{useRoutes(routes)}</Suspense>
+      </QueryClientProvider>
+    </Router>
   )
-})
+}
+
+render(<App />, document.getElementById('root'))

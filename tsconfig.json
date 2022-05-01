@@ -1,12 +1,15 @@
 {
-  "extends": "@norm/cli/config/tsconfig.json",
   "compilerOptions": {
-    "types": ["@norm/cli/config/runtime"],
+    "target": "ES2019",
+    "moduleResolution": "node",
+    "lib": ["DOM", "ES2019"],
+    "strict": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     }
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": ["src"]
 }

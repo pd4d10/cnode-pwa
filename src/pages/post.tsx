@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { definePage } from '@norm/client'
 import { useNavigate } from 'react-router-dom'
 import { Header } from '@/components/header'
 import { fetchAPI } from '@/utils'
@@ -15,7 +14,7 @@ const postTabs = [
   { id: 'dev', name: '客户端测试' },
 ]
 
-export default definePage((props) => {
+export default function Post() {
   const navigate = useNavigate()
   const [tab, setTab] = useState('ask')
   const [title, setTitle] = useState('')
@@ -110,4 +109,4 @@ export default definePage((props) => {
       </div>
     </form>
   )
-})
+}

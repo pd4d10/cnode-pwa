@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { fetchAPI, shareCurrentUrl } from '@/utils'
 import $s from './detail.module.css'
-import { definePage } from '@norm/client'
 import { SendOutline } from 'antd-mobile-icons'
 import { Header } from '@/components/header'
 import { MarkdownViewer } from '@/components/markdown'
@@ -12,7 +11,7 @@ import { NoMore } from '@/components/no-more'
 import { TimeAgo } from '@/components/timeago'
 import { useParams } from 'react-router-dom'
 
-export default definePage(() => {
+export default function Topic() {
   const params = useParams<'id'>()
 
   const [topic, setTopic] = useState(null)
@@ -83,4 +82,4 @@ export default definePage(() => {
       )}
     </>
   )
-})
+}

@@ -1,4 +1,3 @@
-import { definePage } from '@norm/client'
 import { useSearchParams, useNavigate, Link } from 'react-router-dom'
 import { fetchAPI } from '@/utils'
 import { Topic, TopicProps } from '@/components/topic'
@@ -9,7 +8,7 @@ import { Header } from '@/components/header'
 import { useInfiniteQuery } from 'react-query'
 import { Loading } from '@/components/loading'
 
-export default definePage(() => {
+export default function Home() {
   const [searchParams] = useSearchParams()
   const tab = searchParams.get('tab') ?? 'all'
   const navigate = useNavigate()
@@ -102,4 +101,4 @@ export default definePage(() => {
       </Button> */}
     </div>
   )
-})
+}

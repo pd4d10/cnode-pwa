@@ -1,4 +1,3 @@
-import { definePage } from '@norm/client'
 import { List } from 'antd-mobile'
 import { FC } from 'react'
 import { ReactComponent as Logo } from '../cnodejs.svg'
@@ -20,7 +19,7 @@ const Linker: FC<{ title: string; url: string; description?: string }> = ({
   </List.Item>
 )
 
-export default definePage(() => {
+export default function About() {
   return (
     <>
       <Header>关于</Header>
@@ -45,4 +44,4 @@ export default definePage(() => {
       </List>
     </>
   )
-})
+}

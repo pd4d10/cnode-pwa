@@ -1,5 +1,4 @@
 import { useState, useEffect, FC } from 'react'
-import { definePage } from '@norm/client'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '@/hooks/auth'
 import { colors, fetchAPI } from '@/utils'
@@ -31,7 +30,7 @@ const MessageItem: FC<any> = (props) => {
   )
 }
 
-export default definePage(() => {
+export default function Message() {
   const [unread, setUnread] = useState([])
   const [read, setRead] = useState([])
   const [isLoading, setIsLoading] = useState(false)
@@ -96,4 +95,4 @@ export default definePage(() => {
       )}
     </div>
   )
-})
+}

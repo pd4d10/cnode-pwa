@@ -1,11 +1,10 @@
-import { definePage } from '@norm/client'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '@/hooks/auth'
 import QrReader from 'react-qr-reader'
 // import { colors } from '../../utils'
 // import style from './login.css'
 
-export default definePage((props) => {
+export default function Login(props) {
   const navigate = useNavigate()
   // <Dialog
   //   title="登录"
@@ -41,4 +40,4 @@ export default definePage((props) => {
       // style={{ width: "100%" }}
     />
   )
-})
+}

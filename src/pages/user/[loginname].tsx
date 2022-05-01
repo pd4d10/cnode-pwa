@@ -1,6 +1,5 @@
 import { Tabs, List } from 'antd-mobile'
 import { SendOutline } from 'antd-mobile-icons'
-import { definePage } from '@norm/client'
 import { useState, useEffect } from 'react'
 import { Header } from '@/components/header'
 import { fetchAPI, shareCurrentUrl } from '@/utils'
@@ -11,7 +10,7 @@ import { AvatarRow } from '@/components/avatar'
 import { TimeAgo } from '@/components/timeago'
 import { useParams } from 'react-router-dom'
 
-export default definePage(() => {
+export default function User() {
   const { loginname } = useParams<'loginname'>()
   const [author, setAuthor] = useState(null)
   const [tabKey, setTabKey] = useState('0')
@@ -75,4 +74,4 @@ export default definePage(() => {
       )}
     </div>
   )
-})
+}
